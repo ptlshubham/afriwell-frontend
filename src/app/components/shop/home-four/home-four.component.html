@@ -1,0 +1,132 @@
+<div>
+  <ngx-skeleton-loader
+            *ngIf="!contentLoaded"
+              [theme]="{ 'border-radius': '0', height: '550px'  }"
+              count="1"
+            ></ngx-skeleton-loader>
+  <app-main-carousel *ngIf="contentLoaded" [slides]="slides"></app-main-carousel>
+</div>
+<div class="home-1-wrap">
+
+    <div  class="info-bar-four-wrapper">
+        <div class="container">
+            <div fxLayout="row wrap" class="info-bar-four">
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                <ngx-skeleton-loader  [theme]="{ width: '80px', height: '80px' }" appearance="circle" animation="progress" *ngIf="!contentLoaded"></ngx-skeleton-loader>
+                 <mat-icon *ngIf="contentLoaded" mat-stroked-button color="primary" class="mat-icon-xlg  m-0">card_giftcard</mat-icon>
+                 <div  class="content">
+                  <ngx-skeleton-loader
+                  *ngIf="!contentLoaded"
+                    count="2"
+                    [theme]="{ 'border-radius': '0', width: '200px', height: '20px' }"
+                  ></ngx-skeleton-loader>
+                   <p *ngIf="contentLoaded">BONUS PLUS</p>
+                   <span *ngIf="contentLoaded" class="text-muted m-0">Get a bonus plus for buying more that three products</span>
+                 </div>
+               </mat-card>
+             </div>
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                <ngx-skeleton-loader  [theme]="{ width: '80px', height: '80px' }" appearance="circle" animation="progress" *ngIf="!contentLoaded"></ngx-skeleton-loader>
+                 <mat-icon *ngIf="contentLoaded" mat-stroked-button color="primary" class="mat-icon-xlg  m-0">local_shipping</mat-icon>
+                 <div class="content">
+                  <ngx-skeleton-loader
+                  *ngIf="!contentLoaded"
+                    count="2"
+                    [theme]="{ 'border-radius': '0', width: '200px', height: '20px' }"
+                  ></ngx-skeleton-loader>
+                   <p *ngIf="contentLoaded">FREE SHIPPING</p>
+                   <span *ngIf="contentLoaded" class="text-muted m-0">Free shipping on all orders over $99</span>
+                 </div>
+               </mat-card>
+             </div>
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                <ngx-skeleton-loader  [theme]="{ width: '80px', height: '80px' }" appearance="circle" animation="progress" *ngIf="!contentLoaded"></ngx-skeleton-loader>
+                 <mat-icon *ngIf="contentLoaded" mat-stroked-button color="primary" class="mat-icon-xlg m-0">monetization_on</mat-icon>
+                 <div class="content">
+                  <ngx-skeleton-loader
+                  *ngIf="!contentLoaded"
+                    count="2"
+                    [theme]="{ 'border-radius': '0', width: '200px', height: '20px' }"
+                  ></ngx-skeleton-loader>
+                   <p *ngIf="contentLoaded">MONEY BACK GUARANTEE</p>
+                   <span *ngIf="contentLoaded" class="text-muted m-0">100% money back guarantee</span>
+                 </div>
+               </mat-card>
+             </div>
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block no-bd" fxLayout="row"  fxLayoutAlign="start center">
+                <ngx-skeleton-loader  [theme]="{ width: '80px', height: '80px' }" appearance="circle" animation="progress" *ngIf="!contentLoaded"></ngx-skeleton-loader>
+                 <mat-icon *ngIf="contentLoaded"  mat-stroked-button color="primary" class="mat-icon-xlg m-0">history</mat-icon>
+                 <div class="content">
+                  <ngx-skeleton-loader
+                    *ngIf="!contentLoaded"
+                      count="2"
+                      [theme]="{ 'border-radius': '0', width: '200px', height: '20px' }"
+                    ></ngx-skeleton-loader>
+                   <p *ngIf="contentLoaded" >ONLINE SUPPORT 24/7</p>
+                   <span *ngIf="contentLoaded"  class="text-muted m-0">Call us: 02 3555 65454 55</span>
+                 </div>
+               </mat-card>
+             </div>
+         </div>
+           </div>
+    </div>
+            
+
+              <div class="banners-four">
+                  <div class="container">
+                    <app-banners-four [banners]="banners"></app-banners-four>
+                  </div>
+                </div>
+    <div class="container">
+        <div class="products sec-padding">
+          <div class="products-four">
+
+              <h3>POPULAR ITEMS</h3>
+              <app-product-carousel [product]="products | slice:0:8"></app-product-carousel>
+
+          </div>
+
+        </div>
+        </div>
+        <div class="featured-products-wrap">
+            <div class="container">
+                <div class="products sec-padding">
+                        <div class="products-four">
+
+                            <h3>FEATURED ITEMS</h3>
+                            <app-product-carousel [product]="products | slice:8:16"></app-product-carousel>
+
+                        </div>
+                    </div>
+
+                  </div>
+        </div>
+        <div class="main-banner">
+            <app-banner-promotion></app-banner-promotion>
+      </div>
+          <div class="container">
+        <app-product-vertical [products]="products"></app-product-vertical>
+        </div>
+       
+       <div class="blog-section sec-padding">
+         <div class="container">
+           <div class="section-title">
+            <ngx-skeleton-loader
+            *ngIf="!contentLoaded"
+              count="2"
+              [theme]="{ 'border-radius': '0', height: '20px' }"
+            ></ngx-skeleton-loader>
+              <h3 *ngIf="contentLoaded">Latest From Our Blog</h3>
+              <p *ngIf="contentLoaded">Business analytics (BA) is the practice of iterative, methodical exploration of an<br> 
+                  organization's data with emphasis on statistical analysis.</p>
+           </div>
+          
+           <app-blog-section></app-blog-section>
+         </div>
+       </div>
+
+  </div>

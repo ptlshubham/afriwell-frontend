@@ -1,0 +1,259 @@
+<!-- Carousel section start-->
+<div class="carousel-home-decor">
+    <div class="container">
+        <div class="decor-menu">
+            <app-menu></app-menu>
+        </div>
+    </div>
+
+    <div class="carousel-2-wrapper">
+        <ngx-skeleton-loader
+            *ngIf="!contentLoaded"
+              count="1"
+              [theme]="{ 'border-radius': '0', height: '551px' }"
+            ></ngx-skeleton-loader>
+        <app-main-carousel *ngIf="contentLoaded" [slides]="slides"></app-main-carousel>
+        <div *ngIf="contentLoaded" class="container ">
+            <div class="ctn-box" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+                <div class="slider-categories" fxFlex="100" fxFlex.gt-md="100" fxFlex.md="40">
+                    <div class="categories-wrap">
+                        <div class="title" fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon>menu</mat-icon>
+                            <p>TOP CATEGORIES</p>
+                        </div>
+                        <app-categories-furniture></app-categories-furniture>
+                        <div class="btn-sale">
+                            <button mat-raised-button color="primary">USE THE DISCOUNT - 60% OFF</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel section end-->
+
+<!-- Baners section start-->
+<div class="banners-wrap">
+    <div class="container">
+        <div class="banners-decor" fxLayout="column" fxLayout.gt-sm="row" *ngIf="banners.length > 0">
+            <div class="sec-padding" fxHide.lt-md fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column"
+                fxFlex="100" fxFlex.gt-sm="30" class="baners">
+                <ngx-skeleton-loader
+                    *ngIf="!contentLoaded"
+                    count="1"
+                    [theme]="{ 'border-radius': '0', height: '460px', width: '389px' }"
+                    ></ngx-skeleton-loader>
+                <div *ngIf="contentLoaded" class="baner first" [ngStyle]="getBgImage(0)">
+                    <div class="info">
+                     
+                        <div class="text-box">
+                            <span>{{getBanner(0).title}}</span>
+                            <h4>{{getBanner(0).subtitle}}</h4>
+                            <a href="#">Check the new collection</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100" class="pd-20">
+                <div class="bn-wrap" fxLayout="column" fxFlex="50" fxFlex.gt-sm="50">
+                    <div fxLayout="row">
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="1"
+                        [theme]="{ 'border-radius': '0', height: '200px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="3"
+                        [theme]="{ 'border-radius': '0', height: '20px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                    </div>
+                    
+                    <div *ngIf="contentLoaded" class="baner seccond media" fxFlex [ngStyle]="getBgImage(1)">
+                        <div class="info">
+                            <div class="text-box " fxLayout="column">
+                                <h4>{{getBanner(1).title}}</h4>
+                                <p>{{getBanner(1).subtitle}}</p>
+                                <ul>
+                                    <li><a href="">Headphones</a></li>
+                                    <li><a href="">Laptops</a></li>
+                                    <li><a href="">Ipads</a></li>
+                                    <li><a href="">Smartphones</a></li>
+                                    <li><a href="">Usb</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="1"
+                        [theme]="{ 'border-radius': '0', height: '200px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="3"
+                        [theme]="{ 'border-radius': '0', height: '20px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                    </div>
+                    <div *ngIf="contentLoaded" class="baner seccond cosmetics" fxFlex [ngStyle]="getBgImage(2)">
+                        <div class="info">
+                            <div class="text-box " fxLayout="column">
+                                <h4>{{getBanner(2).title}}</h4>
+                                <ul>
+                                    <li><a href="">Haircare</a></li>
+                                    <li><a href="">Barber</a></li>
+                                    <li><a href="">Leapstick</a></li>
+                                    <li><a href="">Shampoo</a></li>
+                                    <li><a href="">Creams</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" bn-wrap" fxLayout="column" fxFlex="50" fxFlex.gt-sm="50">
+                    <div fxLayout="row">
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="1"
+                        [theme]="{ 'border-radius': '0', height: '200px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="3"
+                        [theme]="{ 'border-radius': '0', height: '20px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                    </div>
+                    <div *ngIf="contentLoaded" class="baner seccond decors" fxFlex [ngStyle]="getBgImage(3)">
+                        <div class="info">
+                            <div class="text-box " fxLayout="column">
+                                <h4>{{getBanner(3).title}}</h4>
+                                <ul>
+                                    <li><a href="">Chairs</a></li>
+                                    <li><a href="">Lambs</a></li>
+                                    <li><a href="">Wall art</a></li>
+                                    <li><a href="">Pictures</a></li>
+                                    <li><a href="">Bedding</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="1"
+                        [theme]="{ 'border-radius': '0', height: '200px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                        <ngx-skeleton-loader
+                        *ngIf="!contentLoaded"
+                        count="3"
+                        [theme]="{ 'border-radius': '0', height: '20px', width: '200px', margin: '10px' }"
+                        ></ngx-skeleton-loader>
+                    </div>
+                    <div *ngIf="contentLoaded" class="baner seccond electrics" fxFlex [ngStyle]="getBgImage(4)">
+                        <div class="info">
+                            <div class="text-box " fxLayout="column">
+                                <h4>{{getBanner(4).title}}</h4>
+                                <ul>
+                                    <li><a href="">Headphones</a></li>
+                                    <li><a href="">Laptops</a></li>
+                                    <li><a href="">Ipads</a></li>
+                                    <li><a href="">Smartphones</a></li>
+                                    <li><a href="">Usb</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Baners section start-->
+
+<!-- Product section start-->
+<div class="products products-furniture sec-padding">
+    <div class="container">
+        <h3>POPULAR ITEMS</h3>
+        <mat-tab-group>
+
+            <mat-tab label="FEATURED PRODUCTS">
+
+                <app-product-carousel-four [product]="products | slice:0:5"></app-product-carousel-four>
+
+
+            </mat-tab>
+
+            <mat-tab label="LATEST PRODUCTS">
+
+                <app-product-carousel-four [product]="products | slice:5:13"></app-product-carousel-four>
+
+            </mat-tab>
+
+            <mat-tab label="ON SALE PRODUCTS">
+
+                <app-product-carousel-four [product]="products | slice:13:22"></app-product-carousel-four>
+
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+
+</div>
+<!-- Product section end-->
+
+<!-- Baner section start-->
+<section class="commercial-banners" >
+    <div class="container">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="15px">
+            <!--Image Column-->
+            <div fxLayout="column" fxLayout.gt-sm="row">
+                <ngx-skeleton-loader
+                *ngIf="!contentLoaded"
+                count="1"
+                [theme]="{ 'border-radius': '0', height: '309px', margin: '10px', width: '642px' }"
+                ></ngx-skeleton-loader>
+                <ngx-skeleton-loader
+                *ngIf="!contentLoaded"
+                count="1"
+                [theme]="{ 'border-radius': '0', height: '309px', margin: '10px', width: '642px' }"
+                ></ngx-skeleton-loader>
+            </div>
+            
+            <div *ngIf="contentLoaded" class="image-column" fxFlex="50" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between center" >
+               
+                <div  class="" fxFlex="50">
+                    <span>BIG SALLE</span>
+                    <h3>Check our best<br>camera offer</h3>
+                    <a href="">Check now</a>
+                </div>
+                <div *ngIf="contentLoaded" class="img" fxFlex="50">
+                    <img src="assets/images/product/camera_bn.png" alt="">
+                </div>
+            </div>
+
+            <!--Content Column-->
+           
+            <div *ngIf="contentLoaded" class="image-column" fxFlex="50" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between center" >
+               
+                <div  class="" fxFlex="50">
+                    <span>BIG SALLE</span>
+                    <h3>Check our best<br>Chairs offer</h3>
+                    <a href="">Check now</a>
+                </div>
+                <div *ngIf="contentLoaded" class="img" fxFlex="50">
+                    <img src="assets/images/product/chair.png" alt="">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- Baner section end-->
+
+<!-- Vertical products start-->
+<app-product-vertical [products]="products"></app-product-vertical>
+<!-- Vertical products end-->

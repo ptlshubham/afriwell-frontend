@@ -1,0 +1,88 @@
+
+  <mat-toolbar-row fxHide fxShow.gt-sm class="container" fxLayout="row"  fxLayout.xs="row" fxLayoutAlign="space-between center">
+    <div class="main-menu" fxLayout="row" fxHide fxShow.gt-sm>
+        <a  mat-button class="mat-button" [matMenuTriggerFor]="animals">Home<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+        <mat-menu #animals="matMenu" [overlapTrigger]="false" class="app-dropdown">
+          <a mat-menu-item [routerLink]="['/home/one']" routerLinkActive="router-link-active" >Home-1</a>
+          <a mat-menu-item [routerLink]="['/home/two']" routerLinkActive="router-link-active">Home-2</a>
+          <a mat-menu-item [routerLink]="['/home/three']" routerLinkActive="router-link-active">Home-3</a>
+          <a mat-menu-item [routerLink]="['/home/four']" routerLinkActive="router-link-active">Home-4</a>
+          <a mat-menu-item [routerLink]="['/home/five']" routerLinkActive="router-link-active">Home-5</a>
+          <a mat-menu-item [routerLink]="['/home/industrial']" routerLinkActive="router-link-active">Industrial</a>
+          <a mat-menu-item [routerLink]="['/home/food']" routerLinkActive="router-link-active">Food</a>
+          <a mat-menu-item [routerLink]="['/home/furniture']" routerLinkActive="router-link-active">Furniture</a>
+          <a mat-menu-item [routerLink]="['/home/home-decor']" routerLinkActive="router-link-active">Home Decor</a>
+      </mat-menu>
+        <a  [matMenuTriggerFor]="products" routerLinkActive="router-link-active"  mat-button class="mat-button">Products<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+        <mat-menu #products="matMenu" [overlapTrigger]="false" class="app-dropdown">
+            <a mat-menu-item [routerLink]="['/home/products/all/left-sidebar']" routerLinkActive="router-link-active" >Products Left Sidebar</a>
+            <a mat-menu-item [routerLink]="['/home/products/all/right-sidebar']" routerLinkActive="router-link-active">Products Right Sidebar</a>
+            <a mat-menu-item [routerLink]="['/home/products/all/no-sidebar']" routerLinkActive="router-link-active">Products No Sidebar</a>
+          
+        </mat-menu>
+        <a  mat-button [matMenuTriggerFor]="shop" class="mat-button" (click)="openMegaMenu()">Features<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+        <mat-menu #shop="matMenu" [overlapTrigger]="false" class="app-dropdown mega-menu">
+            <div fxLayout="row wrap">
+                <div fxFlex="25" fxLayout="column" class="p-1">
+                    <a mat-menu-item routerLink="/"><b>PRODUCT PAGES</b></a>
+                    <mat-divider></mat-divider> 
+                    <a mat-menu-item routerLink="/">Product Default</a>
+                    <a mat-menu-item [routerLink]="['/home/product/product-center-name/praesent-mollis']">Product Centered</a>
+                     <a mat-menu-item>Sticky Description </a>
+                     <a mat-menu-item>With Stock Progressbar  </a>
+                    
+                </div>
+                <div fxFlex="25" class="p-1">
+                    <a mat-menu-item routerLink="/"><b>FEATURES</b></a>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item [routerLink]="['/pages/order-success']">Order Success</button>
+                    <button mat-menu-item >Track Order</button>
+                    <button mat-menu-item >My Orders</button>
+                    <button mat-menu-item >Upload Product</button>
+                </div>
+                <div fxFlex="25" class="p-1">
+                    <a mat-menu-item routerLink="/"><b>GALLERY</b></a>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>Gallery 1</button>
+                    <button mat-menu-item>Gallery 2</button>
+                    <button mat-menu-item>Gallery 3</button>
+                    <button mat-menu-item>Gallery 4</button>
+                </div>
+                <div fxFlex="25" class="p-1">
+                    <a mat-menu-item routerLink="/"><b>PRODUCTS HOVERS</b></a>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>Full Box</button>
+                    <button mat-menu-item>Icons on Image</button>
+                    <button mat-menu-item>Icons on Side</button>
+                    <button mat-menu-item>Quick Shop</button>
+                </div>
+  
+            </div>
+  
+        </mat-menu>
+        <a  mat-button mat-button [matMenuTriggerFor]="blog" class="mat-button">Blog<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+        <mat-menu #blog="matMenu" [overlapTrigger]="false" class="app-dropdown">
+            <a mat-menu-item [routerLink]="['/blog/blog-list']">Blog List</a>
+            <a mat-menu-item [routerLink]="['/blog/blog-column']">Blog Columns</a>
+            <a mat-menu-item [routerLink]="['/blog/blog-details']">Blog Details</a>
+  
+        </mat-menu>
+        <a  mat-button [matMenuTriggerFor]="pages" class="mat-button">Pages<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+        <mat-menu #pages="matMenu" [overlapTrigger]="false" class="app-dropdown">
+          <a [routerLink]="['/pages/about']" mat-menu-item>About Us</a>
+          <a mat-menu-item [routerLink]="['/pages/faq']" >FAQ</a>
+          <a mat-menu-item [routerLink]="['/pages/contact']">Contact</a>
+          <a mat-menu-item [routerLink]="['/pages/wishlist']">Wishlist</a>
+          <a mat-menu-item [routerLink]="['/pages/testimonials']">Testimonials <span>NEW</span></a>
+          <a mat-menu-item [routerLink]="['/pages/compare']">Compare</a>
+          <a mat-menu-item [routerLink]="['/pages/checkout']">Checkout</a>
+          <a mat-menu-item [routerLink]="['/pages/cart']">Cart</a>
+          <a mat-menu-item [routerLink]="['/pages/my-account']">My Account</a>
+          <a mat-menu-item [routerLink]="['/pages/error']">404</a>
+      </mat-menu>
+        <a [routerLink]="['/pages/contact']" routerLinkActive="router-link-active"   mat-button class="mat-button">Contact</a>
+      </div>
+  </mat-toolbar-row>
+
+
+

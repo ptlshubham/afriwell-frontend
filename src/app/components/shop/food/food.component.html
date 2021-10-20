@@ -1,0 +1,83 @@
+<!-- Home slider start-->
+<app-main-carousel-food [slides]="slides"></app-main-carousel-food>
+<!-- Home slider end-->
+<!-- Product section start-->
+<app-product-two [products]="products"></app-product-two>
+<!-- Product section end-->
+<!-- Our galery start-->
+<ngx-skeleton-loader
+                                *ngIf="!contentLoaded"
+                                    count="1"
+                                    [theme]="{ 'border-radius': '0', height: '800px' }"
+                                ></ngx-skeleton-loader>
+<div *ngIf="contentLoaded" class="popular-recipes-box" style="background: url(assets/images/background/background.jpg);">
+    <div class="container"></div>
+       <div class="recipes-contain">
+          <div class="head-title">
+              <h3>Our Industry</h3>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has<br>been the industry's standard dummy text ever since the 1500s,</p>
+              <button mat-raised-button color="primary" [routerLink]="['/pages/about']" routerLinkActive="router-link-active" >See more</button>
+            </div>
+            <section class="gallery">
+              <div class="container-fluid">
+                          <section class="gallery-section">
+                              <figure class="gallery__item gallery__item--1" *ngFor="let bg of blog">
+                                  <!-- <a (click)="openProductDialog(product, bigProductImageIndex)"  class="tt-gallery-1"> -->
+                                    <a   class="tt-gallery-1">
+                                      <img [src]="bg.image " alt="Gallery image 1" class="gallery__img">
+                                    </a>
+                               </figure>
+                          </section>
+              </div>
+          </section>
+       </div>
+    
+  </div>
+<!-- Our galery ends-->
+<!-- About products start-->
+<div class="about-products">
+    <div class="container">
+       <div class="about-products-wrap" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+      <div class="left" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+        <ngx-skeleton-loader
+                                *ngIf="!contentLoaded"
+                                    count="3"
+                                    [theme]="{ 'border-radius': '0', height: '20px' }"
+                                ></ngx-skeleton-loader>
+        <div  *ngIf="contentLoaded" class="text">
+          <h3>Our Products</h3>
+          <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 1700s,</span>
+          <p>Pellentesque ac finibus orci. Mauris eu nibh sed libero mollis pellentesque et in est. Donec vel vehicula dui. Cras tincidunt, orci a suscipit sagittis, sapien tortor aliquam ipsum, nec sodales ante enim ut dui. </p>
+          <button class="btn-project" mat-raised-button color="primary" type="submit" [routerLink]="['/home/products/all']" routerLinkActive="router-link-active" >See more</button>
+        </div>
+      </div>
+      <div class="right" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" >
+        <ngx-skeleton-loader
+          *ngIf="!contentLoaded"
+            count="1"
+            [theme]="{ 'border-radius': '0', height: '400px' }"
+             ></ngx-skeleton-loader>
+        <div class="img-wrap" *ngIf="contentLoaded">
+          <img src="assets/images/background/fruit2.png" alt="">
+        </div>
+      </div>
+       </div>
+    </div>
+  </div>
+<!-- About products end-->
+<!-- Vertical products start-->
+<app-product-vertical-food [products]="products"></app-product-vertical-food>
+<!-- Vertical products end-->
+
+
+
+
+
+
+
+
+
+
+
+  
+
