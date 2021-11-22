@@ -11,17 +11,17 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
 
-  title = 'ecommerce-sophia-new';
+  title = 'afriwell-ltd';
   public settings: Settings;
-  public url : any;
+  public url: any;
 
-  constructor(private spinner: NgxSpinnerService, public appSettings:AppSettings, public router: Router) {
+  constructor(private spinner: NgxSpinnerService, public appSettings: AppSettings, public router: Router) {
     this.settings = this.appSettings.settings;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.url = event.url;
       }
-    } )
+    })
   }
 
 
@@ -36,11 +36,11 @@ export class AppComponent {
 
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
-          return;
+        return;
       }
-      window.scrollTo(0,0)
-  });
-  document.documentElement.style.setProperty('--theme-deafult', '#ef6c00');
+      window.scrollTo(0, 0)
+    });
+    document.documentElement.style.setProperty('--theme-deafult', '#e20912');
   }
 
 }

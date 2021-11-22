@@ -9,7 +9,7 @@
         <div class="setting-contant">
             <h6 _ngcontent-oma-c131="" class="title text-muted">Layout Type</h6>
             <div class="dark-light" (click)="customizeLayoutDark()">
-                <div class="theme-layout-version"  >{{buttonName}}</div>
+                <div class="theme-layout-version">{{buttonName}}</div>
             </div>
 
         </div>
@@ -17,7 +17,7 @@
             <h6 _ngcontent-oma-c131="" class="title text-muted">Theme Colors</h6>
             <ul class="color-box">
                 <li>
-                    <input id="colorPicker1" type="color" value="#ef6c00" name="Background"
+                    <input id="colorPicker1" type="color" value="#e20912" name="Background"
                         (change)="customizeThemeColor($event)">
                     <span>theme deafult color</span>
                 </li>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="products-preview-box-wrapper" fxLayout="row">
                 <div class="item" fxFlex="50">
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <a href="javascript:void(0)">
+    <a href="javascript:void(0)" hidden>
         <div (click)="showOptions = !showOptions" class="options-icon">
             <mat-icon>settings</mat-icon>
         </div>
@@ -85,4 +85,4 @@
 
     
     </mat-card> -->
-</div> 
+</div>

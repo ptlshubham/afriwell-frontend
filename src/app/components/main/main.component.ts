@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import {Product} from "../../modals/product.model";
-import {CartItem} from "../../modals/cart-item";
-import {ProductService} from "../shared/services/product.service";
-import {CartService} from "../shared/services/cart.service";
+import { Product } from "../../modals/product.model";
+import { CartItem } from "../../modals/cart-item";
+import { ProductService } from "../shared/services/product.service";
+import { CartService } from "../shared/services/cart.service";
 import { Router, NavigationEnd } from '@angular/router';
 import { SidebarMenuService } from '../shared/sidebar/sidebar-menu.service';
 import { SidenavMenu } from '../shared/sidebar/sidebar-menu.model';
@@ -14,18 +14,18 @@ import { SidenavMenu } from '../shared/sidebar/sidebar-menu.model';
 })
 export class MainComponent implements OnInit {
 
-  public sidenavMenuItems:Array<any>;
+  public sidenavMenuItems: Array<any>;
 
   public currencies = ['USD', 'EUR'];
-  public currency:any;
+  public currency: any;
   public flags = [
-    { name:'English', image: 'assets/images/flags/gb.svg' },
-    { name:'German', image: 'assets/images/flags/de.svg' },
-    { name:'French', image: 'assets/images/flags/fr.svg' },
-    { name:'Russian', image: 'assets/images/flags/ru.svg' },
-    { name:'Turkish', image: 'assets/images/flags/tr.svg' }
+    { name: 'English', image: 'assets/images/flags/gb.svg' },
+    { name: 'German', image: 'assets/images/flags/de.svg' },
+    { name: 'French', image: 'assets/images/flags/fr.svg' },
+    { name: 'Russian', image: 'assets/images/flags/ru.svg' },
+    { name: 'Turkish', image: 'assets/images/flags/tr.svg' }
   ]
-  public flag:any;
+  public flag: any;
 
   products: Product[];
 
@@ -34,9 +34,9 @@ export class MainComponent implements OnInit {
 
   public banners = [];
 
-  wishlistItems  :   Product[] = [];
+  wishlistItems: Product[] = [];
 
-  public url : any;
+  public url: any;
 
   navItems: SidenavMenu[] = [
     {
@@ -62,8 +62,8 @@ export class MainComponent implements OnInit {
     },
     {
       displayName: 'Products',
-          iconName: 'feedback',
-          route: '/home/products/all'
+      iconName: 'feedback',
+      route: '/home/products/all'
     },
     {
       displayName: 'Shop',
@@ -82,22 +82,22 @@ export class MainComponent implements OnInit {
               displayName: 'Cables',
               iconName: 'person',
               route: 'stephen-fluin',
-               },
+            },
             {
               displayName: 'Monitors',
               iconName: 'person',
               route: 'mike-brocchi',
-           },
-           {
-            displayName: 'Tablets',
-            iconName: 'person',
-            route: 'mike-brocchi',
-         },
-         {
-          displayName: 'Headsets',
-          iconName: 'person',
-          route: 'mike-brocchi',
-       }
+            },
+            {
+              displayName: 'Tablets',
+              iconName: 'person',
+              route: 'mike-brocchi',
+            },
+            {
+              displayName: 'Headsets',
+              iconName: 'person',
+              route: 'mike-brocchi',
+            }
           ]
         },
         {
@@ -254,18 +254,19 @@ export class MainComponent implements OnInit {
     },
     {
       displayName: 'Contact',
-          iconName: 'feedback',
-          route: '/pages/contact'
+      iconName: 'feedback',
+      route: '/pages/contact'
     }
   ];
 
-  constructor(public router: Router, private cartService: CartService, public sidenavMenuService:SidebarMenuService) {
+  constructor(public router: Router, private cartService: CartService, public sidenavMenuService: SidebarMenuService) {
     this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.url = event.url;
+        debugger
       }
-    } )
+    })
   }
 
   ngAfterViewInit() {
@@ -276,10 +277,11 @@ export class MainComponent implements OnInit {
     this.flag = this.flags[0];
   }
 
-  public changeCurrency(currency){
+  public changeCurrency(currency) {
     this.currency = currency;
   }
-  public changeLang(flag){
+  public changeLang(flag) {
     this.flag = flag;
+    debugger
   }
 }

@@ -6,8 +6,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/headphone1/headphone1.png",
-      "big": "assets/images/product/small/headphone1/headphone1.png"
+      "small": "assets/images/product/small/headphone1/1.png",
+      "big": "assets/images/product/small/headphone1/1.png"
   },
   {
       "small": "assets/images/product/small/headphone1/headphone2.png",
@@ -43,12 +43,12 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/headphone2/headphone1.png",
-      "big": "assets/images/product/small/headphone2/headphone1.png"
+      "small": "assets/images/product/small/headphone2/2.jpg",
+      "big": "assets/images/product/small/headphone2/2.jpg"
   },
   {
-      "small": "assets/images/product/small/headphone2/headphone2.png",
-      "big": "assets/images/product/small/headphone2/headphone2.png"
+      "small": "assets/images/product/small/headphone2/2.jpg",
+      "big": "assets/images/product/small/headphone2/2.jpg"
   },
   {
       "small": "assets/images/product/small/headphone2/headphone3.png",
@@ -79,12 +79,12 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/headphone3/headphone1.png",
-      "big": "assets/images/product/small/headphone3/headphone1.png"
+      "small": "assets/images/product/small/headphone3/3.jpg",
+      "big": "assets/images/product/small/headphone3/3.jpg"
   },
   {
-      "small": "assets/images/product/small/headphone3/headphone2.png",
-      "big": "assets/images/product/small/headphone3/headphone2.png"
+      "small": "assets/images/product/small/headphone3/3.jpg",
+      "big": "assets/images/product/small/headphone3/3.jpg"
   },
   {
       "small": "assets/images/product/small/headphone3/headphone3.png",
@@ -223,8 +223,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/laptop1/laptop.png",
-      "big": "assets/images/product/small/laptop1/laptop.png"
+      "small": "assets/images/product/small/laptop1/5000.jpeg",
+      "big": "assets/images/product/small/laptop1/5000.jpeg"
   },
   {
       "small": "assets/images/product/small/laptop1/laptop1.png",
@@ -263,8 +263,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/laptop2/laptop.png",
-      "big": "assets/images/product/small/laptop2/laptop.png"
+      "small": "assets/images/product/small/laptop2/5001.jpeg",
+      "big": "assets/images/product/small/laptop2/5001.jpeg"
   },
   {
       "small": "assets/images/product/small/laptop2/laptop1.png",
@@ -303,8 +303,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/laptop3/laptop.png",
-      "big": "assets/images/product/small/laptop3/laptop.png"
+      "small": "assets/images/product/small/laptop3/5003.png",
+      "big": "assets/images/product/small/laptop3/5003.png"
   },
   {
       "small": "assets/images/product/small/laptop3/laptop1.png",
@@ -343,8 +343,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/laptop4/laptop.png",
-      "big": "assets/images/product/small/laptop4/laptop.png"
+      "small": "assets/images/product/small/laptop4/5004.png",
+      "big": "assets/images/product/small/laptop4/5004.png"
   },
   {
       "small": "assets/images/product/small/laptop4/laptop1.png",
@@ -383,8 +383,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/laptop5/laptop.png",
-      "big": "assets/images/product/small/laptop5/laptop.png"
+      "small": "assets/images/product/small/laptop5/5005.jpeg",
+      "big": "assets/images/product/small/laptop5/5005.jpeg"
   },
   {
       "small": "assets/images/product/small/laptop5/laptop1.png",
@@ -423,8 +423,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/small/laptop6/laptop.png",
-      "big": "assets/images/product/small/laptop6/laptop.png"
+      "small": "assets/images/product/small/laptop6/5006.jpg",
+      "big": "assets/images/product/small/laptop6/5006.jpg"
   },
   {
       "small": "assets/images/product/small/laptop6/laptop1.png",
@@ -2395,16 +2395,16 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/furniture/headphone1/headphone1.png",
-      "big": "assets/images/product/furniture/headphone1/headphone1.png"
+      "small": "assets/images/product/furniture/headphone1/1.jpeg",
+      "big": "assets/images/product/furniture/headphone1/1.jpeg"
   },
   {
-      "small": "assets/images/product/furniture/headphone1/headphone2.png",
-      "big": "assets/images/product/furniture/headphone1/headphone2.png"
+      "small": "assets/images/product/furniture/headphone1/2.jpg",
+      "big": "assets/images/product/furniture/headphone1/2.jpg"
   },
   {
-      "small": "assets/images/product/furniture/headphone1/headphone3.png",
-      "big": "assets/images/product/furniture/headphone1/headphone3.png"
+      "small": "assets/images/product/furniture/headphone1/3.jpg",
+      "big": "assets/images/product/furniture/headphone1/3.jpg"
   },
   {
     "small": "assets/images/product/furniture/headphone1/headphone4.png",
@@ -2433,12 +2433,12 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/furniture/headphone2/headphone1.png",
-      "big": "assets/images/product/furniture/headphone2/headphone1.png"
+      "small": "assets/images/product/furniture/headphone2/1.jpeg",
+      "big": "assets/images/product/furniture/headphone2/1.jpeg"
   },
   {
-      "small": "assets/images/product/furniture/headphone2/headphone2.png",
-      "big": "assets/images/product/furniture/headphone2/headphone2.png"
+      "small": "assets/images/product/furniture/headphone2/1.jpeg",
+      "big": "assets/images/product/furniture/headphone2/1.jpeg"
   },
   {
       "small": "assets/images/product/furniture/headphone2/headphone3.png",
@@ -2470,8 +2470,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/furniture/headphone3/headphone1.png",
-      "big": "assets/images/product/furniture/headphone3/headphone1.png"
+      "small": "assets/images/product/furniture/headphone3/1.jpeg",
+      "big": "assets/images/product/furniture/headphone3/1.jpeg"
   },
   {
       "small": "assets/images/product/furniture/headphone3/headphone2.png",
@@ -2507,8 +2507,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/furniture/headphone4/headphone1.png",
-      "big": "assets/images/product/furniture/headphone4/headphone1.png"
+      "small": "assets/images/product/furniture/headphone4/1.jpeg",
+      "big": "assets/images/product/furniture/headphone4/1.jpeg"
   },
   {
       "small": "assets/images/product/furniture/headphone4/headphone2.png",
@@ -2544,8 +2544,8 @@
   "discount": 50,
   "pictures": [
     {
-      "small": "assets/images/product/furniture/headphone5/headphone1.png",
-      "big": "assets/images/product/furniture/headphone5/headphone1.png"
+      "small": "assets/images/product/furniture/headphone5/1.jpeg",
+      "big": "assets/images/product/furniture/headphone5/1.jpeg"
   },
   {
       "small": "assets/images/product/furniture/headphone5/headphone2.png",

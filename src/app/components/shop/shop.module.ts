@@ -16,7 +16,7 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { HomeTwoComponent } from './home-two/home-two.component';
 import { HomeThreeComponent } from './home-three/home-three.component';
 // Import the library
@@ -46,6 +46,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProductVerticalFoodComponent } from './products/product-vertical-food/product-vertical-food.component';
 import { ProductDetailsLeftComponent } from './products/product-details-left/product-details-left.component';
 import { ProductDetailsCenteredComponent } from './products/product-details-centered/product-details-centered.component';
+import { LandingComponent } from './landing/landing.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -84,8 +86,10 @@ import { ProductDetailsCenteredComponent } from './products/product-details-cent
     ProductCarouselTwoComponent,
     ProductVerticalFoodComponent,
     ProductDetailsLeftComponent,
-    ProductDetailsCenteredComponent
-    
+    ProductDetailsCenteredComponent,
+    LandingComponent,
+    ProductListComponent
+
   ],
   imports: [
     CommonModule,
@@ -96,7 +100,8 @@ import { ProductDetailsCenteredComponent } from './products/product-details-cent
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxPaginationModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+
     // NgxImageZoomModule.forRoot() // <-- Add this line
   ],
   exports: [
@@ -106,7 +111,7 @@ import { ProductDetailsCenteredComponent } from './products/product-details-cent
 
   ],
 
-  entryComponents:[
+  entryComponents: [
     ProductDialogComponent,
     ProductZoomComponent
   ],

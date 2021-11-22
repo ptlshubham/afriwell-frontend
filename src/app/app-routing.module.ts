@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
-import { HomeComponent } from './components/shop/home/home.component';
 import { DemoComponent } from './components/demo/demo.component';
+
+import { EmiComponent } from './manage/Admin/emi/emi.component';
+import { AdminLayoutComponent } from './manage/Admin/layouts/admin/admin-layout.component';
 
 
 const appRoutes: Routes = [
   {
+
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'home/landing',
     pathMatch: 'full'
   },
+
+
   {
     path: 'home',
     component: DemoComponent
@@ -24,21 +29,36 @@ const appRoutes: Routes = [
         loadChildren: () => import('./components/shop/shop.module').then(m => m.ShopModule)
       },
       {
-        path: 'pages',
-        loadChildren: () => import('./components/pages/pages.module').then(m => m.PagesModule)
-
-      },
-      {
         path: 'blog',
         loadChildren: () => import('./components/blog/blog.module').then(m => m.BlogModule)
       },
+      // {
+      //   path: 'emi',
+      //   loadChildren: () => import('./manage/Admin/emi/emi.module').then(m => m.EmiModule)
+      // },
+      // {
+      //   path: 'manage',
+      //   loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule)
+      // },
+      // {
+      //   path: 'pages',
+      //   loadChildren: () => import('./manage/Admin/pages/pages.module').then(m => m.PagesModule)
+      // }
     ]
   },
-  {
-    path: '**',
-    redirectTo: 'home/one'
-  }
+  // {
+  //   path: '',
+  //   component: AdminLayoutComponent,
+  //   children: [
+  //     {
+  //       path: 'emi',
+  //       loadChildren: () => import('./manage/Admin/emi/emi.module').then(m => m.EmiModule)
+  //     }
+  //   ]
+  // }
 ];
+
+
 
 @NgModule({
   declarations: [],

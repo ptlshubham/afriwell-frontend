@@ -16,10 +16,15 @@ import { FurnitureComponent } from './furniture/furniture.component';
 import { HomeDecorComponent } from './home-decor/home-decor.component';
 import { ProductDetailsCenteredComponent } from './products/product-details-centered/product-details-centered.component';
 import { Resolver } from '../shared/services/resolver.service';
+import { LandingComponent } from './landing/landing.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 
 // Routes
 const routes: Routes = [
+  { path: 'landing', component: LandingComponent },
+  { path: 'product-list', component: ProductListComponent },
+
   { path: 'one', component: HomeComponent },
   { path: 'two', component: HomeTwoComponent },
   { path: 'three', component: HomeThreeComponent },
@@ -35,9 +40,11 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'product/food/:id', component: ProductDetailsFoodComponent },
   { path: 'product/product-center/:id', component: ProductDetailsCenteredComponent },
-  { path: 'product/product-center-name/:slug', component: ProductDetailsCenteredComponent,  resolve: {
-    data: Resolver
-  } },
+  {
+    path: 'product/product-center-name/:slug', component: ProductDetailsCenteredComponent, resolve: {
+      data: Resolver
+    }
+  },
 
 
 

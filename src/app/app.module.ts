@@ -8,16 +8,16 @@ import { DemoComponent } from './components/demo/demo.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxImgZoomModule } from 'ngx-img-zoom';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
-
 import { MainComponent } from './components/main/main.component';
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { ShopModule } from './components/shop/shop.module';
 import { SharedModule } from './components/shared/shared.module';
 import { ColorOptionsComponent } from './components/color-options/color-options.component';
+import { ManageModule } from './manage/manage.module';
+import { RouterModule } from '@angular/router';
+import { EmiComponent } from './manage/Admin/emi/emi.component';
+import { EmiModule } from './manage/Admin/emi/emi.module';
+import { AdminLayoutComponent } from './manage/Admin/layouts/admin/admin-layout.component';
 
 
 @NgModule({
@@ -26,9 +26,6 @@ import { ColorOptionsComponent } from './components/color-options/color-options.
     DemoComponent,
     MainComponent,
     ColorOptionsComponent
-
-
-
   ],
   imports: [
     NgxSpinnerModule,
@@ -41,6 +38,8 @@ import { ColorOptionsComponent } from './components/color-options/color-options.
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    ManageModule,
+    RouterModule,
     NgxImgZoomModule
   ],
   providers: [],
