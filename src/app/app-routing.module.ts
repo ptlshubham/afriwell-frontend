@@ -29,6 +29,11 @@ const appRoutes: Routes = [
         loadChildren: () => import('./components/shop/shop.module').then(m => m.ShopModule)
       },
       {
+        path: 'pages',
+        loadChildren: () => import('./components/pages/pages.module').then(m => m.PagesModule)
+
+      },
+      {
         path: 'blog',
         loadChildren: () => import('./components/blog/blog.module').then(m => m.BlogModule)
       },

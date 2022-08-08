@@ -15,6 +15,7 @@ import { SidenavMenu } from '../shared/sidebar/sidebar-menu.model';
 export class MainComponent implements OnInit {
 
   public sidenavMenuItems: Array<any>;
+  userName: string;
 
   public currencies = ['USD', 'EUR'];
   public currency: any;
@@ -264,9 +265,12 @@ export class MainComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.url = event.url;
-        debugger
       }
     })
+    // var values = JSON.parse(localStorage.getItem("userName"));
+    // this.userName.localStorage.getItem('userName');
+    this.userName = localStorage.getItem('userName');
+
   }
 
   ngAfterViewInit() {
@@ -282,6 +286,13 @@ export class MainComponent implements OnInit {
   }
   public changeLang(flag) {
     this.flag = flag;
-    debugger
   }
+  logout() {
+    localStorage.clear();
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/main', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
 }

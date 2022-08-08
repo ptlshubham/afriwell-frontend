@@ -5,23 +5,23 @@ import { AppSettings } from './services/color-option.service'
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSelectModule} from '@angular/material/select';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatListModule} from '@angular/material/list';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatInputModule} from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatListModule } from '@angular/material/list';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -41,7 +41,7 @@ import { HeaderFourComponent } from './header-four/header-four.component';
 import { CategoriesMenuComponent } from './categories-menu/categories-menu.component';
 import { CategoriesSectionComponent } from './categories-section/categories-section.component';
 import { FooterTwoComponent } from './footer-two/footer-two.component';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 import { ShoppingWidgetsTwoComponent } from './shopping-widgets-two/shopping-widgets-two.component';
 import { HeaderFiveComponent } from './header-five/header-five.component';
 import { BlogSectionTwoComponent } from './blog-section-two/blog-section-two.component';
@@ -153,4 +153,4 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     AppSettings
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

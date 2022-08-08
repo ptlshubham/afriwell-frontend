@@ -60,9 +60,14 @@
             <mat-icon>cached</mat-icon>COMPARE
           </a>
         </div>
-        <div class="widget-text">
+        <div class="widget-text" *ngIf="userName==null">
           <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/my-account']" routerLinkActive="router-link-active">
-            <mat-icon>person</mat-icon>My Account
+            <mat-icon>login</mat-icon>Login/Signup
+          </a>
+        </div>
+        <div class="widget-text" *ngIf="userName">
+          <a fxShow="false" fxShow.gt-xs (click)="logout()">
+            <mat-icon>person</mat-icon>{{userName}}
           </a>
         </div>
       </div>
@@ -119,7 +124,7 @@
   </mat-toolbar>
   <!-- furniture topbar end -->
   <app-header-seven class="home-header-seven " [ngClass]="{'header-decor': url == '/home/home-decor'}"
-    *ngIf="url == '/home/furniture'  || router.url.includes('furniture') || url == '/home/home-decor' || router.url.includes('home-decor') || url == '/home/landing'  || router.url.includes('landing') ">
+    *ngIf=" url == '/home/landing'  || router.url.includes('landing') ">
   </app-header-seven>
   <app-header-six *ngIf="url == '/home/food'  || router.url.includes('food') "></app-header-six>
   <app-header
