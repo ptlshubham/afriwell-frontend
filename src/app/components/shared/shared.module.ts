@@ -50,6 +50,7 @@ import { ShoppingWidgetsThreeComponent } from './shopping-widgets-three/shopping
 import { HeaderSevenComponent } from './header-seven/header-seven.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { WidgestTwoRoutes } from './shopping-widgets-two/widgets-two.routing';
 
 
 @NgModule({
@@ -101,7 +102,9 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     MatDividerModule,
     MatCardModule,
     FlexLayoutModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    RouterModule.forChild(WidgestTwoRoutes),
+
   ],
   exports: [
     CommonModule,

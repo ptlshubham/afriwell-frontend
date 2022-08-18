@@ -212,6 +212,7 @@ export class CategoryComponent implements OnInit {
     })
   }
   async getMainCategory(id) {
+    debugger
     this.categoryService.getMainCat(id).subscribe(data => {
       this.category = data;
       if (this.isEdit == true) {

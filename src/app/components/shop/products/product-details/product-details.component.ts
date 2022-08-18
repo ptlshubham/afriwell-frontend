@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { SwiperDirective, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ProductZoomComponent } from './product-zoom/product-zoom.component';
+import { Productlist } from 'src/app/modals/productlist.model';
 
 
 @Component({
@@ -15,38 +15,60 @@ import { ProductZoomComponent } from './product-zoom/product-zoom.component';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  public config: SwiperConfigInterface={};
+  public config: SwiperConfigInterface = {};
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('zoomViewer', { static: true }) zoomViewer;
   @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
 
-  public product            :   Product = {};
-  public products           :   Product[] = [];
-
+  public product: Productlist = {};
+  public products: Productlist[] = [];
+  getIamges: any[];
   public image: any;
   public zoomImage: any;
 
-  public counter            :   number = 1;
-
+  public counter: number = 1;
+  pId: number;
   index: number;
+  similarPId: number;
   bigProductImageIndex = 0;
 
-  constructor(private route: ActivatedRoute, public productsService: ProductService, public dialog: MatDialog, private router: Router, private cartService: CartService) {
+  constructor(
+    private route: ActivatedRoute,
+    public productsService: ProductService,
+    public dialog: MatDialog,
+    private router: Router,
+    private cartService: CartService
+  ) {
     this.route.params.subscribe(params => {
       const id = +params['id'];
-      this.productsService.getProduct(id).subscribe(product => this.product = product)
+      this.pId = id
+      this.getProductDetails();
+      // this.productsService.getProduct(id).subscribe(product => this.product = product)
+      this.getProductimages();
     });
-   }
-
-  ngOnInit() {
-    this.productsService.getProducts().subscribe(product => this.products = product);
-
-
-    this.getRelatedProducts();
   }
 
+  ngOnInit() {
+    // this.productsService.getProducts().subscribe(product => this.products = product);
 
+  }
+
+  getProductDetails() {
+    this.productsService.getProductDetails(this.pId).subscribe((data: any) => {
+      this.product = data[0];
+      this.similarPId = data[0].category
+      this.getSimilarProducts();
+
+
+    });
+  }
+  getProductimages() {
+    this.productsService.getImages(this.pId).subscribe((data: any) => {
+      this.getIamges = data;
+    });
+
+  }
   ngAfterViewInit() {
     this.config = {
       observer: true,
@@ -81,7 +103,7 @@ export class ProductDetailsComponent implements OnInit {
 
   public openProductDialog(product, bigProductImageIndex) {
     let dialogRef = this.dialog.open(ProductZoomComponent, {
-      data: {product, index: bigProductImageIndex },
+      data: { product, index: bigProductImageIndex },
       panelClass: 'product-dialog',
     });
     dialogRef.afterClosed().subscribe(product => {
@@ -101,67 +123,77 @@ export class ProductDetailsComponent implements OnInit {
 
 
 
-public increment() {
-  this.counter += 1;
-}
-
-public decrement() {
-  if(this.counter >1){
-     this.counter -= 1;
-  }
-}
-
-getRelatedProducts() {
-  this.productsService.getProducts()
-  .subscribe(
-    (product: Product[]) => {
-      this.products = product
-    });
-}
-
-  // Add to cart
-  public addToCart(product: Product, quantity) {
-    if (quantity == 0) return false;
-    this.cartService.addToCart(product, parseInt(quantity));
+  public increment() {
+    this.counter += 1;
   }
 
-   // Add to cart
-   public buyNow(product: Product, quantity) {
-    if (quantity > 0)
-      this.cartService.addToCart(product,parseInt(quantity));
-      this.router.navigate(['/pages/checkout']);
- }
-
-
-
- public onMouseMove(e){
-  if(window.innerWidth >= 1280){
-    var image, offsetX, offsetY, x, y, zoomer;
-    image = e.currentTarget;
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
-    x = offsetX/image.offsetWidth*100;
-    y = offsetY/image.offsetHeight*100;
-    zoomer = this.zoomViewer.nativeElement.children[0];
-    if(zoomer){
-      zoomer.style.backgroundPosition = x + '% ' + y + '%';
-      zoomer.style.display = "block";
-      zoomer.style.height = image.height + 'px';
-      zoomer.style.width = image.width + 'px';
+  public decrement() {
+    if (this.counter > 1) {
+      this.counter -= 1;
     }
   }
-}
 
-public onMouseLeave(event){
-  this.zoomViewer.nativeElement.children[0].style.display = "none";
-}
+  // getRelatedProducts() {
+  //   this.productsService.getProducts()
+  //     .subscribe(
+  //       (product: Product[]) => {
+  //         this.products = product
+  //       });
+  // }
+  getSimilarProducts() {
+    this.productsService.getSimilar(this.similarPId).subscribe((data: any) => {
+      this.products = data;
 
-public openZoomViewer(){
-  this.dialog.open(ProductZoomComponent, {
-    data: this.zoomImage,
-    panelClass: 'zoom-dialog'
-  });
-}
+
+    });
+  }
+  // Add to cart
+  public addToCart(product: Productlist, quantity) {
+    if (quantity == 0) return false;
+    this.cartService.addToCart(product, parseInt(quantity));
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/widget-two', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
+  // Add to cart
+  public buyNow(product: Productlist, quantity) {
+    if (quantity > 0)
+      this.cartService.addToCart(product, parseInt(quantity));
+    this.router.navigate(['/pages/checkout']);
+  }
+
+
+
+  public onMouseMove(e) {
+    if (window.innerWidth >= 1280) {
+      var image, offsetX, offsetY, x, y, zoomer;
+      image = e.currentTarget;
+      offsetX = e.offsetX;
+      offsetY = e.offsetY;
+      x = offsetX / image.offsetWidth * 100;
+      y = offsetY / image.offsetHeight * 100;
+      zoomer = this.zoomViewer.nativeElement.children[0];
+      if (zoomer) {
+        zoomer.style.backgroundPosition = x + '% ' + y + '%';
+        zoomer.style.display = "block";
+        zoomer.style.height = image.height + 'px';
+        zoomer.style.width = image.width + 'px';
+      }
+    }
+  }
+
+  public onMouseLeave(event) {
+    this.zoomViewer.nativeElement.children[0].style.display = "none";
+  }
+
+  public openZoomViewer() {
+    this.dialog.open(ProductZoomComponent, {
+      data: this.zoomImage,
+      panelClass: 'zoom-dialog'
+    });
+  }
 
 
 

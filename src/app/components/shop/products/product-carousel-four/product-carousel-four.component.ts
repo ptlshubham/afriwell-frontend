@@ -71,10 +71,10 @@ export class ProductCarouselFourComponent implements OnInit {
   }
 
    // Add to cart
-   public addToCart(product: Product,  quantity: number = 1) {
-    this.cartService.addToCart(product,quantity);
-    console.log(product, quantity);
-  }
+  //  public addToCart(product: Product,  quantity: number = 1) {
+  //   this.cartService.addToCart(product,quantity);
+  //   console.log(product, quantity);
+  // }
 
    // Add to wishlist
    public addToWishlist(product: Product) {

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ProductDialogComponent } from '../../products/product-dialog/product-dialog.component';
 import {  SwiperDirective } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { Productlist } from 'src/app/modals/productlist.model';
 
 @Component({
   selector: 'app-product-carousel-three',
@@ -18,10 +19,16 @@ export class ProductCarouselThreeComponent implements OnInit {
   contentLoaded = false;
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
 
- @Input('product') product: Array<Product> = [];
+ @Input('product') product: Array<Productlist> = [];
  public config: SwiperConfigInterface = {};
 
-  constructor(private cartService: CartService, private productsService: ProductService, private wishlistService: WishlistService, private dialog: MatDialog, private router: Router) { }
+  constructor(
+    private cartService: CartService, 
+    private productsService: ProductService, 
+    private wishlistService: WishlistService, 
+    private dialog: MatDialog, 
+    private router: Router
+    ) { }
   // @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
   ngOnInit() {
@@ -61,9 +68,12 @@ export class ProductCarouselThreeComponent implements OnInit {
   }
 
   // Add to cart
-  public addToCart(product: Product,  quantity: number = 1) {
+  public addToCart(product: Productlist,  quantity: number = 1) {
     this.cartService.addToCart(product,quantity);
-    console.log(product, quantity);
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/widget-two', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
   // Add to wishlist

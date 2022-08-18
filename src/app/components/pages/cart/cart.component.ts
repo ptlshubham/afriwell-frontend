@@ -10,36 +10,73 @@ import { CartService } from '../../shared/services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  public cartItems : Observable<CartItem[]> = of([]);
-  public shoppingCartItems  : CartItem[] = [];
-
-  constructor(private cartService: CartService) { }
-
-  ngOnInit() {
-    this.cartItems = this.cartService.getItems();
-    this.cartItems.subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
-
+  public cartItems: Observable<CartItem[]> = of([]);
+  public shoppingCartItems: CartItem[] = [];
+  carttotal: number = 0;
+  totalItem: number = 0;
+  qantWith: number = 0;
+  constructor(private cartService: CartService) {
+    this.getCart();
   }
 
+  ngOnInit() {
+  }
 
-    // Remove cart items
-    public removeItem(item: CartItem) {
-      this.cartService.removeFromCart(item);
+  getCart() {
+    this.carttotal = 0;
+    if (localStorage.getItem('userId') != undefined) {
+      this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
+        this.shoppingCartItems = data;
+        this.getTotal();
+      });
     }
+  }
+  // Remove cart items
+  public removeItem(id) {
+    this.cartService.removeCart(id).subscribe((data: any) => {
+      this.getCart();
+      this.getTotal();
+    });
+  }
 
+  // Increase Product Quantity
+  public increment(data) {
 
-   // Increase Product Quantity
-   public increment(product: any, quantity: number = 1) {
-    this.cartService.updateCartQuantity(product,quantity);
+    this.totalItem = data.quantity + 1;
+    data.quantity = this.totalItem;
+    this.cartService.updateCartDetails(data).subscribe((res: any) => {
+      this.getCart();
+      this.getTotal();
+
+    });
+
   }
 
   // Decrease Product Quantity
-  public decrement(product: any, quantity: number = -1) {
-    this.cartService.updateCartQuantity(product,quantity);
+  public decrement(data) {
+    if (data.quantity == 1) {
+      this.totalItem = data.quantity - 1;
+      data.quantity = this.totalItem;
+      this.removeItem(data.id);
+      this.getCart();
+    }
+    else {
+      this.totalItem = data.quantity - 1;
+      data.quantity = this.totalItem;
+      this.cartService.updateCartDetails(data).subscribe((res: any) => {
+        this.getCart();
+        this.getTotal();
+      });
+    }
   }
-   // Get Total
-   public getTotal(): Observable<number> {
-    return this.cartService.getTotalAmount();
+  // Get Total
+  public getTotal() {
+    this.qantWith = 0;
+    this.carttotal = 0;
+    this.shoppingCartItems.forEach(element => {
+      this.qantWith = element.productPrice * element.quantity;
+      this.carttotal = this.carttotal + this.qantWith;
+    })
   }
 
 }

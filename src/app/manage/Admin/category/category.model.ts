@@ -6,7 +6,8 @@ export class Category{
         public bannersimage?:string,
         public createddate ?:Date,
         public updateddate?:Date,
-        public isactive?:number
+        public isactive?:number,
+        public SubCategory?:any[]
         
      ) {
     }

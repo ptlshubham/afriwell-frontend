@@ -14,26 +14,78 @@ export class ShoppingWidgetsComponent implements OnInit {
 
   products: Product[];
   indexProduct: number;
+  carttotal: number = 0;
+  totalItem: number = 0;
+  qantWith: number = 0;
+  public sidenavMenuItems: Array<any>;
 
-  public sidenavMenuItems:Array<any>;
+  @Input() shoppingCartsItems: CartItem[] = [];
 
-  @Input() shoppingCartItems: CartItem[] = [];
-
-  constructor(private cartService: CartService, public productService: ProductService) { }
+  constructor(
+    private cartService: CartService,
+    public productService: ProductService
+  ) { }
 
   ngOnInit() {
   }
   public updateCurrency(curr) {
     this.productService.currency = curr;
   }
-
-
-  public removeItem(item: CartItem) {
-    this.cartService.removeFromCart(item);
+  getCart() {
+    this.carttotal = 0;
+    if (localStorage.getItem('userId') != undefined) {
+      this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
+        this.shoppingCartsItems = data;
+        this.getTotal();
+      });
+    }
+  }
+  // Remove cart items
+  public removeItem(id) {
+    this.cartService.removeCart(id).subscribe((data: any) => {
+      this.getCart();
+      this.getTotal();
+    });
   }
 
-  public getTotal(): Observable<number> {
-    return this.cartService.getTotalAmount();
+  // Increase Product Quantity
+  public increment(data) {
+
+    this.totalItem = data.quantity + 1;
+    data.quantity = this.totalItem;
+    this.cartService.updateCartDetails(data).subscribe((res: any) => {
+      this.getCart();
+      this.getTotal();
+
+    });
+
   }
+
+ // Decrease Product Quantity
+ public decrement(data) {
+  if (data.quantity == 1) {
+    this.totalItem = data.quantity - 1;
+    data.quantity = this.totalItem;
+    this.removeItem(data.id);
+    this.getCart();
+  }
+  else {
+    this.totalItem = data.quantity - 1;
+    data.quantity = this.totalItem;
+    this.cartService.updateCartDetails(data).subscribe((res: any) => {
+      this.getCart();
+      this.getTotal();
+    });
+  }
+}
+// Get Total
+public getTotal() {
+  this.qantWith = 0;
+  this.carttotal = 0;
+  this.shoppingCartsItems.forEach(element => {
+    this.qantWith = element.productPrice * element.quantity;
+    this.carttotal = this.carttotal + this.qantWith;
+  })
+}
 
 }

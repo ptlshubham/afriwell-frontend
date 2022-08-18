@@ -44,9 +44,9 @@ export class ProductTwoComponent implements OnInit, OnChanges {
     }, 3000);
   }
     // Add to cart
-    public addToCart(product: Product,  quantity: number = 1) {
-      this.cartService.addToCart(product,quantity);
-    }
+    // public addToCart(product: Product,  quantity: number = 1) {
+    //   this.cartService.addToCart(product,quantity);
+    // }
 
     public openProductDialog(product){
       let dialogRef = this.dialog.open(ProductDialogComponent, {

@@ -2,129 +2,178 @@
 
 <div class="container">
   <div class="checkout sec-padding">
-      <div fxLayout="row wrap" class="">
-          <div class="billing-details  pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
-            <div class="header-title">
+    <div fxLayout="row wrap" class="">
+      <div class="billing-details  pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+        <div>
+          <div class="row" *ngIf="!isAddress">
+            <div class="col-md-8">
+              <div class="header-title">
+                <h2>Select Address</h2>
+              </div>
+            </div>
+            <div class="ml-md-auto">
+              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="addNewOpen()">Add New
+                Address</button>
+            </div>
+          </div>
+          <div fxLayout="row wrap" class="testimonials-component" *ngIf="!isAddress">
+            <div fxFlex="50" fxFlex.gt-sm="50" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10"
+              *ngFor="let item of userAddress; let i=index" style="padding: 0px 5px 0px 0px !important">
+              <mat-card class="light-block" fxLayout="column" fxLayoutAlign="start">
+                <!-- <mat-icon class="close-icon" color="warn" (click)="deleteAddress(item.id)">close</mat-icon> -->
+
+                <ngx-skeleton-loader *ngIf="!contentLoaded" count="2"
+                  [theme]="{ 'border-radius': '0', width: '250px', height: '15px' }"></ngx-skeleton-loader>
+                <div *ngIf="contentLoaded" class="content text-center">
+                  <mat-radio-group>
+                    <mat-radio-button value="item.id,i" (click)="selectedAddress(i,item.id)">
+                      <p class="name" *ngIf="contentLoaded">{{item.name}}
+                      </p>
+                      <div class="text-muted m-0 text">{{item.address}} , {{item.city}} ,</div>
+                      <div class="text-muted m-0 text"> {{item.state}} , {{item.pincode}} ,</div>
+                      <div class="text-muted m-0 text">{{item.contactnumber}} , {{item.alternativeno}} </div>
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row" *ngIf="isAddress">
+            <div class="col-md-8">
+              <div class="header-title">
                 <h2>Billing Details</h2>
+              </div>
+            </div>
+            <div class="ml-md-auto">
+              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="addNewClose()">Select
+                Address</button>
+            </div>
+          </div>
+
+          <form fxLayout="row wrap" *ngIf="isAddress">
+            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Name (required)" [(ngModel)]="addressModel.name"
+                  [ngModelOptions]="{standalone: true}" #name="ngModel" ngModel name="name" required>
+                <mat-error *ngIf="name.invalid">Please enter a Name</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Address" #address="ngModel" ngModel [(ngModel)]="addressModel.address"
+                  [ngModelOptions]="{standalone: true}" name="address">
+                <mat-error *ngIf="address.invalid">Please enter a valid Address</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Town/city" #city="ngModel" ngModel [(ngModel)]="addressModel.city"
+                  [ngModelOptions]="{standalone: true}" name="city">
+                <mat-error *ngIf="city.invalid">Please enter a valid City</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="State / Country (required)" #state="ngModel" ngModel name="state" ngModel
+                  [(ngModel)]="addressModel.state" [ngModelOptions]="{standalone: true}" required>
+                <mat-error *ngIf="state.invalid">Please enter a valid State</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Postcode / zip (required)" #pincode="ngModel" ngModel ngModel
+                  [(ngModel)]="addressModel.pincode" [ngModelOptions]="{standalone: true}" name="pincode" required>
+                <mat-error *ngIf="pincode.invalid">Please enter a valid Zipcode</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pr-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Phone (required)" #contactnumber="ngModel" ngModel name="contactnumber"
+                  [(ngModel)]="addressModel.contactnumber" [ngModelOptions]="{standalone: true}" required>
+                <mat-error *ngIf="contactnumber.invalid">Enter Contat Number, Only Numbers Allow.</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pl-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Enter Alternative Numbeer" #alternativeno="ngModel" name="alternativeno"
+                  [(ngModel)]="addressModel.alternativeno" [ngModelOptions]="{standalone: true}" ngModel>
+              </mat-form-field>
             </div>
 
-              <form fxLayout="row wrap">
-                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="First name (required)" #name="ngModel" ngModel name="name" required>
-                          <mat-error *ngIf="name.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Last name (required)" #email="ngModel" ngModel name="email" required>
-                          <mat-error *ngIf="email.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Company name (optional)" #subject="ngModel" ngModel name="subject">
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Address" #address="ngModel" ngModel name="address">
-                          <mat-error *ngIf="address.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Town/city" #town="ngModel" ngModel name="town/city">
-                          <mat-error *ngIf="town.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="State / Country (required)" #state="ngModel" ngModel name="state" required>
-                          <mat-error *ngIf="state.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Postcode / zip (required)" #postcode="ngModel" ngModel name="postcode" required>
-                          <mat-error *ngIf="postcode.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Email Address (required)" #email="ngModel" ngModel name="email" required>
-                          <mat-error *ngIf="email.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <input matInput placeholder="Phone (required)" #phone="ngModel" ngModel name="phone" required>
-                          <mat-error *ngIf="phone.invalid">Please enter a valid message</mat-error>
-                        </mat-form-field>
-                  </div>
-                  <div class="add-info">
-                    <h3>Additional information</h3>
-                    <p class="text-muted">Order notes (optional)</p>
 
+            <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-5" ngClass.sm="mt-1" ngClass.xs="mt-1">
+              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="saveAddress()">Save
+                Address</button>
+            </div>
+            <!-- <div class="add-info">
+              <h3>Additional information</h3>
+              <p class="text-muted">Order notes (optional)</p>
+  
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
+                <textarea placeholder="Post content" matInput rows="4" ngModel name="content"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+              <button class="btn-project" mat-raised-button color="primary" type="submit">Submit Review</button>
+            </div> -->
+          </form>
+        </div>
+      </div>
+      <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+        <div class="main-order ">
+          <div class="order-box">
+            <div class="title-box">
+              <div>Product <span class="tl-amount"> Total</span></div>
+            </div>
+            <ul class="price-list" *ngIf='buyProducts.length'>
+              <li *ngFor="let item of buyProducts">
+                {{ item.productName }} × {{ item.quantity }}
+                <span>
+                  {{ item.productPrice * item.quantity | currency:productService?.currency:'symbol' }}
+                </span>
+              </li>
+            </ul>
+            <ul class="quantity" *ngIf='buyProducts.length <= 0'>
+              <li class="empty-checkout"> There are no products in cart </li>
+            </ul>
+            <ul class="total-amount">
+              <li>
+                Subtotal <span class="amount">{{ carttotal}}$</span>
+              </li>
+              <li *ngIf='buyProducts.length'>
+                Shipping
+                <div class="shipping">
+                  <div class="shopping-option">
+                    <mat-radio-group>
+                      <mat-radio-button *ngFor="let payment of payments" [value]="payment">{{payment}}
+                      </mat-radio-button>
+                    </mat-radio-group>
                   </div>
-                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-                      <mat-form-field class="w-100">
-                          <textarea placeholder="Post content" matInput rows="4" ngModel name="content"></textarea>
-                        </mat-form-field>
-                  </div>
-                  <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
-                      <button class="btn-project" mat-raised-button  color="primary" type="submit">Submit Review</button>
-                    </div>
-                  </form>
-          </div>
-          <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
-            <div class="main-order " >
-              <div class="order-box">
-                  <div class="title-box">
-                      <div>Product <span class="tl-amount"> Total</span></div>
-                  </div>
-                  <ul class="price-list" *ngIf='buyProducts.length'>
-                    <li *ngFor="let item of buyProducts">
-                       {{ item.product.name }} × {{ item.quantity }}
-                      <span>
-                       {{ item.product.price * item.quantity | currency:productService?.currency:'symbol' }}
-                        </span>
-                    </li>
-                </ul>
-                <ul class="quantity" *ngIf='buyProducts.length <= 0'>
-                  <li class="empty-checkout"> There are no products in cart </li>
-                 </ul>
-                <ul class="total-amount">
-                  <li>
-                    Subtotal <span class="amount">{{ getTotal() | async | currency:productService?.currency:'symbol'}}</span>
-                  </li>
-                  <li *ngIf='buyProducts.length'>
-                    Shipping
-                   <div class="shipping">
-                      <div class="shopping-option">
-                        <mat-radio-group>
-                          <mat-radio-button *ngFor="let payment of payments" [value]="payment">{{payment}}</mat-radio-button>
-                        </mat-radio-group>
-                      </div>
 
-                   </div>
-                  </li>
-              </ul>
-              <ul class="total">
-                <li>Total <span class="count">{{ getTotal() | async | currency:productService?.currency:'symbol'}}</span></li>
+                </div>
+              </li>
+            </ul>
+            <ul class="total">
+              <li>Total <span class="count">{{carttotal}}$</span></li>
             </ul>
             <div class="paymentFinal">
               <mat-radio-group>
-                <mat-radio-button fxLayout="column" *ngFor="let payment of paymantWay" [value]="payment">{{payment}}</mat-radio-button>
+                <mat-radio-button fxLayout="column" *ngFor="let payment of paymantWay" [value]="payment">{{payment}}
+                </mat-radio-button>
               </mat-radio-group>
             </div>
             <div class="order">
-              <button class="btn-project" mat-raised-button color="primary" type="submit">PLACE ORDER</button>
+              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="placeOrder()">PLACE
+                ORDER</button>
             </div>
-               </div>
           </div>
-          </div>
+        </div>
+      </div>
 
-       </div>
     </div>
+  </div>
 </div>

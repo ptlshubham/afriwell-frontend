@@ -70,8 +70,9 @@ export class ApiService {
   public static loginURl: string = ApiService.HOST_URL + '/authenticate/authenticate';
   public static saveUserRegisterURL: string = ApiService.HOST_URL + '/authenticate/SaveUserRegister';
   public static getProductListURL: string = ApiService.HOST_URL + '/user/GetProductList';
-  public static getCartListURL: string = ApiService.HOST_URL + '/user/GetCartList';
+  public static getCartListURL: string = ApiService.HOST_URL + '/user/GetCartList/';
   public static saveAddToCartURL: string = ApiService.HOST_URL + '/user/saveAddToCart';
+  public static updateCartDetailsURL: string = ApiService.HOST_URL + '/user/UpdateCartDetails';
   public static saveAddToWishURL: string = ApiService.HOST_URL + '/user/saveToWishList';
   public static getWishListURL: string = ApiService.HOST_URL + '/user/GetWishList';
   public static removeCartListItemURL: string = ApiService.HOST_URL + '/user/RemoveCartList/';

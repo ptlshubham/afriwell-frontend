@@ -24,10 +24,10 @@ export class CompareComponent implements OnInit {
     console.log(this.product);
   }
 
-     // Add to cart
-     public addToCart(product: Product, quantity: number = 1) {
-      this.cartService.addToCart(product, quantity);
-   }
+  //    // Add to cart
+  //    public addToCart(product: Product, quantity: number = 1) {
+  //     this.cartService.addToCart(product, quantity);
+  //  }
 
    // Remove from compare list
    public removeItem(product: Product) {

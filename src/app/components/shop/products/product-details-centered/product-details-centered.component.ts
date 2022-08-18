@@ -130,17 +130,17 @@ getRelatedProducts() {
 }
 
   // Add to cart
-  public addToCart(product: Product, quantity) {
-    if (quantity == 0) return false;
-    this.cartService.addToCart(product, parseInt(quantity));
-  }
+//   public addToCart(product: Product, quantity) {
+//     if (quantity == 0) return false;
+//     this.cartService.addToCart(product, parseInt(quantity));
+//   }
 
-   // Add to cart
-   public buyNow(product: Product, quantity) {
-    if (quantity > 0)
-      this.cartService.addToCart(product,parseInt(quantity));
-      this.router.navigate(['/pages/checkout']);
- }
+//    // Add to cart
+//    public buyNow(product: Product, quantity) {
+//     if (quantity > 0)
+//       this.cartService.addToCart(product,parseInt(quantity));
+//       this.router.navigate(['/pages/checkout']);
+//  }
 
 
 
