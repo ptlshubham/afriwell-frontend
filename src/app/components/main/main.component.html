@@ -66,9 +66,22 @@
           </a>
         </div>
         <div class="widget-text" *ngIf="userName">
-          <a fxShow="false" fxShow.gt-xs (click)="logout()">
-            <mat-icon>person</mat-icon>{{userName}}
+          <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
+            <mat-icon>person</mat-icon> {{userName}} <mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down
+            </mat-icon>
           </a>
+          <mat-menu #langMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+            <button mat-menu-item [routerLink]="['/pages/profile']" routerLinkActive="router-link-active">
+              <mat-icon>person</mat-icon> Profile
+            </button>
+            <button mat-menu-item [routerLink]="['/pages/order-list']" routerLinkActive="router-link-active">
+              <mat-icon>history</mat-icon> Orders
+              
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon> Logout
+            </button>
+          </mat-menu>
         </div>
       </div>
 

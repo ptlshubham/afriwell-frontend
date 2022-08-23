@@ -1,0 +1,232 @@
+<app-breadcrumb [title]="'Profile'" [breadcrumb]="'Profile'"></app-breadcrumb>
+<div class="container">
+    <div class="checkout sec-padding">
+        <div fxLayout="row wrap" class="">
+            <div class="mainOrder-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+                <div class="header-title">
+                    <h2>Manage Profile</h2>
+                </div>
+                <div class="main-order ">
+                    <div class="row">
+                        <div class="mr-ml-auto">
+                            <div class="add-info">
+                                <h3>Personal Information</h3>
+                                <!-- <p class="text-muted">Order notes (optional)</p> -->
+                            </div>
+                        </div>
+                        <div class="mr-ml-auto">
+                            <button mat-button color="primary" (click)="openEditInfo()" *ngIf="!isOpenInfo">
+                                <mat-icon>edit</mat-icon> Edit
+                            </button>
+                            <button mat-button color="warn" (click)="closeEditInfo()" *ngIf="isOpenInfo">
+                                <mat-icon>close</mat-icon> Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <form class="row" *ngIf="isOpenInfo">
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="First Name" [(ngModel)]="userRegisterModel.fname"
+                                    #fname="ngModel" ngModel name="fname" [ngModelOptions]="{standalone: true}">
+                                <!-- <mat-error *ngIf="fname.invalid">Please enter a valid message</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Last Name" [(ngModel)]="userRegisterModel.lname"
+                                    #lname="ngModel" ngModel name="lname" [ngModelOptions]="{standalone: true}">
+                                <!-- <mat-error *ngIf="lname.invalid">Please enter a valid message</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Contact Number" [(ngModel)]="userRegisterModel.contact"
+                                    #contact="ngModel" ngModel name="contact">
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Email Address" [(ngModel)]="userRegisterModel.email"
+                                    #name="ngModel" ngModel name="name">
+                                <!-- <mat-error *ngIf="name.invalid">Please enter a valid Email Address.</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-2 offset-md-4" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <button class="btn-project" mat-raised-button color="primary" type="submit"
+                                (click)="updateUserDetails()">Save</button>
+                        </div>
+                    </form>
+                    <form class="row" *ngIf="!isOpenInfo">
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="First Name" [(ngModel)]="userRegisterModel.fname"
+                                    #fname="ngModel" ngModel name="fname" disabled
+                                    [ngModelOptions]="{standalone: true}">
+                                <!-- <mat-error *ngIf="fname.invalid">Please enter a valid message</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Last Name" [(ngModel)]="userRegisterModel.lname"
+                                    #lname="ngModel" ngModel name="lname" disabled
+                                    [ngModelOptions]="{standalone: true}">
+                                <!-- <mat-error *ngIf="lname.invalid">Please enter a valid message</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Contact Number" [(ngModel)]="userRegisterModel.contact"
+                                    #contact="ngModel" ngModel name="contact" disabled
+                                    [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Email Address" [(ngModel)]="userRegisterModel.email"
+                                    #name="ngModel" ngModel name="name" disabled [ngModelOptions]="{standalone: true}">
+                                <!-- <mat-error *ngIf="name.invalid">Please enter a valid Email Address.</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="billing-details  pl-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+                <div>
+                    <div class="row" *ngIf="!isAddress">
+                        <div class="col-md-8">
+                            <div class="header-title">
+                                <h2>Manage Address</h2>
+                            </div>
+                        </div>
+                        <div class="ml-md-auto">
+                            <button class="btn-project" mat-raised-button color="primary" type="submit"
+                                (click)="addNewOpen()">Add New Address</button>
+                        </div>
+                    </div>
+                    <div fxLayout="row wrap" class="testimonials-component" *ngIf="!isAddress">
+                        <div fxFlex="50" fxFlex.gt-sm="50" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10"
+                            *ngFor="let item of userAddress; let i=index" style="padding: 0px 5px 0px 0px !important">
+                            <mat-card class="light-block" fxLayout="column" fxLayoutAlign="start">
+
+                                <ngx-skeleton-loader *ngIf="!contentLoaded" count="2"
+                                    [theme]="{ 'border-radius': '0', width: '250px', height: '15px' }">
+                                </ngx-skeleton-loader>
+                                <div *ngIf="contentLoaded" class="content text-center">
+                                    <p class="name" *ngIf="contentLoaded">{{item.name}}
+                                    </p>
+                                    <div class="text-muted m-0 text">{{item.address}} , {{item.city}} ,</div>
+                                    <div class="text-muted m-0 text"> {{item.state}} , {{item.pincode}} ,</div>
+                                    <div class="text-muted m-0 text">{{item.contactnumber}} ,
+                                        {{item.alternativeno}} </div>
+                                    <div class="row">
+                                        <div class="col-sm-3 offset-sm-2">
+                                            <button mat-button color="primary" (click)="editAddress(item)">
+                                                <mat-icon>edit</mat-icon> Edit
+                                            </button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button mat-button color="warn" (click)="removeUserAddress(item.id)">
+                                                <mat-icon>close</mat-icon> Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row" *ngIf="isAddress">
+                        <div class="col-md-8">
+                            <div class="header-title">
+                                <h2>Address Details</h2>
+                            </div>
+                        </div>
+                        <div class="ml-md-auto">
+                            <button class="btn-project" mat-raised-button color="primary" type="submit"
+                                (click)="addNewClose()">View Saved
+                                Address</button>
+                        </div>
+                    </div>
+
+                    <form fxLayout="row wrap" *ngIf="isAddress">
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Name (required)" [(ngModel)]="addressModel.name"
+                                    [ngModelOptions]="{standalone: true}" #name="ngModel" ngModel name="name" required>
+                                <mat-error *ngIf="name.invalid">Please enter a Name</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Address" #address="ngModel" ngModel
+                                    [(ngModel)]="addressModel.address" [ngModelOptions]="{standalone: true}"
+                                    name="address">
+                                <mat-error *ngIf="address.invalid">Please enter a valid Address</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Town/city" #city="ngModel" ngModel
+                                    [(ngModel)]="addressModel.city" [ngModelOptions]="{standalone: true}" name="city">
+                                <mat-error *ngIf="city.invalid">Please enter a valid City</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10"
+                            ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="State / Country (required)" #state="ngModel" ngModel
+                                    name="state" ngModel [(ngModel)]="addressModel.state"
+                                    [ngModelOptions]="{standalone: true}" required>
+                                <mat-error *ngIf="state.invalid">Please enter a valid State</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10"
+                            ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Postcode / zip (required)" #pincode="ngModel" ngModel
+                                    ngModel [(ngModel)]="addressModel.pincode" [ngModelOptions]="{standalone: true}"
+                                    name="pincode" required>
+                                <mat-error *ngIf="pincode.invalid">Please enter a valid Zipcode</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pr-5 mt-20" ngClass.sm="mt-10"
+                            ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Phone (required)" #contactnumber="ngModel" ngModel
+                                    name="contactnumber" [(ngModel)]="addressModel.contactnumber"
+                                    [ngModelOptions]="{standalone: true}" required>
+                                <mat-error *ngIf="contactnumber.invalid">Enter Contat Number, Only Numbers Allow.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pl-5" ngClass.sm="mt-10"
+                            ngClass.xs="mt-10">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Enter Alternative Numbeer" #alternativeno="ngModel"
+                                    name="alternativeno" [(ngModel)]="addressModel.alternativeno"
+                                    [ngModelOptions]="{standalone: true}" ngModel>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-5" ngClass.sm="mt-1"
+                            ngClass.xs="mt-1" *ngIf="!isUpdate">
+                            <button class="btn-project" mat-raised-button color="primary" type="submit"
+                                (click)="saveAddress()">Save
+                                Address</button>
+                        </div>
+                        <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-5" ngClass.sm="mt-1"
+                            ngClass.xs="mt-1" *ngIf="isUpdate">
+                            <button class="btn-project" mat-raised-button color="primary" type="submit"
+                                (click)="updateSaveAddress()">Update
+                                Address</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

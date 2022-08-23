@@ -1,5 +1,6 @@
 export class UserRegister {
     constructor(
+        public id?: any,
         public fname?: string,
         public lname?: string,
         public email?: string,

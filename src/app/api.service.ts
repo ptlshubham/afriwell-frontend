@@ -95,7 +95,8 @@ export class ApiService {
   public static getNewArrivalURL: string = ApiService.HOST_URL + '/user/GetNewArrivalProduct';
   public static getProductSizeListURL: string = ApiService.HOST_URL + '/user/GetProductSizeList';
   public static getSimilarProductURL: string = ApiService.HOST_URL + '/user/GetSimilarProductList';
-
+  public static GetCustomerByIdURL: string = ApiService.HOST_URL + '/user/GetCustomerById';
+  public static updateCustomerDetailsURL: string = ApiService.HOST_URL + '/user/updateCustomerDetails';
   showNotification(from, align, msg, color) {
 
 

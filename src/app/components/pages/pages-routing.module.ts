@@ -11,6 +11,8 @@ import { FaqComponent } from './faq/faq.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
+import { ProfileComponent } from './profile/profile.component';
+import { OrderlistComponent } from './orderlist/orderlist.component';
 
 
 
@@ -29,7 +31,11 @@ const routes: Routes = [
       { path: 'my-account', component: MyAccountComponent },
       { path: 'error', component: ErrorPageComponent },
       { path: 'testimonials', component: ReviewsComponent },
-      { path: 'order-success', component: OrderSuccessComponent }
+      { path: 'order-success', component: OrderSuccessComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'order-list', component: OrderlistComponent }
+
+
     ]
   }
 ];

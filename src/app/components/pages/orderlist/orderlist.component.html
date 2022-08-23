@@ -1,0 +1,113 @@
+<app-breadcrumb [title]="'Order-List'" [breadcrumb]="'Order-List'"></app-breadcrumb>
+
+<div class="container">
+    <div class="order-success sec-padding">
+        <div class="header-title">
+            <h3>Your Orders</h3>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="">
+
+            <div class="mainOrder-wrapper pr-15" fxFlex="100" fxFlex.gt-md="20" fxFlex.md="20">
+                <div class="main-order ">
+                    <!-- <div class="order-box">
+                        <div class="title-box">
+                            <div>Order Recap </div>
+                        </div>
+                        <ul class="price-list">
+                            <li>
+                                <p>Contracted price</p>
+                                <span>
+                                    $187.00
+                                </span>
+                            </li>
+                            <li>
+                                <p>Amount towards deductible</p>
+                                <span>
+                                    $0.00
+                                </span>
+                            </li>
+                            <li>
+                                <p> Coinsurance (0%)</p>
+                                <span>
+                                    +$0.00
+                                </span>
+                            </li>
+                            <li>
+                                <p> Copayment</p>
+                                <span>
+                                    +$35.00
+                                </span>
+                            </li>
+                        </ul>
+
+                        <ul class="price-list">
+                            <li>
+                                <p>Toatal deductible,<br>Coinsurance and Copay</p> <span class="amount">$50.00</span>
+                            </li>
+                            <li>
+                                <p>Maximum out-of-pocket on<br>Insurance policy<br>(not reached)</p> <span
+                                    class="amount">$5000.00</span>
+                            </li>
+
+                        </ul>
+                        <ul class="price-list">
+                            <li>
+                                <p>Insurance Responsibility</p> <span class="amount">$53.00</span>
+                            </li>
+                            <li>
+                                <p>Patient Balance</p> <span class="amount">$13.55</span>
+                            </li>
+
+                        </ul>
+                        <ul class="total">
+                            <li>Total <span class="count">$102.00</span></li>
+                        </ul>
+
+                    </div> -->
+                </div>
+            </div>
+            <div class="billing-details  pl-15" fxFlex="100" fxFlex.gt-md="80" fxFlex.md="80">
+
+                <div class="product-order-details mb-30" fxLayout="column" fxLayout.gt-sm="row"
+                    fxLayoutAlign="start center" *ngFor="let item of ordersUser;let i=index">
+                    <div class="order-img" fxFlex="25">
+                        <img src="http://localhost:8090{{item.productMainImage}}" alt="" class="img-fluid">
+                    </div>
+                    <div class="order-name " fxFlex="50">
+                        <!-- <p class="order-name">Product Name</p> -->
+                        <span>{{item.productName}}</span>
+                    </div>
+                    <div class="order-quantity" fxFlex="10">
+                        <!-- <p>Quantity</p> -->
+                        <span>{{item.quantity}}</span>
+                    </div>
+                    <div class="order-price" fxFlex="10">
+                        <!-- <p>Price</p> -->
+                        <span>$ {{item.productPrice}}</span>
+                    </div>
+                    <div class="order-price" fxFlex="20">
+                        <!-- <p>Price</p> -->
+                        <span>{{item.orderdate |date}}</span>
+                    </div>
+                    <div class="order-price" fxFlex="15">
+                        <!-- <p>Price</p> -->
+                        <span *ngIf="item.status=='Pending'"><i class="fa fa-circle" style="color: #ff9f00;"></i>
+                            {{item.status}}</span>
+                        <span *ngIf="item.status=='Accepted'"><i class="fa fa-circle" style="color: #26a541; "></i>
+                            {{item.status}}</span>
+                        <span *ngIf="item.status=='Processing'"><i class="fa fa-circle" style="color: #2874f0; "></i>
+                            {{item.status}}</span>
+                        <span *ngIf="item.status=='Cancelled'"><i class="fa fa-circle" style="color: #ff6161; "></i>
+                            {{item.status}}</span>
+
+                    </div>
+                </div>
+                <!-- <div class="order">
+                    <button class="btn-project" mat-raised-button color="primary" type="submit">PROCEED TO
+                        PAYMENT</button>
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -29,12 +29,23 @@ export class CheckoutService {
     getAddress(id): Observable<Address> {
         return this.httpClient.get<any>(ApiService.getUserAddressURL + id);
     }
-    removeAddress(id) {
-        debugger
+    removeAddress(data) {
+        let id = {
+            id: data
+        }
         return this.httpClient.post<any>(ApiService.removeUserAddressURL, id);
     }
     updateAddress(user) {
         return this.httpClient.post<any>(ApiService.updateUserAddressURL, user);
+    }
+    getUserDetails() {
+        let id = {
+            id: localStorage.getItem('userId')
+        }
+        return this.httpClient.post<any>(ApiService.GetCustomerByIdURL, id)
+    }
+    updateUserDetails(data){
+        return this.httpClient.post<any>(ApiService.updateCustomerDetailsURL,data)
     }
     getUserOrders(id): Observable<Userorders[]> {
         let data = {

@@ -6,6 +6,7 @@ import { ProductService } from '../../shared/services/product.service';
 import { CheckoutService } from '../../shared/services/checkout.service';
 import { Address } from '../../user-models/address.model';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -34,7 +35,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private cartService: CartService,
     public productService: ProductService,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private router: Router
   ) {
     this.getStateWithCity();
   }
@@ -127,6 +129,11 @@ export class CheckoutComponent implements OnInit {
     this.cartService.saveOrders(this.addressModel).subscribe((data: any) => {
       this.removeItem();
       alert("order succesfully");
+      if (data.insertId = !null,!undefined) {
+        debugger
+        this.router.navigate(['pages/order-success']);
+      }
+
     })
 
   }

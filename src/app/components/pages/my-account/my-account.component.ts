@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserRegister } from '../../user-models/userRegister.model';
 import { UserRegisterService } from '../../user-service/register.service';
@@ -16,7 +17,8 @@ export class MyAccountComponent implements OnInit {
 
   constructor(
     private userRegisterService: UserRegisterService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,18 @@ export class MyAccountComponent implements OnInit {
   }
   login() {
     this.userRegisterService.login(this.userRegisterModel).subscribe(data => {
+      debugger
+      let message, status;
+      if (data.length > 0) {
+        message = 'Welcome back ' + data[0].firstname + ' ' + data[0].lastname + '!';
+        status = 'success';
+        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+      }
+      else {
+        message = 'Enter Valid User Email and password';
+        status = 'danger';
+        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+      }
       localStorage.setItem('userId', data[0].id);
       localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
       this.reloadCurrentRoute();
