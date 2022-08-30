@@ -7,7 +7,8 @@ export class Category{
         public createddate ?:Date,
         public updateddate?:Date,
         public isactive?:number,
-        public SubCategory?:any[]
+        public SubCategory?:any[],
+        public isSub?:boolean
         
      ) {
     }

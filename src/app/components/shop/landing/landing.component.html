@@ -94,26 +94,32 @@
     </div>
 </div>
 <!-- Info section end-->
+<div class="products " style="margin-bottom: 30px;">
+    <div class="products-four">
+        <h3 style="margin-bottom: 0px !important;">POPULAR ITEMS</h3>
+        <app-product-carousel [product]="products"></app-product-carousel>
+    </div>
+</div>
 <!-- Baner section start-->
 <div class="container">
     <div class="banners-container" fxLayout="column" fxLayout.gt-sm="row" *ngIf="baners.length > 0">
 
         <div class="sec-padding" fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100"
-            fxFlex.gt-sm="100" class="baners">
+            fxFlex.gt-sm="100" class="baners" style="padding: 0px 0px !important;">
             <ngx-skeleton-loader *ngIf="!contentLoaded" count="1" [theme]="{ 'border-radius': '0', height: '450px' }">
             </ngx-skeleton-loader>
             <div *ngIf="contentLoaded" class="baner first" [ngStyle]="getBgImage(0)">
-                <div class="info">
+                <!-- <div class="info">
                     <div class="text-box">
                         <h4>{{getBanner(0).title}}</h4>
                         <p>{{getBanner(0).subtitle}}</p>
                         <a href="#">Shop Now</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="60">
-            <div class="mt-20" fxLayout="column" fxLayout.gt-sm="row" fxFlexOrder="2" fxFlexOrder.gt-sm="2" fxFlex="50"
+            <div class="" fxLayout="column" fxLayout.gt-sm="row" fxFlexOrder="2" fxFlexOrder.gt-sm="2" fxFlex="50"
                 fxFlex.gt-sm="50">
                 <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
                     [theme]="{ 'border-radius': '0', height: '215px' }"></ngx-skeleton-loader>
@@ -121,7 +127,6 @@
                     <div class="info">
                         <div class="text-box text-right" fxLayout="column">
                             <h4>{{getBanner(1).title}}</h4>
-                            <a href="#">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -131,19 +136,30 @@
                     <div class="info">
                         <div class="text-box " fxLayout="column">
                             <h4>{{getBanner(2).title}}</h4>
-                            <a href="#">Shop Now</a>
                         </div>
                     </div>
                 </div>
             </div>
             <ngx-skeleton-loader *ngIf="!contentLoaded" count="1" [theme]="{ 'border-radius': '0', height: '215px' }">
             </ngx-skeleton-loader>
-            <div *ngIf="contentLoaded" class="baner seccond mg-xs-0" fxFlexOrder="1" fxFlexOrder.gt-sm="1" fxFlex="50"
-                fxFlex.gt-sm="100" [ngStyle]="getBgImage(3)">
-                <div class="info">
-                    <div class="text-box w-50 pt-40 " fxLayout="column">
-                        <h4>{{getBanner(3).title}}</h4>
-                        <a href="#">Shop Now</a>
+            <div class="mt-20" fxLayout="column" fxLayout.gt-sm="row" fxFlexOrder="2" fxFlexOrder.gt-sm="2" fxFlex="50"
+                fxFlex.gt-sm="50">
+                <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
+                    [theme]="{ 'border-radius': '0', height: '215px' }"></ngx-skeleton-loader>
+                <div *ngIf="contentLoaded" class="baner seccond" fxFlex [ngStyle]="getBgImage(3)">
+                    <div class="info">
+                        <div class="text-box text-right" fxLayout="column">
+                            <h4>{{getBanner(3).title}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
+                    [theme]="{ 'border-radius': '0', height: '215px' }"></ngx-skeleton-loader>
+                <div *ngIf="contentLoaded" class="baner seccond pd-xs" fxFlex [ngStyle]="getBgImage(4)">
+                    <div class="info">
+                        <div class="text-box " fxLayout="column">
+                            <h4>{{getBanner(4).title}}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,25 +172,18 @@
 <div class="products products-furniture sec-padding">
     <div class="container">
         <h3>POPULAR ITEMS</h3>
+        <br>
+        <br>
         <mat-tab-group>
 
-            <mat-tab label="FEATURED PRODUCTS">
-
+            <mat-tab label="NEW ARRIVALS PRODUCTS">
                 <app-product-carousel-two [product]="products | slice:0:5"></app-product-carousel-two>
-
-
             </mat-tab>
-
-            <mat-tab label="LATEST PRODUCTS">
-
-                <app-product-carousel-two [product]="products | slice:0:5"></app-product-carousel-two>
-
+            <mat-tab label="BEST PRODUCTS">
+                <app-product-caurousel-best [product]="products | slice:0:5"></app-product-caurousel-best>
             </mat-tab>
-
             <mat-tab label="ON SALE PRODUCTS">
-
-                <app-product-carousel-two [product]="products | slice:0:5"></app-product-carousel-two>
-
+                <app-product-caurousel-sale [product]="products | slice:0:5"></app-product-caurousel-sale>
             </mat-tab>
 
         </mat-tab-group>
@@ -186,31 +195,101 @@
 <!-- Baner section start-->
 <ngx-skeleton-loader *ngIf="!contentLoaded" count="1" [theme]="{ 'border-radius': '0', height: '551px' }">
 </ngx-skeleton-loader>
-<section *ngIf="contentLoaded" class="commercial-banner" fxLayout="column" fxLayout.gt-sm="row">
+<section *ngIf="contentLoaded" class="commercial-banner" fxLayout="column" fxLayout.gt-sm="row"
+    style="padding : 0rem 0vw 3rem 0;">
+    <div *ngFor="let db of dealbanners ">
+        <!--Image Column-->
+        <div class="image-column" fxFlex="50">
+            <img src="http://localhost:8090{{db.image}}" alt="">
+        </div>
 
-    <!--Image Column-->
-    <div class="image-column" fxFlex="50">
-        <img src="assets/images/background/3.jpg" alt="">
-    </div>
-
-    <!--Content Column-->
-    <div *ngIf="contentLoaded" class="story__content" fxFlex="50">
-        <div class="inner-column">
-            <!--Sec Title-->
-            <div class="section-titleBar text-left">
-                <h1>Everything you<br>need to create<br> your outdoor <br>oasis</h1>
-                <button mat-raised-button color="primary">Shop now</button>
+        <!--Content Column-->
+        <div *ngIf="contentLoaded" class="story__content" fxFlex="50">
+            <div class="inner-column" style="padding-left: 30px;">
+                <!--Sec Title-->
+                <div class="section-titleBar text-left">
+                    <h1>{{db.title}}</h1>
+                    <button mat-raised-button color="primary">Shop now</button>
+                </div>
             </div>
-
-
-
         </div>
     </div>
-
-
 </section>
 <!-- Baner section end-->
-
+<section class="commercial-banners">
+    <div class="container">
+        <!--Image Column-->
+        <div class="row">
+            <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
+                [theme]="{ 'border-radius': '0', height: '309px', margin: '10px', width: '1080px' }">
+            </ngx-skeleton-loader>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div *ngIf="contentLoaded"
+                    style="background:#f6f6f6 !important;padding: 30px 30px 30px 30px !important">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>BIG SALLE</span>
+                            <h3>Check our best<br>camera offer</h3>
+                            <a href="">Check now</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div *ngIf="contentLoaded" class="img">
+                                <img src="assets/images/product/camera_bn.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div *ngIf="contentLoaded"
+                    style="background:#f6f6f6 !important;padding: 30px 30px 30px 30px !important">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>BIG SALLE</span>
+                            <h3>Check our best<br>Chairs offer</h3>
+                            <a href="">Check now</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div *ngIf="contentLoaded" class="img">
+                                <img src="assets/images/product/tablet_bn.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Content Column-->
+    </div>
+</section>
 <!-- Vertical products start-->
+<div class="home-3-wrap" style="margin-top:3rem !important">
+    <div class="home-main-wrapper" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+        <div fxFlex="100" fxFlex.gt-md="100" fxFlex.md="100" fxFlex.sm="100" class="main-home3-wrapper">
+            <div class="home3-banner-wrap">
+                <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
+                    [theme]="{  'border-radius': '0', height: '194px' }">
+                </ngx-skeleton-loader>
+                <div *ngFor="let db of flashbanners">
+                <div class="banner" *ngIf="contentLoaded"  >
+                    <div fxLayout="column" class="text-wrap">
+                        <span class="subtitle">{{db.title}}</span>
+                        <span class="main" style="background: transparent !important;">{{db.subtitle}}</span>
+                        <a href="#">Shop Now</a>
+                    </div>
+
+                    <img src="http://localhost:8090{{db.image}}" alt="">
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <app-product-vertical [products]="products"></app-product-vertical>
+<div class="main-banner">
+    <app-banner-promotion></app-banner-promotion>
+</div>
+
 <!-- Vertical products end-->

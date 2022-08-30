@@ -125,12 +125,12 @@ export class CheckoutComponent implements OnInit {
     this.addressModel.total = this.carttotal;
     this.addressModel.addressId = this.selectedAdd;
     this.addressModel.status = 'Pending';
-    debugger
+     
     this.cartService.saveOrders(this.addressModel).subscribe((data: any) => {
       this.removeItem();
       alert("order succesfully");
       if (data.insertId = !null,!undefined) {
-        debugger
+         
         this.router.navigate(['pages/order-success']);
       }
 

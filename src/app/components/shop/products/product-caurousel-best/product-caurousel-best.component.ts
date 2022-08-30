@@ -1,21 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ProductDialogComponent } from '../../products/product-dialog/product-dialog.component';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { UserHomeService } from 'src/app/components/user-service/home.services';
+import { Product } from 'src/app/modals/product.model';
 import { Productlist } from 'src/app/modals/productlist.model';
+import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 
 @Component({
-  selector: 'app-product-carousel-two',
-  templateUrl: './product-carousel-two.component.html',
-  styleUrls: ['./product-carousel-two.component.sass']
+  selector: 'app-product-caurousel-best',
+  templateUrl: './product-caurousel-best.component.html',
+  styleUrls: ['./product-caurousel-best.component.sass']
 })
-export class ProductCarouselTwoComponent implements OnInit {
+export class ProductCaurouselBestComponent implements OnInit {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Input('product') product: Array<Productlist> = [];
   public config: SwiperConfigInterface = {};
@@ -29,11 +29,10 @@ export class ProductCarouselTwoComponent implements OnInit {
     private router: Router,
     private userHomeService: UserHomeService
   ) { }
-  //  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log(this.product);
-    this.getNewArrivalsProducts();
+    this.getbestProducts();
     setTimeout(() => {
       this.contentLoaded = true;
     }, 3000);
@@ -68,12 +67,6 @@ export class ProductCarouselTwoComponent implements OnInit {
       }
     }
   }
-
-  // Add to cart
-  //  public addToCart(product: Product,  quantity: number = 1) {
-  //    this.cartService.addToCart(product,quantity);
-  //    console.log(product, quantity);
-  //  }
   public addToCart(product: Productlist, quantity: number = 1) {
     this.cartService.addToCart(product, quantity);
     let currentUrl = this.router.url;
@@ -83,7 +76,6 @@ export class ProductCarouselTwoComponent implements OnInit {
   }
   // Add to wishlist
   public addToWishlist(product: Productlist) {
-    
     this.wishlistService.addToWishlist(product).subscribe((response) => {
       console.log(response);
     })
@@ -94,8 +86,8 @@ export class ProductCarouselTwoComponent implements OnInit {
     this.productsService.addToCompare(product);
   }
 
-  getNewArrivalsProducts() {
-    this.userHomeService.getBestProduct().subscribe((data: any) => {
+  getbestProducts() {
+    this.userHomeService.getNewArrival().subscribe((data: any) => {
       this.product = data
     })
   }

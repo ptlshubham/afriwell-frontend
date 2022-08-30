@@ -91,9 +91,9 @@ export class LoginComponent implements OnInit {
 
         console.log("......data...." + credentials.email);
         this.loginservice.login(credentials).subscribe(data => {
-            debugger
+             
             if (data == 1) {
-                debugger
+                 
                 // this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
             }
             else if (data == 2) {

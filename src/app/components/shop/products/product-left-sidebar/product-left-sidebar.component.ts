@@ -30,7 +30,7 @@ export class ProductLeftSidebarComponent implements OnInit {
     // this.route.params.subscribe(
     //   (params: Params) => {
     //     const category = params['category'];
-    //     debugger
+    //      
     //     this.productService.getProductByCategory(category).subscribe(products => {
     //       this.allItems = products;
     //       this.products = products.slice(0.8);

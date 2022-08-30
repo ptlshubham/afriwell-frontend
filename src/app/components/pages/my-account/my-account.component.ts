@@ -38,7 +38,7 @@ export class MyAccountComponent implements OnInit {
   }
   login() {
     this.userRegisterService.login(this.userRegisterModel).subscribe(data => {
-      debugger
+       
       let message, status;
       if (data.length > 0) {
         message = 'Welcome back ' + data[0].firstname + ' ' + data[0].lastname + '!';

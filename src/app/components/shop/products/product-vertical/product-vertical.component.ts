@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProductService } from 'src/app/components/shared/services/product.service';
-import { Product } from 'src/app/modals/product.model';
+import { UserHomeService } from 'src/app/components/user-service/home.services';
+import { Productlist } from 'src/app/modals/productlist.model';
 
 @Component({
   selector: 'app-product-vertical',
@@ -9,19 +9,37 @@ import { Product } from 'src/app/modals/product.model';
 })
 export class ProductVerticalComponent implements OnInit {
   contentLoaded = false;
- @Input() products: Product[];
+  @Input() products: Productlist[];
+  public onSale: Productlist[];
+  public hotProduct: Productlist[];
 
-  constructor(private productService: ProductService ) { }
+  constructor(
+    private userHomeService: UserHomeService
+  ) { }
 
   ngOnInit() {
-    this.productService.getProducts()
-    .subscribe (
-    product => this.products = product
-    )
-
+    this.getbestProducts();
+    this.getSaleProducts();
+    this.getHotProducts();
     setTimeout(() => {
       this.contentLoaded = true;
     }, 3000);
   }
+  getbestProducts() {
+    this.userHomeService.getNewArrival().subscribe((data: any) => {
+      this.products = data
+    })
+  }
+  getSaleProducts() {
+    this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
+      this.onSale = data
 
+    })
+  }
+  getHotProducts() {
+    this.userHomeService.getHotProduct().subscribe((data: any) => {
+      this.hotProduct = data
+
+    })
+  }
 }

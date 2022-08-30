@@ -48,7 +48,7 @@ export class CartService {
         let qty = products[index].quantity + quantity;
         let stock = this.calculateStockCounts(products[index], quantity);
         if (qty != 0 && stock) {
-          debugger
+           
           products[index]['quantity'] = qty;
           message = 'The product ' + product.productName + ' has been added to cart.';
           status = 'success';

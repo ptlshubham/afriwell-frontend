@@ -31,7 +31,7 @@ export class MainCarouselComponent implements OnInit {
       navigation: true,
       pagination: this.pagination,
       grabCursor: true,
-      loop: false,
+      loop: true,
       preloadImages: false,
       lazy: true,
       autoplay: {

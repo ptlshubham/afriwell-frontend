@@ -28,17 +28,29 @@ export class WebhomeComponent implements OnInit {
         name: 'Top'
       },
       {
-        name: 'Middle',
+        name: 'Middle Left',
+      },
+      {
+        name: 'Middle Right Top',
+      },
+      {
+        name: 'Middle Right Down',
+      },
+      {
+        name:'Deal Banners'
+      },
+      {
+        name:'Flash Sale Banner'
       },
       {
         name: 'End',
       },
-      {
-        name: 'Deal of the Day',
-      },
-      {
-        name: 'Deal of the Day Center',
-      }
+      // {
+      //   name: 'Deal of the Day',
+      // },
+      // {
+      //   name: 'Deal of the Day Center',
+      // }
     ]
     this.getBanners();
   }
@@ -60,7 +72,7 @@ export class WebhomeComponent implements OnInit {
 
   }
   select(event) {
-     
+
     let max_height;
     let max_width;
     if (event.target.files && event.target.files[0]) {
@@ -69,22 +81,30 @@ export class WebhomeComponent implements OnInit {
       const max_size = 20971520;
       const allowed_types = ['image/png', 'image/jpeg'];
       if (this.selectedPosition == 'Top') {
-        max_height = 400;
-        max_width = 1200;
+        max_height = 805;
+        max_width = 1920;
       }
-      else if (this.selectedPosition == 'Middle') {
-        max_height = 400;
-        max_width = 1200;
+      else if (this.selectedPosition == 'Middle Left') {
+        max_height = 500;
+        max_width = 500;
+      }
+      // else if (this.selectedPosition == 'Middle Right Top') {
+      //   max_height = 900;
+      //   max_width = 348;
+      // }
+      else if (this.selectedPosition == 'Middle Right Down') {
+        max_height = 500;
+        max_width = 294;
       }
       else if (this.selectedPosition == 'End') {
-        max_height = 400;
-        max_width = 1200;
+        max_height = 653;
+        max_width = 1981;
       }
       else if (this.selectedPosition == 'Deal of the Day') {
         max_height = 800;
         max_width = 600;
       }
-      else if (this.selectedPosition == 'Deal of the Day Center'){
+      else if (this.selectedPosition == 'Deal of the Day Center') {
         max_height = 570;
         max_width = 390;
       }
@@ -128,7 +148,7 @@ export class WebhomeComponent implements OnInit {
             const formdata = new FormData();
             formdata.append('file', file);
 
-             
+
             this.bannersServie.uploadImage(formdata).subscribe((response) => {
               this.image = response;
               console.log(response);
@@ -149,7 +169,7 @@ export class WebhomeComponent implements OnInit {
 
   }
   saveBannersImage() {
-     
+
     this.WebbannersModel.bannersimage = this.image;
     this.WebbannersModel.name = this.selectedPosition;
     this.WebbannersModel.status = true;
@@ -159,14 +179,22 @@ export class WebhomeComponent implements OnInit {
     })
   }
   getBanners() {
-     
+
     this.bannersServie.getWebBanners().subscribe((data: any) => {
       this.webImage = data;
     });
 
   }
+  editBannersDetails(data) {
+    this.isAddShow = false;
+    this.image = data.bannersimage;
+    this.selectedPosition = data.name;
+    this.WebbannersModel.title = data.title;
+    this.WebbannersModel.subtitle = data.subtitle;
+
+  }
   removeBannersImage(id) {
-     
+
     this.bannersServie.removeWebBanners(id).subscribe((req) => {
       this.getBanners();
     })

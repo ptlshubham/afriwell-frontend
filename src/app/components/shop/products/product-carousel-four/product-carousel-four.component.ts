@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
-import {  SwiperDirective } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -8,6 +6,7 @@ import { ProductDialogComponent } from '../../products/product-dialog/product-di
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
+import { Productlist } from 'src/app/modals/productlist.model';
 
 @Component({
   selector: 'app-product-carousel-four',
@@ -17,7 +16,7 @@ import { WishlistService } from 'src/app/components/shared/services/wishlist.ser
 export class ProductCarouselFourComponent implements OnInit {
   contentLoaded = false;
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
-  @Input('product') product: Array<Product> = [];
+  @Input('product') product: Array<Productlist> = [];
   public config: SwiperConfigInterface = {};
   constructor(private dialog: MatDialog, private router: Router, private cartService: CartService, private productService: ProductService, private wishlistService: WishlistService) { }
 
@@ -77,12 +76,16 @@ export class ProductCarouselFourComponent implements OnInit {
   // }
 
    // Add to wishlist
-   public addToWishlist(product: Product) {
-    this.wishlistService.addToWishlist(product);
+   public addToWishlist(product: Productlist) {
+    // this.product.userid = localStorage.getItem('userId');
+
+    this.wishlistService.addToWishlist(product).subscribe((response) => {
+      console.log(response);
+    })
  }
 
     // Add to compare
-    public addToCompare(product: Product) {
-      this.productService.addToCompare(product);
-   }
+  //   public addToCompare(product: Product) {
+  //     this.productService.addToCompare(product);
+  //  }
 }

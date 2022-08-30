@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { Productlist } from 'src/app/modals/productlist.model';
-import { Product } from 'src/app/modals/product.model';
 
 @Component({
   selector: 'app-product',
@@ -20,12 +19,12 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    public productsService: ProductService, 
-    private wishlistService: WishlistService, 
-    private dialog: MatDialog, 
+    public productsService: ProductService,
+    private wishlistService: WishlistService,
+    private dialog: MatDialog,
     private router: Router
-    ) {
-     }
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -40,14 +39,17 @@ export class ProductComponent implements OnInit {
   }
 
   // Add to wishlist  
-  public addToWishlist(product: Product) {
-    this.wishlistService.addToWishlist(product);
+  public addToWishlist(product: Productlist) {
+    this.product.userid = localStorage.getItem('userId');
+    this.wishlistService.addToWishlist(product).subscribe((response) => {
+      console.log(response);
+    })
   }
 
   // Add to compare
-  public addToCompare(product: Product) {
-    this.productsService.addToCompare(product);
-  }
+  // public addToCompare(product: Product) {
+  //   this.productsService.addToCompare(product);
+  // }
 
 
   public openProductDialog(product) {

@@ -77,8 +77,10 @@ export class ProductCarouselThreeComponent implements OnInit {
   }
 
   // Add to wishlist
-  public addToWishlist(product: Product) {
-    this.wishlistService.addToWishlist(product);
+  public addToWishlist(product: Productlist) {
+    this.wishlistService.addToWishlist(product).subscribe((response) => {
+      console.log(response);
+    })
  }
 
   // Add to compare

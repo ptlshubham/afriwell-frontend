@@ -48,6 +48,8 @@ import { ProductDetailsLeftComponent } from './products/product-details-left/pro
 import { ProductDetailsCenteredComponent } from './products/product-details-centered/product-details-centered.component';
 import { LandingComponent } from './landing/landing.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductCaurouselBestComponent } from './products/product-caurousel-best/product-caurousel-best.component';
+import { ProductCaurouselSaleComponent } from './products/product-caurousel-sale/product-caurousel-sale.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import { ProductListComponent } from './products/product-list/product-list.compo
     ProductDetailsLeftComponent,
     ProductDetailsCenteredComponent,
     LandingComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductCaurouselBestComponent,
+    ProductCaurouselSaleComponent,
 
   ],
   imports: [

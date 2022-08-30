@@ -93,6 +93,8 @@ export class ApiService {
   public static getBestProductURL: string = ApiService.HOST_URL + '/user/GetBestProduct';
   public static getPopularProductsURL: string = ApiService.HOST_URL + '/user/GetBestProduct';
   public static getNewArrivalURL: string = ApiService.HOST_URL + '/user/GetNewArrivalProduct';
+  public static getSaleProductURL: string = ApiService.HOST_URL + '/user/GetSaleProduct';
+  public static getHotProductURL: string = ApiService.HOST_URL + '/user/GetHotProduct';
   public static getProductSizeListURL: string = ApiService.HOST_URL + '/user/GetProductSizeList';
   public static getSimilarProductURL: string = ApiService.HOST_URL + '/user/GetSimilarProductList';
   public static GetCustomerByIdURL: string = ApiService.HOST_URL + '/user/GetCustomerById';

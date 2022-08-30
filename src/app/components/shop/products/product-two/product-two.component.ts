@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/modals/product.model';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { Productlist } from 'src/app/modals/productlist.model';
 
 @Component({
   selector: 'app-product-two',
@@ -71,8 +72,10 @@ export class ProductTwoComponent implements OnInit, OnChanges {
     }
 
        // Add to wishlist
-   public addToWishlist(product: Product) {
-    this.wishlistService.addToWishlist(product);
+   public addToWishlist(product: Productlist) {
+    this.wishlistService.addToWishlist(product).subscribe((response) => {
+      console.log(response);
+    })
  }
 
 

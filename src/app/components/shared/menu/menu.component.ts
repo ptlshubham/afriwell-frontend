@@ -10,6 +10,9 @@ import { CoreService } from '../../user-service/core.service';
 export class MenuComponent implements OnInit {
   public mainCategory: Category[] = [];
   public subCategory: Category[] = [];
+  subcate: Category[] = [];
+  openSub: boolean = false;
+
   constructor(
     private coreService: CoreService
   ) {
@@ -31,7 +34,7 @@ export class MenuComponent implements OnInit {
   // async getMainCategory(id) {
   //   this.coreService.getAllUserCate(id).subscribe(data => {
   //     this.mainCategory = data;
-  //     debugger
+  //      
   //     this.mainCategory.forEach(element => {
   //       if (element.id) {
   //         this.getSubCategory(element.id);
@@ -43,24 +46,33 @@ export class MenuComponent implements OnInit {
   // getSubCategory(id) {
   //   this.coreService.getAllUserCate(id).subscribe(data => {
   //     this.subCategory = data;
-  //     debugger
+  //      
   //   });
   // }
   getCategoryList() {
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
       this.mainCategory = data;
-      this.mainCategory.forEach(element => {
-        this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
-          element.SubCategory = res;
-        })
-      })
+      // this.mainCategory.forEach(element => {
+      //   this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
+      //     element.SubCategory = res;
+      //   })
+      // })
     });
     this.mainCategory;
+  }
+  openSubcategory(id, i) {
+    this.subcate=[];
+    this.coreService.getAllUserCate(id).subscribe((data: any) => {
+      this.mainCategory[i].SubCategory = data;
+      this.mainCategory[i].isSub = true;
+      this.subcate = data;
+      this.openSub = true;
+    })
   }
   openSubToSub(mainid, subid, i, j) {
     this.mainCategory[i].SubCategory[j].subtosub = [];
     this.coreService.getAllUserCate(subid).subscribe((data: any) => {
- 
+
     })
     // else {
     //   this.mainCategory[i].SubCategory[j].isopen = false;

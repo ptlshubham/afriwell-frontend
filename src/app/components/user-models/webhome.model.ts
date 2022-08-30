@@ -6,7 +6,6 @@ export class Webbanners{
         public status?:boolean,
         public title?:string,
         public subtitle?:string
-        
      ) {
     }
 }

@@ -18,35 +18,10 @@
         </button>
       </span>
       <div fxLayout="row" class="welcome-message">
-        <marquee style="color: white;">Afriwell Provide best quailty products with lots of vairety.is used for scrolling
+        <marquee style="color: white;">Afriwell Provide best quailty products with lots of vairety.is used for
+          scrolling
           is used for scrolling is used for
         </marquee>
-        <!-- <div class="widget-text">
-          <a mat-button [matMenuTriggerFor]="currencyMenu" #currencyMenuTrigger="matMenuTrigger">
-            {{currency}}<mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
-          </a>
-          <mat-menu #currencyMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
-            <span>
-              <button mat-menu-item *ngFor="let cur of currencies" (click)="changeCurrency(cur)">
-                <span>{{cur}}</span>
-              </button>
-            </span>
-          </mat-menu>
-        </div>
-        <div class="widget-text">
-          <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
-            <img [src]="flag.image" width="18">
-            <span fxShow="false" fxShow.gt-sm class="flag-menu-title">{{flag.name}}</span>
-            <mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
-          </a>
-          <mat-menu #langMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
-            <span>
-              <button mat-menu-item *ngFor="let flag of flags" (click)="changeLang(flag)">
-                <img [src]="flag.image" width="18"> {{flag.name}}
-              </button>
-            </span>
-          </mat-menu>
-        </div> -->
       </div>
       <div class="widgets-left" fxLayout="row">
 
@@ -55,18 +30,19 @@
             <mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon> WISHLIST
           </a>
         </div>
-        <div class="widget-text">
+        <!-- <div class="widget-text">
           <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/compare']" routerLinkActive="router-link-active">
             <mat-icon>cached</mat-icon>COMPARE
           </a>
-        </div>
+        </div> -->
         <div class="widget-text" *ngIf="userName==null">
-          <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/my-account']" routerLinkActive="router-link-active">
+          <a [routerLink]="['/pages/my-account']" routerLinkActive="router-link-active">
             <mat-icon>login</mat-icon>Login/Signup
           </a>
         </div>
         <div class="widget-text" *ngIf="userName">
-          <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
+          <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger"
+            style="padding: 0 0px !important;">
             <mat-icon>person</mat-icon> {{userName}} <mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down
             </mat-icon>
           </a>
@@ -76,7 +52,6 @@
             </button>
             <button mat-menu-item [routerLink]="['/pages/order-list']" routerLinkActive="router-link-active">
               <mat-icon>history</mat-icon> Orders
-              
             </button>
             <button mat-menu-item (click)="logout()">
               <mat-icon>exit_to_app</mat-icon> Logout

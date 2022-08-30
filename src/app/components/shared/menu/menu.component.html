@@ -7,10 +7,15 @@
         <mat-menu #shop="matMenu" [overlapTrigger]="false" class="app-dropdown mega-menu">
             <div fxLayout="row wrap">
                 <div fxFlex="25" fxLayout="column" class="p-1" *ngFor="let cat of mainCategory;let i=index">
-                    <a mat-menu-item routerLink="/"><b>{{cat.name}}</b></a>
-                    <mat-divider></mat-divider>
-                    <a mat-menu-item routerLink="/" *ngFor="let sc of cat.SubCategory;let j= index"
-                        (click)="openSubToSub(cat.id ,sc.id,i,j)">{{sc.name}}</a>
+                    <a mat-menu-item (click)="openSubcategory(cat.id,i)"><b>{{cat.name}} <mat-icon
+                        class="caret">arrow_drop_down</mat-icon></b>
+                    </a>
+                    <mat-divider *ngIf="cat.isSub"></mat-divider>
+                    <div *ngIf="cat.isSub">
+                        <a mat-menu-item *ngFor="let sc of subcate;let j= index"
+                         >{{sc.name}}</a>
+                    </div>
+                    
                 </div>
                 <!-- <div fxFlex="25" class="p-1">
                     <a mat-menu-item routerLink="/"><b>FEATURES</b></a>
@@ -64,5 +69,7 @@
         </mat-menu> -->
         <a [routerLink]="['/pages/contact']" routerLinkActive="router-link-active" mat-button
             class="mat-button">Contact</a>
+        <a [routerLink]="['/pages/about']" routerLinkActive="router-link-active" mat-button class="mat-button">About
+            Us</a>
     </div>
 </mat-toolbar-row>
