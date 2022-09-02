@@ -1591,7 +1591,7 @@ display: none;
 .banners-container {
   .baners {
     background: $baners-background !important;
-    margin-right: 15px;
+    // margin-right: 15px;
   }
   .bn-wrap {
     margin-bottom: 18px;
@@ -1647,7 +1647,7 @@ display: none;
     height: 547px;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: center;
     border-radius: 4px;
   }
   .seccond {

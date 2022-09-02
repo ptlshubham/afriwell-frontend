@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Product } from 'src/app/modals/product.model';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Product } from 'src/app/components/modals/product.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 import { CartService } from '../../shared/services/cart.service';
 import { WishlistService } from '../../shared/services/wishlist.service';
 

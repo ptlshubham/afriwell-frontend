@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Product, ColorFilter } from 'src/app/modals/product.model';
+import { Product, ColorFilter } from 'src/app/components/modals/product.model';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
 
 @Component({

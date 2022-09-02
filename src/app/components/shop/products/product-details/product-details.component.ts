@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { SwiperDirective, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ProductZoomComponent } from './product-zoom/product-zoom.component';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 
 @Component({

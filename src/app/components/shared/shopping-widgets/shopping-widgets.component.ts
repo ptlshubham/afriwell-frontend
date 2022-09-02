@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 import { CartService } from '../services/cart.service';
 import { Observable } from 'rxjs';
-import { CartItem } from 'src/app/modals/cart-item';
+import { CartItem } from 'src/app/components/modals/cart-item';
 import { ProductService } from '../services/product.service';
 
 @Component({

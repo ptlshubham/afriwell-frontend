@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem } from 'src/app/modals/cart-item';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { CartItem } from 'src/app/components/modals/cart-item';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 import { CartService } from '../../shared/services/cart.service';
 import { ProductService } from '../../shared/services/product.service';
 import { Webbanners } from '../../user-models/webhome.model';

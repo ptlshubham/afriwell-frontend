@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../shared/services/cart.service';
 import { Observable, of } from 'rxjs';
-import { CartItem } from 'src/app/modals/cart-item';
+import { CartItem } from 'src/app/components/modals/cart-item';
 import { ProductService } from '../../shared/services/product.service';
 import { CheckoutService } from '../../shared/services/checkout.service';
 import { Address } from '../../user-models/address.model';

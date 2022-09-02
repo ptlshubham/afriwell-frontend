@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subscriber } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs/operators';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 import { ApiService } from 'src/app/api.service';
-import { Images } from 'src/app/modals/images.model';
+import { Images } from 'src/app/components/modals/images.model';
 
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../shared/services/product.service';
 import { CartService } from '../../shared/services/cart.service';
-import { CartItem } from 'src/app/modals/cart-item';
-import { Product } from 'src/app/modals/product.model';
+import { CartItem } from 'src/app/components/modals/cart-item';
+import { Product } from 'src/app/components/modals/product.model';
 
 @Component({
   selector: 'app-industrial',

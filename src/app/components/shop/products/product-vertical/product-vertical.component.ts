@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserHomeService } from 'src/app/components/user-service/home.services';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-product-vertical',

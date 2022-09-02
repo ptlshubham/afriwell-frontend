@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
-import { CartItem } from 'src/app/modals/cart-item';
+import { Product } from 'src/app/components/modals/product.model';
+import { CartItem } from 'src/app/components/modals/cart-item';
 import { CartService } from '../services/cart.service';
 import { SidebarMenuService } from '../sidebar/sidebar-menu.service';
 

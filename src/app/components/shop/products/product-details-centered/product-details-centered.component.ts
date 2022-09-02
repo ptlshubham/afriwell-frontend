@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

@@ -73,6 +73,18 @@ export class CategoryComponent implements OnInit {
   color1: '#2883e9'
   isEdit: boolean = false;
 
+  mpage: Number = 1;
+  totalRec: string;
+  subpage: Number = 1;
+  totalRecSub: string;
+  subMpage: Number = 1;
+  totalSub: string;
+
+  taxSlab: any = [];
+  selctedTaxSlab: any;
+
+  tagItems = ['Amsterdam', 'Washington', 'Sydney', 'Beijing'];
+
   constructor(
     private categoryService: CategoryService,
     private fm: FormBuilder,
@@ -87,6 +99,14 @@ export class CategoryComponent implements OnInit {
     this.ProductModel.emiOptiions = false;
     this.ProductModel.relatedProduct = false;
     this.ProductModel.discountPrice = 0;
+    this.taxSlab = [
+      {
+        name: '18 %'
+      },
+      {
+        name: '6 %',
+      },
+    ]
     this.activatedRoutes.queryParams.subscribe((res: any) => {
       if (res) {
 
@@ -140,7 +160,12 @@ export class CategoryComponent implements OnInit {
       discountPrice: ['', Validators.required, Validators.name],
     });
   }
-  enteredquant(ind) {
+  selectTaxSlab(name) {
+    this.taxSlab.forEach(element => {
+      if (element.name == name) {
+        this.selctedTaxSlab = element.name;
+      }
+    })
 
   }
   mainNavCategory() {
@@ -197,7 +222,7 @@ export class CategoryComponent implements OnInit {
     this.CategoryModel.isactive = 1;
     this.CategoryModel.bannersimage = this.categoryimage;
     this.categoryService.saveMainCat(this.CategoryModel).subscribe(response => {
-      // this.apiservice.showNotification('top', 'right', 'Main Category added Successfully.', 'success');
+      this.apiservice.showNotification('top', 'right', 'Main Category added Successfully.', 'success');
       // this.router.navigate(['/', 'labourlist']);
       this.getMainCategory(0);
 
@@ -216,7 +241,9 @@ export class CategoryComponent implements OnInit {
 
     this.categoryService.getMainCat(id).subscribe(data => {
       this.category = data;
-      debugger
+      for (let i = 0; i < this.category.length; i++) {
+        this.category[i].index = i + 1;
+      }
       if (this.isEdit == true) {
         this.cateMain(this.ProductModel.mainCategory);
 
@@ -303,7 +330,7 @@ export class CategoryComponent implements OnInit {
   mainCatRemove(id) {
 
     this.categoryService.removeMainCatList(id).subscribe((req) => {
-      // this.apiservice.showNotification('top', 'right', 'Main Category removed Successfully.', 'success');
+      this.apiservice.showNotification('top', 'right', 'Main Category removed Successfully.', 'success');
       this.getMainCategory(0);
       this.getProductSubCategory(this.selectedSubCatid);
       this.getSubCategory(this.subToSubCat);
@@ -322,7 +349,7 @@ export class CategoryComponent implements OnInit {
     data.bannerimage = this.categoryimage;
     this.categoryService.updateMainCat(data).subscribe((req) => {
       console.log(req);
-      // this.apiservice.showNotification('top', 'right', 'Successfully updated.', 'success');
+      this.apiservice.showNotification('top', 'right', 'Successfully updated.', 'success');
       this.getSubCategory(this.subToSubCat);
 
     })
@@ -350,7 +377,7 @@ export class CategoryComponent implements OnInit {
     })
     this.categoryService.saveCat(this.CategoryModel).subscribe((response) => {
       console.log(response);
-      // this.apiservice.showNotification('top', 'right', 'Category successfully added.', 'success');
+      this.apiservice.showNotification('top', 'right', 'Category successfully added.', 'success');
       this.getSubCategory(this.subToSubCat);
     })
   }
@@ -371,6 +398,9 @@ export class CategoryComponent implements OnInit {
     this.subToSubCat = id;
     this.categoryService.getMainCat(id).subscribe(data => {
       this.subcategory = data;
+      for (let i = 0; i < this.subcategory.length; i++) {
+        this.subcategory[i].index = i + 1;
+      }
       if (this.isEdit == true) {
         this.cateCategory(this.ProductModel.category);
       }
@@ -384,7 +414,7 @@ export class CategoryComponent implements OnInit {
       }
     })
     this.categoryService.saveCat(this.CategoryModel).subscribe((response) => {
-      // this.apiservice.showNotification('top', 'right', 'Sub Category successfully added.', 'success');
+      this.apiservice.showNotification('top', 'right', 'Sub Category successfully added.', 'success');
       this.getProductSubCategory(this.CategoryModel.parent);
     })
     this.isSubCatData = true;
@@ -393,6 +423,9 @@ export class CategoryComponent implements OnInit {
 
     this.categoryService.getMainCat(id).subscribe(data => {
       this.subprodcat = data;
+      for (let i = 0; i < this.subprodcat.length; i++) {
+        this.subprodcat[i].index = i + 1;
+      }
       if (this.isEdit == true) {
         if (this.ProductModel.subCategory != null || this, this.ProductModel.subCategory != undefined) {
           this.subProCategory(this.ProductModel.subCategory);
@@ -591,6 +624,7 @@ export class CategoryComponent implements OnInit {
     this.ProductModel.isActive = 0;
     this.ProductModel.productMainImage = this.image;
     this.ProductModel.selectedSize = this.addSelectFields;
+    this.ProductModel.taxslab = this.selctedTaxSlab;
     this.ProductModel.multi = this.multi;
     if (this.ProductModel.subCategory == undefined) {
       this.ProductModel.subCategory = null;
@@ -598,7 +632,7 @@ export class CategoryComponent implements OnInit {
     // this.ImagesModel.
     // this.QuantityWithSizeModel.addSelectFields = this.addSelectFields;
     this.categoryService.saveAddProduct(this.ProductModel).subscribe((response) => {
-      // this.apiservice.showNotification('top', 'right', 'Product successfully added.', 'success');
+      this.apiservice.showNotification('top', 'right', 'Product successfully added.', 'success');
       // this.router.navigate(['/inventory']);
     })
   }

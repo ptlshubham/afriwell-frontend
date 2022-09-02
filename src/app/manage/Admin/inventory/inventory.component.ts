@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api.service';
 import { Category } from '../category/category.model';
 import { CategoryService } from '../category/category.service';
 import { ClothSize } from '../category/clothsize.model';
@@ -48,7 +49,8 @@ export class InventoryComponent implements OnInit {
   addbestprdt: boolean = false;
   addhotprdt: boolean = false;
   addsale: boolean = false;
-
+  mpage: Number = 1;
+  totalRec: string;
   public category: Category[] = [];
   public subcategory: Category[] = [];
   public subprodcat: Category[] = [];
@@ -58,7 +60,8 @@ export class InventoryComponent implements OnInit {
 
     private categoryService: CategoryService,
     private inventoryService: InventoryService,
-    private router: Router
+    private router: Router,
+    private apiservice: ApiService
   ) {
     this.productCategory = [
       {
@@ -98,6 +101,9 @@ export class InventoryComponent implements OnInit {
       }
       this.inventoryService.getFilterProduct(data).subscribe((data: any) => {
         this.product = data;
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].index = i + 1;
+        }
         this.product.forEach(element => {
           this.inventoryService.getSize(element.id).subscribe((data: any) => {
             element.sizeList = data;
@@ -112,6 +118,9 @@ export class InventoryComponent implements OnInit {
       }
       this.inventoryService.getFilterProduct(data).subscribe((data: any) => {
         this.product = data;
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].index = i + 1;
+        }
         this.product.forEach(element => {
           this.inventoryService.getSize(element.id).subscribe((data: any) => {
             element.sizeList = data;
@@ -125,6 +134,9 @@ export class InventoryComponent implements OnInit {
       }
       this.inventoryService.getFilterProduct(data).subscribe((data: any) => {
         this.product = data;
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].index = i + 1;
+        }
         this.product.forEach(element => {
           this.inventoryService.getSize(element.id).subscribe((data: any) => {
             element.sizeList = data;
@@ -138,6 +150,9 @@ export class InventoryComponent implements OnInit {
       }
       this.inventoryService.getFilterProduct(data).subscribe((data: any) => {
         this.product = data;
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].index = i + 1;
+        }
         this.product.forEach(element => {
           this.inventoryService.getSize(element.id).subscribe((data: any) => {
             element.sizeList = data;
@@ -172,7 +187,7 @@ export class InventoryComponent implements OnInit {
     });
   }
   editproduct() {
-    this.router.navigate(['manage/category'], {
+    this.router.navigate(['category'], {
       queryParams: {
         value: JSON.stringify(this.Chagesproduct)
       },
@@ -190,6 +205,9 @@ export class InventoryComponent implements OnInit {
     }
     this.categoryService.GetFilterProduct(data).subscribe(data => {
       this.product = data;
+      for (let i = 0; i < this.product.length; i++) {
+        this.product[i].index = i + 1;
+      }
       this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;
@@ -215,7 +233,9 @@ export class InventoryComponent implements OnInit {
 
     this.categoryService.GetFilterProduct(data).subscribe(data => {
       this.product = data;
-
+      for (let i = 0; i < this.product.length; i++) {
+        this.product[i].index = i + 1;
+      }
       this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;
@@ -235,6 +255,9 @@ export class InventoryComponent implements OnInit {
     }
     this.categoryService.GetFilterProduct(data).subscribe(data => {
       this.product = data;
+      for (let i = 0; i < this.product.length; i++) {
+        this.product[i].index = i + 1;
+      }
       this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;
@@ -265,7 +288,9 @@ export class InventoryComponent implements OnInit {
 
     this.categoryService.GetFilterProduct(data).subscribe(data => {
       this.product = data;
-
+      for (let i = 0; i < this.product.length; i++) {
+        this.product[i].index = i + 1;
+      }
       this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;
@@ -310,6 +335,9 @@ export class InventoryComponent implements OnInit {
 
     this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
+      for (let i = 0; i < this.product.length; i++) {
+        this.product[i].index = i + 1;
+      }
       this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;
@@ -327,6 +355,7 @@ export class InventoryComponent implements OnInit {
     this.product.forEach(element => {
       if (element.selectedCheck == true) {
         this.inventoryService.removeProduct(element.id).subscribe((req) => {
+          this.apiservice.showNotification('top', 'right', 'Product Removed Successfully.', 'success');
           this.getProductList();
         })
       }
@@ -339,6 +368,9 @@ export class InventoryComponent implements OnInit {
       this.selectedCheck = false;
       this.inventoryService.getProduct().subscribe((data: any) => {
         this.product = data;
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].index = i + 1;
+        }
         this.product.forEach(element => {
           element.selectedCheck = false;
           this.inventoryService.getSize(element.id).subscribe((data: any) => {
@@ -352,6 +384,9 @@ export class InventoryComponent implements OnInit {
       this.selectedCheck = true;
       this.inventoryService.getProduct().subscribe((data: any) => {
         this.product = data;
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].index = i + 1;
+        }
         this.product.forEach(element => {
           element.selectedCheck = true;
           this.inventoryService.getSize(element.id).subscribe((data: any) => {
@@ -421,7 +456,7 @@ export class InventoryComponent implements OnInit {
       this.addsale = false;
       this.addhotprdt = false;
       this.inventoryService.addToNewArrivals(this.Chagesproduct).subscribe(data => {
-        alert("added");
+        this.apiservice.showNotification('top', 'right', 'Product Added Into New Arrival Successfully.', 'success');
       })
     }
     else {
@@ -437,7 +472,7 @@ export class InventoryComponent implements OnInit {
       this.addsale = false;
       this.addhotprdt = false;
       this.inventoryService.addToBestProduct(this.Chagesproduct).subscribe(data => {
-        alert("added");
+        this.apiservice.showNotification('top', 'right', 'Product Added Into Best Successfully.', 'success');
       })
     }
     else {
@@ -452,7 +487,7 @@ export class InventoryComponent implements OnInit {
       this.addsale = false;
       this.addhotprdt = true;
       this.inventoryService.addTohotProduct(this.Chagesproduct).subscribe(data => {
-        alert("added");
+        this.apiservice.showNotification('top', 'right', 'Product Added Into Hot Successfully.', 'success');
       })
     }
     else {
@@ -468,7 +503,7 @@ export class InventoryComponent implements OnInit {
       this.addsale = true;
       this.addhotprdt = false;
       this.inventoryService.addToSale(this.Chagesproduct).subscribe(data => {
-        alert("added");
+        this.apiservice.showNotification('top', 'right', 'Product Added Into Sale Successfully.', 'success');
       })
     }
     else {

@@ -3,8 +3,8 @@ import { ProductService } from 'src/app/components/shared/services/product.servi
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { Router } from '@angular/router';
-import { Productlist } from 'src/app/modals/productlist.model';
-import { CartItem } from 'src/app/modals/cart-item';
+import { Productlist } from 'src/app/components/modals/productlist.model';
+import { CartItem } from 'src/app/components/modals/cart-item';
 
 @Component({
   selector: 'app-product-dialog',

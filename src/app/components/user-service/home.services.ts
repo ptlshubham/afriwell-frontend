@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { Webbanners } from '../user-models/webhome.model';
 import { ApiService } from 'src/app/api.service';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 @Injectable({
   providedIn: 'root'
 })

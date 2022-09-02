@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, of, Subscriber } from 'rxjs';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/api.service';
 

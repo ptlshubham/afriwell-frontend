@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CartItem } from 'src/app/modals/cart-item';
+import { CartItem } from 'src/app/components/modals/cart-item';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-shopping-widgets-two',

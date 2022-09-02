@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -15,6 +16,7 @@ import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
     CommonModule,
     NgbModule,
     FormsModule,
+    NgxPaginationModule,
     JwBootstrapSwitchNg2Module,
     RouterModule.forChild([
       {

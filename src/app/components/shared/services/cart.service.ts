@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CartItem } from 'src/app/modals/cart-item';
+import { CartItem } from 'src/app/components/modals/cart-item';
 import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject, Subscriber } from 'rxjs';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 import { ApiService } from 'src/app/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Address } from '../../user-models/address.model';

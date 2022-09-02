@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Product } from "../../modals/product.model";
-import { CartItem } from "../../modals/cart-item";
+import { Product } from "../modals/product.model";
+import { CartItem } from "../modals/cart-item";
 import { ProductService } from "../shared/services/product.service";
 import { CartService } from "../shared/services/cart.service";
 import { Router, NavigationEnd } from '@angular/router';

@@ -15,9 +15,6 @@ import { SharedModule } from './components/shared/shared.module';
 import { ColorOptionsComponent } from './components/color-options/color-options.component';
 import { ManageModule } from './manage/manage.module';
 import { RouterModule } from '@angular/router';
-import { EmiComponent } from './manage/Admin/emi/emi.component';
-import { EmiModule } from './manage/Admin/emi/emi.module';
-import { AdminLayoutComponent } from './manage/Admin/layouts/admin/admin-layout.component';
 import { MainRoutes } from './components/main/main.routing';
 
 

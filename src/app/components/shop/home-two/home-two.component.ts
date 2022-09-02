@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
-import { CartItem } from 'src/app/modals/cart-item';
+import { Product } from 'src/app/components/modals/product.model';
+import { CartItem } from 'src/app/components/modals/cart-item';
 import { ProductService } from '../../shared/services/product.service';
 import { CartService } from '../../shared/services/cart.service';
 

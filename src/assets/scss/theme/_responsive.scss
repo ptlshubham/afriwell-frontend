@@ -970,7 +970,7 @@
   padding-left: 0px;
 }
   .main-slider{
-      height: 280px ;
+      height: 280px !important ;
   }
       .slide-item {
         .content {
@@ -994,6 +994,12 @@
         }
 
     }
+    .main-banner {
+
+      .banner-pro {
+        height: auto !important;
+      }
+    }
        .mt-2{
         margin-top: 20px ;
     }
@@ -1005,7 +1011,21 @@
 
 
     }
-
+    img {
+      max-width: 100%;
+      border-radius: 3px;
+      height: 100%;
+      width: 100%;
+  }
+  p{
+    font-size: 10px !important; 
+  }
+  .banners-container .first{
+    height: 380px !important;
+  }
+  .categories-wrap{
+    width: 385px !important;
+  } 
     .carousel-3 {
       .slider-categories {
         .carousel-banners-wrapper {

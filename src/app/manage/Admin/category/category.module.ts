@@ -3,14 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CategoryComponent } from './category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// ...
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { CategoryService } from './category.service';
-
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -20,6 +17,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     JwBootstrapSwitchNg2Module,
     NgMultiSelectDropDownModule.forRoot(),
     ReactiveFormsModule,
+    NgxPaginationModule,
     ColorPickerModule,
     RouterModule.forChild([
       {

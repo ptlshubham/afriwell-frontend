@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms'
-import { ColorFilter, Productlist } from 'src/app/modals/productlist.model';
+import { ColorFilter, Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-product-left-sidebar',

@@ -6,7 +6,7 @@ import { ProductDialogComponent } from '../../products/product-dialog/product-di
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-product-carousel-four',

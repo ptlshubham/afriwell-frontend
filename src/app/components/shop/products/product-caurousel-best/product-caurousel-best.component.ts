@@ -6,8 +6,8 @@ import { CartService } from 'src/app/components/shared/services/cart.service';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
 import { UserHomeService } from 'src/app/components/user-service/home.services';
-import { Product } from 'src/app/modals/product.model';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Product } from 'src/app/components/modals/product.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 
 @Component({

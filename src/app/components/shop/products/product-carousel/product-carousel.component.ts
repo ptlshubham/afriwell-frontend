@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/components/shared/services/product.servi
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
 import { CoreService } from 'src/app/components/user-service/core.service';
 import { Category } from 'src/app/manage/Admin/category/category.model';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-product-carousel',
@@ -53,10 +53,10 @@ export class ProductCarouselComponent implements OnInit {
         disableOnInteraction: false
       },
       breakpoints: {
-        480: {
+        20: {
           slidesPerView: 1
         },
-        740: {
+        40: {
           slidesPerView: 2,
         },
         960: {
@@ -64,6 +64,9 @@ export class ProductCarouselComponent implements OnInit {
         },
         1280: {
           slidesPerView: 4,
+        },
+       3280: {
+          slidesPerView: 8,
         },
 
 

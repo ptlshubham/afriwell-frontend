@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from 'src/app/components/shared/services/product.service';
-import { ColorFilter, Product } from 'src/app/modals/product.model';
+import { ColorFilter, Product } from 'src/app/components/modals/product.model';
 
 @Component({
   selector: 'app-product-list',

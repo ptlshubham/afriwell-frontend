@@ -4,10 +4,10 @@ import { ProductService } from 'src/app/components/shared/services/product.servi
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-product-two',

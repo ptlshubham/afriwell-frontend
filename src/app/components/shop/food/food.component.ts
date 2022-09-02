@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from '../../shared/services/product.service';
-import { CartItem } from 'src/app/modals/cart-item';
+import { CartItem } from 'src/app/components/modals/cart-item';
 
 import { ProductDialogComponent } from './../products/product-dialog/product-dialog.component';
 import { Router } from '@angular/router';

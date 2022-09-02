@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductService } from 'src/app/components/shared/services/product.service';
-import { Product } from 'src/app/modals/product.model';
+import { Product } from 'src/app/components/modals/product.model';
 
 
 

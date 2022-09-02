@@ -5,7 +5,7 @@ import { WishlistService } from 'src/app/components/shared/services/wishlist.ser
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
-import { Productlist } from 'src/app/modals/productlist.model';
+import { Productlist } from 'src/app/components/modals/productlist.model';
 
 @Component({
   selector: 'app-product',
