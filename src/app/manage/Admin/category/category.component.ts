@@ -138,7 +138,9 @@ export class CategoryComponent implements OnInit {
     this.addSelectFields = [{
       selsize: '',
       quantity: 0,
-      color: '#ffffff'
+      color: '#ffffff',
+      mainPrice:0,
+      discountPrice:0,
     }];
     this.value++;
     this.mainCateRegForm = this.fm.group({
@@ -578,7 +580,9 @@ export class CategoryComponent implements OnInit {
     let data = {
       selsize: '',
       quantity: 0,
-      color: '#ffffff'
+      color: '#ffffff',
+      mainPrice:0,
+      discountPrice:0,
     }
 
     this.addSelectFields.push(data);
