@@ -3,10 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { DemoComponent } from './components/demo/demo.component';
 
-import { EmiComponent } from './manage/Admin/emi/emi.component';
-import { AdminLayoutComponent } from './manage/Admin/layouts/admin/admin-layout.component';
-
-
 const appRoutes: Routes = [
   {
 

@@ -8,9 +8,6 @@ import { FixedPluginModule } from './Admin/shared/fixedplugin/fixedplugin.module
 import { FooterModule } from './Admin/shared/footer/footer.module';
 import { NavbarModule } from './Admin/shared/navbar/navbar.module';
 import { SidebarModule } from './Admin/sidebar/sidebar.module';
-import { PagesModule } from './Admin/pages/pages.module';
-import { EmiModule } from './Admin/emi/emi.module';
-
 
 
 @NgModule({
@@ -25,7 +22,6 @@ import { EmiModule } from './Admin/emi/emi.module';
     SidebarModule,
     NavbarModule,
     FooterModule,
-
     FixedPluginModule,
     // ColorPickerModule,
 

@@ -1132,7 +1132,7 @@
                                     </div>
                                 </div>
                                 <label class="col-sm-4 col-form-label">Add Sub Category</label>
-                                <div class="col-sm-8">
+                                <!-- <div class="col-sm-8">
                                     <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
                                         <input type="text" class="form-control" id="name" name="name"
                                             placeholder="Enter Category Name" [(ngModel)]="CategoryModel.name" required
@@ -1143,14 +1143,14 @@
                                         <div *ngIf="name.errors.required">Category Name is required</div>
                                         <div [hidden]="!name.errors('pattern')">Enter Only Characters.</div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        (click)="EditedSavesubCategory(editCat)">Update</button>
+                        >Update</button>
                 </div>
             </div>
         </div>

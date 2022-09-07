@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import { Reviews } from './reviews.model';
 import { ReviewsService } from './reviews.service';
@@ -14,7 +13,7 @@ declare var $: any;
 export class ReviewsComponent implements OnInit {
   public ReviewsModel: Reviews = new Reviews;
   public rating: Reviews[] = [];
-  public editrating: Reviews[] = [];
+  public editrating: Reviews = new Reviews ;
   model: Date;
   constructor(
     private reviewsService: ReviewsService,

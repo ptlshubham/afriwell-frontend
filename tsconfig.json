@@ -16,7 +16,7 @@
       "node_modules/@types"
     ],
     "lib": [
-      "es2018",
+      "es2020",
       "dom"
     ]
   },
@@ -25,6 +25,6 @@
     "tslib": "1.10.0"
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   }
 }

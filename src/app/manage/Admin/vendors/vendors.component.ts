@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-vendors',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorsComponent implements OnInit {
   isAdd: boolean = false;
+  model: NgbDateStruct;
   constructor() { }
 
   ngOnInit(): void {

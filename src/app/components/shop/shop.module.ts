@@ -50,6 +50,7 @@ import { LandingComponent } from './landing/landing.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductCaurouselBestComponent } from './products/product-caurousel-best/product-caurousel-best.component';
 import { ProductCaurouselSaleComponent } from './products/product-caurousel-sale/product-caurousel-sale.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { ProductCaurouselSaleComponent } from './products/product-caurousel-sale
     FlexLayoutModule,
     NgxPaginationModule,
     NgxSkeletonLoaderModule,
+    MatIconModule
 
     // NgxImageZoomModule.forRoot() // <-- Add this line
   ],

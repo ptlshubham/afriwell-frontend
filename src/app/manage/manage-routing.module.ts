@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
 import { AdminLayoutComponent } from './Admin/layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './Admin/layouts/auth/auth-layout.component';
 
@@ -20,47 +18,46 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: './Admin/dashboard/dashboard.module#DashboardModule',
-        // canActivate: [AuthGuard]
+        loadChildren: () => import('./Admin/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'category',
-        loadChildren: './Admin/category/category.module#CategoryModule',
+        loadChildren: () => import('./Admin/category/category.module').then(m => m.CategoryModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'emi',
-        loadChildren: './Admin/emi/emi.module#EmiModule',
+        loadChildren: () => import('./Admin/emi/emi.module').then(m => m.EmiModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'orders',
-        loadChildren: './Admin/orders/orders.module#OrdersModule',
+        loadChildren: () => import('./Admin/orders/orders.module').then(m => m.OrdersModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'customers',
-        loadChildren: './Admin/customers/customers.module#CustomersModule',
+        loadChildren: () => import('./Admin/customers/customers.module').then(m => m.CustomersModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'reviews',
-        loadChildren: './Admin/reviews/reviews.module#ReviewsModule',
+        loadChildren: () => import('./Admin/reviews/reviews.module').then(m => m.ReviewsModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'inventory',
-        loadChildren: './Admin/inventory/inventory.module#InventoryModule',
+        loadChildren: () => import('./Admin/inventory/inventory.module').then(m => m.InventoryModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'vendors',
-        loadChildren: './Admin/vendors/vendors.module#VendorsModule',
+        loadChildren: () => import('./Admin/vendors/vendors.module').then(m => m.VendorsModule)
         // canActivate: [AuthGuard]
       },
       {
         path: 'banners',
-        loadChildren: './Admin/banners/banners.module#BannersModule',
+        loadChildren: () => import('./Admin/banners/banners.module').then(m => m.BannersModule)
         // canActivate: [AuthGuard]
       },
     ]
@@ -72,7 +69,7 @@ const routes: Routes = [
     children: [
       {
         path: 'pages',
-        loadChildren: './Admin/pages/pages.module#PagesModule'
+        loadChildren: () => import('./Admin/pages/pages.module').then(m => m.PagesModule)
       }
     ]
   },

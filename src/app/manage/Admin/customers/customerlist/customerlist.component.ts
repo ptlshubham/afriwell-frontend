@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerList } from './customerlist.model';
 import { CustomerListService } from './customerlist.service';
 
@@ -10,6 +11,7 @@ import { CustomerListService } from './customerlist.service';
 export class CustomerlistComponent implements OnInit {
   public CustomerListModel: CustomerList = new CustomerList;
   public customerlist: CustomerList[] = [];
+  model: NgbDateStruct;
 
   constructor(
     private customerListService: CustomerListService,

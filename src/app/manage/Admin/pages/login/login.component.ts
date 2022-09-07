@@ -1,10 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormGroup } from '@angular/forms';
-import { AdminRegister } from './login.model';
 import { ApiService } from 'src/app/api.service';
+import { AdminRegister } from '../register/register.model';
 
 declare var $: any;
 
@@ -18,7 +17,9 @@ export class LoginComponent implements OnInit {
     focus;
     focus1;
     focus2;
-    public loginModel: AdminRegister[] = [];
+    public loginModel: AdminRegister = new AdminRegister;
+
+    // public loginModel: AdminRegister[] = [];
     loginForm: FormGroup;
     account_validation_messages = {
         'email': [
@@ -90,10 +91,10 @@ export class LoginComponent implements OnInit {
     login(credentials) {
 
         console.log("......data...." + credentials.email);
-        this.loginservice.login(credentials).subscribe(data => {
-             
+        this.loginservice.login(this.loginModel).subscribe(data => {
+
             if (data == 1) {
-                 
+
                 // this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
             }
             else if (data == 2) {
