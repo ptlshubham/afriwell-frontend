@@ -18,11 +18,11 @@ export class OrdersService {
     return this.httpClient.post<any>(ApiService.updateOrdersStatusURL, admin);
   }
 
-  getOrders(data): Observable<Userorders[]> {
+  getOrders(data:any): Observable<Userorders[]> {
 
     return this.httpClient.post<any>(ApiService.getOrdersListURL, data);
   }
-  acceptOrder(id) {
+  acceptOrder(id:any) {
     let data = {
       id: id
     }

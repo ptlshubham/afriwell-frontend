@@ -90,6 +90,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
@@ -101,8 +109,13 @@
           "configurations": {
             "production": {
               "browserTarget": "ecommerce-sophia-new:build:production"
+            },
+            "development": {
+              "browserTarget": "ecommerce-sophia-new:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
+
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -206,7 +219,6 @@
       }
     }
   },
-  "defaultProject": "ecommerce-sophia-new",
   "cli": {
     "analytics": false
   }

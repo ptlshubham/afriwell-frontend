@@ -53,9 +53,8 @@
                                         (blur)="focus=false" #name="ngModel">
                                 </div>
                                 <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
-                                    <div *ngIf="name.errors.required">Category Name is required</div>
+                                    <div *ngIf="name.errors?.['required']">Category Name is required</div>
                                     <div [hidden]="!name.errors('pattern')">Enter Only Characters.
-                                        <!-- <small><b>Mens Wear</b></small> -->
                                     </div>
                                 </div>
                             </div>
@@ -133,9 +132,8 @@
                                 </div>
                                 <div *ngIf="subname.errors && (subname.dirty || subname.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="subname.errors.required">Category Name is required</div>
+                                    <div *ngIf="subname.errors?.['required']">Category Name is required</div>
                                     <div [hidden]="!subname.errors('pattern')">Enter Only Name
-                                        <!-- <small><b>Mens Wear</b></small> -->
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +226,7 @@
                                         (blur)="focus=false" #name="ngModel">
                                 </div>
                                 <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
-                                    <div *ngIf="name.errors.required">Category Name is required</div>
+                                    <div *ngIf="name.errors?.['required']">Category Name is required</div>
                                     <div [hidden]="!name.errors('pattern')">Enter Only Characters.</div>
                                 </div>
                             </div>
@@ -310,16 +308,15 @@
                             </div>
 
                         </div>
-                        <br><br><br>
+                        <br><br>
                         <div class="row">
-                            <!-- <input type="text" class="form-control" id="name" name="name"
-                            placeholder="Enter Main Category Name" [(ngModel)]="CategoryModel.name"
-                            #name="ngModel"> -->
-                            <!-- <div class="form-group">
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter Category Name" [(ngModel)]="CategoryModel.name"
-                                    #name="ngModel">
-                            </div> -->
+                            <label class="col-md-1 col-form-label">Product Tag Number</label>
+                            <div class="col-md-3">
+                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
+                                    <input type="text" class="form-control" id="productName" name="productName"
+                                        value="{{maintag}}" disabled>
+                                </div>
+                            </div>
                             <label class="col-md-1 col-form-label">Product Name</label>
                             <div class="col-md-3">
                                 <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
@@ -330,7 +327,7 @@
                                 </div>
                                 <div *ngIf="productName.errors && (productName.dirty || productName.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="productName.errors.required">Product Name is required</div>
+                                    <div *ngIf="productName.errors?.['required']">Product Name is required</div>
                                     <div [hidden]="!productName.errors('pattern')">Enter Only Characters.</div>
                                 </div>
                             </div>
@@ -344,51 +341,15 @@
                                 </div>
                                 <div *ngIf="brandName.errors && (brandName.dirty || brandName.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="brandName.errors.required">Brand Name is required</div>
+                                    <div *ngIf="brandName.errors?.['required']">Brand Name is required</div>
                                     <div [hidden]="!brandName.errors('pattern')">Enter Only Characters.</div>
                                 </div>
                             </div>
-                            <label class="col-md-1 col-form-label">Manufacturer Name</label>
-                            <div class="col-md-3">
-                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="text" class="form-control" id="manufacturerName"
-                                        name="manufacturerName" [(ngModel)]="ProductModel.manufacturerName"
-                                        placeholder="Enter Manufacturer Name" required value=""
-                                        pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus=true"
-                                        #manufacturerName="ngModel">
-                                </div>
-                                <div *ngIf="manufacturerName.errors && (manufacturerName.dirty || manufacturerName.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="manufacturerName.errors.required">Manufacturer name is required
-                                    </div>
-                                    <div [hidden]="!manufacturerName.errors('pattern')">Enter Only Characters.</div>
-                                </div>
-                            </div>
+
                         </div>
                         <br>
                         <div class="row">
-                            <label class="col-md-1 col-form-label">Product Code</label>
-                            <div class="col-md-3" [ngClass]="{'form-group-focus':focus===true}">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="productCode" name="productCode"
-                                        [(ngModel)]="ProductModel.productCode" placeholder="Enter Product Code" required
-                                        value="" pattern="^[a-zA-Z0-9]+$" (focus)="focus=true" #productCode="ngModel">
-                                </div>
-                                <div *ngIf="productCode.errors && (productCode.dirty || productCode.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="productCode.errors.required">Product Code is required.
-                                    </div>
-                                    <div [hidden]="!productCode.errors('pattern')">Enter Only Characters and Numbers.
-                                    </div>
-                                </div>
-                            </div>
-                            <label class="col-md-1 col-form-label">Start Rating</label>
-                            <div class="col-md-3">
-                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="startRating"
-                                    name="startRating" [(ngModel)]="ProductModel.startRating">
-                                </bSwitch>
-                            </div>
-                            <label class="col-md-1 col-form-label">Product Price</label>
+                            <!-- <label class="col-md-1 col-form-label">Product Price</label>
                             <div class="col-md-3" [ngClass]="{'form-group-focus':focus===true}">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="productPrice" name="productPrice"
@@ -398,14 +359,11 @@
                                 </div>
                                 <div *ngIf="productPrice.errors && (productPrice.dirty || productPrice.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="productPrice.errors.required">Product Price is required.</div>
+                                    <div *ngIf="productPrice.errors?.['required']">Product Price is required.</div>
                                     <div [hidden]="!productPrice.errors('pattern')">Enter Only Numbers.</div>
                                 </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <label class="col-md-1 col-form-label">Discount Price</label>
+                            </div> -->
+                            <!-- <label class="col-md-1 col-form-label">Discount Price</label>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="discountPrice" name="discountPrice"
@@ -417,20 +375,53 @@
                                     class="alert alert-danger">
                                     <div [hidden]="!discountPrice.errors('pattern')">Enter Only Numbers.</div>
                                 </div>
-                            </div>
-                            <label class="col-md-1 col-form-label">EMI Options</label>
+                            </div> -->
+                            <label class="col-md-1 col-form-label">Manufacturer Name</label>
                             <div class="col-md-3">
-                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="emiOptiions"
-                                    name="emiOptiions" [(ngModel)]="ProductModel.emiOptiions">
-                                </bSwitch>
+                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
+                                    <input type="text" class="form-control" id="manufacturerName"
+                                        name="manufacturerName" [(ngModel)]="ProductModel.manufacturerName"
+                                        placeholder="Enter Manufacturer Name" required value=""
+                                        pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus=true"
+                                        #manufacturerName="ngModel">
+                                </div>
+                                <div *ngIf="manufacturerName.errors && (manufacturerName.dirty || manufacturerName.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="manufacturerName.errors?.['required']">Manufacturer name is required
+                                    </div>
+                                    <div [hidden]="!manufacturerName.errors('pattern')">Enter Only Characters.</div>
+                                </div>
                             </div>
+                            <label class="col-md-1 col-form-label">Product Code</label>
+                            <div class="col-md-3" [ngClass]="{'form-group-focus':focus===true}">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="productCode" name="productCode"
+                                        [(ngModel)]="ProductModel.productCode" placeholder="Enter Product Code" required
+                                        value="" pattern="^[a-zA-Z0-9]+$" (focus)="focus=true" #productCode="ngModel">
+                                </div>
+                                <div *ngIf="productCode.errors && (productCode.dirty || productCode.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="productCode.errors?.['required']">Product Code is required.
+                                    </div>
+                                    <div [hidden]="!productCode.errors('pattern')">Enter Only Characters and Numbers.
+                                    </div>
 
-                            <label class="col-md-1 col-form-label">Avibilaty Status</label>
+                                </div>
+                            </div>
+                            <label class="col-md-1 col-form-label">Product Model Number</label>
                             <div class="col-md-3">
-                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'"
-                                    id="avibilityStatus" name="avibilityStatus"
-                                    [(ngModel)]="ProductModel.avibilityStatus">
-                                </bSwitch>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="productSRNumber" name="productSRNumber"
+                                        [(ngModel)]="ProductModel.productSRNumber" placeholder=" Enter Model Number"
+                                        required value="" pattern="^[a-zA-Z0-9]+$" (focus)="focus=true"
+                                        #productSRNumber="ngModel">
+                                </div>
+                                <div *ngIf="productSRNumber.errors && (productSRNumber.dirty || productSRNumber.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="productSRNumber.errors?.['required']">Product Price is required.
+                                    </div>
+                                    <div [hidden]="!productSRNumber.errors('pattern')">Enter Only Numbers.</div>
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -443,54 +434,6 @@
                                         placeholder=" Enter Total Product Quantity">
                                 </div>
                             </div> -->
-                            <label class="col-md-1 col-form-label">Descripition With Bullet</label>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <textarea rows="4" cols="80" class="form-control textarea" id="descripition"
-                                        name="descripition" [(ngModel)]="ProductModel.descripition"
-                                        placeholder="Write Discripition and Seperated by ',' commaa for Bullet"></textarea>
-                                </div>
-                            </div>
-                            <label class="col-md-1 col-form-label">Related Product</label>
-                            <div class="col-md-3">
-                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'"
-                                    id="relatedProduct" name="relatedProduct" [(ngModel)]="ProductModel.relatedProduct">
-                                </bSwitch>
-                            </div>
-                            <label class="col-md-1 col-form-label">Product Model Number</label>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="productSRNumber" name="productSRNumber"
-                                        [(ngModel)]="ProductModel.productSRNumber" placeholder=" Enter Model Number"
-                                        required value="" pattern="^[a-zA-Z0-9]+$" (focus)="focus=true"
-                                        #productSRNumber="ngModel">
-                                </div>
-                                <div *ngIf="productSRNumber.errors && (productSRNumber.dirty || productSRNumber.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="productSRNumber.errors.required">Product Price is required.
-                                    </div>
-                                    <div [hidden]="!productSRNumber.errors('pattern')">Enter Only Numbers.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="row">
-                            <label class="col-md-1 col-form-label">Product Size</label>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="productSize" name="productSize"
-                                        [(ngModel)]="ProductModel.productSize" placeholder="Enter Product Dimension">
-                                </div>
-                            </div>
-
-                            <label class="col-md-1 col-form-label">Item Weight</label>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="itemWeight" name="itemWeight"
-                                        [(ngModel)]="ProductModel.itemWeight" placeholder=" Enter Item Weight">
-                                </div>
-                            </div>
                             <label class="col-md-1 col-form-label">Select ETR Tax</label>
                             <div class="col-md-3">
                                 <div class="dropdown form-group">
@@ -507,6 +450,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <label class="col-md-1 col-form-label">Descripition With Bullet</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <textarea rows="4" cols="80" class="form-control textarea" id="descripition"
+                                        name="descripition" [(ngModel)]="ProductModel.descripition"
+                                        placeholder="Write Discripition and Seperated by ',' commaa for Bullet"></textarea>
+                                </div>
+                            </div>
+
+
+                            <label class="col-md-1 col-form-label">Product Size</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="productSize" name="productSize"
+                                        [(ngModel)]="ProductModel.productSize" placeholder="Enter Product Dimension">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label class="col-md-1 col-form-label">Item Weight</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="itemWeight" name="itemWeight"
+                                        [(ngModel)]="ProductModel.itemWeight" placeholder=" Enter Item Weight">
+                                </div>
+                            </div>
+                            <label class="col-md-1 col-form-label">Start Rating</label>
+                            <div class="col-md-1">
+                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="startRating"
+                                    name="startRating" [(ngModel)]="ProductModel.startRating">
+                                </bSwitch>
+                            </div>
+
+                            <label class="col-md-1 col-form-label">EMI Options</label>
+                            <div class="col-md-1">
+                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="emiOptiions"
+                                    name="emiOptiions" [(ngModel)]="ProductModel.emiOptiions">
+                                </bSwitch>
+                            </div>
+
+                            <label class="col-md-1 col-form-label">Avibilaty Status</label>
+                            <div class="col-md-1">
+                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'"
+                                    id="avibilityStatus" name="avibilityStatus"
+                                    [(ngModel)]="ProductModel.avibilityStatus">
+                                </bSwitch>
+                            </div>
+                            <label class="col-md-1 col-form-label">Related Product</label>
+                            <div class="col-md-1">
+                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'"
+                                    id="relatedProduct" name="relatedProduct" [(ngModel)]="ProductModel.relatedProduct">
+                                </bSwitch>
+                            </div>
                             <!-- <label class="col-md-1 col-form-label">Quantity</label>
                             <div class="col-md-3">
                                 <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
@@ -517,7 +514,7 @@
                                 </div>
                                 <div *ngIf="quantity.errors && (quantity.dirty || quantity.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="quantity.errors.required">Quantity is required</div>
+                                    <div *ngIf="quantity.errors?.['required']">Quantity is required</div>
                                     <div [hidden]="!quantity.errors('pattern')">Enter Only Numbers.
                                     </div>
                                 </div>
@@ -541,14 +538,7 @@
                         </div>
                         <br>
                         <div class="row" *ngFor="let i of addSelectFields;let ind=index">
-                            <label class="col-md-1 col-form-label">Enter Size</label>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <input type="text" id="selsize" name="selsize" [(ngModel)]="i.selsize"
-                                        placeholder="Enter Size" class="form-control" required value=""
-                                        pattern=""  #selsize="ngModel">
-                                </div>
-                                <!-- <div class="dropdown form-group">
+                            <!-- <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">{{i.selsize}}
@@ -561,24 +551,48 @@
                                         </div>
                                     </div>
                                 </div> -->
+                            <div class="col-md-2 offset-md-1">
+                                <label class="col-form-label">Enter Size</label>
+                                <div class="form-group">
+                                    <input type="text" id="selsize" name="selsize" [(ngModel)]="i.selsize"
+                                        placeholder="Enter Size" class="form-control" required value="" pattern=""
+                                        #selsize="ngModel">
+                                </div>
                             </div>
-                            <label class="col-md-1 col-form-label">Enter Price</label>
-                            <div class="col-md-2">
+                            <div class="col-md-2 ">
+                                <label class="col-form-label">Enter Price</label>
+
                                 <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="number" id="mainPrice" name="mainPrice"  [(ngModel)]="i.mainPrice"
+                                    <input type="number" id="mainPrice" name="mainPrice" [(ngModel)]="i.mainPrice"
                                         placeholder=" Enter Product Price" class="form-control" required value=""
                                         pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
                                         #mainPrice="ngModel" style="text-transform: capitalize;">
                                 </div>
                                 <div *ngIf="mainPrice.errors && (mainPrice.dirty || mainPrice.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="mainPrice.errors.required">Product Price is required</div>
-                                    <div [hidden]="!mainPrice.errors('pattern')">Enter Only Numbers.
-                                    </div>
+                                    <div *ngIf="mainPrice.errors?.['required']">Product Price is required</div>
+                                    <div [hidden]="!mainPrice.errors('pattern')">Enter Only Numbers.</div>
                                 </div>
                             </div>
-                            <label class="col-md-1 col-form-label">Quantity</label>
-                            <div class="col-md-2" style="margin-top: 6px!important;">
+                            <div class="col-md-2">
+                                <label class="col-form-label">Discount Percentage</label>
+                                <div class="form-group">
+                                    <input type="number" id="discountPerc" name="discountPerc"
+                                        [(ngModel)]="i.discountPerc" placeholder=" Discount Percentage"
+                                        class="form-control" value="" (input)="onDiscountChange($event.target.value,i)"
+                                        #discountPerc="ngModel">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="col-form-label">Discounted Product Price</label>
+                                <div class="form-group">
+                                    <input type="number" id="discountPrice" name="discountPrice"
+                                        [(ngModel)]="i.discountPrice" disabled placeholder=" Discounted Product Price"
+                                        class="form-control" value="" #discountPrice="ngModel">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="col-form-label">Quantity</label>
                                 <!-- <div class="form-group">
                                     <input type="number" class="form-control" id="productQuantity"
                                         name="productQuantity" [(ngModel)]="i.quantity" placeholder=" Enter Quantity">
@@ -591,9 +605,8 @@
                                 </div>
                                 <div *ngIf="quantity.errors && (quantity.dirty || quantity.touched)"
                                     class="alert alert-danger">
-                                    <div *ngIf="quantity.errors.required">Quantity is required</div>
-                                    <div [hidden]="!quantity.errors('pattern')">Enter Only Numbers.
-                                    </div>
+                                    <div *ngIf="quantity.errors?.['required']">Quantity is required</div>
+                                    <div [hidden]="!quantity.errors('pattern')">Enter Only Numbers.</div>
                                 </div>
                             </div>
                             <!-- <div class="col-md-2" style="margin-top: 6px!important;">
@@ -605,17 +618,23 @@
                                     (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event,ind)" />
                             </div> -->
                             <div class="col-md-1">
-                                <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()"
-                                    style="font-size: 35px !important;margin-top:9%!important;"></i>
-                            </div>
-                            <div class="col-md-1" *ngIf="ind>0">
-                                <i class="fa fa-times-circle-o" aria-hidden="true" (click)="removeSelectSize(ind)"
-                                    style="font-size: 35px !important;margin-top:9%!important;margin-left: -76%!important;"></i>
+                                <label class="col-form-label">&nbsp;</label>
+                                <tr class="form-group">
+                                    <td>
+                                        <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()"
+                                            style="font-size: 35px !important;"></i>&nbsp;
+                                    </td>
+                                    <td *ngIf="ind>0">
+                                        <i class="fa fa-times-circle-o" aria-hidden="true"
+                                            (click)="removeSelectSize(ind)" style="font-size: 35px !important;"></i>
+                                    </td>
+                                </tr>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-3 offset-md-1">
+                            <div class="col-md-1"></div>
+                            <!-- <div class="col-md-3 ">
                                 <div class="form-group">
                                     <p class="card-title">Select Product Image</p>
                                     <span style="color: red;">*Image size must be 800X600</span>
@@ -641,7 +660,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-3" *ngIf="!isEdit">
                                 <div class="form-group">
 
@@ -667,35 +686,36 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3" *ngFor="let i of addingprdtimg;let ind=index">
+                            <div class="col-md-3 " *ngFor="let i of addingprdtimg;let ind=index">
                                 <div class="form-group">
-
                                     <p class="card-title">Select Product Detail Image</p>
                                     <span style="color: red;">*Image size must be 800X600</span>
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
 
                                         <div class="fileinput-new thumbnail">
 
-                                            <img src="./assets/img/image_placeholder.jpg" alt="..." *ngIf="!isEdit">
+                                            <img src="./assets/manage/assets/img/image_placeholder.jpg" alt="..."
+                                                *ngIf="!isEdit">
                                             <img src="http://localhost:8090{{i.productListImage}}" alt="..."
                                                 *ngIf="isEdit">
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <div>
                                             <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select Detail Image</span>
+                                                <span class="fileinput-new">Select Image</span>
                                                 <span class="fileinput-exists">Change</span>
                                                 <input type="file" id="productListImage" name="productListImage"
                                                     [(ngModel)]="ImagesModel.productListImage" value={}
                                                     (change)="onSelect($event)" />
                                             </span>
                                             <a class="btn btn-danger btn-round fileinput-exists"
-                                                data-dismiss="fileinput" (click)="removeOrChangedImage(id)"><i
+                                                data-dismiss="fileinput" (click)="removeOrChangedImage()"><i
                                                     class="fa fa-times"></i> Remove</a>
-
-                                            <i class="fa fa-times-circle-o" aria-hidden="true"
-                                                (click)="removeImageUploader(ind)"
-                                                style="font-size:25px!important;padding-left:9px!important"></i>
+                                            <a class="btn btn-danger btn-round btn-link"
+                                                (click)="removeImageUploader(ind)">
+                                                <i class="fa fa-times-circle-o" aria-hidden="true"
+                                                    style="font-size: 25px;"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -807,7 +827,7 @@
     <!-- Edit Main Category Popup menu start -->
     <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-notice">
+        <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -815,7 +835,7 @@
                     </button>
                     <h5 class="modal-title" id="myModalLabel">Update Main Category</h5>
                 </div>
-                <div class="modal-body modal-notice">
+                <div class="modal-body">
                     <div class="instruction">
                         <form class="form-horizontal" name="mainCateRegForm" #mainCateRegForm="ngForm">
                             <div class="row">
@@ -854,7 +874,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        (click)="updateMainCate(editMain)">Update Main Category</button>
+                        (click)="updateMainCate(editMain)">Update</button>
                 </div>
             </div>
         </div>
@@ -1140,7 +1160,7 @@
                                             (blur)="focus=false" #name="ngModel">
                                     </div>
                                     <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
-                                        <div *ngIf="name.errors.required">Category Name is required</div>
+                                        <div *ngIf="name.errors?.['required']">Category Name is required</div>
                                         <div [hidden]="!name.errors('pattern')">Enter Only Characters.</div>
                                     </div>
                                 </div> -->
@@ -1149,8 +1169,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        >Update</button>
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal">Update</button>
                 </div>
             </div>
         </div>

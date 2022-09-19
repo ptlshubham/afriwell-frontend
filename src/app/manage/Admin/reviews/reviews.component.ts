@@ -14,7 +14,7 @@ export class ReviewsComponent implements OnInit {
   public ReviewsModel: Reviews = new Reviews;
   public rating: Reviews[] = [];
   public editrating: Reviews = new Reviews ;
-  model: Date;
+  model!: Date;
   constructor(
     private reviewsService: ReviewsService,
     private apiservice: ApiService
@@ -39,17 +39,17 @@ export class ReviewsComponent implements OnInit {
 
     });
   }
-  editReview(data) {
+  editReview(data:any) {
 
     this.editrating = data;
   }
-  updateRatings(data) {
+  updateRatings(data:any) {
 
     this.reviewsService.updateRating(data).subscribe((req) => {
     })
 
   }
-  removeReview(id) {
+  removeReview(id:any) {
     this.reviewsService.removeRating(id).subscribe((req) => {
       this.getReviewList();
     })

@@ -8,17 +8,17 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 })
 export class VendorsComponent implements OnInit {
   isAdd: boolean = false;
-  model: NgbDateStruct;
+  model!: NgbDateStruct;
   constructor() { }
 
   ngOnInit(): void {
   }
   addVendors() {
-     
+    
     this.isAdd = true;
   }
-  saveVendor(){
-    this.isAdd =false;
+  saveVendor() {
+    this.isAdd = false;
   }
 
 }

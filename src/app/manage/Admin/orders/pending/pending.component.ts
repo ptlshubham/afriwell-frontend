@@ -7,7 +7,7 @@ declare var $:any;
   styleUrls: ['./pending.component.css']
 })
 export class PendingComponent implements OnInit {
-  model: Date;
+  model!: Date;
   constructor() { }
 
   ngOnInit(): void {

@@ -8,7 +8,7 @@ declare var $:any;
   styleUrls: ['./complete.component.css']
 })
 export class CompleteComponent implements OnInit {
-  model: Date;
+  model!: Date;
   completedOrders:any;
   constructor(
     private ordersService: OrdersService

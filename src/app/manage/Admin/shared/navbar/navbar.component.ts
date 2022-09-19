@@ -17,15 +17,14 @@ var misc: any = {
 })
 
 export class NavbarComponent implements OnInit {
-    private listTitles: any[];
+    private listTitles!: any[];
     location: Location;
     private nativeElement: Node;
-    private toggleButton;
+    private toggleButton:any;
     private sidebarVisible: boolean;
-    private _router: Subscription;
     public open: boolean = false;
 
-    @ViewChild("navbar-cmp", { static: false }) button;
+    @ViewChild("navbar-cmp", { static: false }) button: any;
 
     constructor(location: Location, private renderer: Renderer2, private element: ElementRef, private router: Router) {
         this.location = location;

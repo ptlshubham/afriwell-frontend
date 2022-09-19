@@ -43,23 +43,23 @@ export class MobilehomeComponent implements OnInit {
   cancelAddImage() {
     this.isAddShow = true;
   }
-  selectPosition(name) {
-    this.positiion.forEach(element => {
+  selectPosition(name: any) {
+    this.positiion.forEach((element: { name: any; }) => {
       if (element.name == name) {
         this.selectedPosition = element.name;
       }
     })
 
   }
-  select(event) {
-     
+  select(event: any) {
+
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
 
       const formdata = new FormData();
       formdata.append('file', file);
 
-       
+
       this.bannersServie.uploadMobileBannersImage(formdata).subscribe((response) => {
         this.image = response;
         console.log(response);
@@ -68,7 +68,7 @@ export class MobilehomeComponent implements OnInit {
     }
   }
   saveBannersImage() {
-     
+
     this.WebbannersModel.bannersimage = this.image;
     this.WebbannersModel.name = this.selectedPosition;
     this.WebbannersModel.status = true;
@@ -83,21 +83,21 @@ export class MobilehomeComponent implements OnInit {
     });
 
   }
-  removeBannersImage(id) {
-     
+  removeBannersImage(id: any) {
+
     this.bannersServie.removeMobileBanners(id).subscribe((req) => {
       this.getBanners();
     })
   }
-  activeBanners(id){
-    this.webImage[id].status =true;
-    this.bannersServie.activeDeavctiveBanners( this.webImage[id]).subscribe((req)=>{
+  activeBanners(id: any) {
+    this.webImage[id].status = true;
+    this.bannersServie.activeDeavctiveBanners(this.webImage[id]).subscribe((req) => {
 
     })
   }
-  deactiveBanners(id){
-    this.webImage[id].status =false;
-    this.bannersServie.activeDeavctiveBanners( this.webImage[id]).subscribe((req)=>{
+  deactiveBanners(id: any) {
+    this.webImage[id].status = false;
+    this.bannersServie.activeDeavctiveBanners(this.webImage[id]).subscribe((req) => {
 
     })
   }

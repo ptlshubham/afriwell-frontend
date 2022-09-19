@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { CoreService } from 'src/app/components/user-service/core.service';
 import { Category } from 'src/app/manage/Admin/category/category.model';
 
@@ -8,7 +9,8 @@ import { Category } from 'src/app/manage/Admin/category/category.model';
   styleUrls: ['./categories-furniture.component.sass']
 })
 export class CategoriesFurnitureComponent implements OnInit {
-  public mainCategory: Category[] = [];
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+  public categoryList: Category[] = [];
   public subCategory: Category[] = [];
   constructor(
     private coreService: CoreService
@@ -19,24 +21,45 @@ export class CategoriesFurnitureComponent implements OnInit {
   ngOnInit(): void {
   }
   getCategoryList() {
+    debugger
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
-      this.mainCategory = data;
-      this.mainCategory.forEach(element => {
+      this.categoryList = data;
+      debugger
+      this.categoryList.forEach(element => {
         this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
           element.SubCategory = res;
+          debugger
         })
       })
     });
-    this.mainCategory;
-  }
-  openSubToSub(mainid, subid, i, j) {
-    this.mainCategory[i].SubCategory[j].subtosub = [];
-    this.coreService.getAllUserCate(subid).subscribe((data: any) => {
- 
-    })
-    // else {
-    //   this.mainCategory[i].SubCategory[j].isopen = false;
-    // }
+    this.categoryList;
 
   }
+  openSubToSub(mainid, subid, i, j) {
+    //   this.categoryList[i].SubCategory[j].subtosub = [];
+    //   if (this.openSub == false) {
+    //     this.openSub = true;
+    //     this.coreService.getAllUserCate(subid).subscribe((data: any) => {
+    //       if (data) {
+    //         this.subtosub = data;
+    //         this.categoryList[i].SubCategory[j].subtosub = data;
+    //         this.categoryList[i].SubCategory[j].isopen = true;
+    //         if (data.length == 0) {
+    //           // this.getPoductToNavbar( this.categoryList[i].SubCategory[j].id);
+    //         }
+    //       }
+    //       else {
+    //         this.categoryList[i].SubCategory[j].isopen = false;
+    //         // this.getPoductToNavbar( this.categoryList[i].SubCategory[j].id);
+    //       }
+
+    //     })
+    //   }
+    //   else {
+    //     this.openSub = false;
+    //     this.categoryList[i].SubCategory[j].isopen = false;
+    //   }
+
+  }
+
 }

@@ -15,7 +15,7 @@ export class BannersService {
     private httpClient: HttpClient
   ) { }
 
-  uploadImage(img): Observable<any> {
+  uploadImage(img:any): Observable<any> {
 
     return this.httpClient.post<any>(ApiService.uploadBannersImageURL, img);
 
@@ -27,7 +27,7 @@ export class BannersService {
   getWebBanners(): Observable<Webbanners[]> {
     return this.httpClient.get<any>(ApiService.getWebBannersURL);
   }
-  removeWebBanners(id) {
+  removeWebBanners(id:any) {
     let bnr = {
       id: id
     }
@@ -40,14 +40,14 @@ export class BannersService {
   getMobileBanners(): Observable<Webbanners[]> {
     return this.httpClient.get<any>(ApiService.getMobileBannersURL);
   }
-  removeMobileBanners(id) {
+  removeMobileBanners(id:any) {
 
     let bnr = {
       id: id
     }
     return this.httpClient.post<any>(ApiService.removeMobileBannersURL, bnr);
   }
-  uploadMobileBannersImage(img): Observable<any> {
+  uploadMobileBannersImage(img:any): Observable<any> {
 
     return this.httpClient.post<any>(ApiService.uploadMobileImageURL, img);
 

@@ -16,7 +16,7 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
-
+  public static getProductMasterTagURL: string = ApiService.HOST_URL + '/admin/GetProductMasterTag';
   public static saveMainURL: string = ApiService.HOST_URL + '/admin/SaveMainCategory';
   public static getMainURL: string = ApiService.HOST_URL + '/admin/GetMainCategory/';
   public static saveCatURL: string = ApiService.HOST_URL + '/admin/SaveMainCategory';
@@ -99,7 +99,8 @@ export class ApiService {
   public static getSimilarProductURL: string = ApiService.HOST_URL + '/user/GetSimilarProductList';
   public static GetCustomerByIdURL: string = ApiService.HOST_URL + '/user/GetCustomerById';
   public static updateCustomerDetailsURL: string = ApiService.HOST_URL + '/user/updateCustomerDetails';
-  showNotification(from, align, msg, color) {
+
+  showNotification(from: any, align: any, msg: any, color: any) {
 
 
     var color = color;

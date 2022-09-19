@@ -8,9 +8,11 @@ import { CoreService } from '../../user-service/core.service';
   styleUrls: ['./menu.component.sass']
 })
 export class MenuComponent implements OnInit {
-  public mainCategory: Category[] = [];
+  public categoryList: Category[] = [];
   public subCategory: Category[] = [];
   subcate: Category[] = [];
+  public subtosub: any = [];
+
   openSub: boolean = false;
 
   constructor(
@@ -31,52 +33,43 @@ export class MenuComponent implements OnInit {
       }
     });
   }
-  // async getMainCategory(id) {
-  //   this.coreService.getAllUserCate(id).subscribe(data => {
-  //     this.mainCategory = data;
-  //      
-  //     this.mainCategory.forEach(element => {
-  //       if (element.id) {
-  //         this.getSubCategory(element.id);
-  //         // this.selectedCat = element.name;
-  //       }
-  //     })
-  //   });
-  // }
-  // getSubCategory(id) {
-  //   this.coreService.getAllUserCate(id).subscribe(data => {
-  //     this.subCategory = data;
-  //      
-  //   });
-  // }
   getCategoryList() {
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
-      this.mainCategory = data;
-      // this.mainCategory.forEach(element => {
-      //   this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
-      //     element.SubCategory = res;
-      //   })
-      // })
+      this.categoryList = data;
+      this.categoryList.forEach(element => {
+        this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
+          element.SubCategory = res;
+        })
+      })
     });
-    this.mainCategory;
-  }
-  openSubcategory(id, i) {
-    this.subcate=[];
-    this.coreService.getAllUserCate(id).subscribe((data: any) => {
-      this.mainCategory[i].SubCategory = data;
-      this.mainCategory[i].isSub = true;
-      this.subcate = data;
-      this.openSub = true;
-    })
+    this.categoryList;
+
   }
   openSubToSub(mainid, subid, i, j) {
-    this.mainCategory[i].SubCategory[j].subtosub = [];
-    this.coreService.getAllUserCate(subid).subscribe((data: any) => {
+    this.categoryList[i].SubCategory[j].subtosub = [];
+    if (this.openSub == false) {
+      this.openSub = true;
+      this.coreService.getAllUserCate(subid).subscribe((data: any) => {
+        if (data) {
+          this.subtosub = data;
+          this.categoryList[i].SubCategory[j].subtosub = data;
+          this.categoryList[i].SubCategory[j].isopen = true;
+          if (data.length == 0) {
+            // this.getPoductToNavbar( this.categoryList[i].SubCategory[j].id);
+          }
+        }
+        else {
+          this.categoryList[i].SubCategory[j].isopen = false;
+          // this.getPoductToNavbar( this.categoryList[i].SubCategory[j].id);
+        }
 
-    })
-    // else {
-    //   this.mainCategory[i].SubCategory[j].isopen = false;
-    // }
+      })
+    }
+    else {
+      this.openSub = false;
+      this.categoryList[i].SubCategory[j].isopen = false;
+    }
 
   }
+
 }

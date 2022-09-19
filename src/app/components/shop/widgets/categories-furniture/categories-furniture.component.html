@@ -1,11 +1,26 @@
 <div class="category-contant">
-    <ul>
+    <!-- <ul>
         <li><a class="no-brd" [routerLink]="['/home/products/all']">Show All</a></li>
-        <li><a *ngFor="let cat of mainCategory;let i=index">{{cat.name}}</a>
+        <li><a *ngFor="let cat of categoryList;let i=index">{{cat.name}}</a>
         </li>
-        <!-- <li> 
-            <a *ngFor="let sc of cat.SubCategory;let j= index">{{sc.name}}</a>
+       
+    </ul> -->
+    <!-- <div class="example-action-buttons">
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    </div> -->
+    <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel style="margin: 0px 0 !important;" *ngFor="let cat of categoryList;let i=index">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{cat.name}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-button *ngFor="let sc of cat.SubCategory;let j= index" (click)="openSubToSub(cat.id ,sc.id,i,j)"
+                style="width: 100%;">{{sc.name}}
+                <mat-divider></mat-divider>
+            </button>
+        </mat-expansion-panel>
+    </mat-accordion>
 
-        </li> -->
-    </ul>
 </div>

@@ -11,8 +11,8 @@ declare var $: any;
   styleUrls: ['./running.component.css']
 })
 export class RunningComponent implements OnInit {
-  model: Date;
-  myForm: FormGroup;
+  model!: Date;
+  myForm: any;
   currentOrders: any = [];
   orderStatus: any = [];
   selectedStatus: any;
@@ -47,12 +47,12 @@ export class RunningComponent implements OnInit {
       this.currentOrders = data;
     });
   }
-  viewOrdersDetails(data, ind) {
+  viewOrdersDetails(data:any, ind:any) {
 
     this.Orderview = data;
   }
-  selectOrderStatus(name) {
-    this.orderStatus.forEach(element => {
+  selectOrderStatus(name:any) {
+    this.orderStatus.forEach((element: { name: any; }) => {
       if (element.name == name) {
         this.selectedStatus = element.name;
       }

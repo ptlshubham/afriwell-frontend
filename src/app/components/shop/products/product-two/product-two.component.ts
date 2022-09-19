@@ -1,6 +1,5 @@
 import { Component, OnChanges, Input, OnInit, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { CartService } from 'src/app/components/shared/services/cart.service';
-import { ProductService } from 'src/app/components/shared/services/product.service';
 import { WishlistService } from 'src/app/components/shared/services/wishlist.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -27,13 +26,14 @@ export class ProductTwoComponent implements OnInit, OnChanges {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Input('product') product: Array<Product> = [];
   contentLoaded = false;
-  defaultFruits: Product[];
+  defaultFruits: Product[] = [];
 
-  @Input() products: Product[];
+  @Input()
+  products: Product[] = [];
 
   constructor(private wishlistService: WishlistService, private cartService: CartService, private dialog: MatDialog, private router: Router) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: any): void {
     if (changes.products && changes.products.currentValue && changes.products.currentValue.length) {
       this.defaultFruits = this.products;
     }
@@ -49,7 +49,7 @@ export class ProductTwoComponent implements OnInit, OnChanges {
     //   this.cartService.addToCart(product,quantity);
     // }
 
-    public openProductDialog(product){
+    public openProductDialog(product:any){
       let dialogRef = this.dialog.open(ProductDialogComponent, {
           data: product,
           panelClass: 'product-dialog',

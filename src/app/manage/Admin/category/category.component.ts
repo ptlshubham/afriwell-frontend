@@ -37,6 +37,7 @@ export class CategoryComponent implements OnInit {
   public CategoryModel: Category = new Category;
   public ProductModel: Product = new Product;
   public ImagesModel: Images = new Images;
+  public productMaster: Product[] = [];
   public ClothSizeModel: ClothSize = new ClothSize;
   public QuantityWithSizeModel: QuantityWithSize = new QuantityWithSize;
   public quantitysize: QuantityWithSize[] = [];
@@ -56,7 +57,7 @@ export class CategoryComponent implements OnInit {
   editCat: any = {};
   addingprdtimg: any = [];
   val = 0;
-  myForm: FormGroup;
+  myForm!: FormGroup;
   disabled: boolean = false;
   ShowFilter: boolean = false;
   limitSelection: boolean = false;
@@ -70,7 +71,7 @@ export class CategoryComponent implements OnInit {
   imageError: string;
   isImageSaved: boolean = true;
   cardImageBase64: string;
-  color1: '#2883e9'
+  color1: '#2883e9';
   isEdit: boolean = false;
 
   mpage: Number = 1;
@@ -82,9 +83,8 @@ export class CategoryComponent implements OnInit {
 
   taxSlab: any = [];
   selctedTaxSlab: any;
-
-  tagItems = ['Amsterdam', 'Washington', 'Sydney', 'Beijing'];
-
+  percentage: any;
+  maintag: number;
   constructor(
     private categoryService: CategoryService,
     private fm: FormBuilder,
@@ -96,15 +96,15 @@ export class CategoryComponent implements OnInit {
     this.getMainCategory(0).then();
     this.ProductModel.startRating = false;
     this.ProductModel.avibilityStatus = false;
-    this.ProductModel.emiOptiions = false;
+    this.ProductModel.emiOptions = false;
     this.ProductModel.relatedProduct = false;
     this.ProductModel.discountPrice = 0;
     this.taxSlab = [
       {
-        name: '18 %'
+        name: '8 %'
       },
       {
-        name: '6 %',
+        name: '16 %',
       },
     ]
     this.activatedRoutes.queryParams.subscribe((res: any) => {
@@ -139,18 +139,20 @@ export class CategoryComponent implements OnInit {
       selsize: '',
       quantity: 0,
       color: '#ffffff',
-      mainPrice:0,
-      discountPrice:0,
+      mainPrice: 0,
+      discountPerc: 0,
+      discountPrice: 0,
     }];
+
     this.value++;
     this.mainCateRegForm = this.fm.group({
-      name: ['', Validators.required, Validators.name,],
+      name: ['', Validators.required, Validators.name, Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")],
     });
     this.cateRegForm = this.fm.group({
-      subname: ['', Validators.required, Validators.name,],
+      subname: ['', Validators.required, Validators.name, Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")],
     })
     this.subCateRegForm = this.fm.group({
-      name: ['', Validators.required, Validators.name,],
+      name: ['', Validators.required, Validators.name, Validators.pattern],
     });
     this.productRegForm = this.fm.group({
       productName: ['', Validators.required, Validators.name,],
@@ -162,8 +164,8 @@ export class CategoryComponent implements OnInit {
       discountPrice: ['', Validators.required, Validators.name],
     });
   }
-  selectTaxSlab(name) {
-    this.taxSlab.forEach(element => {
+  selectTaxSlab(name: any) {
+    this.taxSlab.forEach((element: { name: any; }) => {
       if (element.name == name) {
         this.selctedTaxSlab = element.name;
       }
@@ -197,6 +199,7 @@ export class CategoryComponent implements OnInit {
     this.isMainCatData = false;
   }
   addProduct() {
+    this.getProductMasterTag();
     this.isProduct = true;
     this.ProductModel = {};
     this.isEdit = false;
@@ -212,7 +215,7 @@ export class CategoryComponent implements OnInit {
   ngAfterViewInit() {
     $('[rel="tooltip"]').tooltip();
   }
-  onEventLog(ev, color, i) {
+  onEventLog(ev: string, color: { color: any; }, i: string | number) {
 
     if (ev == 'colorPickerClose') {
       this.addSelectFields[i].color = color.color;
@@ -230,16 +233,28 @@ export class CategoryComponent implements OnInit {
 
     })
   }
-  onEvent(val, ev) {
+  onEvent(val: any, ev: any) {
 
   }
-  getdetailImages(id) {
+  getdetailImages(id: any) {
     this.categoryService.getProductDetailImages(id).subscribe(res => {
       this.addingprdtimg = res;
 
     })
   }
-  async getMainCategory(id) {
+  getProductMasterTag() {
+    this.categoryService.getProductMasterTag().subscribe(res => {
+      this.productMaster = res;
+      if (this.productMaster.length == 0) {
+        this.maintag = 1;
+      }
+      else {
+        this.maintag = this.productMaster[0].maintag + 1;
+      }
+    })
+  }
+
+  async getMainCategory(id: any) {
 
     this.categoryService.getMainCat(id).subscribe(data => {
       this.category = data;
@@ -253,11 +268,11 @@ export class CategoryComponent implements OnInit {
       }
     });
   }
-  mainCatEdit(data) {
+  mainCatEdit(data: any) {
 
     this.editMain = data;
   }
-  updateCategoryBanners(event) {
+  updateCategoryBanners(event: any) {
 
     let max_height;
     let max_width;
@@ -320,6 +335,10 @@ export class CategoryComponent implements OnInit {
     }
 
   }
+  onDiscountChange(searchValue: string, i: any): void {
+    this.percentage = +i.mainPrice - (+i.mainPrice * +i.discountPerc / 100);
+    debugger
+  }
   updateMainCate(data) {
     data.bannersimage = this.categoryimage;
     data.isactive = 1;
@@ -329,7 +348,7 @@ export class CategoryComponent implements OnInit {
     })
   }
 
-  mainCatRemove(id) {
+  mainCatRemove(id: any) {
 
     this.categoryService.removeMainCatList(id).subscribe((req) => {
       this.apiservice.showNotification('top', 'right', 'Main Category removed Successfully.', 'success');
@@ -338,11 +357,11 @@ export class CategoryComponent implements OnInit {
       this.getSubCategory(this.subToSubCat);
     })
   }
-  editCategory(Data) {
+  editCategory(Data: any) {
 
     this.editCat = Data;
   }
-  updatemaincatddl(parent, name) {
+  updatemaincatddl(parent: any, name: any) {
 
     this.editCat.parent = parent;
     this.selectedCat = name;
@@ -395,7 +414,7 @@ export class CategoryComponent implements OnInit {
     })
     this.getProductSubCategory(id);
   }
-  getSubCategory(id) {
+  getSubCategory(id: any) {
 
     this.subToSubCat = id;
     this.categoryService.getMainCat(id).subscribe(data => {
@@ -449,11 +468,11 @@ export class CategoryComponent implements OnInit {
     this.val++;
     this.addingprdtimg.push({ name: this.val });
   }
-  removeImageUploader(val) {
+  removeImageUploader(val: any) {
     this.addingprdtimg.splice(val, 1);
   }
 
-  select(event) {
+  select(event: any) {
 
     let max_height;
     let max_width;
@@ -516,7 +535,7 @@ export class CategoryComponent implements OnInit {
 
   // Multiple Image Uploader
 
-  onSelect(event) {
+  onSelect(event: any) {
     let max_height;
     let max_width;
 
@@ -577,33 +596,34 @@ export class CategoryComponent implements OnInit {
   }
   addSelectSize() {
     this.value++;
+    debugger
     let data = {
       selsize: '',
       quantity: 0,
       color: '#ffffff',
-      mainPrice:0,
-      discountPrice:0,
+      mainPrice: 0,
+      discountPerc: 0,
+      discountPrice: 0,
     }
-
     this.addSelectFields.push(data);
+
   }
-  removeSelectSize(value) {
+  removeSelectSize(value: any) {
     this.addSelectFields.splice(value, 1);
   }
   getClothSize() {
     this.categoryService.getCloth().subscribe((data: any) => {
       this.clothsize = data;
-
     });
   }
-  selectClothsSize(id) {
+  selectClothsSize(id: any) {
     this.clothsize.forEach(element => {
       if (element.id == id) {
         this.selectClothSize = element.size;
       }
     })
   }
-  submitClothSize(id, index) {
+  submitClothSize(id: any, index: string | number | undefined) {
     if (index != undefined) {
 
       this.clothsize.forEach(element => {
@@ -624,31 +644,29 @@ export class CategoryComponent implements OnInit {
 
 
   submitAddProduct() {
-
     this.ProductModel.isActive = 0;
-    this.ProductModel.productMainImage = this.image;
+    // this.ProductModel.productMainImage = this.image;
     this.ProductModel.selectedSize = this.addSelectFields;
+    this.ProductModel.maintag = this.maintag;
     this.ProductModel.taxslab = this.selctedTaxSlab;
     this.ProductModel.multi = this.multi;
     if (this.ProductModel.subCategory == undefined) {
       this.ProductModel.subCategory = null;
     }
-    // this.ImagesModel.
-    // this.QuantityWithSizeModel.addSelectFields = this.addSelectFields;
     this.categoryService.saveAddProduct(this.ProductModel).subscribe((response) => {
       this.apiservice.showNotification('top', 'right', 'Product successfully added.', 'success');
       // this.router.navigate(['/inventory']);
     })
   }
-  // removeOrChangedImage() {
-  //    
-
-  //   this.categoryService.removeOrChanged().subscribe((req) => {
-  //   })
-  // }
+  removeOrChangedImage() {
 
 
-  selectBanners(event) {
+    // this.categoryService.removeOrChanged().subscribe((req) => {
+    // })
+  }
+
+
+  selectBanners(event: any) {
 
     let max_height;
     let max_width;

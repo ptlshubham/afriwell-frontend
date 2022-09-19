@@ -12,7 +12,7 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
 @import 'paper-dashboard/variables';
 @import 'paper-dashboard/mixins';
 
@@ -22,7 +22,6 @@
 @import 'paper-dashboard/plugins/plugin-nouislider';
 @import 'paper-dashboard/plugins/plugin-animate-bootstrap-notify';
 @import 'paper-dashboard/plugins/plugin-perfect-scrollbar';
-
 @import 'paper-dashboard/plugins/plugin-card-wizard';
 @import 'paper-dashboard/plugins/plugin-datetimepicker';
 @import 'paper-dashboard/plugins/plugin-bootstrap-select';
@@ -63,14 +62,11 @@
 @import 'paper-dashboard/sidebar-and-main-panel';
 @import 'paper-dashboard/timeline';
 
-
-
 // cards
 @import 'paper-dashboard/cards';
 @import "paper-dashboard/cards/card-chart";
 @import "paper-dashboard/cards/card-map";
 @import "paper-dashboard/cards/card-user";
-
 @import "paper-dashboard/cards/card-background";
 @import "paper-dashboard/cards/card-collapse";
 @import "paper-dashboard/cards/card-contributions";
@@ -85,12 +81,8 @@
 @import "paper-dashboard/cards/card-testimonials";
 @import "paper-dashboard/cards/card-tasks";
 
-
-
 // example pages and sections
 @import 'paper-dashboard/example-pages';
 @import 'paper-dashboard/sections';
-
-
 @import 'paper-dashboard/responsive';
 @import 'paper-dashboard/media-queries';

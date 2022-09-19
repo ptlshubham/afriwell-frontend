@@ -14,13 +14,13 @@ declare var $: any;
 })
 
 export class LoginComponent implements OnInit {
-    focus;
-    focus1;
-    focus2;
+    focus: any;
+    focus1: any;
+    focus2: any;
     public loginModel: AdminRegister = new AdminRegister;
 
     // public loginModel: AdminRegister[] = [];
-    loginForm: FormGroup;
+    loginForm: any;
     account_validation_messages = {
         'email': [
             { type: 'required', message: 'Email is required' },
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     onSubmit() { this.submitted = true };
 
     test: Date = new Date();
-    private toggleButton;
+    private toggleButton:any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
 
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
             body.classList.remove('nav-open');
         }
     }
-    login(credentials) {
+    login(credentials:any) {
 
         console.log("......data...." + credentials.email);
         this.loginservice.login(this.loginModel).subscribe(data => {

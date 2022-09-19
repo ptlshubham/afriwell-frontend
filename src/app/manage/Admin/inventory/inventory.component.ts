@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { element } from 'protractor';
 import { ApiService } from 'src/app/api.service';
 import { Category } from '../category/category.model';
 import { CategoryService } from '../category/category.service';
@@ -56,6 +56,7 @@ export class InventoryComponent implements OnInit {
   public subprodcat: Category[] = [];
   subToSubCat: any;
   productCategory: any = [];
+  productImagesList: any = [];
   constructor(
 
     private categoryService: CategoryService,
@@ -93,7 +94,7 @@ export class InventoryComponent implements OnInit {
       });
     }
   }
-  selectProductCategory(name) {
+  selectProductCategory(name: any) {
     this.selectedCategory = name;
     if (name == 'Hot Product') {
       let data = {
@@ -181,7 +182,7 @@ export class InventoryComponent implements OnInit {
     });
     var table = $('#datatable').DataTable();
   }
-  getMainCategory(id) {
+  getMainCategory(id: any) {
     this.categoryService.getMainCat(id).subscribe(data => {
       this.category = data;
     });
@@ -193,7 +194,7 @@ export class InventoryComponent implements OnInit {
       },
     });
   }
-  cateMain(id) {
+  cateMain(id: any) {
     this.maincatid = null;
     this.subcatid = null;
     this.subToSubCat = null;
@@ -223,7 +224,7 @@ export class InventoryComponent implements OnInit {
     this.getSubCategory(id);
 
   }
-  getSubCategory(id) {
+  getSubCategory(id: any) {
     this.subToSubCat = id;
     let data = {
       maincatid: this.maincatid,
@@ -246,7 +247,7 @@ export class InventoryComponent implements OnInit {
       this.subcategory = data;
     });
   }
-  cateCategory(id) {
+  cateCategory(id: any) {
     this.subcatid = id;
     let data = {
       maincatid: this.maincatid,
@@ -271,13 +272,13 @@ export class InventoryComponent implements OnInit {
     })
     this.getProductSubCategory(id);
   }
-  getProductSubCategory(id) {
+  getProductSubCategory(id: any) {
 
     this.categoryService.getMainCat(id).subscribe(data => {
       this.subprodcat = data;
     });
   }
-  subProCategory(id) {
+  subProCategory(id: any) {
     this.subToSubCat = id;
     this.subToSubCat = id;
     let data = {
@@ -304,7 +305,7 @@ export class InventoryComponent implements OnInit {
       }
     })
   }
-  addSelectSize(i) {
+  addSelectSize(i: any) {
 
     let data = {
       productid: this.restock.id,
@@ -328,7 +329,7 @@ export class InventoryComponent implements OnInit {
     }
 
   }
-  removeSelectSize(value) {
+  removeSelectSize(value: any) {
     this.addSelectFields.splice(value, 1);
   }
   getProductList() {
@@ -339,13 +340,16 @@ export class InventoryComponent implements OnInit {
         this.product[i].index = i + 1;
       }
       this.product.forEach(element => {
+        this.categoryService.getProductDetailImages(element.id).subscribe((data: any) => {
+          element.productImages = data;
+          debugger
+        })
+      })
+      this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;
         })
       })
-
-
-
       this.product.forEach(element => {
         element.selectedCheck = false;
       })
@@ -362,7 +366,7 @@ export class InventoryComponent implements OnInit {
     })
 
   }
-  selectAll(event) {
+  selectAll(event: any) {
 
     if (event == true) {
       this.selectedCheck = false;
@@ -398,7 +402,7 @@ export class InventoryComponent implements OnInit {
     }
 
   }
-  onChanges(sel, data, idx) {
+  onChanges(sel: any, data: any, idx: any) {
 
     if (sel == false) {
       this.product[idx].selectedCheck = true;
@@ -415,7 +419,7 @@ export class InventoryComponent implements OnInit {
 
 
   }
-  restokProduct(data, ind) {
+  restokProduct(data: any, ind: any) {
 
     this.restock = data;
     this.restock.index = ind + 1;
@@ -423,7 +427,7 @@ export class InventoryComponent implements OnInit {
     this.addSelectFields = this.restock.sizeList;
 
   }
-  submitClothSize(id, index) {
+  submitClothSize(id: any, index: any) {
     if (index != undefined) {
 
       this.clothsize.forEach(element => {

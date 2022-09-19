@@ -4,6 +4,7 @@ export class RateOfIntrest{
         public bankid:number,
         public months:any,
         public intrest :any,
+        public bankname:any,
         public isactive:boolean,
         public createddate:Date,
         public upadeteddate:Date

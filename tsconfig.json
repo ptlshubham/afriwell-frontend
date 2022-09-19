@@ -2,6 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "tslib": [
+        "path/to/node_modules/tslib/tslib.d.ts"
+      ]
+    },
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -18,13 +23,22 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    // "forceConsistentCasingInFileNames": true,
+    // "strict": true,
+    // "noImplicitOverride": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    // "noImplicitReturns": true,
+    // "noFallthroughCasesInSwitch": true,
   },
   "peerDependencies": {
-    "typescript": "3.6.4",
-    "tslib": "1.10.0"
+    "typescript": "~4.6.4",
+    "tslib": "^2.4.0"
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": true,
+    "strictInjectionParameters": true,
+    // "strictInputAccessModifiers": true,
+    // "strictTemplates": true,
   }
 }

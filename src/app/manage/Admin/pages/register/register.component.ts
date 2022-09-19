@@ -14,11 +14,11 @@ declare var $: any;
 })
 
 export class RegisterComponent implements OnInit {
-    focus;
-    focus1;
-    focus2;
+    focus: any;
+    focus1: any;
+    focus2: any;
     test: Date = new Date();
-    private toggleButton;
+    private toggleButton:any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
     public AdminRegisterModel: AdminRegister = new AdminRegister;

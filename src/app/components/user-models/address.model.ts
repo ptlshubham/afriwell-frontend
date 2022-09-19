@@ -1,7 +1,7 @@
 export class Address {
     constructor(
         public id?: number,
-        public userid?: string,
+        public userid?: any,
         public username?: string,
         public name?: string,
         public contactnumber?: number,

@@ -13,9 +13,9 @@ export class WebhomeComponent implements OnInit {
   positiion: any = []
   selectedPosition: any;
 
-  imageError: string;
+  imageError!: string;
   isImageSaved: boolean = true;
-  cardImageBase64: string;
+  cardImageBase64!: string;
 
 
   public WebbannersModel: Webbanners = new Webbanners;
@@ -63,15 +63,15 @@ export class WebhomeComponent implements OnInit {
   cancelAddImage() {
     this.isAddShow = true;
   }
-  selectPosition(name) {
-    this.positiion.forEach(element => {
+  selectPosition(name:any) {
+    this.positiion.forEach((element: { name: any; }) => {
       if (element.name == name) {
         this.selectedPosition = element.name;
       }
     })
 
   }
-  select(event) {
+  select(event:any) {
 
     let max_height;
     let max_width;
@@ -185,7 +185,7 @@ export class WebhomeComponent implements OnInit {
     });
 
   }
-  editBannersDetails(data) {
+  editBannersDetails(data:any) {
     this.isAddShow = false;
     this.image = data.bannersimage;
     this.selectedPosition = data.name;
@@ -193,19 +193,19 @@ export class WebhomeComponent implements OnInit {
     this.WebbannersModel.subtitle = data.subtitle;
 
   }
-  removeBannersImage(id) {
+  removeBannersImage(id:any) {
 
     this.bannersServie.removeWebBanners(id).subscribe((req) => {
       this.getBanners();
     })
   }
-  activeBanners(id) {
+  activeBanners(id:any) {
     this.webImage[id].status = true;
     this.bannersServie.activeDeavctiveWebBanners(this.webImage[id]).subscribe((req) => {
 
     })
   }
-  deactiveBanners(id) {
+  deactiveBanners(id:any) {
     this.webImage[id].status = false;
     this.bannersServie.activeDeavctiveWebBanners(this.webImage[id]).subscribe((req) => {
 

@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-locale:en": "ng build -c en --output-path=dist/en --baseHref /en/",
+    "build-locale:fr": "ng build -c fr --output-path=dist/fr --baseHref /fr/"
   },
   "private": true,
   "dependencies": {
@@ -70,7 +72,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.1",
-    "@angular/cli": "~14.2.1",
+    "@angular/cli": "^14.2.2",
     "@angular/compiler-cli": "~14.2.0",
     "@angular/language-service": "~14.2.0",
     "@types/jasmine": "~3.6.0",
@@ -89,9 +91,8 @@
     "rxjs-tslint": "^0.1.7",
     "swiper": "^6.4.15",
     "ts-node": "~7.0.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.4.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.6.4",
-    "webpack": "^4.41.6"
+    "typescript": "~4.6.4"
   }
 }

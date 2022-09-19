@@ -39,7 +39,7 @@ export class EmiComponent implements OnInit {
     this.val++;
     this.addEmiFields.push({ name: this.val });
   }
-  removeEmiMonths(val) {
+  removeEmiMonths(val:any) {
     this.addEmiFields.splice(val, 1);
   }
   addBankList() {
@@ -52,7 +52,7 @@ export class EmiComponent implements OnInit {
       this.EMI = data;
     });
   }
-  selectBankList(id) {
+  selectBankList(id:any) {
     this.bankid = id;
     this.EMI.forEach(element => {
       if (element.id == id) {
@@ -60,8 +60,8 @@ export class EmiComponent implements OnInit {
       }
     })
   }
-  saveROIntrest(data) {
-    this.addEmiFields.forEach(element => {
+  saveROIntrest(data:any) {
+    this.addEmiFields.forEach((element: { bankid: any; }) => {
       element.bankid = this.bankid
     });
     this.emiService.addEmiOption(this.addEmiFields).subscribe((data: any) => {
@@ -74,7 +74,7 @@ export class EmiComponent implements OnInit {
       this.roi = data;
     });
   }
-  removeEmi(id) {
+  removeEmi(id:any) {
     this.emiService.removeROIList(id).subscribe((req) => {
       this.getROIList();
     })

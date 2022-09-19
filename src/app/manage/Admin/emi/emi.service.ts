@@ -19,13 +19,13 @@ export class EmiService {
   getBankList(): Observable<Emi[]> {
     return this.httpClient.get<any>(ApiService.getBankListURL);
   }
-  addEmiOption(data) {
+  addEmiOption(data:any) {
     return this.httpClient.post<any>(ApiService.saveEmioptionURL, data);
   }
   getRateOfIntrest(): Observable<Emi[]> {
     return this.httpClient.get<any>(ApiService.getROIListURL);
   }
-  removeROIList(id) {
+  removeROIList(id:any) {
     let data = {
       id: id
     };

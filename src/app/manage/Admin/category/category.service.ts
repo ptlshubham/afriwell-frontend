@@ -20,16 +20,16 @@ export class CategoryService {
 
         return this.httpClient.post<any>(ApiService.saveMainURL, admin);
     }
-    GetFilterProduct(data) {
+    GetFilterProduct(data: any) {
         return this.httpClient.post<any>(ApiService.getFilterProductListURL, data);
     }
-    getProductDetailImages(id) {
+    getProductDetailImages(id: any) {
         let data = {
             id: id
         }
         return this.httpClient.post<any>(ApiService.getProductDetailImageURL, data);
     }
-    getMainCat(id): Observable<Category[]> {
+    getMainCat(id: any): Observable<Category[]> {
 
         return this.httpClient.get<any>(ApiService.getMainURL + id);
     }
@@ -46,7 +46,7 @@ export class CategoryService {
     //
     //   return this.httpClient.get<any>(ApiService.getCatURL);
     // }
-    removeMainCatList(id) {
+    removeMainCatList(id: any) {
 
         return this.httpClient.get<any>(ApiService.removeMainCatURL + id);
     }
@@ -62,19 +62,23 @@ export class CategoryService {
 
         return this.httpClient.post<any>(ApiService.saveProductsURL, admin);
     }
-    selectUploadImage(img): Observable<any> {
+    selectUploadImage(img: any): Observable<any> {
 
         return this.httpClient.post<any>(ApiService.uploadMainImageURL, img);
 
     }
-    selectMultiUploadImage(img): Observable<any> {
+    selectMultiUploadImage(img: any): Observable<any> {
         return this.httpClient.post<any>(ApiService.uploadMultiImageURL, img);
     }
     removeOrChanged() {
         return this.httpClient.get<any>(ApiService.removeImageURL);
     }
-    uploadCategoryBannersImage(img): Observable<any> {
+    uploadCategoryBannersImage(img: any): Observable<any> {
         return this.httpClient.post<any>(ApiService.uploadCategoryBannersURL, img);
+    }
+    getProductMasterTag(): Observable<Product[]> {
+
+        return this.httpClient.get<any>(ApiService.getProductMasterTagURL);
     }
 
 

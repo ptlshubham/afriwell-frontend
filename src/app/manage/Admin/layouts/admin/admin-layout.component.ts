@@ -11,14 +11,15 @@ import { filter } from 'rxjs/operators';
 })
 
 export class AdminLayoutComponent implements OnInit {
-    private _router: Subscription;
+    private _router: Subscription = new Subscription;
     // url: string;
-    url: string;
+    url!: string;
     location: Location;
-    private lastPoppedUrl: string;
-    private yScrollStack: number[] = [];
-    @ViewChild('sidebar', { static: false }) sidebar;
-    @ViewChild(NavbarComponent, { static: false }) navbar: NavbarComponent;
+    private lastPoppedUrl!: any;
+    private yScrollStack: any;
+    @ViewChild('sidebar', { static: false }) sidebar: any;
+    @ViewChild(NavbarComponent, { static: false })
+    navbar!: NavbarComponent;
     constructor(private router: Router, location: Location,) {
         this.location = location;
     }
@@ -42,7 +43,7 @@ export class AdminLayoutComponent implements OnInit {
                     window.scrollTo(0, 0);
             }
         });
-        this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+        this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
             elemMainPanel.scrollTop = 0;
             elemSidebar.scrollTop = 0;
         });
@@ -55,7 +56,7 @@ export class AdminLayoutComponent implements OnInit {
         else {
             html.classList.add('perfect-scrollbar-off');
         }
-        this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+        this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
             this.navbar.sidebarClose();
         });
     }

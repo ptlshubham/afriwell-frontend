@@ -2,49 +2,36 @@
     fxLayoutAlign="space-between center">
     <div class="main-menu" fxLayout="row" fxHide fxShow.gt-sm>
         <a [routerLink]="['/home/landing']" routerLinkActive="router-link-active" mat-button class="mat-button">home</a>
-        <a mat-button [matMenuTriggerFor]="shop" class="mat-button" (click)="openMegaMenu()">Products<mat-icon
-                class="caret">arrow_drop_down</mat-icon></a>
-        <mat-menu #shop="matMenu" [overlapTrigger]="false" class="app-dropdown mega-menu">
+
+
+        <a mat-button [matMenuTriggerFor]="Product" class="mat-button">Products<mat-icon class="caret">arrow_drop_down
+            </mat-icon></a>
+        <mat-menu #Product="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="category"
+                *ngFor="let c of categoryList; let i=index">{{c.name}}</button>
+        </mat-menu>
+        <!-- <mat-menu #category="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="sub" *ngFor="let sc of c.SubCategory;let j= index"
+                (click)="openSubToSub(c.id ,sc.id,i,j)">{{sc.name}}</button>
+        </mat-menu>
+        <mat-menu #sub="matMenu">
+            <button mat-menu-item *ngFor="let ss of sc.subtosub">{{ss.name}}</button>
+        </mat-menu> -->
+        <!-- <mat-menu #shop="matMenu" [overlapTrigger]="false" class="app-dropdown mega-menu">
             <div fxLayout="row wrap">
                 <div fxFlex="25" fxLayout="column" class="p-1" *ngFor="let cat of mainCategory;let i=index">
-                    <a mat-menu-item (click)="openSubcategory(cat.id,i)"><b>{{cat.name}} <mat-icon
-                        class="caret">arrow_drop_down</mat-icon></b>
+                    <a mat-menu-item (click)="openSubcategory(cat.id,i)"><b>{{cat.name}} <mat-icon class="caret">
+                                arrow_drop_down</mat-icon></b>
                     </a>
                     <mat-divider *ngIf="cat.isSub"></mat-divider>
                     <div *ngIf="cat.isSub">
-                        <a mat-menu-item *ngFor="let sc of subcate;let j= index"
-                         >{{sc.name}}</a>
+                        <a mat-menu-item *ngFor="let sc of subcate;let j= index">{{sc.name}}</a>
                     </div>
-                    
-                </div>
-                <!-- <div fxFlex="25" class="p-1">
-                    <a mat-menu-item routerLink="/"><b>FEATURES</b></a>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item [routerLink]="['/pages/order-success']">Order Success</button>
-                    <button mat-menu-item>Track Order</button>
-                    <button mat-menu-item>My Orders</button>
-                    <button mat-menu-item>Upload Product</button>
-                </div>
-                <div fxFlex="25" class="p-1">
-                    <a mat-menu-item routerLink="/"><b>GALLERY</b></a>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>Gallery 1</button>
-                    <button mat-menu-item>Gallery 2</button>
-                    <button mat-menu-item>Gallery 3</button>
-                    <button mat-menu-item>Gallery 4</button>
-                </div>
-                <div fxFlex="25" class="p-1">
-                    <a mat-menu-item routerLink="/"><b>PRODUCTS HOVERS</b></a>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>Full Box</button>
-                    <button mat-menu-item>Icons on Image</button>
-                    <button mat-menu-item>Icons on Side</button>
-                    <button mat-menu-item>Quick Shop</button>
-                </div> -->
 
+                </div>
             </div>
 
-        </mat-menu>
+        </mat-menu> -->
         <!-- <a mat-button mat-button [matMenuTriggerFor]="blog" class="mat-button">Blog<mat-icon class="caret">
                 arrow_drop_down</mat-icon></a>
         <mat-menu #blog="matMenu" [overlapTrigger]="false" class="app-dropdown">

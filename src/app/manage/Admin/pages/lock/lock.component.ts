@@ -12,7 +12,7 @@ declare var $: any;
 
 export class LockComponent implements OnInit {
     test: Date = new Date();
-    private toggleButton;
+    private toggleButton:any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
 

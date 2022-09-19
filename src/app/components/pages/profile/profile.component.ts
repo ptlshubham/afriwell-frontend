@@ -4,8 +4,6 @@ import { ProductService } from '../../shared/services/product.service';
 import { Address } from '../../user-models/address.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserRegister } from '../../user-models/userRegister.model';
-import { UserRegisterService } from '../../user-service/register.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +14,7 @@ export class ProfileComponent implements OnInit {
   public userAddress: Address[] = [];
   isAddress: boolean = false;
   isUpdate: boolean = false;
-  selectedAdd: number;
+  selectedAdd: any;
   public addressModel: Address = new Address;
   public userRegisterModel: UserRegister = new UserRegister;
   isOpenInfo: boolean = false;
@@ -31,6 +29,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    debugger
     setTimeout(() => {
       this.contentLoaded = true;
     }, 2000);
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
     this.isUpdate = false;
 
   }
-  editAddress(data) {
+  editAddress(data: any) {
     this.isAddress = true;
     this.addressModel = data;
     this.isUpdate = true;
@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
       this.isUpdate = false;
     })
   }
-  removeUserAddress(id) {
+  removeUserAddress(id: any) {
 
     this.checkoutService.removeAddress(id).subscribe((req) => {
       this.getUserAddress();
@@ -106,6 +106,7 @@ export class ProfileComponent implements OnInit {
   }
   updateUserDetails() {
     this.userRegisterModel.id = localStorage.getItem('userId');
+    debugger
     this.checkoutService.updateUserDetails(this.userRegisterModel).subscribe((res) => {
       this.userRegisterModel = res;
       let message, status;
