@@ -62,6 +62,10 @@ export class CategoryService {
 
         return this.httpClient.post<any>(ApiService.saveProductsURL, admin);
     }
+    saveBulkProduct(admin: any): Observable<any> {
+        debugger
+        return this.httpClient.post<any>(ApiService.saveBulkProductsUploadURL, admin);
+    }
     selectUploadImage(img: any): Observable<any> {
 
         return this.httpClient.post<any>(ApiService.uploadMainImageURL, img);

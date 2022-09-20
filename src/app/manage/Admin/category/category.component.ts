@@ -85,6 +85,7 @@ export class CategoryComponent implements OnInit {
   selctedTaxSlab: any;
   percentage: any;
   maintag: number;
+  openBulkUpload: boolean = false;
   constructor(
     private categoryService: CategoryService,
     private fm: FormBuilder,
@@ -731,6 +732,9 @@ export class CategoryComponent implements OnInit {
 
   }
 
-
+  bulkUpload() {
+    this.openBulkUpload = true;
+    this.isProduct = false;
+  }
 }
 

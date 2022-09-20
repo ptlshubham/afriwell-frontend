@@ -48,6 +48,7 @@
     "datatables.net-select-bs4": "^1.3.3",
     "easy-pie-chart": "^2.1.7",
     "eonasdan-bootstrap-datetimepicker": "^4.15.35",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "fullcalendar": "^3.10.1",
     "jasny-bootstrap": "^4.0.0",
@@ -68,6 +69,7 @@
     "rxjs": "~6.5.4",
     "sweetalert2": "^10.3.5",
     "twitter-bootstrap-wizard": "^1.2.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.11.8"
   },
   "devDependencies": {
