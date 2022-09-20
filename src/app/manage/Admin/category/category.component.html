@@ -504,57 +504,17 @@
                                     id="relatedProduct" name="relatedProduct" [(ngModel)]="ProductModel.relatedProduct">
                                 </bSwitch>
                             </div>
-                            <!-- <label class="col-md-1 col-form-label">Quantity</label>
-                            <div class="col-md-3">
-                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="number" id="quantity" name="quantity"
-                                        [(ngModel)]="ProductModel.quantity" placeholder=" Enter Quantity"
-                                        class="form-control" required value="" pattern="^[0-9]+$" (focus)="focus=true"
-                                        (blur)="focus=false" #quantity="ngModel">
-                                </div>
-                                <div *ngIf="quantity.errors && (quantity.dirty || quantity.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="quantity.errors?.['required']">Quantity is required</div>
-                                    <div [hidden]="!quantity.errors('pattern')">Enter Only Numbers.
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-md-2" style="margin-top: 6px!important;">
-                                <input [style.background]="color1" [(ngModel)]="ProductModel.color"
-                                    [(colorPicker)]="color1" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"
-                                    (colorPickerClose)="onEventLog('colorPickerClose', $event)"
-                                    (cpInputChange)="onEventLog('cpInputChange', $event)"
-                                    (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
-                                    (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event,ind)" />
-                            </div> -->
-                            <!-- <label class="col-md-1 col-form-label">Enter Size</label>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <tag-input [(ngModel)]='tagItems' placeholder="Enter Size" class="form-control"
-                                        theme='regular-theme'>
-                                    </tag-input>
-                                </div>
-                            </div> -->
+                           
                         </div>
                         <br>
+                        <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()" *ngIf="addSelectFields.length ==0"
+                        style="font-size: 35px !important;">Click To Add Product of Diffrent size</i>&nbsp;
                         <div class="row" *ngFor="let i of addSelectFields;let ind=index">
-                            <!-- <div class="dropdown form-group">
-                                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
-                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">{{i.selsize}}
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <div class="dropdown-header">Select Product Size</div>
-                                        <div *ngFor="let cs of clothsize">
-                                            <a class="dropdown-item"
-                                                (click)="submitClothSize(cs.id , ind)">{{cs.size}}</a>
-                                        </div>
-                                    </div>
-                                </div> -->
+                           
                             <div class="col-md-2 offset-md-1">
                                 <label class="col-form-label">Enter Size</label>
                                 <div class="form-group">
-                                    <input type="text" id="selsize" name="selsize" [(ngModel)]="i.selsize"
+                                    <input type="text"  name="selsize{{ind}}" [(ngModel)]="i.selsize"
                                         placeholder="Enter Size" class="form-control" required value="" pattern=""
                                         #selsize="ngModel">
                                 </div>
@@ -563,60 +523,42 @@
                                 <label class="col-form-label">Enter Price</label>
 
                                 <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="number" id="mainPrice" name="mainPrice" [(ngModel)]="i.mainPrice"
+                                    <input type="number" name="mainPrice{{ind}}" [(ngModel)]="i.mainPrice"
                                         placeholder=" Enter Product Price" class="form-control" required value=""
                                         pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
                                         #mainPrice="ngModel" style="text-transform: capitalize;">
                                 </div>
-                                <div *ngIf="mainPrice.errors && (mainPrice.dirty || mainPrice.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="mainPrice.errors?.['required']">Product Price is required</div>
-                                    <div [hidden]="!mainPrice.errors('pattern')">Enter Only Numbers.</div>
-                                </div>
+                               
                             </div>
                             <div class="col-md-2">
                                 <label class="col-form-label">Discount Percentage</label>
                                 <div class="form-group">
-                                    <input type="number" id="discountPerc" name="discountPerc"
+                                    <input type="number"  name="discountPerc{{ind}}"
                                         [(ngModel)]="i.discountPerc" placeholder=" Discount Percentage"
-                                        class="form-control" value="" (input)="onDiscountChange($event.target.value,i)"
-                                        #discountPerc="ngModel">
+                                        class="form-control"  (input)="onDiscountChange($event.target.value,i,ind)"
+                                       >
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <label class="col-form-label">Discounted Product Price</label>
                                 <div class="form-group">
-                                    <input type="number" id="discountPrice" name="discountPrice"
+                                    <input type="number"  name="discountPrice{{ind}}"
                                         [(ngModel)]="i.discountPrice" disabled placeholder=" Discounted Product Price"
-                                        class="form-control" value="" #discountPrice="ngModel">
+                                        class="form-control"  >
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <label class="col-form-label">Quantity</label>
-                                <!-- <div class="form-group">
-                                    <input type="number" class="form-control" id="productQuantity"
-                                        name="productQuantity" [(ngModel)]="i.quantity" placeholder=" Enter Quantity">
-                                </div> -->
+                               
                                 <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="number" id="quantity" name="quantity" [(ngModel)]="i.quantity"
+                                    <input type="number"  name="quantity{{ind}}" [(ngModel)]="i.quantity"
                                         placeholder=" Enter Quantity" class="form-control" required value=""
                                         pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
                                         #quantity="ngModel">
                                 </div>
-                                <div *ngIf="quantity.errors && (quantity.dirty || quantity.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="quantity.errors?.['required']">Quantity is required</div>
-                                    <div [hidden]="!quantity.errors('pattern')">Enter Only Numbers.</div>
-                                </div>
+                              
                             </div>
-                            <!-- <div class="col-md-2" style="margin-top: 6px!important;">
-                                <input [style.background]="color1" [(ngModel)]="i.color" [(colorPicker)]="color1"
-                                    (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"
-                                    (colorPickerClose)="onEventLog('colorPickerClose', $event)"
-                                    (cpInputChange)="onEventLog('cpInputChange', $event)"
-                                    (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
-                                    (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event,ind)" />
-                            </div> -->
+                           
                             <div class="col-md-1">
                                 <label class="col-form-label">&nbsp;</label>
                                 <tr class="form-group">
@@ -631,36 +573,11 @@
                                 </tr>
                             </div>
                         </div>
+                      
                         <br>
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <!-- <div class="col-md-3 ">
-                                <div class="form-group">
-                                    <p class="card-title">Select Product Image</p>
-                                    <span style="color: red;">*Image size must be 800X600</span>
-                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail">
-                                            <img src="./assets/manage/assets/img/image_placeholder.jpg" alt="..."
-                                                *ngIf="!isEdit">
-                                            <img src="http://localhost:8090{{this.ProductModel.productMainImage}}"
-                                                alt="..." *ngIf="isEdit">
-                                        </div>
-                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                        <div>
-                                            <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select Product image</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="file" id="productMainImage" name="productMainImage"
-                                                    [(ngModel)]="ProductModel.productMainImage"
-                                                    (change)="select($event)" />
-                                            </span>
-                                            <a href="javascript:void(0)"
-                                                class="btn btn-danger btn-round fileinput-exists"
-                                                data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                            
                             <div class="col-md-3" *ngIf="!isEdit">
                                 <div class="form-group">
 
@@ -724,9 +641,7 @@
                                 <i class="fa fa-plus-circle" aria-hidden="true"
                                     style="font-size: 50px !important;margin-top:130%!important;"
                                     (click)="addImageUploader()"></i>
-                                <!-- <i class="nc-icon nc-simple-add" style="font-size: 50px !important;
-                                    color: aqua;"></i> -->
-
+                        
                             </div>
                         </div>
                         <br>

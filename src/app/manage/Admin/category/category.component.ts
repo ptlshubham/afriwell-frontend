@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Category } from './category.model';
 import { CategoryService } from './category.service';
 import { ClothSize } from './clothsize.model';
 import { Images } from './images.model';
+import { MoreProduct } from './moreProduct.mode';
 import { Product } from './product.model';
 import { QuantityWithSize } from './quantity.model';
 // ...
@@ -65,7 +66,7 @@ export class CategoryComponent implements OnInit {
   categoryimage: any;
   multi: any = [];
   files: File[] = [];
-  addSelectFields: any = [];
+  addSelectFields: any=[];
   value = 0;
   multiplefile: any = [];
   imageError: string;
@@ -108,7 +109,8 @@ export class CategoryComponent implements OnInit {
       },
     ]
     this.activatedRoutes.queryParams.subscribe((res: any) => {
-      if (res) {
+      
+      if (res.value != undefined ) {
 
         let data = JSON.parse(res.value);
 
@@ -143,25 +145,47 @@ export class CategoryComponent implements OnInit {
       discountPerc: 0,
       discountPrice: 0,
     }];
+    
+    this.mainCateRegForm = new FormGroup({
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")
+      ]),
 
-    this.value++;
-    this.mainCateRegForm = this.fm.group({
-      name: ['', Validators.required, Validators.name, Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")],
     });
-    this.cateRegForm = this.fm.group({
-      subname: ['', Validators.required, Validators.name, Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")],
-    })
-    this.subCateRegForm = this.fm.group({
-      name: ['', Validators.required, Validators.name, Validators.pattern],
+    this.cateRegForm = new FormGroup({
+      subname: new FormControl('', [
+        Validators.required,
+        Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")
+      ]),
     });
-    this.productRegForm = this.fm.group({
-      productName: ['', Validators.required, Validators.name,],
-      brandName: ['', Validators.required, Validators.name,],
-      manufacturerName: ['', Validators.required, Validators.name,],
-      productCode: ['', Validators.required, Validators.name],
-      productPrice: ['', Validators.required, Validators.name],
-      productSRNumber: ['', Validators.required, Validators.name],
-      discountPrice: ['', Validators.required, Validators.name],
+
+    this.subCateRegForm = new FormGroup({
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")
+      ]),
+    });
+    this.productRegForm = new FormGroup({
+      productName: new FormControl('', [
+        Validators.required
+      ]),
+      brandName: new FormControl('', [
+        Validators.required
+      ]),
+      manufacturerName: new FormControl('', [
+        Validators.required
+      ]),
+
+      productPrice: new FormControl('', [
+        Validators.required
+      ]),
+      productSRNumber: new FormControl('', [
+        Validators.required
+      ]),
+      productCode: new FormControl('', [
+        Validators.required
+      ]),
     });
   }
   selectTaxSlab(name: any) {
@@ -170,7 +194,6 @@ export class CategoryComponent implements OnInit {
         this.selctedTaxSlab = element.name;
       }
     })
-
   }
   mainNavCategory() {
     this.isMainShow = true;
@@ -232,9 +255,6 @@ export class CategoryComponent implements OnInit {
       this.getMainCategory(0);
 
     })
-  }
-  onEvent(val: any, ev: any) {
-
   }
   getdetailImages(id: any) {
     this.categoryService.getProductDetailImages(id).subscribe(res => {
@@ -335,9 +355,9 @@ export class CategoryComponent implements OnInit {
     }
 
   }
-  onDiscountChange(searchValue: string, i: any): void {
-    this.percentage = +i.mainPrice - (+i.mainPrice * +i.discountPerc / 100);
-    debugger
+  onDiscountChange(searchValue: string, i: any,ind:any): void {
+    this.addSelectFields[ind].discountPrice = +this.addSelectFields[ind].mainPrice - (+this.addSelectFields[ind].mainPrice * +this.addSelectFields[ind].discountPerc / 100);
+    
   }
   updateMainCate(data) {
     data.bannersimage = this.categoryimage;
@@ -595,17 +615,19 @@ export class CategoryComponent implements OnInit {
     }
   }
   addSelectSize() {
-    this.value++;
-    debugger
-    let data = {
+  
+   
+    this.addSelectFields.push({
       selsize: '',
       quantity: 0,
       color: '#ffffff',
       mainPrice: 0,
       discountPerc: 0,
       discountPrice: 0,
-    }
-    this.addSelectFields.push(data);
+    });
+    this.addSelectFields
+    debugger
+    // this.addSelectFields.push(data);
 
   }
   removeSelectSize(value: any) {
@@ -644,9 +666,11 @@ export class CategoryComponent implements OnInit {
 
 
   submitAddProduct() {
+    this.addSelectFields;
     this.ProductModel.isActive = 0;
     // this.ProductModel.productMainImage = this.image;
     this.ProductModel.selectedSize = this.addSelectFields;
+    debugger
     this.ProductModel.maintag = this.maintag;
     this.ProductModel.taxslab = this.selctedTaxSlab;
     this.ProductModel.multi = this.multi;
