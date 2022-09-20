@@ -8,9 +8,10 @@ import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
 
 @NgModule({
-  declarations: [CategoryComponent],
+  declarations: [CategoryComponent, BulkUploadComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,6 +30,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers: [
     CategoryService
   ],
+  exports:[
+    BulkUploadComponent
+  ]
 
 })
 export class CategoryModule { }

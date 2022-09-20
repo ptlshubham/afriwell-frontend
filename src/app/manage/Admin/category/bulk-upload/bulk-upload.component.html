@@ -1,0 +1,91 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <label class="col-md-1 col-form-label">Select Main Category</label>
+            <div class="col-md-3">
+                <div class="dropdown form-group">
+                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">{{selectedCat}}
+
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-header">Select Main Category</div>
+                        <div *ngFor="let c of category">
+                            <a class="dropdown-item" (click)="cateMain(c.id)">{{c.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label class="col-md-1 col-form-label">Select Category</label>
+            <div class="col-md-3">
+                <div class="dropdown form-group">
+                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">{{selectedSubCat}}
+
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-header">Select Category</div>
+                        <div *ngFor="let ca of subcategory">
+                            <a class="dropdown-item" (click)="cateCategory(ca.id)">{{ca.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label class="col-md-1 col-form-label">Select Sub Category</label>
+            <div class="col-md-3">
+                <div class="dropdown form-group">
+                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">{{selectedSubProCat}}
+
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-header">Select sub Category</div>
+                        <div *ngFor="let s of subprodcat">
+                            <a class="dropdown-item" (click)="subProCategory(s.id)">{{s.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- <div class="col-md-3">
+                <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file"
+                    accept=".xlsx">
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-md" (click)="readAsCSV()">Read as CSV</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-md" (click)="readAsJson()">Read as JSON</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-md" (click)="readAsHTML()">Read as HTML</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-md" (click)="readAsText()">Read as Text</button>
+            </div> -->
+            <div class="col-md-3">
+                <label for="formFile" class="form-label">Product Excel</label>
+                <input class="form-control" type="file" id="formFile" (change)="onFileChange($event)" multiple="false">
+            </div>
+            <!-- <table class="sjs-table">
+                <tbody>
+                    <tr *ngFor="let row of data">
+                        <td *ngFor="let val of row">
+                            {{val}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table> -->
+            <!-- <button (click)="export()">Export!</button> -->
+        </div>
+    </div>
+
+</div>

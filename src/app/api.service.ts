@@ -24,6 +24,7 @@ export class ApiService {
   public static removeMainCatURL: string = ApiService.HOST_URL + '/admin/RemoveMainCategory/';
   public static updateCategoryURL: string = ApiService.HOST_URL + '/admin/UpdateCategory';
   public static saveProductsURL: string = ApiService.HOST_URL + '/admin/SaveAddProducts/';
+  public static saveBulkProductsUploadURL: string = ApiService.HOST_URL + '/admin/SaveBulkProductsUpload';
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
   public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
