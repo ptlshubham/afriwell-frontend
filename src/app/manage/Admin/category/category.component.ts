@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Category } from './category.model';
 import { CategoryService } from './category.service';
 import { ClothSize } from './clothsize.model';
 import { Images } from './images.model';
-import { MoreProduct } from './moreProduct.mode';
 import { Product } from './product.model';
 import { QuantityWithSize } from './quantity.model';
 // ...
@@ -35,6 +34,7 @@ export class CategoryComponent implements OnInit {
   isMainShow: boolean = false;
   isMainCatData: boolean = false;
   isSubCatData: boolean = false;
+  editOpen: boolean = true;
   public CategoryModel: Category = new Category;
   public ProductModel: Product = new Product;
   public ImagesModel: Images = new Images;
@@ -66,7 +66,7 @@ export class CategoryComponent implements OnInit {
   categoryimage: any;
   multi: any = [];
   files: File[] = [];
-  addSelectFields: any=[];
+  addSelectFields: any = [];
   value = 0;
   multiplefile: any = [];
   imageError: string;
@@ -89,9 +89,7 @@ export class CategoryComponent implements OnInit {
   openBulkUpload: boolean = false;
   constructor(
     private categoryService: CategoryService,
-    private fm: FormBuilder,
     private apiservice: ApiService,
-    private router: Router,
     private activatedRoutes: ActivatedRoute
   ) {
     this.mainNavCategory();
@@ -110,13 +108,17 @@ export class CategoryComponent implements OnInit {
       },
     ]
     this.activatedRoutes.queryParams.subscribe((res: any) => {
-      
-      if (res.value != undefined ) {
-
+      if (res.value != undefined) {
+        this.getMainCategory(0).then();
         let data = JSON.parse(res.value);
-
+        debugger
         this.ProductModel = data[0];
-        this.isEdit = true;
+        this.categoryService.getMainCat(0).subscribe(data => {
+          this.category = data;
+          debugger
+        });
+        this.editOpen = false;
+        this.isEdit = false;
         this.isProduct = true;
         this.isShow = false;
         this.isshowsub = false;
@@ -132,7 +134,6 @@ export class CategoryComponent implements OnInit {
           this.subProCategory(this.ProductModel.subCategory);
         }
         this.getClothSize();
-
       }
     });
   }
@@ -146,13 +147,11 @@ export class CategoryComponent implements OnInit {
       discountPerc: 0,
       discountPrice: 0,
     }];
-    
     this.mainCateRegForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
         Validators.pattern("[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]")
       ]),
-
     });
     this.cateRegForm = new FormGroup({
       subname: new FormControl('', [
@@ -268,17 +267,19 @@ export class CategoryComponent implements OnInit {
       this.productMaster = res;
       if (this.productMaster.length == 0) {
         this.maintag = 1;
+        this.ProductModel.maintag = this.maintag;
       }
       else {
         this.maintag = this.productMaster[0].maintag + 1;
+        this.ProductModel.maintag = this.maintag;
       }
     })
   }
 
   async getMainCategory(id: any) {
-
     this.categoryService.getMainCat(id).subscribe(data => {
       this.category = data;
+      debugger
       for (let i = 0; i < this.category.length; i++) {
         this.category[i].index = i + 1;
       }
@@ -356,9 +357,9 @@ export class CategoryComponent implements OnInit {
     }
 
   }
-  onDiscountChange(searchValue: string, i: any,ind:any): void {
+  onDiscountChange(searchValue: string, i: any, ind: any): void {
     this.addSelectFields[ind].discountPrice = +this.addSelectFields[ind].mainPrice - (+this.addSelectFields[ind].mainPrice * +this.addSelectFields[ind].discountPerc / 100);
-    
+
   }
   updateMainCate(data) {
     data.bannersimage = this.categoryimage;
@@ -398,7 +399,7 @@ export class CategoryComponent implements OnInit {
   }
 
   cateMain(id) {
-
+    debugger
     this.ImagesModel.mainCategoryId = id;
     this.ProductModel.mainCategory = id;
     this.category.forEach(element => {
@@ -616,8 +617,8 @@ export class CategoryComponent implements OnInit {
     }
   }
   addSelectSize() {
-  
-   
+
+
     this.addSelectFields.push({
       selsize: '',
       quantity: 0,

@@ -16,34 +16,35 @@ export class InventoryService {
   getProduct(): Observable<Product[]> {
     return this.httpClient.get<any>(ApiService.getAdminProductListURL);
   }
-  getSize(id:any) {
+  getSize(id: any) {
     let data = {
       id: id
     }
     return this.httpClient.post(ApiService.GetSizeListURL, data);
 
   }
-  getFilterProduct(data:any) {
+  getFilterProduct(data: any) {
     return this.httpClient.post<any>(ApiService.GetFilterProductsURL, data)
   }
-  removeProduct(id:any) {
+  removeProduct(id: any) {
 
     return this.httpClient.get<any>(ApiService.removeProductListItemURL + id);
   }
-  addToNewArrivals(data:any) {
+  addToNewArrivals(data: any) {
     return this.httpClient.post(ApiService.addToNewArrivalsURL, data);
 
   }
-  addToBestProduct(data:any) {
+  addToBestProduct(data: any) {
     return this.httpClient.post(ApiService.addToBestProductURL, data);
 
   }
-  addTohotProduct(data:any) {
+  addTohotProduct(data: any) {
     return this.httpClient.post(ApiService.addToHotProductURL, data);
-
   }
-  addToSale(data:any) {
+  addToSale(data: any) {
     return this.httpClient.post(ApiService.addToOnSaleURL, data);
-
+  }
+  restokProductQuantity(data: any) {
+    return this.httpClient.post(ApiService.addRestockQuantityURL, data);
   }
 }
