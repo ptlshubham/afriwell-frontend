@@ -5,6 +5,7 @@ import { Category } from '../category.model';
 import { CategoryService } from '../category.service';
 import { Product } from '../product.model';
 import { ApiService } from 'src/app/api.service';
+import { Router } from '@angular/router';
 type AOA = any[][];
 
 @Component({
@@ -27,7 +28,7 @@ export class BulkUploadComponent implements OnInit {
   selectedSubProCat: any;
   subToSubCat: any;
   selectedMain: any;
-  subCate:any;
+  subCate: any;
 
   public category: Category[] = [];
   public subcategory: Category[] = [];
@@ -45,8 +46,8 @@ export class BulkUploadComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private apiservice: ApiService
-
+    private apiservice: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -225,18 +226,13 @@ export class BulkUploadComponent implements OnInit {
       }
       this.ProductModel.push(data);
     }
-
-    debugger
+  }
+  saveBulkUploadedData() {
     this.categoryService.saveBulkProduct(this.ProductModel).subscribe((response) => {
       this.apiservice.showNotification('top', 'right', 'Product successfully added.', 'success');
-      // this.router.navigate(['/inventory']);
     })
   }
-  // saveUploadedData() {
-  //   this.uploadedData;
-  //    
-  // }
-  export(): void {
+   export(): void {
     /* generate worksheet */
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
 

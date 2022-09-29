@@ -1,5 +1,15 @@
 <div class="card">
     <div class="card-header">
+        <!-- <div class="row">
+            <div class="ml-md-auto">
+                <button type="submit" class="btn btn-danger btn-round" id="product-submit"
+                routerLink="/category"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Back</button>
+            </div>
+        </div> -->
+
+    </div>
+    <div class="card-body">
         <div class="row">
             <label class="col-md-1 col-form-label">Select Main Category</label>
             <div class="col-md-3">
@@ -49,11 +59,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-    </div>
-    <div class="card-body">
         <div class="row">
             <!-- <div class="col-md-3">
                 <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file"
@@ -85,6 +91,16 @@
                 </tbody>
             </table> -->
             <!-- <button (click)="export()">Export!</button> -->
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="ml-md-auto">
+                <button type="submit" class="btn btn-info btn-round" id="product-submit"
+                    (click)="saveBulkUploadedData()" [disabled]="!selectedCat&&!selectedSubCat&&!selectedSubProCat"><i
+                        class="fa fa-paper-plane" aria-hidden="true"></i>
+                    Submit</button>
+            </div>
         </div>
     </div>
 

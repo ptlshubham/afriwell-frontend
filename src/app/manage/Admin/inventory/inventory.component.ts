@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { element } from 'protractor';
 import { ApiService } from 'src/app/api.service';
 import { Category } from '../category/category.model';
 import { CategoryService } from '../category/category.service';
 import { ClothSize } from '../category/clothsize.model';
+import { Images } from '../category/images.model';
 import { Product } from '../category/product.model';
 import { InventoryService } from './inventory.service';
 declare var require: any
@@ -25,16 +25,18 @@ export class InventoryComponent implements OnInit {
   public product: Product[] = [];
   public Chagesproduct: Product[] = [];
   public dataTable: DataTable;
-  public ClothSizeModel: ClothSize = new ClothSize;
-  public clothsize: ClothSize[] = [];
+  // public ClothSizeModel: ClothSize = new ClothSize;
+  // public clothsize: ClothSize[] = [];
 
   selectClothSize: any;
   model: Date;
-  restock: any = {};
+  restock: Product = {};
+  imageProduct: Product = {};
   index: any;
   selectedCheck: boolean = false;
   popularProduct: boolean = true;
-  addSelectFields: any = [];
+  isFileUploader: boolean = false;
+  // addSelectFields: any = [];
   value = 0;
   selectedCat: any;
   selectedSubCat: any;
@@ -42,8 +44,8 @@ export class InventoryComponent implements OnInit {
   maincatid: any;
   subcatid: any;
   subtosubid: any;
-  isdef: boolean = true;
-  isntdef: boolean = false;
+  // isdef: boolean = true;
+  // isntdef: boolean = false;
   selectedCategory: any;
   addnewarrival: boolean = false;
   addbestprdt: boolean = false;
@@ -57,6 +59,16 @@ export class InventoryComponent implements OnInit {
   subToSubCat: any;
   productCategory: any = [];
   productImagesList: any = [];
+
+  addingprdtimg: any = [];
+  val = 0;
+  multiplefile: any = [];
+  imageError: string;
+  isImageSaved: boolean = true;
+  cardImageBase64: string;
+  multi: any = [];
+  public ImagesModel: Images = new Images;
+
   constructor(
 
     private categoryService: CategoryService,
@@ -84,8 +96,8 @@ export class InventoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addSelectFields = [{ name: this.value }];
-    this.value++;
+    // this.addSelectFields = [{ name: this.value }];
+    // this.value++;
     this.model = new Date();
     if ($(".selectpicker").length != 0) {
       $(".selectpicker").selectpicker({
@@ -206,16 +218,16 @@ export class InventoryComponent implements OnInit {
     }
     this.categoryService.GetFilterProduct(data).subscribe(data => {
       this.product = data;
-      debugger
-      for (let i = 0; i < this.product.length; i++) {
-        this.product[i].index = i + 1;
-      }
-      this.product.forEach(element => {
-        this.inventoryService.getSize(element.id).subscribe((data: any) => {
-          element.sizeList = data;
-          debugger
-        })
-      });
+
+      // for (let i = 0; i < this.product.length; i++) {
+      //   this.product[i].index = i + 1;
+      // }
+      // this.product.forEach(element => {
+      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+      //     element.sizeList = data;
+      //      
+      //   })
+      // });
     });
     this.category.forEach(element => {
       if (element.id == id) {
@@ -307,33 +319,33 @@ export class InventoryComponent implements OnInit {
       }
     })
   }
-  addSelectSize(i: any) {
+  // addSelectSize(i: any) {
 
-    let data = {
-      productid: this.restock.id,
-      size: '',
-      quantity: '0',
-      soldquantity: 0
-    }
-    this.addSelectFields = [];
-    if (this.isntdef == false) {
-      this.isntdef = true;
-      this.isdef = false;
-      // this.restock.sizeList=data;
-      this.addSelectFields = this.restock.sizeList;
-      this.addSelectFields.push(data);
-    }
-    else {
-      this.isntdef = false;
-      this.isdef = true;
-      this.addSelectFields = this.restock.sizeList;
-      this.addSelectFields.push(data);
-    }
+  //   let data = {
+  //     productid: this.restock.id,
+  //     size: '',
+  //     quantity: '0',
+  //     soldquantity: 0
+  //   }
+  //   this.addSelectFields = [];
+  //   if (this.isntdef == false) {
+  //     this.isntdef = true;
+  //     this.isdef = false;
+  //     // this.restock.sizeList=data;
+  //     this.addSelectFields = this.restock.sizeList;
+  //     this.addSelectFields.push(data);
+  //   }
+  //   else {
+  //     this.isntdef = false;
+  //     this.isdef = true;
+  //     this.addSelectFields = this.restock.sizeList;
+  //     this.addSelectFields.push(data);
+  //   }
 
-  }
-  removeSelectSize(value: any) {
-    this.addSelectFields.splice(value, 1);
-  }
+  // }
+  // removeSelectSize(value: any) {
+  //   this.addSelectFields.splice(value, 1);
+  // }
   getProductList() {
 
     this.inventoryService.getProduct().subscribe((data: any) => {
@@ -418,37 +430,47 @@ export class InventoryComponent implements OnInit {
 
   }
   restokProduct(data: any, ind: any) {
-
     this.restock = data;
     this.restock.index = ind + 1;
-    this.getClothSize();
-    this.addSelectFields = this.restock.sizeList;
+    // this.getClothSize();
+    // this.addSelectFields = this.restock.sizeList;
 
   }
-  submitClothSize(id: any, index: any) {
-    if (index != undefined) {
+  onDiscountChange(searchValue: string,): void {
+    this.restock.discountPrice = +this.restock.productPrice - (+this.restock.productPrice * +this.restock.productPer / 100);
 
-      this.clothsize.forEach(element => {
-        if (element.id == id) {
-          this.addSelectFields[index].size = element.size;
-          // this.addSelectFields[index].soldquantity =0;
-        }
-      })
-    }
-    else {
-      this.clothsize.forEach(element => {
-        if (element.id == id) {
-          this.selectClothSize = element.size;
-        }
-      })
-    }
   }
-  getClothSize() {
-    this.categoryService.getCloth().subscribe((data: any) => {
-      this.clothsize = data;
+  updateProductStock(data: any) {
+    this.restock = data;
+    this.inventoryService.restokProductQuantity(this.restock).subscribe(data => {
+      this.apiservice.showNotification('top', 'right', 'Product Stock Updated Successfully.', 'success');
+    })
+  }
 
-    });
-  }
+  // submitClothSize(id: any, index: any) {
+  //   if (index != undefined) {
+
+  //     this.clothsize.forEach(element => {
+  //       if (element.id == id) {
+  //         this.addSelectFields[index].size = element.size;
+  //         // this.addSelectFields[index].soldquantity =0;
+  //       }
+  //     })
+  //   }
+  //   else {
+  //     this.clothsize.forEach(element => {
+  //       if (element.id == id) {
+  //         this.selectClothSize = element.size;
+  //       }
+  //     })
+  //   }
+  // }
+  // getClothSize() {
+  //   this.categoryService.getCloth().subscribe((data: any) => {
+  //     this.clothsize = data;
+
+  //   });
+  // }
 
   //filter code from here
   AddToNewArrival() {
@@ -467,6 +489,7 @@ export class InventoryComponent implements OnInit {
 
 
   }
+
   AddToBestProduct() {
     if (this.addbestprdt == false) {
       this.addnewarrival = false;
@@ -513,6 +536,89 @@ export class InventoryComponent implements OnInit {
     }
 
   }
+
+  addImageUploader() {
+    this.val++;
+    this.addingprdtimg.push({ name: this.val });
+  }
+  removeImageUploader(val: any) {
+    this.addingprdtimg.splice(val, 1);
+  }
+  getdetailImages(id: any) {
+    this.categoryService.getProductDetailImages(id).subscribe(res => {
+      this.addingprdtimg = res;
+
+    })
+  }
+  onSelect(event: any) {
+    let max_height;
+    let max_width;
+
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const max_size = 20971520;
+      const allowed_types = ['image/png', 'image/jpeg'];
+      max_height = 800;
+      max_width = 600;
+
+      if (event.target.files[0].size > max_size) {
+        this.imageError =
+          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+
+        return false;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          const img_height = rs.currentTarget['height'];
+          const img_width = rs.currentTarget['width'];
+          console.log(img_height, img_width);
+          if (img_height > max_height && img_width > max_width) {
+            alert("image must be " + max_height + "*" + max_width);
+            this.isImageSaved = false;
+            this.imageError =
+              'Maximum dimentions allowed ' +
+              max_height +
+              '*' +
+              max_width +
+              'px';
+            return false;
+          }
+          else {
+            const imgBase64Path = e.target.result;
+            this.cardImageBase64 = imgBase64Path;
+            const formdata = new FormData();
+            formdata.append('file', file);
+            formdata.append('catid', this.ImagesModel.mainCategoryId);
+            formdata.append('subcatid', this.ImagesModel.categoryId);
+            formdata.append('grandchild', this.ImagesModel.subCategoryId);
+
+
+            this.categoryService.selectMultiUploadImage(formdata).subscribe((response) => {
+              this.multi.push(response);
+            })
+            // this.previewImagePath = imgBase64Path;
+          }
+        };
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+  addProductImages(data) {
+    this.isFileUploader = true;
+    this.imageProduct = data;
+  }
+  saveBulkImages() {
+    this.imageProduct.multi = this.multi;
+    this.categoryService.saveBulkImages(this.imageProduct).subscribe(data => {
+      this.apiservice.showNotification('top', 'right', 'Product Images Added Successfully.', 'success');
+      this.isFileUploader = false;
+    })
+  }
+
   // getMainCategory() {
   //   this.categoryService.getMainCat().subscribe(data => {
   //     this.category = data;

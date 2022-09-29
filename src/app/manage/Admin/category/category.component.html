@@ -257,7 +257,7 @@
                             <h4 class="card-title">Add Products</h4>
                         </div>
                         <div class="ml-md-auto">
-                            <button class="btn btn-success btn-md" (click)="bulkUpload()">
+                            <button class="btn btn-success btn-round" (click)="bulkUpload()">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i> Bulk Upload</button>
 
                         </div>
@@ -322,9 +322,9 @@
                         <div class="row">
                             <label class="col-md-1 col-form-label">Product Tag Number</label>
                             <div class="col-md-3">
-                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="text" class="form-control" id="productName" name="productName"
-                                        value="{{maintag}}" disabled>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="maintag" name="maintag"
+                                        [(ngModel)]="ProductModel.maintag" disabled>
                                 </div>
                             </div>
                             <label class="col-md-1 col-form-label">Product Name</label>
@@ -514,80 +514,82 @@
                                     id="relatedProduct" name="relatedProduct" [(ngModel)]="ProductModel.relatedProduct">
                                 </bSwitch>
                             </div>
-                           
+
                         </div>
                         <br>
-                        <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()" *ngIf="addSelectFields.length ==0"
-                        style="font-size: 35px !important;">Click To Add Product of Diffrent size</i>&nbsp;
-                        <div class="row" *ngFor="let i of addSelectFields;let ind=index">
-                           
-                            <div class="col-md-2 offset-md-1">
-                                <label class="col-form-label">Enter Size</label>
-                                <div class="form-group">
-                                    <input type="text"  name="selsize{{ind}}" [(ngModel)]="i.selsize"
-                                        placeholder="Enter Size" class="form-control" required value="" pattern=""
-                                        #selsize="ngModel">
-                                </div>
-                            </div>
-                            <div class="col-md-2 ">
-                                <label class="col-form-label">Enter Price</label>
+                        <div *ngIf="editOpen">
+                            <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()"
+                                *ngIf="addSelectFields.length ==0" style="font-size: 35px !important;">Click To Add
+                                Product of Diffrent size</i>&nbsp;
+                            <div class="row" *ngFor="let i of addSelectFields;let ind=index">
 
-                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="number" name="mainPrice{{ind}}" [(ngModel)]="i.mainPrice"
-                                        placeholder=" Enter Product Price" class="form-control" required value=""
-                                        pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
-                                        #mainPrice="ngModel" style="text-transform: capitalize;">
+                                <div class="col-md-2 offset-md-1">
+                                    <label class="col-form-label">Enter Size</label>
+                                    <div class="form-group">
+                                        <input type="text" name="selsize{{ind}}" [(ngModel)]="i.selsize"
+                                            placeholder="Enter Size" class="form-control" required value="" pattern=""
+                                            #selsize="ngModel">
+                                    </div>
                                 </div>
-                               
-                            </div>
-                            <div class="col-md-2">
-                                <label class="col-form-label">Discount Percentage</label>
-                                <div class="form-group">
-                                    <input type="number"  name="discountPerc{{ind}}"
-                                        [(ngModel)]="i.discountPerc" placeholder=" Discount Percentage"
-                                        class="form-control"  (input)="onDiscountChange($event.target.value,i,ind)"
-                                       >
+                                <div class="col-md-2 ">
+                                    <label class="col-form-label">Enter Price</label>
+
+                                    <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
+                                        <input type="number" name="mainPrice{{ind}}" [(ngModel)]="i.mainPrice"
+                                            placeholder=" Enter Product Price" class="form-control" required value=""
+                                            pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
+                                            #mainPrice="ngModel" style="text-transform: capitalize;">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-form-label">Discount Percentage</label>
+                                    <div class="form-group">
+                                        <input type="number" name="discountPerc{{ind}}" [(ngModel)]="i.discountPerc"
+                                            placeholder=" Discount Percentage" class="form-control"
+                                            (input)="onDiscountChange($event.target.value,i,ind)">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-form-label">Discounted Product Price</label>
+                                    <div class="form-group">
+                                        <input type="number" name="discountPrice{{ind}}" [(ngModel)]="i.discountPrice"
+                                            disabled placeholder=" Discounted Product Price" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-form-label">Quantity</label>
+
+                                    <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
+                                        <input type="number" name="quantity{{ind}}" [(ngModel)]="i.quantity"
+                                            placeholder=" Enter Quantity" class="form-control" required value=""
+                                            pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
+                                            #quantity="ngModel">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="col-form-label">&nbsp;</label>
+                                    <tr class="form-group">
+                                        <td>
+                                            <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()"
+                                                style="font-size: 35px !important;"></i>&nbsp;
+                                        </td>
+                                        <td *ngIf="ind>0">
+                                            <i class="fa fa-times-circle-o" aria-hidden="true"
+                                                (click)="removeSelectSize(ind)" style="font-size: 35px !important;"></i>
+                                        </td>
+                                    </tr>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <label class="col-form-label">Discounted Product Price</label>
-                                <div class="form-group">
-                                    <input type="number"  name="discountPrice{{ind}}"
-                                        [(ngModel)]="i.discountPrice" disabled placeholder=" Discounted Product Price"
-                                        class="form-control"  >
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="col-form-label">Quantity</label>
-                               
-                                <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
-                                    <input type="number"  name="quantity{{ind}}" [(ngModel)]="i.quantity"
-                                        placeholder=" Enter Quantity" class="form-control" required value=""
-                                        pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
-                                        #quantity="ngModel">
-                                </div>
-                              
-                            </div>
-                           
-                            <div class="col-md-1">
-                                <label class="col-form-label">&nbsp;</label>
-                                <tr class="form-group">
-                                    <td>
-                                        <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSelectSize()"
-                                            style="font-size: 35px !important;"></i>&nbsp;
-                                    </td>
-                                    <td *ngIf="ind>0">
-                                        <i class="fa fa-times-circle-o" aria-hidden="true"
-                                            (click)="removeSelectSize(ind)" style="font-size: 35px !important;"></i>
-                                    </td>
-                                </tr>
-                            </div>
+
                         </div>
-                      
+
                         <br>
                         <div class="row">
                             <div class="col-md-1"></div>
-                            
+
                             <div class="col-md-3" *ngIf="!isEdit">
                                 <div class="form-group">
 
@@ -651,7 +653,7 @@
                                 <i class="fa fa-plus-circle" aria-hidden="true"
                                     style="font-size: 50px !important;margin-top:130%!important;"
                                     (click)="addImageUploader()"></i>
-                        
+
                             </div>
                         </div>
                         <br>
