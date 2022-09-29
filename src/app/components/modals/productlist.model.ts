@@ -25,7 +25,7 @@ export class Productlist {
     productSize?: string;
     itemWeight?: string;
     isActive?: number;
-    productMainImage?: string;
+    productMainImage?: any;
     selectedSize?: any[];
     userid?: any;
     productid?: number;

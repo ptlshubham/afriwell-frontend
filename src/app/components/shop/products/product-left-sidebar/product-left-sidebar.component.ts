@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/components/shared/services/product.servi
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms'
 import { ColorFilter, Productlist } from 'src/app/components/modals/productlist.model';
+import { CategoryService } from 'src/app/manage/Admin/category/category.service';
 
 @Component({
   selector: 'app-product-left-sidebar',
@@ -21,25 +22,44 @@ export class ProductLeftSidebarComponent implements OnInit {
   public colorFilters: ColorFilter[] = [];
 
   public items: Productlist[] = [];
-  public allItems: Productlist[] = [];
-  public products: Productlist[] = [];
+  public allItems: any=[];
+  public products: any=[] ;
   public tags: any[] = [];
   public colors: any[] = [];
+  public category:any;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) {
-    // this.route.params.subscribe(
-    //   (params: Params) => {
-    //     const category = params['category'];
-    //      
-    //     this.productService.getProductByCategory(category).subscribe(products => {
-    //       this.allItems = products;
-    //       this.products = products.slice(0.8);
-    //       this.getTags(products)
-    //       this.getColors(products)
-    //     })
-    //   }
-    // )
-    this.getProducts();
+  constructor(private productService: ProductService, private route: ActivatedRoute,private categoryService:CategoryService) {
+    this.route.params.subscribe(
+      (params: any) => {
+        this.category = params['category'];
+        debugger
+        if(this.category == 'all'){
+          let data = {
+            maincatid:null,
+            catid: this.category,
+            subid: null
+          }
+          this.productService.getProductList().subscribe(products => {
+            
+            this.allItems = products;
+            this.products = products.slice(0.8);
+          })
+        }else{
+          let data = {
+            maincatid:null,
+            catid: this.category,
+            subid: null
+          }
+          this.productService.getProductByCategory(data).subscribe(products => {
+            
+            this.allItems = products;
+            this.products = products.slice(0.8);
+          })
+        }
+      
+      }
+    )
+    // this.getProducts();
   }
 
 
@@ -87,8 +107,8 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.productService.getProductList().subscribe((data: any) => {
       this.allItems = data;
       this.products = data.slice(0.8);
-      this.getTags(data);
-      this.getColors(data);
+      // this.getTags(data);
+      // this.getColors(data);
     });
   }
 

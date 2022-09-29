@@ -1,3 +1,4 @@
+
 <app-breadcrumb [title]="'Shop'" [breadcrumb]="'Shop'"></app-breadcrumb>
 
 <div class="left-sidebar-wrapper sec-padding">
@@ -79,7 +80,7 @@
             </button>
           </div>
         </div>
-        <div [@Animation]="animation" fxLayout="row wrap" class="products-wrapper">
+        <div  fxLayout="row wrap" class="products-wrapper" *ngIf="allItems.length > 0">
           <div
             *ngFor="let products of allItems | orderBy:sortByOrder | paginate: { itemsPerPage: 12, currentPage: page  }"
             fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">

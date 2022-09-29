@@ -13,7 +13,7 @@
                   *ngIf="!contentLoaded"></ngx-skeleton-loader>
 
                 <a *ngIf="contentLoaded" [routerLink]="['/home/product', product.id]"><img
-                  src="http://localhost:8090{{product.productMainImage}}" class="small" alt=""> </a>
+                  src="http://localhost:8090{{product.productMainImage[0].productListImage}}" class="small" alt=""> </a>
               </div>
               <div class="media-body">
                 <ngx-skeleton-loader *ngIf="!contentLoaded" count="3"
@@ -43,7 +43,7 @@
                 <ngx-skeleton-loader [theme]="{ width: '80px', height: '80px' }" animation="progress"
                   *ngIf="!contentLoaded"></ngx-skeleton-loader>
                 <a *ngIf="contentLoaded" [routerLink]="['/home/product', product.id]"><img
-                    src="http://localhost:8090{{product.productMainImage}}" class="small" alt=""> </a>
+                    src="http://localhost:8090{{product.productMainImage[0].productListImage}}" class="small" alt=""> </a>
               </div>
               <div class="media-body">
                 <ngx-skeleton-loader *ngIf="!contentLoaded" count="3"
@@ -73,7 +73,7 @@
                 <ngx-skeleton-loader [theme]="{ width: '80px', height: '80px' }" animation="progress"
                   *ngIf="!contentLoaded"></ngx-skeleton-loader>
                 <a *ngIf="contentLoaded"><img [routerLink]="['/home/product', product.id]"
-                    src="http://localhost:8090{{product.productMainImage}}" class="small" alt=""> </a>
+                    src="http://localhost:8090{{product.productMainImage[0].productListImage}}" class="small" alt=""> </a>
               </div>
               <div class="media-body">
                 <ngx-skeleton-loader *ngIf="!contentLoaded" count="3"

@@ -114,14 +114,11 @@
   <app-header-seven class="home-header-seven " [ngClass]="{'header-decor': url == '/home/home-decor'}"
     *ngIf=" url == '/home/landing'  || router.url.includes('landing') ">
   </app-header-seven>
-  <app-header-six *ngIf="url == '/home/food'  || router.url.includes('food') "></app-header-six>
+ 
   <app-header
-    *ngIf=" url == '/home/one' || url == '/home/three' && url != '/home/two' && url != '/home/four' || router.url.includes('pages')  || router.url.includes('blog') || router.url.includes('product') ">
+    *ngIf=" url == '/home/one' || url == '/home/three' && url != '/home/two' && url != '/home/four' || router.url.includes('pages')  || router.url.includes('blog') || router.url.includes('/products') || router.url.includes('left-sidebar')">
   </app-header>
-  <app-header-two *ngIf="url == '/home/two' || url == '/home/product/food' "></app-header-two>
-  <app-header-three *ngIf="url == '/home/four' || url == '/home/four'"></app-header-three>
-  <app-header-four *ngIf="url == '/home/five' || url == '/home/five'"></app-header-four>
-  <app-header-five *ngIf="url == '/home/industrial' || url == '/home/industrial'"></app-header-five>
+ 
 
   <router-outlet></router-outlet>
 

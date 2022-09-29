@@ -51,6 +51,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductCaurouselBestComponent } from './products/product-caurousel-best/product-caurousel-best.component';
 import { ProductCaurouselSaleComponent } from './products/product-caurousel-sale/product-caurousel-sale.component';
 import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { MatIconModule } from '@angular/material/icon';
     FlexLayoutModule,
     NgxPaginationModule,
     NgxSkeletonLoaderModule,
-    MatIconModule
+    MatIconModule,
+    
 
     // NgxImageZoomModule.forRoot() // <-- Add this line
   ],

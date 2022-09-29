@@ -87,7 +87,7 @@ export class ProductCaurouselBestComponent implements OnInit {
   }
 
   getbestProducts() {
-    this.userHomeService.getNewArrival().subscribe((data: any) => {
+    this.userHomeService.getBestProduct().subscribe((data: any) => {
       this.product = data
     })
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/manage/Admin/category/category.model';
 import { CoreService } from '../../user-service/core.service';
 
@@ -12,11 +13,12 @@ export class MenuComponent implements OnInit {
   public subCategory: Category[] = [];
   subcate: Category[] = [];
   public subtosub: any = [];
-
+  submenu:any=[];
   openSub: boolean = false;
 
   constructor(
-    private coreService: CoreService
+    private coreService: CoreService,
+    private router:Router
   ) {
     this.getCategoryList();
   }
@@ -70,6 +72,13 @@ export class MenuComponent implements OnInit {
       this.categoryList[i].SubCategory[j].isopen = false;
     }
 
+  }
+  OpenCategory(id,ind){
+    this.submenu = this.categoryList[ind].SubCategory;
+    debugger
+  }
+  openSubcat(id){
+    this.router.navigate(['/home/products/'+id+'/left-sidebar']);
   }
 
 }

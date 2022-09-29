@@ -207,15 +207,15 @@ export class InventoryComponent implements OnInit {
     this.categoryService.GetFilterProduct(data).subscribe(data => {
       this.product = data;
       debugger
-      // for (let i = 0; i < this.product.length; i++) {
-      //   this.product[i].index = i + 1;
-      // }
-      // this.product.forEach(element => {
-      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
-      //     element.sizeList = data;
-      //     debugger
-      //   })
-      // });
+      for (let i = 0; i < this.product.length; i++) {
+        this.product[i].index = i + 1;
+      }
+      this.product.forEach(element => {
+        this.inventoryService.getSize(element.id).subscribe((data: any) => {
+          element.sizeList = data;
+          debugger
+        })
+      });
     });
     this.category.forEach(element => {
       if (element.id == id) {
@@ -338,15 +338,11 @@ export class InventoryComponent implements OnInit {
 
     this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
+      debugger
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
       }
-      this.product.forEach(element => {
-        this.categoryService.getProductDetailImages(element.id).subscribe((data: any) => {
-          element.productImages = data;
-          debugger
-        })
-      })
+     
       this.product.forEach(element => {
         this.inventoryService.getSize(element.id).subscribe((data: any) => {
           element.sizeList = data;

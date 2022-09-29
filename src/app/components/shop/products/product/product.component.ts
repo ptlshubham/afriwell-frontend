@@ -15,7 +15,7 @@ import { Productlist } from 'src/app/components/modals/productlist.model';
 export class ProductComponent implements OnInit {
 
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
-  @Input() product: Productlist;
+  @Input() product: any;
 
   constructor(
     private cartService: CartService,
@@ -27,14 +27,15 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+   
   }
 
   // Add to cart
   public addToCart(product: Productlist, quantity: number = 1) {
     this.cartService.addToCart(product, quantity);
-    let currentUrl = this.router.url;
+    debugger
     this.router.navigateByUrl('/widget-two', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
+      this.router.navigate(['/home/products/'+this.product.category+'/left-sidebar']);
     });
   }
 

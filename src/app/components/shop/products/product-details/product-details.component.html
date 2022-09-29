@@ -11,7 +11,7 @@
                         <mat-icon>fullscreen</mat-icon>
                      </button>
                      <!-- <img [src]="product.pictures[bigProductImageIndex].big"/> -->
-                     <img src="http://localhost:8090{{product.productMainImage}}">
+                     <img src="http://localhost:8090{{product.productMainImage[0].productListImage}}">
                   </div>
                   <a (click)="openProductDialog(product, bigProductImageIndex)" style="cursor: pointer;">
                      <mat-icon>zoom_in</mat-icon>

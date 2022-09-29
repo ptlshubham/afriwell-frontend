@@ -38,6 +38,7 @@ export class ProductService {
     return this.httpClient.get<Product[]>('assets/data/products2.json');
   }
 
+
   public banners(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.url);
   }
@@ -138,16 +139,9 @@ export class ProductService {
   }
 
   // Get Products By category
-  public getProductByCategory(category: string): Observable<Product[]> {
-    return this.products().pipe(map(items =>
-      items.filter((item: Product) => {
-        if (category == 'all')
-          return item
-        else
-          return item.category === category;
+  public getProductByCategory(category: any) {
 
-      })
-    ));
+    return this.httpClient.post<any>(ApiService.getFilterProductListURL, category);
   }
 
 }

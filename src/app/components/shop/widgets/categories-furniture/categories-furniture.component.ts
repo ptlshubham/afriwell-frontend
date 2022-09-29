@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
+import { Router } from '@angular/router';
 import { CoreService } from 'src/app/components/user-service/core.service';
 import { Category } from 'src/app/manage/Admin/category/category.model';
 
@@ -13,7 +14,8 @@ export class CategoriesFurnitureComponent implements OnInit {
   public categoryList: Category[] = [];
   public subCategory: Category[] = [];
   constructor(
-    private coreService: CoreService
+    private coreService: CoreService,
+    private router:Router
   ) {
     this.getCategoryList();
   }
@@ -21,21 +23,23 @@ export class CategoriesFurnitureComponent implements OnInit {
   ngOnInit(): void {
   }
   getCategoryList() {
-    debugger
+    
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
       this.categoryList = data;
-      debugger
+      
       this.categoryList.forEach(element => {
         this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
           element.SubCategory = res;
-          debugger
+          
         })
       })
     });
-    this.categoryList;
+  
 
   }
   openSubToSub(mainid, subid, i, j) {
+    
+    this.router.navigate(['/home/products/'+this.categoryList[i].SubCategory[j].id+'/left-sidebar']);
     //   this.categoryList[i].SubCategory[j].subtosub = [];
     //   if (this.openSub == false) {
     //     this.openSub = true;

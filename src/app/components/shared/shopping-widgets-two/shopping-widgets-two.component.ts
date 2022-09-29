@@ -35,20 +35,38 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
 
 
   getCart() {
+    debugger
     this.carttotal = 0;
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
         this.shoppingCartsItems = data;
-        this.getTotal();
+        if(this.shoppingCartsItems.length>0){
+          this.getTotal();
+        }
       });
+    }else{
+      let data =JSON.parse(localStorage.getItem('cartItem')) ;
+      this.shoppingCartsItems = data;
+      if(this.shoppingCartsItems != null){
+        this.getTotal();
+      }
+       
     }
   }
   // Remove cart items
-  public removeItem(id) {
-    this.cartService.removeCart(id).subscribe((data: any) => {
+  public removeItem(id , ind) {
+    if(localStorage.getItem('userId')==undefined){
+      this.shoppingCartsItems.splice(ind,1);
+      localStorage.removeItem('cartItem');
       this.getCart();
       this.getTotal();
-    });
+    }else{
+      this.cartService.removeCart(id).subscribe((data: any) => {
+        this.getCart();
+        this.getTotal();
+      });
+    }
+   
   }
 
   // Increase Product Quantity
@@ -64,23 +82,23 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
 
   }
 
-  // Decrease Product Quantity
-  public decrement(data) {
-    if (data.quantity == 1) {
-      this.totalItem = data.quantity - 1;
-      data.quantity = this.totalItem;
-      this.removeItem(data.id);
-      this.getCart();
-    }
-    else {
-      this.totalItem = data.quantity - 1;
-      data.quantity = this.totalItem;
-      this.cartService.updateCartDetails(data).subscribe((res: any) => {
-        this.getCart();
-        this.getTotal();
-      });
-    }
-  }
+  // // Decrease Product Quantity
+  // public decrement(data) {
+  //   if (data.quantity == 1) {
+  //     this.totalItem = data.quantity - 1;
+  //     data.quantity = this.totalItem;
+  //     this.removeItem(data.id,1);
+  //     this.getCart();
+  //   }
+  //   else {
+  //     this.totalItem = data.quantity - 1;
+  //     data.quantity = this.totalItem;
+  //     this.cartService.updateCartDetails(data).subscribe((res: any) => {
+  //       this.getCart();
+  //       this.getTotal();
+  //     });
+  //   }
+  // }
   // Get Total
   public getTotal() {
     this.qantWith = 0;

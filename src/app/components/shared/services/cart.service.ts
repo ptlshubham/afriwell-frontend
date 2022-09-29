@@ -40,10 +40,12 @@ export class CartService {
 
   // Add to cart
   public addToCart(product: Productlist, quantity: number) {
+    debugger
     let message, status;
     var item: CartItem | boolean = false;
     // If Products exist
     let hasItem = products.find((items, index) => {
+      debugger
       if (items.product.id == product.id) {
         let qty = products[index].quantity + quantity;
         let stock = this.calculateStockCounts(products[index], quantity);
@@ -61,20 +63,30 @@ export class CartService {
     // If Products does not exist (Add New Products)
     if (!hasItem) {
       products = [];
-      item = { product: product, quantity: quantity, userid: localStorage.getItem('userId'), productPrice: 0 };
+      item = { product: product, quantity: quantity, userid: localStorage.getItem('userId'), productPrice: product.productPrice };
       products.push(item);
-      this.saveAddTocart(products);
-      message = 'The product ' + product.productName + ' has been added to cart.';
-      status = 'success';
-      this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+      if(localStorage.getItem('userId') == undefined){
+        localStorage.setItem("cartItem", JSON.stringify(products));
+        let   message = 'The product ' + products[0].productName + ' has been added to cart.';
+        let status = 'success';
+         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+      
+      }else{
+        this.saveAddTocart(products);
+       
+      }
+     
     }
 
-    //  localStorage.setItem("cartItem", JSON.stringify(products));
+    
     return item;
 
   }
   saveAddTocart(data) {
     this.httpClient.post<any>(ApiService.saveAddToCartURL, data).subscribe((res: any) => {
+    let   message = 'The product ' + data[0].productName + ' has been added to cart.';
+     let status = 'success';
+      this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     });
   }
   updateCartDetails(data) {

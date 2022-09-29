@@ -10,7 +10,7 @@
         <button mat-button (click)="accordion.closeAll()">Collapse All</button>
     </div> -->
     <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel style="margin: 0px 0 !important;" *ngFor="let cat of categoryList;let i=index">
+        <mat-expansion-panel style="margin: 0px 0 !important;" *ngFor="let cat of categoryList;let i=index" >
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{cat.name}}
