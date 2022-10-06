@@ -8,6 +8,7 @@ import { FixedPluginModule } from './Admin/shared/fixedplugin/fixedplugin.module
 import { FooterModule } from './Admin/shared/footer/footer.module';
 import { NavbarModule } from './Admin/shared/navbar/navbar.module';
 import { SidebarModule } from './Admin/sidebar/sidebar.module';
+import { ShiprocketModule } from './Admin/shiprocket/shiprocket.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SidebarModule } from './Admin/sidebar/sidebar.module';
     SidebarModule,
     NavbarModule,
     FooterModule,
+    ShiprocketModule,
     FixedPluginModule,
     // ColorPickerModule,
 

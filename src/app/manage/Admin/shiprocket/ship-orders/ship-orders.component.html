@@ -1,0 +1,109 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Orders List</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-shopping">
+                    <thead class="text-primary">
+                        <th class="text-left">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox">
+                                    <span class="form-check-sign"></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th class="text-left">
+                            Order Details
+                        </th>
+                        <th class="text-left">
+                            Customer Details
+                        </th>
+                        <th class="text-left">
+                            Package Details
+                        </th>
+                        <th class="text-left">
+                            Payment
+                        </th>
+                        <th class="text-left">
+                            Pickup Address
+                        </th>
+                        <th class="text-left">
+                            Status
+                        </th>
+                        <th class="text-right">Action</th>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let o of ordersList | paginate: { id:'listing',itemsPerPage: 10, currentPage: mpage,totalItems:totalRec };let i=index">
+                            <td class="text-left">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox">
+                                        <span class="form-check-sign"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="text-left">
+                                {{o.channel_order_id}} <br>
+                                {{o.created_at}}
+
+                            </td>
+                            <td class="text-left">
+                                {{o.customer_name}}<br>
+                                {{o.customer_email}}<br>
+                                {{o.customer_phone}}
+                            </td>
+                            <td class="text-left">
+                                Dead Wt : {{o.shipments.total_dead_weight}}<br>
+                                {{o.dimensions}}<br>
+                                volumetric Wt: {{o.total_volumetric_weight}}
+                            </td>
+                            <td class="text-left">{{o.total}} <br>
+                                <span class="badge badge-success">{{o.payment_method}}</span>
+
+                            </td>
+                            <td class="text-left">{{o.pickup_location}}</td>
+                            <td class="text-left">
+                                <span class="badge badge-success">{{o.status}}</span> <br>
+                                {{o.updated_at | date}}
+                            </td>
+                            <!-- <td class="text-right">{{o.id}}</td> -->
+
+                            <td class="text-right">
+
+                                <button class="btn btn-primary btn-md" style="margin-right: 5px;">
+                                    Ship Now</button>
+                                <button type="button" rel="tooltip"
+                                    class="btn btn-primary dropdown-toggle btn-icon btn-md " id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item">Download Invoice</a>
+                                    <a class="dropdown-item">Edit Order</a>
+                                    <a class="dropdown-item">Verify Order</a>
+                                    <a class="dropdown-item">Call Buyer</a>
+                                    <a class="dropdown-item">Mark as verified</a>
+                                    <a class="dropdown-item">Add Order Tag</a>
+                                    <a class="dropdown-item">Clone Order</a>
+                                    <a class="dropdown-item">Cancel Order</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage= $event"
+                        autoHide="true" responsive="true">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -67,8 +67,21 @@ export const ROUTES: RouteInfo[] = [{
     ]
 },
 {
-    path: '/orders',
+    path: '/shipping',
     title: 'Orders List',
+    type: 'sub',
+    collapse: 'shipping',
+    icontype: 'fa fa-shopping-cart',
+    children: [
+        { path: 'orders', title: 'Recent Orders', ab: 'CO' },
+        // { path: 'pending', title: 'Pending Orders', ab: 'PO' },
+        // { path: 'running', title: 'Shipments Orders', ab: 'SO' },
+        // { path: 'complete', title: 'Complete Orders', ab: 'CO' },
+    ]
+},
+{
+    path: '/orders',
+    title: 'Local Orders',
     type: 'sub',
     collapse: 'orders',
     icontype: 'fa fa-shopping-cart',
@@ -79,6 +92,7 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'complete', title: 'Complete Orders', ab: 'CO' },
     ]
 },
+
 {
     path: '/reviews',
     title: 'Customer Reviews ',
