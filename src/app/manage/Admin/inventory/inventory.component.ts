@@ -347,7 +347,7 @@ export class InventoryComponent implements OnInit {
   //   this.addSelectFields.splice(value, 1);
   // }
   getProductList() {
-
+    this.product=[];
     this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
       debugger
@@ -375,6 +375,14 @@ export class InventoryComponent implements OnInit {
       }
     })
 
+  }
+  removeIndIvidualProduct(pro:any,ind:any){
+    
+        this.inventoryService.removeProduct(pro.id).subscribe((req) => {
+          this.apiservice.showNotification('top', 'right', 'Product Removed Successfully.', 'success');
+          this.getProductList();
+        })
+     
   }
   selectAll(event: any) {
 
@@ -556,10 +564,11 @@ export class InventoryComponent implements OnInit {
 
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
+      debugger
       const max_size = 20971520;
       const allowed_types = ['image/png', 'image/jpeg'];
-      max_height = 800;
-      max_width = 600;
+      max_height = 1280;
+      max_width = 900;
 
       if (event.target.files[0].size > max_size) {
         this.imageError =
@@ -594,9 +603,10 @@ export class InventoryComponent implements OnInit {
             formdata.append('catid', this.ImagesModel.mainCategoryId);
             formdata.append('subcatid', this.ImagesModel.categoryId);
             formdata.append('grandchild', this.ImagesModel.subCategoryId);
-
+            debugger
 
             this.categoryService.selectMultiUploadImage(formdata).subscribe((response) => {
+              debugger
               this.multi.push(response);
             })
             // this.previewImagePath = imgBase64Path;

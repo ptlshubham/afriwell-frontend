@@ -32,11 +32,11 @@
       </div>
       <div class="new-product" fxLayout="column" *ngIf="shoppingCartsItems?.length">
         <div class="item" fxLayout="row" fxLayoutAlign="start start" *ngFor="let item of shoppingCartsItems;let i =index">
-          <div class="product">
-            <img src="http://localhost:8090{{item.product.productMainImage[0].productListImage}}" alt="">
+          <div class="product" *ngIf="item.productMainImage.length >0">
+            <img src="http://localhost:8090{{item.productMainImage[0].productListImage}}" alt="">
           </div>
           <div class="desc">
-            <p>{{item.product.productName}}</p>
+            <p>{{item.productName}}</p>
             <span>{{item.quantity}} X {{item.productPrice}}</span>
           </div>
           <div class="close-circle">

@@ -185,8 +185,14 @@ export class BulkUploadComponent implements OnInit {
   }
   getProductMasterTag() {
     this.categoryService.getProductMasterTag().subscribe(res => {
-      this.productMaster = res;
-      this.maintag = this.productMaster[0].maintag + 1;
+      if(res.length ==0){
+        this.maintag=1;
+      }else{
+        this.productMaster = res;
+        this.maintag = this.productMaster[0].maintag + 1;
+      }
+
+     
     })
   }
   saveUploadedData() {

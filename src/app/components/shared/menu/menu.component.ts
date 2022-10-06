@@ -38,6 +38,7 @@ export class MenuComponent implements OnInit {
   getCategoryList() {
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
       this.categoryList = data;
+      debugger
       this.categoryList.forEach(element => {
         this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
           element.SubCategory = res;

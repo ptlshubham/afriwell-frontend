@@ -46,7 +46,7 @@ export class CartService {
     // If Products exist
     let hasItem = products.find((items, index) => {
       debugger
-      if (items.product.id == product.id) {
+      if (items.product.productId == product.productId) {
         let qty = products[index].quantity + quantity;
         let stock = this.calculateStockCounts(products[index], quantity);
         if (qty != 0 && stock) {
@@ -83,8 +83,9 @@ export class CartService {
 
   }
   saveAddTocart(data) {
+    debugger
     this.httpClient.post<any>(ApiService.saveAddToCartURL, data).subscribe((res: any) => {
-    let   message = 'The product ' + data[0].productName + ' has been added to cart.';
+    let   message = 'The product ' + data[0].product.productName + ' has been added to cart.';
      let status = 'success';
       this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     });

@@ -18,8 +18,8 @@ export class OrderlistComponent implements OnInit {
     this.getOrdersForUser();
   }
   getOrdersForUser() {
-
     this.checkoutService.getUserOrders(this.localUserId).subscribe((data: any) => {
+      debugger
       this.ordersUser = data;
     });
   }

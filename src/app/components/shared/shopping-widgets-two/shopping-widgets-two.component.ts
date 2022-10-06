@@ -39,8 +39,10 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
     this.carttotal = 0;
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
-        this.shoppingCartsItems = data;
-        if(this.shoppingCartsItems.length>0){
+        if(data != 'empty'){
+          this.shoppingCartsItems = data;
+
+          debugger
           this.getTotal();
         }
       });
@@ -103,10 +105,13 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
   public getTotal() {
     this.qantWith = 0;
     this.carttotal = 0;
-    this.shoppingCartsItems.forEach(element => {
-      this.qantWith = element.productPrice * element.quantity;
-      this.carttotal = this.carttotal + this.qantWith;
-    })
+    if(this.shoppingCartsItems.length >0){
+      this.shoppingCartsItems.forEach(element => {
+        this.qantWith = element.productPrice * element.quantity;
+        this.carttotal = this.carttotal + this.qantWith;
+      })
+    }
+   
   }
 
 

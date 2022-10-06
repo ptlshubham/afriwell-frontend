@@ -65,7 +65,7 @@
                             </td>
                             <td>
                                 <div class="img-container">
-                                    <img src="http://localhost:8090{{ro.productMainImage}}" alt="...">
+                                    <img src="http://localhost:8090{{ro.productMainImage[0].productListImage}}" alt="...">
                                 </div>
                             </td>
 
@@ -147,7 +147,7 @@
                                 <label class="col-sm-1 col-form-label">Product Image</label>
                                 <div class="col-sm-3">
                                     <div class="img-container" style="max-width: 30% !important;">
-                                        <img src="http://localhost:8090{{Orderview.productMainImage}}">
+                                        <img src="http://localhost:8090{{Orderview.productMainImage[0].productListImage}}">
                                     </div>
                                 </div>
                                 <label class="col-sm-1 col-form-label">Product Price</label>

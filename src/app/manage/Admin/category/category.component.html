@@ -496,8 +496,8 @@
 
                             <label class="col-md-1 col-form-label">EMI Options</label>
                             <div class="col-md-1">
-                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="emiOptiions"
-                                    name="emiOptiions" [(ngModel)]="ProductModel.emiOptiions">
+                                <bSwitch [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="emiOptions"
+                                    name="emiOptions" [(ngModel)]="ProductModel.emiOptions">
                                 </bSwitch>
                             </div>
 
@@ -615,7 +615,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 " *ngFor="let i of addingprdtimg;let ind=index">
+                            <div class="col-md-3 " *ngFor="let i of ProductModel.productMainImage;let ind=index">
                                 <div class="form-group">
                                     <p class="card-title">Select Product Detail Image</p>
                                     <span style="color: red;">*Image size must be 800X600</span>
@@ -662,9 +662,13 @@
                 <div class="card-footer ">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <button type="submit" class="btn btn-info btn-round" id="product-submit"
+                            <button type="submit" class="btn btn-info btn-round" id="product-submit" *ngIf="!isEdit"
                                 (click)="submitAddProduct()"><i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                Submit</button>
+                                Add Product</button>
+
+                                <button type="submit" class="btn btn-info btn-round" id="product-submit" *ngIf="isEdit"
+                                (click)="submitAddProduct()"><i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                Update Product</button>
                         </div>
                     </div>
                 </div>

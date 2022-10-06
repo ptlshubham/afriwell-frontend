@@ -24,6 +24,7 @@ export class ApiService {
   public static removeMainCatURL: string = ApiService.HOST_URL + '/admin/RemoveMainCategory/';
   public static updateCategoryURL: string = ApiService.HOST_URL + '/admin/UpdateCategory';
   public static saveProductsURL: string = ApiService.HOST_URL + '/admin/SaveAddProducts/';
+  public static updateProductsURL: string = ApiService.HOST_URL + '/admin/updateProducts/';
   public static saveBulkProductsUploadURL: string = ApiService.HOST_URL + '/admin/SaveBulkProductsUpload';
   public static saveBulkProductsImagesURL: string = ApiService.HOST_URL + '/admin/SaveBulkProductsImages';
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
@@ -67,6 +68,7 @@ export class ApiService {
   public static getProductDetailImageURL: string = ApiService.HOST_URL + '/admin/getProductDetailImage';
   public static updateOrdersStatusURL: string = ApiService.HOST_URL + '/admin/UpdateOrdersStatus';
   public static addRestockQuantityURL: string = ApiService.HOST_URL + '/admin/AddRestockQuantity';
+  public static saveShiprocketDataURL: string = ApiService.HOST_URL + '/admin/saveShiprocketData';
 
 
   //USer APIs

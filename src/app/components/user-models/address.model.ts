@@ -8,6 +8,7 @@ export class Address {
         public pincode?: string,
         public locality?: string,
         public address?: string,
+        public country?: string,
         public city?: string,
         public state?: string,
         public landmark?: string,

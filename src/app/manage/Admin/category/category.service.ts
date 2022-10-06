@@ -58,6 +58,9 @@ export class CategoryService {
 
         return this.httpClient.post<any>(ApiService.updateCategoryURL, admin);
     }
+    updateProduct(product:Product){
+        return this.httpClient.post(ApiService.updateProductsURL,product);
+    }
     saveAddProduct(admin: Product): Observable<any> {
 
         return this.httpClient.post<any>(ApiService.saveProductsURL, admin);

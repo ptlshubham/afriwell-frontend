@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShiprocketService } from 'src/app/shiprocket.service';
 import { CategoryService } from '../category/category.service';
 import { CustomerListService } from '../customers/customerlist/customerlist.service';
 import { InventoryService } from '../inventory/inventory.service';
@@ -25,21 +26,21 @@ export class DashboardComponent implements OnInit {
         private customerListService: CustomerListService,
         private categoryService: CategoryService,
         private ordersService: OrdersService,
+        private shipService:ShiprocketService
     ) {
         this.getProductList();
         this.getCustomerList();
         this.getMainCategory();
         this.getRecentOrder();
+        
     }
     public gradientChartOptionsConfiguration: any;
     public gradientChartOptionsConfigurationWithNumbersAndGrid: any;
-
     public activeUsersChartType: any;
     public activeUsersChartData!: Array<any>;
     public activeUsersChartOptions: any;
     public activeUsersChartLabels!: Array<any>;
     public activeUsersChartColors!: Array<any> 
-
     public chartClicked(e: any): void {
         console.log(e);
     }

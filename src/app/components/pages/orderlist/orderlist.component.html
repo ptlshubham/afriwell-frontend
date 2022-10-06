@@ -7,8 +7,8 @@
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="">
 
-            <div class="mainOrder-wrapper pr-15" fxFlex="100" fxFlex.gt-md="20" fxFlex.md="20">
-                <div class="main-order ">
+            <!-- <div class="mainOrder-wrapper pr-15" fxFlex="100" fxFlex.gt-md="20" fxFlex.md="20">
+                <div class="main-order "> -->
                     <!-- <div class="order-box">
                         <div class="title-box">
                             <div>Order Recap </div>
@@ -64,14 +64,14 @@
                         </ul>
 
                     </div> -->
-                </div>
-            </div>
+                <!-- </div>
+            </div> -->
             <div class="billing-details  pl-15" fxFlex="100" fxFlex.gt-md="80" fxFlex.md="80">
 
                 <div class="product-order-details mb-30" fxLayout="column" fxLayout.gt-sm="row"
                     fxLayoutAlign="start center" *ngFor="let item of ordersUser;let i=index">
                     <div class="order-img" fxFlex="25">
-                        <img src="http://localhost:8090{{item.productMainImage}}" alt="" class="img-fluid">
+                        <img src="http://localhost:8090{{item.productMainImage[0].productListImage}}" alt="" class="img-fluid">
                     </div>
                     <div class="order-name " fxFlex="50">
                         <!-- <p class="order-name">Product Name</p> -->

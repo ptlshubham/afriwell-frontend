@@ -38,7 +38,7 @@ export class Productlist {
     isOnSale?: boolean;
     tags?: ProductTags[];
     colors?: ProductColor[];
-
+    productId?:any;
     stock?: any;
     constructor(
         id?: number,

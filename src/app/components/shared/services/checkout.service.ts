@@ -21,7 +21,9 @@ export class CheckoutService {
     saveUserAddress(user: Address): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveUserAddressURL, user);
     }
-
+    saveShiperocketData(data){
+       return this.httpClient.post(ApiService.saveShiprocketDataURL,data);
+    }
     getState(): Observable<any> {
         return this.httpClient.get("./assets/data/state.json");
 

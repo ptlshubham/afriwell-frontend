@@ -90,7 +90,8 @@ export class CategoryComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private apiservice: ApiService,
-    private activatedRoutes: ActivatedRoute
+    private activatedRoutes: ActivatedRoute,
+    private router:Router
   ) {
     this.mainNavCategory();
     this.getMainCategory(0).then();
@@ -104,21 +105,19 @@ export class CategoryComponent implements OnInit {
         name: '8 %'
       },
       {
-        name: '16 %',
+        name: '18 %',
       },
     ]
     this.activatedRoutes.queryParams.subscribe((res: any) => {
       if (res.value != undefined) {
-        this.getMainCategory(0).then();
         let data = JSON.parse(res.value);
-        debugger
         this.ProductModel = data[0];
         this.categoryService.getMainCat(0).subscribe(data => {
           this.category = data;
-          debugger
+          this.cateMain(this.ProductModel.mainCategory);
         });
         this.editOpen = false;
-        this.isEdit = false;
+        this.isEdit = true;
         this.isProduct = true;
         this.isShow = false;
         this.isshowsub = false;
@@ -127,9 +126,10 @@ export class CategoryComponent implements OnInit {
         this.isMainCatData = false;
         this.isSubCatData = false;
         this.addSelectFields = this.ProductModel.sizeList;
-        this.getdetailImages(this.ProductModel.id);
-        this.cateMain(this.ProductModel.mainCategory);
-        this.cateCategory(this.ProductModel.category);
+        this.selectTaxSlab(this.ProductModel.taxslab);
+        // this.getdetailImages(this.ProductModel.id);
+       
+        // this.cateCategory(this.ProductModel.category);
         if (this.ProductModel.subCategory != null || this, this.ProductModel.subCategory != undefined) {
           this.subProCategory(this.ProductModel.subCategory);
         }
@@ -189,9 +189,11 @@ export class CategoryComponent implements OnInit {
     });
   }
   selectTaxSlab(name: any) {
+    debugger
     this.taxSlab.forEach((element: { name: any; }) => {
       if (element.name == name) {
         this.selctedTaxSlab = element.name;
+        this.ProductModel.taxslab = this.selctedTaxSlab
       }
     })
   }
@@ -239,11 +241,9 @@ export class CategoryComponent implements OnInit {
     $('[rel="tooltip"]').tooltip();
   }
   onEventLog(ev: string, color: { color: any; }, i: string | number) {
-
     if (ev == 'colorPickerClose') {
       this.addSelectFields[i].color = color.color;
     }
-
   }
   submitMainCategory() {
     this.CategoryModel.parent = 0;
@@ -279,7 +279,7 @@ export class CategoryComponent implements OnInit {
   async getMainCategory(id: any) {
     this.categoryService.getMainCat(id).subscribe(data => {
       this.category = data;
-      debugger
+       
       for (let i = 0; i < this.category.length; i++) {
         this.category[i].index = i + 1;
       }
@@ -291,11 +291,9 @@ export class CategoryComponent implements OnInit {
     });
   }
   mainCatEdit(data: any) {
-
     this.editMain = data;
   }
   updateCategoryBanners(event: any) {
-
     let max_height;
     let max_width;
     if (event.target.files && event.target.files[0]) {
@@ -308,10 +306,8 @@ export class CategoryComponent implements OnInit {
       if (event.target.files[0].size > max_size) {
         this.imageError =
           'Maximum size allowed is ' + max_size / 1000 + 'Mb';
-
         return false;
       }
-
       // if (!_.includes(allowed_types, event.target.files[0].type)) {
       //     this.imageError = 'Only Images are allowed ( JPG | PNG )';
       //     return false;
@@ -333,33 +329,24 @@ export class CategoryComponent implements OnInit {
               '*' +
               max_width +
               'px';
-
-
             return false;
           } else {
             const imgBase64Path = e.target.result;
             this.cardImageBase64 = imgBase64Path;
-
             const formdata = new FormData();
             formdata.append('file', file);
-
             this.categoryService.uploadCategoryBannersImage(formdata).subscribe((response) => {
               this.categoryimage = response;
               console.log(response);
             })
-
-            // this.previewImagePath = imgBase64Path;
           }
         };
       };
-
       reader.readAsDataURL(event.target.files[0]);
     }
-
   }
   onDiscountChange(searchValue: string, i: any, ind: any): void {
     this.addSelectFields[ind].discountPrice = +this.addSelectFields[ind].mainPrice - (+this.addSelectFields[ind].mainPrice * +this.addSelectFields[ind].discountPerc / 100);
-
   }
   updateMainCate(data) {
     data.bannersimage = this.categoryimage;
@@ -371,7 +358,6 @@ export class CategoryComponent implements OnInit {
   }
 
   mainCatRemove(id: any) {
-
     this.categoryService.removeMainCatList(id).subscribe((req) => {
       this.apiservice.showNotification('top', 'right', 'Main Category removed Successfully.', 'success');
       this.getMainCategory(0);
@@ -380,11 +366,9 @@ export class CategoryComponent implements OnInit {
     })
   }
   editCategory(Data: any) {
-
     this.editCat = Data;
   }
   updatemaincatddl(parent: any, name: any) {
-
     this.editCat.parent = parent;
     this.selectedCat = name;
   }
@@ -394,21 +378,17 @@ export class CategoryComponent implements OnInit {
       console.log(req);
       this.apiservice.showNotification('top', 'right', 'Successfully updated.', 'success');
       this.getSubCategory(this.subToSubCat);
-
     })
   }
-
   cateMain(id) {
-    debugger
     this.ImagesModel.mainCategoryId = id;
     this.ProductModel.mainCategory = id;
+    this.getSubCategory(id);
     this.category.forEach(element => {
       if (element.id == id) {
         this.selectedCat = element.name;
       }
     })
-    this.getSubCategory(id);
-
   }
   submitCategory() {
     this.category.forEach(element => {
@@ -427,9 +407,10 @@ export class CategoryComponent implements OnInit {
   cateCategory(id) {
     this.ProductModel.category = id;
     this.ImagesModel.categoryId = id;
-
     this.selectedSubCatid = id;
+    debugger
     this.subcategory.forEach(element => {
+      debugger
       if (element.id == id) {
         this.selectedSubCat = element.name;
       }
@@ -437,7 +418,6 @@ export class CategoryComponent implements OnInit {
     this.getProductSubCategory(id);
   }
   getSubCategory(id: any) {
-
     this.subToSubCat = id;
     this.categoryService.getMainCat(id).subscribe(data => {
       this.subcategory = data;
@@ -463,7 +443,6 @@ export class CategoryComponent implements OnInit {
     this.isSubCatData = true;
   }
   getProductSubCategory(id) {
-
     this.categoryService.getMainCat(id).subscribe(data => {
       this.subprodcat = data;
       for (let i = 0; i < this.subprodcat.length; i++) {
@@ -491,11 +470,15 @@ export class CategoryComponent implements OnInit {
     this.addingprdtimg.push({ name: this.val });
   }
   removeImageUploader(val: any) {
-    this.addingprdtimg.splice(val, 1);
+    if(this.isEdit){
+      this.ProductModel.productMainImage.splice(val,1)
+    }else{
+      this.addingprdtimg.splice(val, 1);
+    } 
+    
   }
 
   select(event: any) {
-
     let max_height;
     let max_width;
     if (event.target.files && event.target.files[0]) {
@@ -504,11 +487,9 @@ export class CategoryComponent implements OnInit {
       const allowed_types = ['image/png', 'image/jpeg'];
       max_height = 800;
       max_width = 600;
-
       if (event.target.files[0].size > max_size) {
         this.imageError =
           'Maximum size allowed is ' + max_size / 1000 + 'Mb';
-
         return false;
       }
       const reader = new FileReader();
@@ -528,29 +509,20 @@ export class CategoryComponent implements OnInit {
               '*' +
               max_width +
               'px';
-
-
             return false;
           }
           else {
             const imgBase64Path = e.target.result;
             this.cardImageBase64 = imgBase64Path;
-
             const formdata = new FormData();
             formdata.append('file', file);
-
-
             this.categoryService.selectUploadImage(formdata).subscribe((response) => {
               this.image = response;
-              console.log(response);
-
-
             })
             // this.previewImagePath = imgBase64Path;
           }
         };
       };
-
       reader.readAsDataURL(event.target.files[0]);
     }
   }
@@ -617,8 +589,6 @@ export class CategoryComponent implements OnInit {
     }
   }
   addSelectSize() {
-
-
     this.addSelectFields.push({
       selsize: '',
       quantity: 0,
@@ -628,7 +598,7 @@ export class CategoryComponent implements OnInit {
       discountPrice: 0,
     });
     this.addSelectFields
-    debugger
+     
     // this.addSelectFields.push(data);
 
   }
@@ -649,7 +619,6 @@ export class CategoryComponent implements OnInit {
   }
   submitClothSize(id: any, index: string | number | undefined) {
     if (index != undefined) {
-
       this.clothsize.forEach(element => {
         if (element.id == id) {
           this.addSelectFields[index].selsize = element.size;
@@ -665,14 +634,22 @@ export class CategoryComponent implements OnInit {
       })
     }
   }
-
-
   submitAddProduct() {
-    this.addSelectFields;
-    this.ProductModel.isActive = 0;
+    debugger
+    if(this.isEdit){
+      if(this.multi.length>0){
+        this.multi.forEach(element=>{
+          this.ProductModel.productMainImage.push({productid:this.ProductModel.id,mainCategoryId:this.ProductModel.mainCategory,categoryId:this.ProductModel.category,subCategoryId:this.ProductModel.subCategory,productListImage:element})
+        })
+      }
+      this.categoryService.saveAddProduct(this.ProductModel).subscribe((response) => {
+        this.apiservice.showNotification('top', 'right', 'Product Updated successfully.', 'success');
+         this.router.navigate(['/inventory']);
+      })
+    }else{
+      this.ProductModel.isActive = 0;
     // this.ProductModel.productMainImage = this.image;
     this.ProductModel.selectedSize = this.addSelectFields;
-    debugger
     this.ProductModel.maintag = this.maintag;
     this.ProductModel.taxslab = this.selctedTaxSlab;
     this.ProductModel.multi = this.multi;
@@ -683,6 +660,9 @@ export class CategoryComponent implements OnInit {
       this.apiservice.showNotification('top', 'right', 'Product successfully added.', 'success');
       // this.router.navigate(['/inventory']);
     })
+    }
+   
+    
   }
   removeOrChangedImage() {
 

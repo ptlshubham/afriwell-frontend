@@ -197,18 +197,19 @@
                             </td>
                             <td class="text-center">{{i+1}}</td>
                             <td class="text-center">{{p.productName}}</td>
+                         
                             <td class="text-center">
-                                <div class="img-container" *ngIf=" p.productMainImage != undefined">
+                                <div class="img-container" *ngIf=" p.productMainImage.length >0">
                                     <img src="http://localhost:8090{{p.productMainImage[0].productListImage}}">
                                 </div>
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md"
-                                    *ngIf=" p.productImages == undefined" (click)="addProductImages(p)">
+                                    *ngIf=" p.productMainImage.length == 0" (click)="addProductImages(p)">
                                     <i class="fa fa-upload" aria-hidden="true" style="font-size: 24px;"></i>
                                 </button>
 
                             </td>
                             <td class="text-center">
-                                {{p.subCategory}}
+                                {{p.name}}
                             </td>
 
                             <td class="text-center">
@@ -225,7 +226,7 @@
                                     <i class="fa fa-edit" (click)="restokProduct(p,i)"></i>
                                 </button>
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                    (click)="removeProduct(p,i)">
+                                    (click)="  removeIndIvidualProduct(p,i)">
                                     <i class="fa fa-times"></i>
                                 </button>
                                 <!-- <button type="button" title="View" data-toggle="modal" data-target="#noticeModal"

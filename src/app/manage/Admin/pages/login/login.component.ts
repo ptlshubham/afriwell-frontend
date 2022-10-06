@@ -92,18 +92,18 @@ export class LoginComponent implements OnInit {
 
         console.log("......data...." + credentials.email);
         this.loginservice.login(this.loginModel).subscribe(data => {
-
+            debugger
             if (data == 1) {
 
-                // this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
+                 this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
             }
             else if (data == 2) {
 
-                // this.apiservice.showNotification('top', 'right', 'Wrong Password!', 'danger');
+                 this.apiservice.showNotification('top', 'right', 'Wrong Password!', 'danger');
 
             }
             else {
-                // this.apiservice.showNotification('top', 'right', 'Admin successfully Login.', 'success');
+                 this.apiservice.showNotification('top', 'right', 'Admin successfully Login.', 'success');
                 localStorage.setItem('authenticationAdminToken', data[0].token);
                 localStorage.setItem('AdminId', data[0].id);
                 localStorage.setItem('AdminName', data[0].firstname + ' ' + data[0].lastname);

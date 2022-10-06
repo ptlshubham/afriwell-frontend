@@ -38,7 +38,7 @@ export class Product {
         //public selectedSize?: string [],
         // public productListImage?: string,
         public sizeList?: any[],
-        public productMainImage?: string,
+        public productMainImage?: any[],
         public selectedSize?: any[],
         public multi?: any[],
         public selectedCheck?: Boolean,
