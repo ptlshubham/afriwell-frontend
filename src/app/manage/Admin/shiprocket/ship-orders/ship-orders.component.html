@@ -67,28 +67,36 @@
                             </td>
                             <td class="text-left">{{o.pickup_location}}</td>
                             <td class="text-left">
-                                <span class="badge badge-success">{{o.status}}</span> <br>
+                                <span class="badge badge-success" *ngIf="o.status=='NEW'">{{o.status}}</span>
+                                <span class="badge badge-success" *ngIf="o.status=='INVOICED'">{{o.status}}</span>
+                                <span class="badge badge-danger" *ngIf="o.status=='CANCELED'">{{o.status}}</span> <br>
                                 {{o.updated_at | date}}
                             </td>
                             <!-- <td class="text-right">{{o.id}}</td> -->
 
                             <td class="text-right">
 
-                                <button class="btn btn-primary btn-md" style="margin-right: 5px;">
+                                <button class="btn btn-primary btn-md" style="margin-right: 5px;"
+                                    *ngIf="o.status!='CANCELED'">
                                     Ship Now</button>
-                                <button type="button" rel="tooltip"
+                                <button class="btn btn-primary btn-md" style="margin-right: 5px;"
+                                    *ngIf="o.status=='CANCELED'" disabled>
+                                    Clone Order</button>
+                                <button type="button" rel="tooltip" *ngIf="o.status!='CANCELED'"
                                     class="btn btn-primary dropdown-toggle btn-icon btn-md " id="navbarDropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item">Download Invoice</a>
-                                    <a class="dropdown-item">Edit Order</a>
+                                <div class="dropdown-menu dropdown-menu-right" style="background-color:#f4f3ef;"
+                                    aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" (click)="generateInvoice(o.id)">Download Invoice</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#editOrderModal"
+                                        (click)="editOrderDetails(o.id)">Edit Order</a>
                                     <a class="dropdown-item">Verify Order</a>
                                     <a class="dropdown-item">Call Buyer</a>
                                     <a class="dropdown-item">Mark as verified</a>
-                                    <a class="dropdown-item">Add Order Tag</a>
-                                    <a class="dropdown-item">Clone Order</a>
-                                    <a class="dropdown-item">Cancel Order</a>
+                                    <!-- <a class="dropdown-item">Add Order Tag</a> -->
+                                    <!-- <a class="dropdown-item">Clone Order</a> -->
+                                    <a class="dropdown-item" (click)="cancelOrderById(o.id)">Cancel Order</a>
                                 </div>
                             </td>
                         </tr>
@@ -102,6 +110,230 @@
                     <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage= $event"
                         autoHide="true" responsive="true">
                     </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">
+                        Edit Order Details</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction">
+                        <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+                            <div class="row">
+                                <h6>Package & Dimensions</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Dead Weight</label> <small
+                                        class="text-muted">(Kg)</small>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="deadWeight" name="deadWeight"
+                                            placeholder=" Enter Dead Weight " [(ngModel)]="detail.weight" />
+                                        <small class="text-muted">The minimum chargeable weight is 0.50 Kg</small>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h6>Package Dimensions</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genm class="form-check-input" name="gender" type="radio"
+                                                value="male" ngModel />
+                                            Enter Dimensions
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genf class="form-check-input" name="gender" type="radio"
+                                                value="female" ngModel />
+                                            Select Package
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <small class="text-muted">(CM)</small>
+
+                                        <input type="number" class="form-control" id="cm" name="cm" placeholder="CM"
+                                            [(ngModel)]="detail.dimensions" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <small class="text-muted">(CM)</small>
+                                        <input type="number" class="form-control" id="cm1" name="cm1" placeholder="CM"
+                                            [(ngModel)]="detail.dimensions1" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <small class="text-muted">(CM)</small>
+
+                                        <input type="number" class="form-control" id="cm2" name="cm2" placeholder="CM"
+                                            [(ngModel)]="detail.dimensions2" />
+                                    </div>
+                                </div>
+                                <small class="text-muted">Note: Dimensions should be in centimeters only & values should
+                                    be greater than 0.50 cm.</small>
+
+                            </div>
+                            <div class="row">
+                                <h6>Payment Mode</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genm class="form-check-input" name="gender" type="radio"
+                                                value="male" ngModel />
+                                            Prepaid
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genf class="form-check-input" name="gender" type="radio"
+                                                value="female" ngModel />
+                                            COD
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h6>Pickup Address</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pAddress" name="pAddress"
+                                            placeholder="Pickup Address" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h6>Customer Details</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Full Name</label>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            placeholder=" Enter First Name " [(ngModel)]="detail.customer_name" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Mobile Number</label>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="contact" name="contact"
+                                            placeholder="Enter Contact Number" [(ngModel)]="detail.customer_phone" />
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3">
+                                    <label class="col-form-label">Alternate Contact No.</label> <small
+                                        class="text-muted">(Optional)</small>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="acontact" name="acontact"
+                                            placeholder="Enter Alternate Contact Number" [(ngModel)]="detail.customer_name" />
+                                    </div>
+                                </div> -->
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Email</label> <small
+                                        class="text-muted">(Optional)</small>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="Enter Email Address" [(ngModel)]="detail.customer_email" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Company Name</label> <small
+                                        class="text-muted">(Optional)</small>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="cname" name="cname"
+                                            placeholder=" Enter Company Name " [(ngModel)]="detail.company_name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Complete Address</label>
+                                    <div class="form-group">
+                                        <textarea id="address" class="form-control" name="address" rows="2" cols="40"
+                                            placeholder="Enter Address"
+                                            [(ngModel)]="detail.customer_address"> </textarea>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3">
+                                    <label class="col-form-label">Landmark</label> <small
+                                        class="text-muted">(Optional)</small>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="landmark" name="landmark"
+                                            placeholder=" Enter Landmark " [(ngModel)]="detail.customer_name" />
+                                    </div>
+                                </div> -->
+                                <div class="col-md-3">
+                                    <label class="col-form-label">City</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="city" name="city"
+                                            placeholder="Enter City" [(ngModel)]="detail.customer_city" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Pincode</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pincode" name="pincode"
+                                            placeholder="Enter Pincode" [(ngModel)]="detail.customer_pincode" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-form-label">State</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="state" name="state"
+                                            placeholder="Enter State" [(ngModel)]="detail.customer_state" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-form-label">Country</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="country" name="country"
+                                            placeholder="Enter Country" [(ngModel)]="detail.customer_country" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
                 </div>
             </div>
         </div>
