@@ -21,28 +21,54 @@ export class CheckoutComponent implements OnInit {
   public buyProducts: CartItem[] = [];
   public userAddress: Address[] = [];
   public state: any = [];
-public selectedFullAddress:Address = new Address;
+  public selectedFullAddress: Address = new Address;
   carttotal: number = 0;
   totalItem: number = 0;
   qantWith: number = 0;
   amount: number;
   payments: string[] = ['Create an Account?', 'Flat Rate'];
-  paymantWay: string[] = ['Direct Bank Transfer', 'PayPal','paytm' , 'Razorpay', 'cashFree'];
+  paymantWay: string[] = ['Direct Bank Transfer', 'PayPal', 'paytm', 'Razorpay', 'cashFree'];
   contentLoaded = false;
   public addressModel: Address = new Address;
   selectedValue: string;
   isAddress: boolean = false;
-  selectedAdd: number;
+  selectedAdd: any;
+
+  isShow: boolean = false;
+  isLogin: boolean = true;
+  showGift: boolean = false;
+  isAddressOpen: boolean = false;
+  isproductList: boolean = false;
+  ispayment: boolean = false;
+  isProductsum: boolean = false;
+  isShowLogout: boolean = false;
+  isSignup: boolean = false;
+  loginModel: any = [];
+  // selectedAdd: any;
 
   constructor(
     private cartService: CartService,
     public productService: ProductService,
     private checkoutService: CheckoutService,
     private router: Router,
-    private shipService:ShiprocketService,
+    private shipService: ShiprocketService,
     private datePipe: DatePipe
   ) {
     this.getStateWithCity();
+
+    if (localStorage.getItem('UserId') != null || localStorage.getItem('UserId') != undefined) {
+      this.isLogin = true;
+      this.getUserAddress();
+    }
+    else {
+      this.isLogin = false;
+    }
+    this.isLogin = true;
+    // this.isSignup = false;
+    this.isAddress = false;
+    this.isShow=true;
+    this.ispayment=true;
+
   }
 
   ngOnInit() {
@@ -54,11 +80,74 @@ public selectedFullAddress:Address = new Address;
     }, 2000);
     this.getCart();
     this.getUserAddress();
-    if(localStorage.getItem('shipToken') == undefined){
+    if (localStorage.getItem('shipToken') == undefined) {
       this.shipService.loginShiprocket();
     }
-   
+
   }
+  changeLoginUser() {
+    this.isShowLogout = true;
+    this.isAddress = true;
+  }
+  ContinueCheckout() {
+    this.isAddress = false;
+    this.isShowLogout = false;
+    this.isAddress = false;
+  }
+  signupOpen() {
+
+    this.isSignup = true;
+    this.isLogin = true;
+  }
+  continueLoginUser(credentials) {
+    console.log("......data...." + credentials.email);
+    // this.loginService.login(credentials).subscribe(data => {
+
+    //   if (data == 1) {
+    //     this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
+    //   }
+    //   else if (data == 2) {
+
+    //     this.apiservice.showNotification('top', 'right', 'Wrong Password!', 'danger');
+
+    //   }
+    //   else {
+    //     localStorage.setItem('authenticationToken', data[0].token);
+    //     localStorage.setItem('UserId', data[0].id);
+    //     localStorage.setItem('Email', data[0].email);
+    //     localStorage.setItem('Username', data[0].firstname + ' ' + data[0].lastname);
+    //     this.localUserEmail = localStorage.getItem('Email');
+    //     this.localUserName = localStorage.getItem('Username');
+    //     this.isLogin = true;
+    //     this.getUserAddress();
+    //   }
+
+    // });
+  }
+  changeDilveryAddress() {
+    this.isAddress = false;
+    // this.selectedAdd = '';
+  }
+  cancelAddress() {
+    this.isShow = false;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getStateWithCity() {
     this.checkoutService.getState().subscribe((data: any) => {
       this.state = data;
@@ -117,21 +206,21 @@ public selectedFullAddress:Address = new Address;
       this.carttotal = this.carttotal + this.qantWith;
     })
   }
-  deleteAddress(id) {}
+  deleteAddress(id) { }
   placeOrder() {
-    let myDate:any = new Date();
-     myDate = this.datePipe.transform(myDate, 'yyyy-MM-dd');
+    let myDate: any = new Date();
+    myDate = this.datePipe.transform(myDate, 'yyyy-MM-dd');
     this.addressModel.userid = localStorage.getItem('userId');
     this.addressModel.username = localStorage.getItem('userName');
     this.addressModel.productid = this.buyProducts;
     this.addressModel.total = this.carttotal;
     this.addressModel.addressId = this.selectedAdd;
     this.addressModel.status = 'Pending';
-    let orderedItems:any=[]
-    if(this.buyProducts.length>0){
-      this.buyProducts.forEach((element:any)=>{
-        let data={
-          name:element.productName,
+    let orderedItems: any = []
+    if (this.buyProducts.length > 0) {
+      this.buyProducts.forEach((element: any) => {
+        let data = {
+          name: element.productName,
           sku: element.productid,
           units: element.quantity,
           selling_price: element.productPrice,
@@ -139,18 +228,18 @@ public selectedFullAddress:Address = new Address;
           tax: "",
           hsn: ''
         };
-        orderedItems.push(data); 
+        orderedItems.push(data);
       })
     }
-   
+
     this.cartService.saveOrders(this.addressModel).subscribe((data: any) => {
-      
-      
-      if (data.insertId  != null || data.insertId != undefined) {
+
+
+      if (data.insertId != null || data.insertId != undefined) {
         this.removeItem();
         alert("order succesfully");
         this.selectedFullAddress.country = 'India';
-        let dataObj={
+        let dataObj = {
           order_id: data.insertId,
           order_date: myDate,
           pickup_location: "primary",
@@ -164,7 +253,7 @@ public selectedFullAddress:Address = new Address;
           billing_pincode: this.selectedFullAddress.pincode,
           billing_state: this.selectedFullAddress.state,
           billing_country: this.selectedFullAddress.country,
-          billing_email:'pranavgoswami38@gmail.com',
+          billing_email: 'pranavgoswami38@gmail.com',
           billing_phone: this.selectedFullAddress.contactnumber,
           shipping_is_billing: true,
           shipping_customer_name: "",
@@ -189,17 +278,17 @@ public selectedFullAddress:Address = new Address;
           height: 20,
           weight: 2.5
         };
-        this.shipService.placingOrder(dataObj).subscribe((res:any)=>{
+        this.shipService.placingOrder(dataObj).subscribe((res: any) => {
           debugger
-          if(res.order_id != undefined){
+          if (res.order_id != undefined) {
             res.system_order_id = data.insertId;
             debugger
-            this.checkoutService.saveShiperocketData(res).subscribe((resp:any)=>{
+            this.checkoutService.saveShiperocketData(res).subscribe((resp: any) => {
               debugger
               this.router.navigate(['pages/order-success']);
             })
           }
-        }); 
+        });
       }
     })
   }
@@ -213,8 +302,8 @@ public selectedFullAddress:Address = new Address;
       this.getTotal();
     });
   }
-  cancelOrder(){
-    this.shipService.cancelOrder(264317748).subscribe((res:any)=>{
+  cancelOrder() {
+    this.shipService.cancelOrder(264317748).subscribe((res: any) => {
       debugger
     })
   }
