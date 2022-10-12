@@ -56,11 +56,19 @@ export class ShiprocketService {
     cancelOrder(data?){
       let data1:any;
       data1 ={
-        ids:["'"+data+"'"]
+        ids:[data]
       };
       this.httpOption.headers=new HttpHeaders({"Authorization":'Bearer '+localStorage.getItem('shipToken')});
       debugger
       return  this.http.post("https://apiv2.shiprocket.in/v1/external/orders/cancel",data1,this.httpOption);
+    }
+    generateInvoice(idArr){
+      let data={
+        ids:idArr
+      }
+      debugger
+      this.httpOption.headers=new HttpHeaders({"Authorization":'Bearer '+localStorage.getItem('shipToken')});
+      return this.http.post("https://apiv2.shiprocket.in/v1/external/orders/print/invoice",data,this.httpOption)
     }
     //for orders
     getAllOrderfromShiprocket(){
@@ -141,12 +149,6 @@ export class ShiprocketService {
       return this.http.get('https://apiv2.shiprocket.in/v1/external/courier/track'+data,this.httpOption);
     }
 
-    generateInvoice(idArr){
-      let data={
-        ids:idArr
-      }
-      this.httpOption.headers=new HttpHeaders({"Authorization":'Bearer '+localStorage.getItem('shipToken')});
-      this.http.post("https://apiv2.shiprocket.in/v1/external/orders/print/invoice",data,this.httpOption)
-    }
+   
   
 }

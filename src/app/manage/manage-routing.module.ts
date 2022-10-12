@@ -60,6 +60,11 @@ const routes: Routes = [
         loadChildren: () => import('./Admin/banners/banners.module').then(m => m.BannersModule)
         // canActivate: [AuthGuard]
       },
+      {
+        path: 'shipping',
+        loadChildren: () => import('./Admin/shiprocket/shiprocket.module').then(m => m.ShiprocketModule)
+        // canActivate: [AuthGuard]
+      },
     ]
   },
 
