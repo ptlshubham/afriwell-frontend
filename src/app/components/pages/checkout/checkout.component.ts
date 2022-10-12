@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShiprocketService } from 'src/app/shiprocket.service';
 import { DatePipe } from '@angular/common';
+import { UserRegister } from '../../user-models/userRegister.model';
 
 @Component({
   selector: 'app-checkout',
@@ -19,7 +20,7 @@ export class CheckoutComponent implements OnInit {
 
   public cartItems: Observable<CartItem[]> = of([]);
   public buyProducts: CartItem[] = [];
-  public userAddress: Address[] = [];
+  // public userAddress: Address[] = [];
   public state: any = [];
 public selectedFullAddress:Address = new Address;
   carttotal: number = 0;
@@ -31,8 +32,35 @@ public selectedFullAddress:Address = new Address;
   contentLoaded = false;
   public addressModel: Address = new Address;
   selectedValue: string;
+  // isAddress: boolean = false;
+  // selectedAdd: number;
+
+
+  isShow: boolean = false;
+  isLogin: boolean = true;
+  showGift: boolean = false;
   isAddress: boolean = false;
-  selectedAdd: number;
+  isproductList: boolean = false;
+  ispayment: boolean = false;
+  isProductsum: boolean = false;
+  isShowLogout: boolean = false;
+  isSignup: boolean = false;
+  public localUserName = localStorage.getItem('Username')
+  public userAddressModel: Address = new Address;
+  public userAddress: Address[] = [];
+  public loginModel: UserRegister[] = [];
+  public stateList: any
+  public selectedstate: any;
+  public localUserId = localStorage.getItem('UserId');
+  public localUserEmail = localStorage.getItem('Email');
+  selectedAdd: any;
+  getCartList: any = [];
+  GrandTotal: number = 0;
+  public userOrdersModel : CartItem[] = [];
+  public userOrders: CartItem[] = [];
+  public RegisterModel: UserRegister = new UserRegister;
+  public adminRegister: UserRegister[] = [];
+  addressid: any;
 
   constructor(
     private cartService: CartService,
@@ -76,6 +104,18 @@ public selectedFullAddress:Address = new Address;
       this.getUserAddress();
       this.isAddress = false;
     })
+  }
+  addAddress() {
+    this.isShow = true;
+  }
+  cancelAddress() {
+    this.isShow = false;
+  }
+  addGiftCoupon() {
+    this.showGift = true;
+  }
+  cancelGiftCard() {
+    this.showGift = false;
   }
   getCart() {
     this.carttotal = 0;
