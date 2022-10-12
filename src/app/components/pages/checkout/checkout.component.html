@@ -1,181 +1,707 @@
 <app-breadcrumb [title]="'Checkout'" [breadcrumb]="'Checkout'"></app-breadcrumb>
 
-<div class="container">
-  <div class="checkout sec-padding">
-    <div fxLayout="row wrap" class="">
-      <div class="billing-details  pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
-        <div>
-          <div class="row" *ngIf="!isAddress">
-            <div class="col-md-8">
-              <div class="header-title">
-                <h2>Select Address</h2>
-              </div>
-            </div>
-            <div class="ml-md-auto">
-              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="addNewOpen()">Add New
-                Address</button>
-            </div>
-          </div>
-          <div fxLayout="row wrap" class="testimonials-component" *ngIf="!isAddress">
-            <div fxFlex="50" fxFlex.gt-sm="50" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10"
-              *ngFor="let item of userAddress; let i=index" style="padding: 0px 5px 0px 0px !important">
-              <mat-card class="light-block" fxLayout="column" fxLayoutAlign="start">
-                <!-- <mat-icon class="close-icon" color="warn" (click)="deleteAddress(item.id)">close</mat-icon> -->
 
-                <ngx-skeleton-loader *ngIf="!contentLoaded" count="2"
-                  [theme]="{ 'border-radius': '0', width: '250px', height: '15px' }"></ngx-skeleton-loader>
-                <div *ngIf="contentLoaded" class="content text-center">
-                  <mat-radio-group>
-                    <mat-radio-button value="item.id,i" (click)="selectedAddress(i,item.id)">
-                      <p class="name" *ngIf="contentLoaded">{{item.name}}
-                      </p>
-                      <div class="text-muted m-0 text">{{item.address}} , {{item.city}} ,</div>
-                      <div class="text-muted m-0 text"> {{item.state}} , {{item.pincode}} ,</div>
-                      <div class="text-muted m-0 text">{{item.contactnumber}} , {{item.alternativeno}} </div>
-                    </mat-radio-button>
-                  </mat-radio-group>
+
+<div class="checkout-page-area mb-130">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="lezada-form">
+          <!-- Checkout Form s-->
+          <form action="#" class="checkout-form">
+            <div class="row row-40">
+
+              <div class="col-lg-8 mb-20">
+                <div class="myaccount-content mb-10" *ngIf="isLogin && !isSignup">
+                  <h3> <span>1</span> Login <i style="color:#0de70d" class="fa fa-check"
+                      aria-hidden="true"></i> </h3>
+                  <div class="account-details-form" style="margin-top: 0% !important;">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <h4 style="font-weight: 600;">{{localUserName}}</h4>
+                      </div>
+                      <div class="col-md-7">
+                        <span>{{localUserEmail}}</span>
+                      </div>
+                      <div class="col-md-2" *ngIf="!isShowLogout">
+                        <div class="single-input-item">
+                          <button class="check-btn sqr-btn-cancel"
+                            (click)="changeLoginUser()">Change</button>
+                        </div>
+                      </div>
+                      <div class="col-md-6" *ngIf="isShowLogout">
+                        <a (click)="logoutUser()">
+                          <span>Logout & Sign in to another account</span>
+                        </a>
+                      </div>
+                      <div class="col-md-2 offset-md-4" *ngIf="isShowLogout">
+                        <div class="single-input-item">
+                          <button class="check-btn sqr-btn"
+                            (click)="ContinueCheckout()">Continue</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="isShowLogout">
+                      <span
+                        style="font-size: 14px!important;font-weight: 500;color: red;">Please
+                        note that upon clicking
+                        "Logout" you will lose all items in cart and will be redirected to
+                        Lamaya home page.</span>
+                    </div>
+
+                  </div>
                 </div>
-              </mat-card>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="row" *ngIf="isAddress">
-            <div class="col-md-8">
-              <div class="header-title">
-                <h2>Billing Details</h2>
-              </div>
-            </div>
-            <div class="ml-md-auto">
-              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="addNewClose()">Select
-                Address</button>
-            </div>
-          </div>
+                <div class="myaccount-content mb-10" *ngIf="!isLogin && !isSignup">
+                  <h3><span>1</span> Login</h3>
+                  <div class="account-details-form">
+                    <form name="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="email" class="required">Email</label>
+                            <input type="text" id="email" name="email"
+                              class="form-control" [(ngModel)]="loginModel.email" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="password" class="required">Password</label>
+                            <input type="password" id="password" name="password"
+                              class="form-control"
+                              [(ngModel)]="loginModel.password" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="single-input-item">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <span>
+                              By continuing, you agree to Lamya's Terms Of Use and
+                              Privacy Policy.
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="check-btn sqr-btn-cancel"
+                            (click)="signupOpen()">SIGNUP</button>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="check-btn sqr-btn"
+                              (click)="continueLoginUser(loginModel)">Continue</button>
+                          </div>
+                        </div>
 
-          <form fxLayout="row wrap" *ngIf="isAddress">
-            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Name (required)" [(ngModel)]="addressModel.name"
-                  [ngModelOptions]="{standalone: true}" #name="ngModel" ngModel name="name" required>
-                <mat-error *ngIf="name.invalid">Please enter a Name</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Address" #address="ngModel" ngModel [(ngModel)]="addressModel.address"
-                  [ngModelOptions]="{standalone: true}" name="address">
-                <mat-error *ngIf="address.invalid">Please enter a valid Address</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Town/city" #city="ngModel" ngModel [(ngModel)]="addressModel.city"
-                  [ngModelOptions]="{standalone: true}" name="city">
-                <mat-error *ngIf="city.invalid">Please enter a valid City</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="State / Country (required)" #state="ngModel" ngModel name="state" ngModel
-                  [(ngModel)]="addressModel.state" [ngModelOptions]="{standalone: true}" required>
-                <mat-error *ngIf="state.invalid">Please enter a valid State</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Postcode / zip (required)" #pincode="ngModel" ngModel ngModel
-                  [(ngModel)]="addressModel.pincode" [ngModelOptions]="{standalone: true}" name="pincode" required>
-                <mat-error *ngIf="pincode.invalid">Please enter a valid Zipcode</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pr-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Phone (required)" #contactnumber="ngModel" ngModel name="contactnumber"
-                  [(ngModel)]="addressModel.contactnumber" [ngModelOptions]="{standalone: true}" required>
-                <mat-error *ngIf="contactnumber.invalid">Enter Contat Number, Only Numbers Allow.</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pl-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <input matInput placeholder="Enter Alternative Numbeer" #alternativeno="ngModel" name="alternativeno"
-                  [(ngModel)]="addressModel.alternativeno" [ngModelOptions]="{standalone: true}" ngModel>
-              </mat-form-field>
-            </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="myaccount-content mb-10" *ngIf="isSignup">
+                  <h3><span>1</span> Signup</h3>
+                  <div class="account-details-form">
+                    <form name="signupForm" #signupForm="ngForm" >
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="firstname" class="required">First Name</label>
+                            <input type="text" class="form-control" id="firstname"
+                              name="firstname">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="middlename" class="required">Middle Name</label>
+                            <input type="text" id="middlename" name="middlename"
+                              class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="lastname" class="required">Last Name</label>
+                            <input type="text" id="lastname" name="flastname"
+                              class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="contactnumber" class="required">Contact
+                              Number</label>
+                            <input type="text" id="contactnumber" name="contactnumber"
+                              class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="email" class="required">Email</label>
+                            <input type="email" class="form-control" id="email"
+                              name="email" >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="password" class="required">Password</label>
+                            <input type="password" class="form-control" id="password"
+                              name="password">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="single-input-item">
+                        <div class="row">
+                          <div class="col-md-10">
+                            <span>
+                              By continuing, you agree to Lamya's Terms Of Use and
+                              Privacy Policy.
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="check-btn sqr-btn"
+                              (click)="submitUserRegister()">Continue</button>
+                          </div>
+                        </div>
 
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="myaccount-content mb-10" *ngIf="isAddress">
+                  <h3><span>2</span> DILVERY ADDRESS <i style="color:#0de70d" class="fa fa-check"
+                      aria-hidden="true"></i> </h3>
+                  <div class="account-details-form" style="margin-top: 0% !important;">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <h4 style="font-weight: 600;">{{selectedAdd}}</h4>
+                      </div>
+                      <div class="col-md-7">
+                        <!-- <span>{{localUserEmail}}</span> -->
+                      </div>
+                      <div class="col-md-2">
+                        <div class="single-input-item">
+                          <button class="check-btn sqr-btn-cancel"
+                            (click)="changeDilveryAddress()">Change</button>
+                        </div>
+                      </div>
+                    </div>
 
-            <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-5" ngClass.sm="mt-1" ngClass.xs="mt-1">
-              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="saveAddress()">Save
-                Address</button>
-            </div>
-            <!-- <div class="add-info">
-              <h3>Additional information</h3>
-              <p class="text-muted">Order notes (optional)</p>
-  
-            </div>
-            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
-              <mat-form-field class="w-100">
-                <textarea placeholder="Post content" matInput rows="4" ngModel name="content"></textarea>
-              </mat-form-field>
-            </div>
-            <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
-              <button class="btn-project" mat-raised-button color="primary" type="submit">Submit Review</button>
-            </div> -->
-          </form>
-        </div>
-      </div>
-      <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
-        <div class="main-order ">
-          <div class="order-box">
-            <div class="title-box">
-              <div>Product <span class="tl-amount"> Total</span></div>
-            </div>
-            <ul class="price-list" *ngIf='buyProducts.length'>
-              <li *ngFor="let item of buyProducts">
-                {{ item.productName }} × {{ item.quantity }}
-                <span>
-                  {{ item.productPrice * item.quantity | currency:productService?.currency:'symbol' }}
-                </span>
-              </li>
-            </ul>
-            <ul class="quantity" *ngIf='buyProducts.length <= 0'>
-              <li class="empty-checkout"> There are no products in cart </li>
-            </ul>
-            <ul class="total-amount">
-              <li>
-                Subtotal <span class="amount">{{ carttotal}}$</span>
-              </li>
-              <li *ngIf='buyProducts.length'>
-                Shipping
-                <div class="shipping">
-                  <div class="shopping-option">
-                    <mat-radio-group>
-                      <mat-radio-button *ngFor="let payment of payments" [value]="payment">{{payment}}
-                      </mat-radio-button>
-                    </mat-radio-group>
+                  </div>
+                </div>
+                <div class="myaccount-content mb-10" *ngIf="!isAddress">
+                  <h3><span>2</span> DILVERY ADDRESS</h3>
+                  <div class="row" *ngIf="isLogin">
+                    <div class="col-lg-12">
+                      <h4>Choose for delivery.</h4>
+                    </div>
+
+                    <div class="col-md-4" *ngFor="let add of userAddress;let i=index">
+                      <address *ngIf="isLogin">
+                        <div class="custom-control custom-radio">
+                          <input id="add.id" type="radio" class="custom-control-input"
+                            name="add.id" (click)="selectaddress(i,add.id)">
+                          <p style="margin-bottom:0px !important"
+                            class="custom-control-label" for="add.id">
+                            <strong>{{add.name}}</strong>
+                          </p>
+                        </div>
+                        <p style="margin-bottom:0px !important">
+                          {{add.address}},{{add.landmark}},{{add.city}}<br>
+                          {{add.state}},{{add.pincode}}</p>
+                        <p style="margin-bottom:0px !important">Mobile:{{add.contactnumber}}
+                        </p>
+                      </address>
+                      <button class="check-btn sqr-btn-butn" *ngIf="add.selected"
+                        style="margin-bottom: 1rem !important;"
+                        (click)="selectedaddress(add)">Deliver Here</button>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="myaccount-content mb-20" *ngIf="!isAddress && isLogin">
+                  <div class="single-input-item">
+                    <button class="check-btn sqr-btn-butn" (click)="addAddress()"><i
+                        class="fa fa-plus" aria-hidden="true"></i> Add a new
+                      address</button>
+                  </div>
+                </div>
+
+                <div class="myaccount-content mb-20" *ngIf="isShow">
+                  <h3>ADD A NEW ADDRESS</h3>
+                  <div class="account-details-form">
+                    <form name="mainCateRegForm" #mainCateRegForm="ngForm"
+                      (ngSubmit)="onSubmit()">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="name" class="required">Name</label>
+                            <input type="text" id="name" name="name"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.name" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="contact-number" class="required">Contact
+                              Number</label>
+                            <input type="text" id="contactnumber" name="contactnumber"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.contactnumber" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="pincode" class="required">Pincode</label>
+                            <input type="text" id="pincode" name="pincode"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.pincode" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="locality" class="required">Locality</label>
+                            <input type="text" id="locality" name="locality"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.locality" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="address" class="required"
+                              style="text-transform:none">Address (Area and
+                              Street)</label>
+                            <textarea class="form-control-custom" rows="4" id="address"
+                              name="address" class="form-control"
+                              [(ngModel)]="userAddressModel.address"
+                              style="border: 1px solid #e8e8e8 !important;"></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="city"
+                              class="required">City/District/Town</label>
+                            <input type="text" id="city" name="city"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.city" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="dropdown form-group">
+                            <label for="city" class="required">Select State</label>
+                            <button
+                              class="dropdown-toggle btn btn-primary btn-round btn-block"
+                              type="button" name="dropdownMenuButton"
+                              id="dropdownMenuButton" data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">{{selectedstate}}
+
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right"
+                              aria-labelledby="dropdownMenuButton">
+                              <div class="dropdown-header">Select State</div>
+                              <div *ngFor="let s of stateList">
+                                <a class="dropdown-item"
+                                  (click)="selectStateList(s.id)">{{s.name}}</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="landmark" class="required">Landmark
+                              (Optional)</label>
+                            <input type="text" id="landmark" name="landmark"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.landmark" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="single-input-item">
+                            <label for="alternative" class="required">Alternative Phone
+                              (Optional)</label>
+                            <input type="text" id="alternativeno" name="alternativeno"
+                              class="form-control"
+                              [(ngModel)]="userAddressModel.alternativeno" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="single-input-item">
+                        <div class="row">
+                          <div class="col-sm-7"></div>
+                          <div class="col-sm-5" style="margin-left: 64%;">
+                            <button class="check-btn sqr-btn"
+                              (click)="saveAddress()">Save Changes</button>
+
+                            <button class="check-btn sqr-btn-cancel"
+                              (click)="cancelAddress()">Cancel</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="myaccount-content mb-10" *ngIf="isproductList">
+
+                  <h3><span>3</span> ORDER SUMMARY <i style="color:#0de70d" class="fa fa-check"
+                      aria-hidden="true"></i> </h3>
+
+                  <div class="account-details-form" style="margin-top: 0% !important;">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <h4 style="font-weight: 600;">{{getCartList.length}} Items</h4>
+                      </div>
+                      <div class="col-md-7">
+                        <!-- <span>{{localUserEmail}}</span> -->
+                      </div>
+                      <div class="col-md-2">
+                        <div class="single-input-item">
+                          <button class="check-btn sqr-btn-cancel"
+                            (click)="changeOrderUser()">Change</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="myaccount-content mb-20" *ngIf="!isproductList">
+                  <h3> <span>3</span> ORDER SUMMARY </h3>
+                  <div class="cart-table-container" *ngIf="isProductsum">
+                    <table class="cart-table">
+                      <thead>
+                        <tr>
+                          <th class="product-name" colspan="2">Product</th>
+                          <th class="product-name">Size</th>
+                          <th class="product-price">Price</th>
+                          <th class="product-quantity">Quantity</th>
+                          <th class="product-subtotal">Total</th>
+                          <th class="product-remove">&nbsp;</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr *ngFor="let cl of getCartList;let i=index">
+                          <td class="product-thumbnail">
+                            <a (click)="getProductList(cl.productid)">
+                              <img src="http://localhost:8090{{cl.productMainImage}}"
+                                class="img-fluid" alt="">
+                            </a>
+                          </td>
+                          <td class="product-name">
+                            <a
+                              (click)="viewProductDetails(cl.ProductId)">{{cl.productName}}</a>
+                            <span class="product-variation">{{cl.brandName}}</span>
+                            <span class="product-variation">{{cl.descripition}}</span>
+                          </td>
+                          <td class="product-name" style="text-align: left;">
+                            <div class="shop-product__block shop-product__block--size mb-20"
+                              style="text-align: left;">
+                              <div class="shop-product__block__value"
+                                style="text-align: left;">
+                                <div class="shop-product-size-list"
+                                  style="text-align: left;">
+                                  <div *ngFor="let si of cl.sizelist;let j=index">
+                                    <span
+                                      style="font-size: 1rem;text-align: left;"
+                                      [ngClass]="si.sizeclass"
+                                      (click)="selectSize(i,j,si.size)">{{si.size}}</span>
+                                  </div>
+                                  <!-- <span [ngClass]="sizeclassxl"  *ngIf="isxl" (click)="selectSize('xl')">XL</span>
+                                  <span [ngClass]="sizeclassl" *ngIf="isl" (click)="selectSize('l')">L</span>
+                                  <span [ngClass]="sizeclassm" *ngIf="ism" (click)="selectSize('m')">M</span>
+                                  <span [ngClass]="sizeclasss" *ngIf="iss" (click)="selectSize('s')">S</span>
+                                  <span [ngClass]="sizeclassxs" *ngIf="isxs" (click)="selectSize('xs')">XS</span> -->
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="product-price"><span
+                              class="price">{{cl.productPrice}}</span></td>
+
+                          <td class="product-quantity">
+                            <div class="pro-qty d-inline-block mx-0">
+
+                              <i class="fa fa-minus" aria-hidden="true"
+                                (click)="decrementQty(i)"></i>
+                              &nbsp; &nbsp; {{ cl.quantity }} &nbsp; &nbsp;
+                              <i class="fa fa-plus" aria-hidden="true"
+                                (click)="incrementQty(i)"></i>
+
+                            </div>
+                          </td>
+                          <td class="total-price">
+                            <span class="price">₹ {{cl.total}}</span>
+                          </td>
+
+                          <td class="product-remove">
+                            <a (click)="removeCartItem(i,cl.id)">
+                              <i class="ion-android-close"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
 
                 </div>
-              </li>
-            </ul>
-            <ul class="total">
-              <li>Total <span class="count">{{carttotal}}$</span></li>
-            </ul>
-            <div class="paymentFinal">
-              <mat-radio-group>
-                <mat-radio-button fxLayout="column" *ngFor="let payment of paymantWay" [value]="payment">{{payment}}
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
-            <div class="order">
-              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="placeOrder()">PLACE
-                ORDER</button>
+                <div class="myaccount-content mb-20" *ngIf="!isproductList && isProductsum">
+                  <div class="single-input-item">
+                    <div class="row">
+                      <div class="col-sm-10">
+                        <P>Order confirmation email will be sent to
+                          <strong>ptlshubham@gmail.com</strong>
+                        </P>
+                      </div>
+                      <div class="col-sm-2">
+                        <button class="check-btn sqr-btn-butn"
+                          (click)="showingListProduct()">CONTINUE</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="myaccount-content mb-10">
+                  <h3><span>4</span> PAYMENT OPTIONS</h3>
+                  <div *ngIf="ispayment">
+                    <div class="myaccount-content">
+                      <div class="form-check-radio">
+                        <label class="form-check-label" style="font-size: 15px !important;">
+                          <input class="form-check-input" type="radio"
+                            name="exampleRadioz" id="exampleRadios11" value="option1">
+                          <img src="assets/images/upi-icon.svg" alt="Bhim SVG"
+                            style="height:30px !important;width:30px !important;" /> UPI
+                          <span class="form-check-sign"></span>
+                        </label>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3 offset-md-1">
+                          <h4>Choose an option</h4>
+                          <div class="form-check-radio">
+                            <label class="form-check-label"
+                              style="font-size: 15px !important;">
+                              <input class="form-check-input" type="radio"
+                                name="exampleRadioz" id="exampleRadios11"
+                                value="option1">Phone Pe
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                          <div class="form-check-radio">
+                            <label class="form-check-label"
+                              style="font-size: 15px !important;">
+                              <input class="form-check-input" type="radio"
+                                name="exampleRadioz" id="exampleRadios11"
+                                value="option1">Your UPI ID
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
 
-                <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="cancelOrder()">cancel order</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="myaccount-content">
+                      <div class="form-check-radio">
+                        <label class="form-check-label" style="font-size: 15px !important;">
+                          <input class="form-check-input" type="radio"
+                            name="exampleRadioz" id="exampleRadios11" value="option1">
+                          <img src="assets/images/iconfinder_paytm_1220356.svg"
+                            alt="Paytm SVG"
+                            style="height:30px !important;width:30px !important;" />
+                          Wallets
+                          <span class="form-check-sign"></span>
+                        </label>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3 offset-md-1">
+                          <div class="form-check-radio">
+                            <label class="form-check-label"
+                              style="font-size: 15px !important;">
+                              <input class="form-check-input" type="radio"
+                                name="exampleRadioz" id="exampleRadios11"
+                                value="option1">Paytm
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="myaccount-content">
+                      <div class="form-check-radio">
+                        <label class="form-check-label" style="font-size: 15px !important;">
+                          <input class="form-check-input" type="radio"
+                            name="exampleRadioz" id="exampleRadios11"
+                            value="option1">Credit / Debit / ATM Card
+                          <span class="form-check-sign"></span>
+                        </label>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8 offset-md-1">
+                          <div class="single-input-item">
+                            <input type="text" id="number" name="number"
+                              placeholder="Enter Card Number" class="form-control"
+                              style="border: 1px solid;" />
+                          </div>
+                        </div>
+                        <div class="col-md-8 offset-md-1">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <div class="btn-group bootstrap-select w-100">
+                                <select class="selectpicker w-100" data-size="8"
+                                  data-style="btn btn-primary btn-round"
+                                  title="MM">
+                                  <option disabled selected>MM</option>
+                                  <option value="2">1</option>
+                                  <option value="3">2</option>
+                                  <option value="4">3</option>
+                                  <option value="5">4</option>
+                                  <option value="6">5</option>
+                                  <option value="7">6</option>
+                                  <option value="8">7</option>
+                                  <option value="9">8</option>
+                                  <option value="10">9</option>
+                                  <option value="11">10</option>
+                                  <option value="12">11</option>
+                                  <option value="13">12</option>
+
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="btn-group bootstrap-select w-100">
+                                <select class="selectpicker w-100" data-size="8"
+                                  data-style="btn btn-primary btn-round"
+                                  title="YY">
+                                  <option disabled selected>YY</option>
+                                  <option value="2">21</option>
+                                  <option value="3">22</option>
+                                  <option value="4">23</option>
+                                  <option value="5">24</option>
+                                  <option value="6">25</option>
+                                  <option value="7">26</option>
+                                  <option value="8">27</option>
+                                  <option value="9">28</option>
+                                  <option value="10">29</option>
+                                  <option value="11">30</option>
+                                  <option value="12">31</option>
+                                  <option value="13">32</option>
+                                  <option value="14">33</option>
+                                  <option value="15">34</option>
+                                  <option value="16">35</option>
+                                  <option value="17">36</option>
+                                  <option value="18">37</option>
+                                  <option value="19">38</option>
+                                  <option value="20">39</option>
+                                  <option value="21">40</option>
+                                  <option value="22">41</option>
+                                  <option value="23">42</option>
+                                  <option value="24">43</option>
+                                  <option value="25">44</option>
+                                  <option value="26">45</option>
+                                  <option value="27">46</option>
+                                  <option value="28">47</option>
+                                  <option value="29">48</option>
+                                  <option value="30">49</option>
+                                  <option value="31">50</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="single-input-item">
+                                <input type="text" id="number" name="number"
+                                  placeholder="CVV" class="form-control"
+                                  style="border: 1px solid;margin-top: 12px !important;" />
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-3">
+                          <button class="check-btn sqr-btn-butn"
+                            style="margin-top: 5px;">PAY
+                            $</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="myaccount-content mb-20" *ngIf="!showGift">
+                  <div class="single-input-item">
+                    <button class="check-btn sqr-btn-butn" (click)="addGiftCoupon()"><i
+                        class="fa fa-plus" aria-hidden="true"></i> Add Gift Card</button>
+                  </div>
+                </div>
+                <div class="myaccount-content mb-20" *ngIf="showGift">
+                  <div class="single-input-item">
+                    <h3>ADD GIFT CARD</h3>
+                    <div class="account-details-form">
+                      <form action="#">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="single-input-item">
+                              <label for="landmark" class="required">Voucher Number
+                                (Optional)</label>
+                              <input type="text" id="landmark" />
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="single-input-item">
+                              <label for="alternative" class="required">Vochuer Pin
+                                (Optional)</label>
+                              <input type="text" id="alternative" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="single-input-item">
+                          <div class="row">
+                            <div class="col-sm-8"></div>
+                            <div class="col-sm-4" style="margin-left:72%;">
+                              <button class="check-btn sqr-btn ">APPLY</button>
+
+                              <button class="check-btn sqr-btn-cancel"
+                                (click)="cancelGiftCard()">CANCEL</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="row">
+
+                  <!-- Cart Total -->
+                  <div class="col-12 mb-60">
+
+                    <h4 class="checkout-title">Cart Total</h4>
+
+                    <div class="checkout-cart-total">
+
+                      <h4>Product <span>Total</span></h4>
+
+                      <ul *ngFor="let cl of getCartList;let i=index">
+                        <li>{{cl.productName}} X {{cl.quantity}} <span>₹ {{cl.productPrice *
+                            cl.quantity}} </span></li>
+                        <!-- <li>Auctor gravida pellentesque X 02 <span>$50.00</span></li>
+                        <li>Condimentum posuere consectetur X 01 <span>$29.00</span></li>
+                        <li>Habitasse dictumst elementum X 01 <span>$10.00</span></li> -->
+                      </ul>
+
+                      <p>Sub Total <span> ₹ {{GrandTotal}}</span></p>
+                      <p>Shipping Fee <span>₹ 80</span></p>
+
+                      <h4>Grand Total <span>₹{{GrandTotal +80}}</span></h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
             </div>
-          </div>
+          </form>
         </div>
       </div>
-
     </div>
   </div>
 </div>
