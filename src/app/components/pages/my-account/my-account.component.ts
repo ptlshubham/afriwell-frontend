@@ -51,6 +51,7 @@ export class MyAccountComponent implements OnInit {
         status = 'danger';
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
       }
+      localStorage.setItem('Email', data[0].email);
       localStorage.setItem('userId', data[0].id);
       localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
       this.reloadCurrentRoute();

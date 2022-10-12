@@ -3,39 +3,55 @@
 <div class="container">
   <div class="checkout sec-padding">
     <div fxLayout="row wrap" class="">
+
+
       <div class="billing-details  pr-15" fxFlex="100" fxFlex.gt-md="65" fxFlex.md="65">
+      
+
+
+
+
         <!-- Login Portion With Login Successfully -->
         <div class="myaccount-content mb-10" *ngIf="isLogin && !isSignup">
           <h3> <span>1</span> Login <i style="color:#0de70d" class="fa fa-check" aria-hidden="true"></i> </h3>
           <div class="account-details-form" style="margin-top: 0% !important;">
             <div class="row">
-              <div class="col-md-3">
-                <h4 style="font-weight: 600;">{{localUserName}}</h4>
+              <div class="col-md-4">
+                <h5 style="font-weight: 600;">{{localUserName}}</h5>
               </div>
-              <div class="col-md-7">
-                <span>{{localUserEmail}}</span>
+              <div class="col-md-6">
+                <span style="font-size: 16px!important;">{{localUserEmail}}</span>
               </div>
               <div class="col-md-2" *ngIf="!isShowLogout">
-                <div class="single-input-item">
+                <!-- <div class="single-input-item">
                   <button class="check-btn sqr-btn-cancel" (click)="changeLoginUser()">Change</button>
+                </div> -->
+                <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                  <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="changeLoginUser()">Change
+                    </button>
                 </div>
               </div>
               <div class="col-md-6" *ngIf="isShowLogout">
                 <a (click)="logoutUser()">
-                  <span>Logout & Sign in to another account</span>
+                  <span style="font-size: 16px!important;font-weight: bold;color: rgb(7, 85, 240);">
+                  Logout & Sign in to another account
+                  </span>
+
                 </a>
               </div>
-              <div class="col-md-2 offset-md-4" *ngIf="isShowLogout">
+              <div class="col-md-2 offset-md-1" *ngIf="isShowLogout">
                 <div class="single-input-item">
-                  <button class="check-btn sqr-btn" (click)="ContinueCheckout()">Continue</button>
+                  <!-- <button class="check-btn sqr-btn" >Continue Checkout</button> -->
+                  <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="ContinueCheckout()">Continue Checkout
+                  </button>
                 </div>
               </div>
             </div>
             <div class="row" *ngIf="isShowLogout">
-              <span style="font-size: 14px!important;font-weight: 500;color: red;">Please
+              <span style="font-size: 12px!important;font-weight: 500;color: red;">Please
                 note that upon clicking
                 "Logout" you will lose all items in cart and will be redirected to
-                Lamaya home page.</span>
+                 home page.</span>
             </div>
 
           </div>
@@ -147,14 +163,14 @@
           <div class="account-details-form" style="margin-top: 0% !important;">
             <div class="row">
               <div class="col-md-3">
-                <h4 style="font-weight: 600;">{{selectedAdd}}</h4>
+                <span style="font-weight: 400;font-size: 18px;">{{selectedAdd}}</span>
               </div>
               <div class="col-md-7">
                 <!-- <span>{{localUserEmail}}</span> -->
               </div>
               <div class="col-md-2">
                 <div class="single-input-item">
-                  <button class="check-btn sqr-btn-cancel" (click)="changeDilveryAddress()">Change</button>
+                  <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="changeDilveryAddress()">Change</button>
                 </div>
               </div>
             </div>
@@ -169,10 +185,10 @@
             </div>
 
             <div class="col-md-4" *ngFor="let add of userAddress;let i=index">
-              <address *ngIf="isLogin">
+              <address *ngIf="isLogin" (click)="selectaddress(i,add.id)">
                 <div class="custom-control custom-radio">
                   <input id="add.id" type="radio" class="custom-control-input" name="add.id"
-                    (click)="selectaddress(i,add.id)">
+                    >
                   <p style="margin-bottom:0px !important" class="custom-control-label" for="add.id">
                     <strong>{{add.name}}</strong>
                   </p>
@@ -183,15 +199,15 @@
                 <p style="margin-bottom:0px !important">Mobile:{{add.contactnumber}}
                 </p>
               </address>
-              <button class="check-btn sqr-btn-butn" *ngIf="add.selected" style="margin-bottom: 1rem !important;"
+              <button class="btn-project" mat-raised-button color="primary" type="submit" *ngIf="add.selected" style="margin-bottom: 1rem !important;"
                 (click)="selectedaddress(add)">Deliver Here</button>
             </div>
 
           </div>
         </div>
-        <div class="myaccount-content mb-20" *ngIf="isShow">
-          <h3>ADD A NEW ADDRESS</h3>
-          <form fxLayout="row wrap">
+        <div class="myaccount-content mb-20" *ngIf="isShow && !isAddress ">
+          <h3 (click)="addNewAdd()">ADD A NEW ADDRESS</h3>
+          <form *ngIf="isAddNewAddClick" fxLayout="row wrap">
             <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20 " ngClass.sm="mt-10" ngClass.xs="mt-10">
               <mat-form-field class="w-100">
                 <input matInput placeholder="Name (required)" [(ngModel)]="addressModel.name"
@@ -241,32 +257,10 @@
               </mat-form-field>
             </div>
 
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="myaccount-content mb-10" *ngIf="isAddress">
-                  <h3><span>2</span> DILVERY ADDRESS <i style="color:#0de70d" class="fa fa-check"
-                      aria-hidden="true"></i> </h3>
-                  <div class="account-details-form" style="margin-top: 0% !important;">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <h4 style="font-weight: 600;">{{selectedAdd}}</h4>
-                      </div>
-                      <div class="col-md-7">
-                        <!-- <span>{{localUserEmail}}</span> -->
-                      </div>
-                      <div class="col-md-2">
-                        <div class="single-input-item">
-                          <button class="check-btn sqr-btn-cancel"
-                            (click)="changeDilveryAddress()">Change</button>
-                        </div>
-                      </div>
-                    </div>
 
             <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-5" ngClass.sm="mt-1" ngClass.xs="mt-1">
               <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="saveAddress()">Save
-                Address</button>
+                Address</button>&nbsp;&nbsp;
               <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="cancelAddress()">
                 Cancel</button>
             </div>
@@ -290,18 +284,18 @@
 
         <div class="myaccount-content mb-10">
           <h3><span>4</span> PAYMENT OPTIONS</h3>
-          <div *ngIf="ispayment">
+          <div *ngIf="ispayment && isAddress">
             <div class="myaccount-content">
               <div class="form-check-radio">
                 <label class="form-check-label" style="font-size: 15px !important;">
                   <input class="form-check-input" type="radio"
-                    name="exampleRadioz" id="exampleRadios11" value="option1">
-                  <img src="assets/images/upi-icon.svg" alt="Bhim SVG"
-                    style="height:30px !important;width:30px !important;" /> UPI
+                    name="pymnt" id="pymnt1"  [value]="cashfree" />
+                  <img src="../../../../assets/images/Cashfree.jpg" alt="Bhim SVG"
+                    style="height:30px !important;width:30px !important;" /> Cashfree
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-3 offset-md-1">
                   <h4>Choose an option</h4>
                   <div class="form-check-radio">
@@ -324,138 +318,49 @@
                   </div>
 
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="myaccount-content">
               <div class="form-check-radio">
                 <label class="form-check-label" style="font-size: 15px !important;">
                   <input class="form-check-input" type="radio"
-                    name="exampleRadioz" id="exampleRadios11" value="option1">
-                  <img src="assets/images/iconfinder_paytm_1220356.svg"
+                  name="pymnt" id="pymnt2"  [value]="stripe" >
+                  <img src="../../../../assets/images/stripe.jpeg"
                     alt="Paytm SVG"
                     style="height:30px !important;width:30px !important;" />
-                  Wallets
+                  Strapi
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="row">
-                <div class="col-md-3 offset-md-1">
-                  <div class="form-check-radio">
-                    <label class="form-check-label"
-                      style="font-size: 15px !important;">
-                      <input class="form-check-input" type="radio"
-                        name="exampleRadioz" id="exampleRadios11"
-                        value="option1">Paytm
-                      <span class="form-check-sign"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
             </div>
+             
+
             <div class="myaccount-content">
               <div class="form-check-radio">
                 <label class="form-check-label" style="font-size: 15px !important;">
                   <input class="form-check-input" type="radio"
-                    name="exampleRadioz" id="exampleRadios11"
-                    value="option1">Credit / Debit / ATM Card
+                  name="pymnt" id="pymnt3"  [value]="cod" />
+                  <!-- <img src="../../../../assets/images/stripe.jpeg"
+                    alt="Paytm SVG"
+                    style="height:30px !important;width:30px !important;" /> -->
+                  Cash on Delivery
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="row">
-                <div class="col-md-8 offset-md-1">
-                  <div class="single-input-item">
-                    <input type="text" id="number" name="number"
-                      placeholder="Enter Card Number" class="form-control"
-                      style="border: 1px solid;" />
-                  </div>
-                </div>
-                <div class="col-md-8 offset-md-1">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="btn-group bootstrap-select w-100">
-                        <select class="selectpicker w-100" data-size="8"
-                          data-style="btn btn-primary btn-round"
-                          title="MM">
-                          <option disabled selected>MM</option>
-                          <option value="2">1</option>
-                          <option value="3">2</option>
-                          <option value="4">3</option>
-                          <option value="5">4</option>
-                          <option value="6">5</option>
-                          <option value="7">6</option>
-                          <option value="8">7</option>
-                          <option value="9">8</option>
-                          <option value="10">9</option>
-                          <option value="11">10</option>
-                          <option value="12">11</option>
-                          <option value="13">12</option>
-
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="btn-group bootstrap-select w-100">
-                        <select class="selectpicker w-100" data-size="8"
-                          data-style="btn btn-primary btn-round"
-                          title="YY">
-                          <option disabled selected>YY</option>
-                          <option value="2">21</option>
-                          <option value="3">22</option>
-                          <option value="4">23</option>
-                          <option value="5">24</option>
-                          <option value="6">25</option>
-                          <option value="7">26</option>
-                          <option value="8">27</option>
-                          <option value="9">28</option>
-                          <option value="10">29</option>
-                          <option value="11">30</option>
-                          <option value="12">31</option>
-                          <option value="13">32</option>
-                          <option value="14">33</option>
-                          <option value="15">34</option>
-                          <option value="16">35</option>
-                          <option value="17">36</option>
-                          <option value="18">37</option>
-                          <option value="19">38</option>
-                          <option value="20">39</option>
-                          <option value="21">40</option>
-                          <option value="22">41</option>
-                          <option value="23">42</option>
-                          <option value="24">43</option>
-                          <option value="25">44</option>
-                          <option value="26">45</option>
-                          <option value="27">46</option>
-                          <option value="28">47</option>
-                          <option value="29">48</option>
-                          <option value="30">49</option>
-                          <option value="31">50</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="single-input-item">
-                        <input type="text" id="number" name="number"
-                          placeholder="CVV" class="form-control"
-                          style="border: 1px solid;margin-top: 12px !important;" />
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-md-3">
-                  <button class="check-btn sqr-btn-butn"
-                    style="margin-top: 5px;">PAY
-                    $</button>
-                </div>
-              </div>
             </div>
-
+            
+            </div>
           </div>
-        </div>
+        
         <!-- Payment Portion End -->
+
+        
 
 
       </div>
+
+
+     
       <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="35" fxFlex.md="35">
         <div class="main-order ">
           <div class="order-box">
@@ -488,272 +393,23 @@
                   </div>
 
                 </div>
-                <div class="myaccount-content mb-20" *ngIf="!isproductList && isProductsum">
-                  <div class="single-input-item">
-                    <div class="row">
-                      <div class="col-sm-10">
-                        <P>Order confirmation email will be sent to
-                          <strong>ptlshubham@gmail.com</strong>
-                        </P>
-                      </div>
-                      <div class="col-sm-2">
-                        <button class="check-btn sqr-btn-butn"
-                          (click)="showingListProduct()">CONTINUE</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="myaccount-content mb-10">
-                  <h3><span>4</span> PAYMENT OPTIONS</h3>
-                  <div *ngIf="ispayment">
-                    <div class="myaccount-content">
-                      <div class="form-check-radio">
-                        <label class="form-check-label" style="font-size: 15px !important;">
-                          <input class="form-check-input" type="radio"
-                            name="exampleRadioz" id="exampleRadios11" value="option1">
-                          <img src="assets/images/upi-icon.svg" alt="Bhim SVG"
-                            style="height:30px !important;width:30px !important;" /> UPI
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3 offset-md-1">
-                          <h4>Choose an option</h4>
-                          <div class="form-check-radio">
-                            <label class="form-check-label"
-                              style="font-size: 15px !important;">
-                              <input class="form-check-input" type="radio"
-                                name="exampleRadioz" id="exampleRadios11"
-                                value="option1">Phone Pe
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                          <div class="form-check-radio">
-                            <label class="form-check-label"
-                              style="font-size: 15px !important;">
-                              <input class="form-check-input" type="radio"
-                                name="exampleRadioz" id="exampleRadios11"
-                                value="option1">Your UPI ID
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
+              </li>
+            </ul>
+            <ul class="total">
+              <li>Total <span class="count">{{carttotal}}$</span></li>
+            </ul>
+          
+            <div class="order">
+              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="placeOrder()">PLACE
+                ORDER</button>&nbsp;&nbsp;
 
-                        </div>
-                      </div>
-                    </div>
-                    <div class="myaccount-content">
-                      <div class="form-check-radio">
-                        <label class="form-check-label" style="font-size: 15px !important;">
-                          <input class="form-check-input" type="radio"
-                            name="exampleRadioz" id="exampleRadios11" value="option1">
-                          <img src="assets/images/iconfinder_paytm_1220356.svg"
-                            alt="Paytm SVG"
-                            style="height:30px !important;width:30px !important;" />
-                          Wallets
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3 offset-md-1">
-                          <div class="form-check-radio">
-                            <label class="form-check-label"
-                              style="font-size: 15px !important;">
-                              <input class="form-check-input" type="radio"
-                                name="exampleRadioz" id="exampleRadios11"
-                                value="option1">Paytm
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="myaccount-content">
-                      <div class="form-check-radio">
-                        <label class="form-check-label" style="font-size: 15px !important;">
-                          <input class="form-check-input" type="radio"
-                            name="exampleRadioz" id="exampleRadios11"
-                            value="option1">Credit / Debit / ATM Card
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-8 offset-md-1">
-                          <div class="single-input-item">
-                            <input type="text" id="number" name="number"
-                              placeholder="Enter Card Number" class="form-control"
-                              style="border: 1px solid;" />
-                          </div>
-                        </div>
-                        <div class="col-md-8 offset-md-1">
-                          <div class="row">
-                            <div class="col-md-3">
-                              <div class="btn-group bootstrap-select w-100">
-                                <select class="selectpicker w-100" data-size="8"
-                                  data-style="btn btn-primary btn-round"
-                                  title="MM">
-                                  <option disabled selected>MM</option>
-                                  <option value="2">1</option>
-                                  <option value="3">2</option>
-                                  <option value="4">3</option>
-                                  <option value="5">4</option>
-                                  <option value="6">5</option>
-                                  <option value="7">6</option>
-                                  <option value="8">7</option>
-                                  <option value="9">8</option>
-                                  <option value="10">9</option>
-                                  <option value="11">10</option>
-                                  <option value="12">11</option>
-                                  <option value="13">12</option>
-
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-md-3">
-                              <div class="btn-group bootstrap-select w-100">
-                                <select class="selectpicker w-100" data-size="8"
-                                  data-style="btn btn-primary btn-round"
-                                  title="YY">
-                                  <option disabled selected>YY</option>
-                                  <option value="2">21</option>
-                                  <option value="3">22</option>
-                                  <option value="4">23</option>
-                                  <option value="5">24</option>
-                                  <option value="6">25</option>
-                                  <option value="7">26</option>
-                                  <option value="8">27</option>
-                                  <option value="9">28</option>
-                                  <option value="10">29</option>
-                                  <option value="11">30</option>
-                                  <option value="12">31</option>
-                                  <option value="13">32</option>
-                                  <option value="14">33</option>
-                                  <option value="15">34</option>
-                                  <option value="16">35</option>
-                                  <option value="17">36</option>
-                                  <option value="18">37</option>
-                                  <option value="19">38</option>
-                                  <option value="20">39</option>
-                                  <option value="21">40</option>
-                                  <option value="22">41</option>
-                                  <option value="23">42</option>
-                                  <option value="24">43</option>
-                                  <option value="25">44</option>
-                                  <option value="26">45</option>
-                                  <option value="27">46</option>
-                                  <option value="28">47</option>
-                                  <option value="29">48</option>
-                                  <option value="30">49</option>
-                                  <option value="31">50</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-sm-3">
-                              <div class="single-input-item">
-                                <input type="text" id="number" name="number"
-                                  placeholder="CVV" class="form-control"
-                                  style="border: 1px solid;margin-top: 12px !important;" />
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-                        <div class="col-md-3">
-                          <button class="check-btn sqr-btn-butn"
-                            style="margin-top: 5px;">PAY
-                            $</button>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="myaccount-content mb-20" *ngIf="!showGift">
-                  <div class="single-input-item">
-                    <button class="check-btn sqr-btn-butn" (click)="addGiftCoupon()"><i
-                        class="fa fa-plus" aria-hidden="true"></i> Add Gift Card</button>
-                  </div>
-                </div>
-                <div class="myaccount-content mb-20" *ngIf="showGift">
-                  <div class="single-input-item">
-                    <h3>ADD GIFT CARD</h3>
-                    <div class="account-details-form">
-                      <form action="#">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="single-input-item">
-                              <label for="landmark" class="required">Voucher Number
-                                (Optional)</label>
-                              <input type="text" id="landmark" />
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="single-input-item">
-                              <label for="alternative" class="required">Vochuer Pin
-                                (Optional)</label>
-                              <input type="text" id="alternative" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="single-input-item">
-                          <div class="row">
-                            <div class="col-sm-8"></div>
-                            <div class="col-sm-4" style="margin-left:72%;">
-                              <button class="check-btn sqr-btn ">APPLY</button>
-
-                              <button class="check-btn sqr-btn-cancel"
-                                (click)="cancelGiftCard()">CANCEL</button>
-                            </div>
-                          </div>
-
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="row">
-
-                  <!-- Cart Total -->
-                  <div class="col-12 mb-60">
-
-                    <h4 class="checkout-title">Cart Total</h4>
-
-                    <div class="checkout-cart-total">
-
-                      <h4>Product <span>Total</span></h4>
-
-                      <ul *ngFor="let cl of getCartList;let i=index">
-                        <li>{{cl.productName}} X {{cl.quantity}} <span>₹ {{cl.productPrice *
-                            cl.quantity}} </span></li>
-                        <!-- <li>Auctor gravida pellentesque X 02 <span>$50.00</span></li>
-                        <li>Condimentum posuere consectetur X 01 <span>$29.00</span></li>
-                        <li>Habitasse dictumst elementum X 01 <span>$10.00</span></li> -->
-                      </ul>
-
-                      <p>Sub Total <span> ₹ {{GrandTotal}}</span></p>
-                      <p>Shipping Fee <span>₹ 80</span></p>
-
-                      <h4>Grand Total <span>₹{{GrandTotal +80}}</span></h4>
-
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-
-<<<<<<< HEAD
-=======
               <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="cancelOrder()">cancel
                 order</button>
->>>>>>> 30b65fcd978d4c840d05e36cd19035d86e49910f
             </div>
-          </form>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

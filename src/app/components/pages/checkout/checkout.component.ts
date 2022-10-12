@@ -35,8 +35,9 @@ export class CheckoutComponent implements OnInit {
   // isAddress: boolean = false;
   // selectedAdd: number;
 
-
-
+  public localUserName = localStorage.getItem('userName');
+  public localUserId = localStorage.getItem('UserId');
+  public localUserEmail = localStorage.getItem('Email');
   isAddress: boolean = false;
   selectedAdd: any;
 
@@ -50,6 +51,7 @@ export class CheckoutComponent implements OnInit {
   isShowLogout: boolean = false;
   isSignup: boolean = false;
   loginModel: any = [];
+  isAddNewAddClick:boolean = false;
   // selectedAdd: any;
 
   constructor(
@@ -105,6 +107,27 @@ export class CheckoutComponent implements OnInit {
     this.isSignup = true;
     this.isLogin = true;
   }
+  logoutUser(){
+    this.router.navigate(['pages/my-account']);
+  }
+  addNewAdd(){
+    this.isAddNewAddClick = !this.isAddNewAddClick;
+  }
+  selectaddress(idn, id) {
+     debugger
+    if (this.userAddress[idn].selected == false) {
+      this.userAddress[idn].selected = true;
+      this.userAddress.forEach(element => {
+        if (element.id != id) {
+          element.selected = false;
+        }
+      })
+
+    }
+    else {
+      this.userAddress[idn].selected = false;
+    }
+  }
   continueLoginUser(credentials) {
     console.log("......data...." + credentials.email);
     // this.loginService.login(credentials).subscribe(data => {
@@ -137,22 +160,6 @@ export class CheckoutComponent implements OnInit {
   cancelAddress() {
     this.isShow = false;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   getStateWithCity() {
     this.checkoutService.getState().subscribe((data: any) => {
@@ -191,22 +198,13 @@ export class CheckoutComponent implements OnInit {
       });
     }
   }
-  selectedAddress(idn, id) {
-    this.selectedAdd = id;
-    if (this.userAddress[idn].selected == false) {
-      this.userAddress[idn].selected = true;
-      this.selectedFullAddress = this.userAddress[idn];
-      debugger
-      this.userAddress.forEach(element => {
-        if (element.id != id) {
-          element.selected = false;
-        }
-      })
+  selectedaddress(data) {
+    this.selectedAdd = data.address + ',' + data.landmark + ',' + data.city + ',' + data.state + ',' + data.pincode;
+    this.isAddress = true;
+    this.isProductsum = true;
+    this.ispayment = true;
 
-    }
-    else {
-      this.userAddress[idn].selected = false;
-    }
+
   }
   addNewOpen() {
     this.isAddress = true;
