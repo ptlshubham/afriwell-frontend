@@ -3,17 +3,10 @@
 <div class="container">
   <div class="checkout sec-padding">
     <div fxLayout="row wrap" class="">
-
-
       <div class="billing-details  pr-15" fxFlex="100" fxFlex.gt-md="65" fxFlex.md="65">
-      
-
-
-
-
         <!-- Login Portion With Login Successfully -->
         <div class="myaccount-content mb-10" *ngIf="isLogin && !isSignup">
-          <h3> <span>1</span> Login <i style="color:#0de70d" class="fa fa-check" aria-hidden="true"></i> </h3>
+          <h3>1 Login <i style="color:#0de70d" class="fa fa-check" aria-hidden="true"></i> </h3>
           <div class="account-details-form" style="margin-top: 0% !important;">
             <div class="row">
               <div class="col-md-4">
@@ -26,15 +19,17 @@
                 <!-- <div class="single-input-item">
                   <button class="check-btn sqr-btn-cancel" (click)="changeLoginUser()">Change</button>
                 </div> -->
-                <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
-                  <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="changeLoginUser()">Change
-                    </button>
+                <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="mt-1" ngClass.sm="mt-1"
+                  ngClass.xs="mt-1">
+                  <button class="btn-project" mat-raised-button color="primary" type="submit"
+                    (click)="changeLoginUser()">Change
+                  </button>
                 </div>
               </div>
               <div class="col-md-6" *ngIf="isShowLogout">
                 <a (click)="logoutUser()">
                   <span style="font-size: 16px!important;font-weight: bold;color: rgb(7, 85, 240);">
-                  Logout & Sign in to another account
+                    Logout & Sign in to another account
                   </span>
 
                 </a>
@@ -42,7 +37,8 @@
               <div class="col-md-2 offset-md-1" *ngIf="isShowLogout">
                 <div class="single-input-item">
                   <!-- <button class="check-btn sqr-btn" >Continue Checkout</button> -->
-                  <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="ContinueCheckout()">Continue Checkout
+                  <button class="btn-project" mat-raised-button color="primary" type="submit"
+                    (click)="ContinueCheckout()">Continue Checkout
                   </button>
                 </div>
               </div>
@@ -51,13 +47,13 @@
               <span style="font-size: 12px!important;font-weight: 500;color: red;">Please
                 note that upon clicking
                 "Logout" you will lose all items in cart and will be redirected to
-                 home page.</span>
+                home page.</span>
             </div>
 
           </div>
         </div>
         <div class="myaccount-content mb-10" *ngIf="!isLogin && !isSignup">
-          <h3><span>1</span> Login</h3>
+          <h3>1 Login </h3>
           <div class="account-details-form">
             <form name="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
               <div class="row">
@@ -96,7 +92,7 @@
           </div>
         </div>
         <div class="myaccount-content mb-10" *ngIf="isSignup">
-          <h3><span>1</span> Signup</h3>
+          <h3>1 Login </h3>
           <div class="account-details-form">
             <form name="signupForm" #signupForm="ngForm">
               <div class="row">
@@ -159,7 +155,7 @@
         <!-- Address Portion start -->
 
         <div class="myaccount-content mb-10" *ngIf="isAddress">
-          <h3><span>2</span> DILVERY ADDRESS <i style="color:#0de70d" class="fa fa-check" aria-hidden="true"></i> </h3>
+          <h3>2 DELIVERY ADDRESS <i style="color:#0de70d" class="fa fa-check" aria-hidden="true"></i> </h3>
           <div class="account-details-form" style="margin-top: 0% !important;">
             <div class="row">
               <div class="col-md-3">
@@ -170,7 +166,8 @@
               </div>
               <div class="col-md-2">
                 <div class="single-input-item">
-                  <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="changeDilveryAddress()">Change</button>
+                  <button class="btn-project" mat-raised-button color="primary" type="submit"
+                    (click)="changeDilveryAddress()">Change</button>
                 </div>
               </div>
             </div>
@@ -178,17 +175,27 @@
           </div>
         </div>
         <div class="myaccount-content mb-10" *ngIf="!isAddress">
-          <h3><span>2</span> DILVERY ADDRESS</h3>
+          <h3>2 DELIVERY ADDRESS</h3>
           <div class="row" *ngIf="isLogin">
             <div class="col-lg-12">
               <h4>Choose for delivery.</h4>
             </div>
 
-            <div class="col-md-4" *ngFor="let add of userAddress;let i=index">
-              <address *ngIf="isLogin" (click)="selectaddress(i,add.id)">
+            <div class="col-md-12" *ngFor="let add of userAddress;let i=index">
+              <mat-card *ngIf="isLogin" (click)="selectaddress(i,add.id)">
+                <mat-radio-group>
+                  <mat-radio-button value="1" id="add.id">
+                    <strong>{{add.name}}</strong> <br>
+                    {{add.address}} , {{add.landmark}} , {{add.city}}
+                    {{add.state}} , {{add.pincode}}
+                  </mat-radio-button> <br>
+                  <button class="btn-project" mat-raised-button color="primary" type="submit" *ngIf="add.selected"
+                  style="margin-bottom: 1rem !important;" (click)="selectedaddress(add)">Deliver Here</button>
+                </mat-radio-group>
+              </mat-card>
+              <!-- <div>
                 <div class="custom-control custom-radio">
-                  <input id="add.id" type="radio" class="custom-control-input" name="add.id"
-                    >
+                  <input id="add.id" type="radio" class="custom-control-input" name="add.id">
                   <p style="margin-bottom:0px !important" class="custom-control-label" for="add.id">
                     <strong>{{add.name}}</strong>
                   </p>
@@ -198,9 +205,8 @@
                   {{add.state}},{{add.pincode}}</p>
                 <p style="margin-bottom:0px !important">Mobile:{{add.contactnumber}}
                 </p>
-              </address>
-              <button class="btn-project" mat-raised-button color="primary" type="submit" *ngIf="add.selected" style="margin-bottom: 1rem !important;"
-                (click)="selectedaddress(add)">Deliver Here</button>
+              </div> -->
+             
             </div>
 
           </div>
@@ -283,18 +289,17 @@
         <!-- Payment Portion Start -->
 
         <div class="myaccount-content mb-10">
-          <h3><span>4</span> PAYMENT OPTIONS</h3>
+          <h3>3 PAYMENT OPTIONS</h3>
           <div *ngIf="ispayment && isAddress">
             <div class="myaccount-content">
-              <div class="form-check-radio">
+              <!-- <div class="form-check-radio">
                 <label class="form-check-label" style="font-size: 15px !important;">
-                  <input class="form-check-input" type="radio"
-                    name="pymnt" id="pymnt1"  [value]="cashfree" />
+                  <input class="form-check-input" type="radio" name="pymnt" id="pymnt1" [value]="cashfree" />
                   <img src="../../../../assets/images/Cashfree.jpg" alt="Bhim SVG"
                     style="height:30px !important;width:30px !important;" /> Cashfree
                   <span class="form-check-sign"></span>
                 </label>
-              </div>
+              </div> -->
               <!-- <div class="row">
                 <div class="col-md-3 offset-md-1">
                   <h4>Choose an option</h4>
@@ -319,27 +324,29 @@
 
                 </div>
               </div> -->
+              <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                <mat-radio-button class="example-radio-button" [value]="Cashfree">
+                  <img src="../../../../assets/images/Cashfree.jpg" alt="Bhim SVG"
+                    style="height:30px !important;width:30px !important;" /> Cashfree
+                </mat-radio-button>
+                <br>
+                <mat-radio-button class="example-radio-button" [value]="stripe">
+                  <img src="../../../../assets/images/stripe.jpeg" alt="Paytm SVG"
+                    style="height:30px !important;width:30px !important;" /> stripe
+                </mat-radio-button>
+                <br>
+                <mat-radio-button class="example-radio-button" [value]="cod">
+                  Cash on Delivery
+                </mat-radio-button>
+              </mat-radio-group>
+
+
             </div>
-            <div class="myaccount-content">
-              <div class="form-check-radio">
-                <label class="form-check-label" style="font-size: 15px !important;">
-                  <input class="form-check-input" type="radio"
-                  name="pymnt" id="pymnt2"  [value]="stripe" >
-                  <img src="../../../../assets/images/stripe.jpeg"
-                    alt="Paytm SVG"
-                    style="height:30px !important;width:30px !important;" />
-                  Strapi
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-            </div>
-             
 
             <div class="myaccount-content">
               <div class="form-check-radio">
                 <label class="form-check-label" style="font-size: 15px !important;">
-                  <input class="form-check-input" type="radio"
-                  name="pymnt" id="pymnt3"  [value]="cod" />
+                  <input class="form-check-input" type="radio" name="pymnt" id="pymnt3" [value]="cod" />
                   <!-- <img src="../../../../assets/images/stripe.jpeg"
                     alt="Paytm SVG"
                     style="height:30px !important;width:30px !important;" /> -->
@@ -348,19 +355,19 @@
                 </label>
               </div>
             </div>
-            
-            </div>
+
           </div>
-        
+        </div>
+
         <!-- Payment Portion End -->
 
-        
+
 
 
       </div>
 
 
-     
+
       <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="35" fxFlex.md="35">
         <div class="main-order ">
           <div class="order-box">
@@ -398,7 +405,7 @@
             <ul class="total">
               <li>Total <span class="count">{{carttotal}}$</span></li>
             </ul>
-          
+
             <div class="order">
               <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="placeOrder()">PLACE
                 ORDER</button>&nbsp;&nbsp;
