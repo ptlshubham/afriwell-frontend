@@ -32,7 +32,7 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.route.params.subscribe(
       (params: any) => {
         this.category = params['category'];
-        debugger
+         
         if(this.category == 'all'){
           let data = {
             maincatid:null,

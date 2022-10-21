@@ -8,12 +8,14 @@ import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CourierPartnersComponent } from './courier-partners/courier-partners.component';
 
 
 
 @NgModule({
   declarations: [
-    ShipOrdersComponent
+    ShipOrdersComponent,
+    CourierPartnersComponent
   ],
   imports: [
     CommonModule,

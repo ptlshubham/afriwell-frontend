@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
   getCategoryList() {
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
       this.categoryList = data;
-      debugger
+       
       this.categoryList.forEach(element => {
         this.coreService.getAllUserCate(element.id).subscribe((res: any) => {
           element.SubCategory = res;
@@ -76,7 +76,7 @@ export class MenuComponent implements OnInit {
   }
   OpenCategory(id,ind){
     this.submenu = this.categoryList[ind].SubCategory;
-    debugger
+     
   }
   openSubcat(id){
     this.router.navigate(['/home/products/'+id+'/left-sidebar']);

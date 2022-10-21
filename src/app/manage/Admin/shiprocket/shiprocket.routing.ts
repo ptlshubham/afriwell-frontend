@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { CourierPartnersComponent } from "./courier-partners/courier-partners.component";
 import { ShipOrdersComponent } from "./ship-orders/ship-orders.component";
 
 
@@ -11,12 +12,12 @@ export const ShiprocketRoutes: Routes = [
             component: ShipOrdersComponent
         }]
     },
-    // {
-    //     path: '',
-    //     children: [{
-    //         path: 'webhome',
-    //         component: WebhomeComponent
-    //     }]
-    // },
+    {
+        path: '',
+        children: [{
+            path: 'courier',
+            component: CourierPartnersComponent
+        }]
+    },
 
 ];

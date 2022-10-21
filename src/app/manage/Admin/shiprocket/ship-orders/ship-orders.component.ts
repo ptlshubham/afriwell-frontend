@@ -18,6 +18,8 @@ export class ShipOrdersComponent implements OnInit {
   orderDetails: any = {};
   detail: any = {};
   dimension: any;
+  orderSelect: any;
+  isOpen: boolean = false;
   constructor(
     private shiprocketService: ShiprocketService,
     private apiService: ApiService,
@@ -96,7 +98,7 @@ export class ShipOrdersComponent implements OnInit {
         customer_country: this.orderDetails.customer_country,
       }
       this.detail = data1;
-      debugger
+       
 
     })
   }
@@ -108,5 +110,9 @@ export class ShipOrdersComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Order Successfully Cancelled.', 'success');
 
     })
+  }
+  shipnowOpen(data) {
+    this.isOpen = true;
+    this.orderSelect = data;
   }
 }

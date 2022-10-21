@@ -97,6 +97,7 @@ export class ProductCarouselTwoComponent implements OnInit {
   getNewArrivalsProducts() {
     this.userHomeService.getBestProduct().subscribe((data: any) => {
       this.product = data
+       
     })
   }
   public openProductDialog(product) {

@@ -1,0 +1,81 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Select Courier Partner</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-shopping">
+                <thead class="text-primary">
+                    <th class="text-left">
+                        Courier Partner
+                    </th>
+                    <th class="text-left">
+                        Rating
+                    </th>
+                    <th class="text-left">
+                        Expected Pickup
+                    </th>
+                    <th class="text-left">
+                        Estimated Delivery
+                    </th>
+                    <th class="text-left">
+                        Chargeable Weight
+                    </th>
+                    <th class="text-left">
+                        Charges
+                    </th>
+                    <th class="text-right">Action</th>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let o of courierList | paginate: { id:'listing',itemsPerPage: 10, currentPage: mpage,totalItems:totalRec };let i=index">
+                        <td class="text-left">
+                            {{o.courier_name}} <br>
+                            <!-- {{o.created_at}} -->
+
+                        </td>
+                        <td class="text-left">
+                            {{o.rating}}<br>
+                            <!-- {{o.customer_email}}<br>
+                            {{o.customer_phone}} -->
+                        </td>
+                        <td class="text-left">
+                            Dead Wt : {{o.shipments.total_dead_weight}}<br>
+                            {{o.dimensions}}<br>
+                            volumetric Wt: {{o.total_volumetric_weight}}
+                        </td>
+                        <td class="text-left">{{o.etd}} <br>
+                            <!-- <span class="badge badge-success">{{o.payment_method}}</span> -->
+
+                        </td>
+                        <td class="text-left">{{o.charge_weight}}</td>
+                        <td class="text-left">
+                            <!-- <span class="badge badge-success" *ngIf="o.status=='NEW'">{{o.status}}</span>
+                            <span class="badge badge-success" *ngIf="o.status=='INVOICED'">{{o.status}}</span>
+                            <span class="badge badge-danger" *ngIf="o.status=='CANCELED'">{{o.status}}</span> <br> -->
+
+                            {{o.rate}} ₹
+                        </td>
+                        <!-- <td class="text-right">{{o.id}}</td> -->
+
+                        <td class="text-right">
+
+                            <button class="btn btn-primary btn-md" style="margin-right: 5px;">
+                                Ship Now</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="ml-md-auto">
+                <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage= $event"
+                    autoHide="true" responsive="true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

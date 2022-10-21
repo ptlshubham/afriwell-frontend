@@ -160,7 +160,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-shopping">
                     <thead class="text-primary">
                         <tr>
                             <th class="text-left">
@@ -197,9 +197,9 @@
                             </td>
                             <td class="text-center">{{i+1}}</td>
                             <td class="text-center">{{p.productName}}</td>
-                         
+
                             <td class="text-center">
-                                <div class="img-container" *ngIf=" p.productMainImage.length >0">
+                                <div class="img-container " *ngIf=" p.productMainImage.length >0">
                                     <img src="http://localhost:8090{{p.productMainImage[0].productListImage}}">
                                 </div>
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md"

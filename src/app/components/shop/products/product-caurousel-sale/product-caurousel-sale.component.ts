@@ -90,6 +90,7 @@ export class ProductCaurouselSaleComponent implements OnInit {
     this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
       this.product = data
        
+       
     })
   }
   public openProductDialog(product) {

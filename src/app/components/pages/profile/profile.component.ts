@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     
-    debugger
+     
     setTimeout(() => {
       this.contentLoaded = true;
     }, 2000);
@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
   }
   updateUserDetails() {
     this.userRegisterModel.id = localStorage.getItem('userId');
-    debugger
+     
     this.checkoutService.updateUserDetails(this.userRegisterModel).subscribe((res) => {
       this.userRegisterModel = res;
       let message, status;

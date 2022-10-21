@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
-import { DemoComponent } from './components/demo/demo.component';
 
 const appRoutes: Routes = [
   {
@@ -11,11 +10,6 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
 
-
-  {
-    path: 'home',
-    component: DemoComponent
-  },
   {
     path: '',
     component: MainComponent,

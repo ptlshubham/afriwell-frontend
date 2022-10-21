@@ -35,20 +35,22 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
 
 
   getCart() {
-    debugger
+     
     this.carttotal = 0;
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
         if(data != 'empty'){
           this.shoppingCartsItems = data;
-
           debugger
+
+           
           this.getTotal();
         }
       });
     }else{
       let data =JSON.parse(localStorage.getItem('cartItem')) ;
       this.shoppingCartsItems = data;
+      debugger
       if(this.shoppingCartsItems != null){
         this.getTotal();
       }
