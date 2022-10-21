@@ -180,35 +180,25 @@
             <div class="col-lg-12">
               <h4>Choose for delivery.</h4>
             </div>
-
-            <div class="col-md-12" *ngFor="let add of userAddress;let i=index">
-              <mat-card *ngIf="isLogin" (click)="selectaddress(i,add.id)">
-                <mat-radio-group>
-                  <mat-radio-button value="1" id="add.id">
-                    <strong>{{add.name}}</strong> <br>
-                    {{add.address}} , {{add.landmark}} , {{add.city}}
-                    {{add.state}} , {{add.pincode}}
-                  </mat-radio-button> <br>
-                  <button class="btn-project" mat-raised-button color="primary" type="submit" *ngIf="add.selected"
-                  style="margin-bottom: 1rem !important;" (click)="selectedaddress(add)">Deliver Here</button>
+            <div class="col-md-12" >
+              <mat-card *ngIf="isLogin" >
+                <mat-radio-group >
+                  <div *ngFor="let add of userAddress;let i=index">
+                    <mat-radio-button class="mb-20" value="{{add.id}}"  (click)="selectaddress(i,add.id)">
+                      <strong>{{add.name}}</strong> <br>
+                      {{add.address}} , {{add.landmark}} , {{add.city}}
+                      {{add.state}} , {{add.pincode}}<br>
+  
+                    </mat-radio-button><br>
+                    
+                    <button class="btn-project" mat-raised-button color="primary" type="submit" *ngIf="add.selected"
+                    style="margin-bottom: 1rem !important;" (click)="selectedaddress(add)">Deliver Here</button>
+                  </div>
+                  <br>
+                
                 </mat-radio-group>
               </mat-card>
-              <!-- <div>
-                <div class="custom-control custom-radio">
-                  <input id="add.id" type="radio" class="custom-control-input" name="add.id">
-                  <p style="margin-bottom:0px !important" class="custom-control-label" for="add.id">
-                    <strong>{{add.name}}</strong>
-                  </p>
-                </div>
-                <p style="margin-bottom:0px !important">
-                  {{add.address}},{{add.landmark}},{{add.city}}<br>
-                  {{add.state}},{{add.pincode}}</p>
-                <p style="margin-bottom:0px !important">Mobile:{{add.contactnumber}}
-                </p>
-              </div> -->
-             
             </div>
-
           </div>
         </div>
         <div class="myaccount-content mb-20" *ngIf="isShow && !isAddress ">
@@ -285,138 +275,65 @@
             </div>
           </form>
         </div>
-        <!-- Address Portion End -->
-        <!-- Payment Portion Start -->
-
         <div class="myaccount-content mb-10">
           <h3>3 PAYMENT OPTIONS</h3>
           <div *ngIf="ispayment && isAddress">
             <div class="myaccount-content">
-              <!-- <div class="form-check-radio">
-                <label class="form-check-label" style="font-size: 15px !important;">
-                  <input class="form-check-input" type="radio" name="pymnt" id="pymnt1" [value]="cashfree" />
-                  <img src="../../../../assets/images/Cashfree.jpg" alt="Bhim SVG"
-                    style="height:30px !important;width:30px !important;" /> Cashfree
-                  <span class="form-check-sign"></span>
-                </label>
-              </div> -->
-              <!-- <div class="row">
-                <div class="col-md-3 offset-md-1">
-                  <h4>Choose an option</h4>
-                  <div class="form-check-radio">
-                    <label class="form-check-label"
-                      style="font-size: 15px !important;">
-                      <input class="form-check-input" type="radio"
-                        name="exampleRadioz" id="exampleRadios11"
-                        value="option1">Phone Pe
-                      <span class="form-check-sign"></span>
-                    </label>
-                  </div>
-                  <div class="form-check-radio">
-                    <label class="form-check-label"
-                      style="font-size: 15px !important;">
-                      <input class="form-check-input" type="radio"
-                        name="exampleRadioz" id="exampleRadios11"
-                        value="option1">Your UPI ID
-                      <span class="form-check-sign"></span>
-                    </label>
-                  </div>
-
-                </div>
-              </div> -->
-              <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
-                <mat-radio-button class="example-radio-button" [value]="Cashfree">
-                  <img src="../../../../assets/images/Cashfree.jpg" alt="Bhim SVG"
+              <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" >
+                <mat-radio-button class="example-radio-button mb-20" value="Cashfree" (click)="paymentSelect('cashfree')">
+                  <img src="../../../../assets/images/Cashfree.jpg" 
                     style="height:30px !important;width:30px !important;" /> Cashfree
                 </mat-radio-button>
                 <br>
-                <mat-radio-button class="example-radio-button" [value]="stripe">
-                  <img src="../../../../assets/images/stripe.jpeg" alt="Paytm SVG"
+                <mat-radio-button class="example-radio-button mb-20" value="stripe" (click)="paymentSelect('stripe')">
+                  <img src="../../../../assets/images/stripe.jpeg" 
                     style="height:30px !important;width:30px !important;" /> stripe
                 </mat-radio-button>
                 <br>
-                <mat-radio-button class="example-radio-button" [value]="cod">
+                <mat-radio-button class="example-radio-button mb-20" value="cod" (click)="paymentSelect('cod')">
                   Cash on Delivery
                 </mat-radio-button>
               </mat-radio-group>
-
-
             </div>
-
-            <div class="myaccount-content">
-              <div class="form-check-radio">
-                <label class="form-check-label" style="font-size: 15px !important;">
-                  <input class="form-check-input" type="radio" name="pymnt" id="pymnt3" [value]="cod" />
-                  <!-- <img src="../../../../assets/images/stripe.jpeg"
-                    alt="Paytm SVG"
-                    style="height:30px !important;width:30px !important;" /> -->
-                  Cash on Delivery
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-            </div>
+           
 
           </div>
         </div>
-
-        <!-- Payment Portion End -->
-
-
-
-
       </div>
-
-
-
-      <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="35" fxFlex.md="35">
+      <div class="mainOrder-wrapper pl-1" fxFlex="100" fxFlex.gt-md="35" fxFlex.md="35">
         <div class="main-order ">
           <div class="order-box">
             <div class="title-box">
               <div>Product <span class="tl-amount"> Total</span></div>
             </div>
-            <ul class="price-list" *ngIf='buyProducts.length'>
-              <li *ngFor="let item of buyProducts">
-                {{ item.productName }} × {{ item.quantity }}
-                <span>
+            <ol class="price-list" *ngIf="buyProducts.length >0" type="1">
+              <li *ngFor="let item of buyProducts;let i =index;" style="font-size: 14px;" class="mb-10">
+               <b>{{i+1}}</b> {{ item.productName }} × {{ item.quantity }} =
+                
                   {{ item.productPrice * item.quantity | currency:productService?.currency:'symbol' }}
-                </span>
+                
               </li>
-            </ul>
+            </ol>
             <ul class="quantity" *ngIf='buyProducts.length <= 0'>
               <li class="empty-checkout"> There are no products in cart </li>
             </ul>
             <ul class="total-amount">
               <li>
-                Subtotal <span class="amount">{{ carttotal}}$</span>
-              </li>
-              <li *ngIf='buyProducts.length'>
-                Shipping
-                <div class="shipping">
-                  <div class="shopping-option">
-                    <mat-radio-group>
-                      <mat-radio-button *ngFor="let payment of payments" [value]="payment">{{payment}}
-                      </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-
-                </div>
+                Subtotal <span class="amount">$ {{ carttotal}}</span>
               </li>
             </ul>
             <ul class="total">
-              <li>Total <span class="count">{{carttotal}}$</span></li>
+              <li>Total <span class="count"> $ {{carttotal}}</span></li>
             </ul>
-
             <div class="order">
-              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="placeOrder()">PLACE
+              <button *ngIf="isPaymentDone" class="btn-project" mat-raised-button color="primary" type="submit" (click)="placeOrder()">PLACE
                 ORDER</button>&nbsp;&nbsp;
-
               <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="cancelOrder()">cancel
                 order</button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

@@ -105,6 +105,11 @@ export class ApiService {
   public static GetCustomerByIdURL: string = ApiService.HOST_URL + '/user/GetCustomerById';
   public static updateCustomerDetailsURL: string = ApiService.HOST_URL + '/user/updateCustomerDetails';
 
+
+  //Cashfree APIS
+  public static createCashfreeOrderURL: string = ApiService.HOST_URL + '/cashfree/createCashfreeOrder';
+
+
   showNotification(from: any, align: any, msg: any, color: any) {
 
 

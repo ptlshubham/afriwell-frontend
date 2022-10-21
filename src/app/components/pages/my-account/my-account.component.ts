@@ -54,6 +54,7 @@ export class MyAccountComponent implements OnInit {
       localStorage.setItem('Email', data[0].email);
       localStorage.setItem('userId', data[0].id);
       localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
+      localStorage.setItem('contactNo',data[0].contactnumber);
       this.reloadCurrentRoute();
     });
   }

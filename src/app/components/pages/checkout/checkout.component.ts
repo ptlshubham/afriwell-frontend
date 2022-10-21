@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ShiprocketService } from 'src/app/shiprocket.service';
 import { DatePipe } from '@angular/common';
 import { UserRegister } from '../../user-models/userRegister.model';
+import { cashfreeService } from 'src/app/cashfree.service';
 
 @Component({
   selector: 'app-checkout',
@@ -27,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   totalItem: number = 0;
   qantWith: number = 0;
   amount: number;
+  isPaymentDone:boolean = false;
   payments: string[] = ['Create an Account?', 'Flat Rate'];
   paymantWay: string[] = ['Direct Bank Transfer', 'PayPal', 'paytm', 'Razorpay', 'cashFree'];
   contentLoaded = false;
@@ -36,7 +38,7 @@ export class CheckoutComponent implements OnInit {
   // selectedAdd: number;
 
   public localUserName = localStorage.getItem('userName');
-  public localUserId = localStorage.getItem('UserId');
+  public localUserId = localStorage.getItem('userId');
   public localUserEmail = localStorage.getItem('Email');
   isAddress: boolean = false;
   selectedAdd: any;
@@ -54,13 +56,16 @@ export class CheckoutComponent implements OnInit {
   isAddNewAddClick:boolean = false;
   // selectedAdd: any;
 
+  paymentResp:any;
+
   constructor(
     private cartService: CartService,
     public productService: ProductService,
     private checkoutService: CheckoutService,
     private router: Router,
     private shipService: ShiprocketService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private cashfreeservice:cashfreeService
   ) {
     this.getStateWithCity();
 
@@ -115,7 +120,7 @@ export class CheckoutComponent implements OnInit {
   }
   selectaddress(idn, id) {
      debugger
-    if (this.userAddress[idn].selected == false) {
+    if (this.userAddress[idn].selected == false || this.userAddress[idn].selected == undefined) {
       this.userAddress[idn].selected = true;
       this.userAddress.forEach(element => {
         if (element.id != id) {
@@ -126,33 +131,10 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       this.userAddress[idn].selected = false;
+      debugger
     }
   }
-  continueLoginUser(credentials) {
-    console.log("......data...." + credentials.email);
-    // this.loginService.login(credentials).subscribe(data => {
 
-    //   if (data == 1) {
-    //     this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
-    //   }
-    //   else if (data == 2) {
-
-    //     this.apiservice.showNotification('top', 'right', 'Wrong Password!', 'danger');
-
-    //   }
-    //   else {
-    //     localStorage.setItem('authenticationToken', data[0].token);
-    //     localStorage.setItem('UserId', data[0].id);
-    //     localStorage.setItem('Email', data[0].email);
-    //     localStorage.setItem('Username', data[0].firstname + ' ' + data[0].lastname);
-    //     this.localUserEmail = localStorage.getItem('Email');
-    //     this.localUserName = localStorage.getItem('Username');
-    //     this.isLogin = true;
-    //     this.getUserAddress();
-    //   }
-
-    // });
-  }
   changeDilveryAddress() {
     this.isAddress = false;
     // this.selectedAdd = '';
@@ -199,12 +181,35 @@ export class CheckoutComponent implements OnInit {
     }
   }
   selectedaddress(data) {
-    this.selectedAdd = data.address + ',' + data.landmark + ',' + data.city + ',' + data.state + ',' + data.pincode;
+    this.selectedAdd = data.name +' '+ data.address + ',' + data.landmark + ',' + data.city + ',' + data.state + ',' + data.pincode;
     this.isAddress = true;
     this.isProductsum = true;
     this.ispayment = true;
 
 
+  }
+  paymentSelect(val){
+    this.isPaymentDone = true
+    debugger;
+    if(val =='cashfree'){
+      let data={
+        order_amount:this.carttotal,
+        order_currency:'INR',
+        customer_details: {
+          customer_id: this.localUserId,
+          customer_email: this.localUserEmail,
+          customer_phone: localStorage.getItem('contactNo')
+      },
+     
+      };
+      debugger
+      this.cashfreeservice.CreateNewOrderPayment(data).subscribe((res:any)=>{
+        this.paymentResp = JSON.parse(res);
+        // window.location.href = this.paymentResp.payment_link;
+       let data = window.open(this.paymentResp.payment_link, "_blank", "resizable=no, toolbar=no, scrollbars=no, menubar=no, status=no, directories=no, location=no, width=1000, height=600, left= 20; top=100 " );
+        debugger
+      })
+    }
   }
   addNewOpen() {
     this.isAddress = true;
