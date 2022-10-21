@@ -89,7 +89,7 @@ export class ProductCaurouselBestComponent implements OnInit {
   getbestProducts() {
     this.userHomeService.getBestProduct().subscribe((data: any) => {
       this.product = data
-      debugger
+       
     })
   }
   public openProductDialog(product) {

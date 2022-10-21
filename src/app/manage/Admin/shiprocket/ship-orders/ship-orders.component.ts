@@ -98,7 +98,7 @@ export class ShipOrdersComponent implements OnInit {
         customer_country: this.orderDetails.customer_country,
       }
       this.detail = data1;
-      debugger
+       
 
     })
   }

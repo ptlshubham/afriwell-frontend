@@ -28,9 +28,9 @@ export class WishlistComponent implements OnInit {
   }
 
   public addaToCart(product: Productlist, quantity: number = 1, i) {
-    debugger
+     
     product.productid = product.productid;
-    debugger
+     
     this.cartService.addToCart(product, quantity);
     this.wishlistService.removeWish(product.id).subscribe((req) => {
       this.wishlistItems.splice(i, 1);

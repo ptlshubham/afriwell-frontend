@@ -19,7 +19,7 @@ export class OrderlistComponent implements OnInit {
   }
   getOrdersForUser() {
     this.checkoutService.getUserOrders(this.localUserId).subscribe((data: any) => {
-      debugger
+       
       this.ordersUser = data;
     });
   }

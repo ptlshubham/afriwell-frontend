@@ -23,14 +23,14 @@ export class ShiprocketService {
       email: "ptlshubham02@gmail.com",
       password: "Prnv@3850"
     };
-    debugger
+     
     this.http.post("https://apiv2.shiprocket.in/v1/external/auth/login", data).toPromise().then((res: any) => {
       localStorage.setItem("shipToken", res.token);
     });
   }
   //create/Update order
   placingOrder(data) {
-    debugger
+     
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
     return this.http.post("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", data, this.httpOption);
   }
@@ -59,37 +59,37 @@ export class ShiprocketService {
       ids: [data]
     };
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
-    debugger
+     
     return this.http.post("https://apiv2.shiprocket.in/v1/external/orders/cancel", data1, this.httpOption);
   }
   generateInvoice(idArr) {
     let data = {
       ids: idArr
     }
-    debugger
+     
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
     return this.http.post("https://apiv2.shiprocket.in/v1/external/orders/print/invoice", data, this.httpOption)
   }
   //for orders
   getAllOrderfromShiprocket() {
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
-    debugger
+     
     return this.http.get("https://apiv2.shiprocket.in/v1/external/orders", this.httpOption);
   }
   getOrderDeialsfromShiprocket(id) {
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
-    debugger
+     
     return this.http.get("https://apiv2.shiprocket.in/v1/external/orders/show/" + id, this.httpOption);
   }
   exportOrders() {
 
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
-    debugger
+     
     return this.http.post(" https://apiv2.shiprocket.in/v1/external/orders/export", this.httpOption);
   }
   //to get details about courier service
   getCourierServiceability(order_id) {
-    debugger
+     
     let data={
       "order_id":order_id
   }
@@ -97,7 +97,7 @@ export class ShiprocketService {
     //One of either the 'order_id' or 'cod' and 'weight' is required. If you specify the order id, the cod and weight fields are not required and vice versa.
     //You can add further fields to add the shipment details and filter the search.
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
-    debugger
+     
     return this.http.get("https://apiv2.shiprocket.in/v1/external/courier/serviceability/"+order_id,this.httpOption);
   }
 

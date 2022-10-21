@@ -40,12 +40,12 @@ export class CartService {
 
   // Add to cart
   public addToCart(product: Productlist, quantity: number) {
-    debugger
+     
     let message, status;
     var item: CartItem | boolean = false;
     // If Products exist
     let hasItem = products.find((items, index) => {
-      debugger
+       
       if (items.product.productId == product.productId) {
         let qty = products[index].quantity + quantity;
         let stock = this.calculateStockCounts(products[index], quantity);
@@ -83,7 +83,7 @@ export class CartService {
 
   }
   saveAddTocart(data) {
-    debugger
+     
     this.httpClient.post<any>(ApiService.saveAddToCartURL, data).subscribe((res: any) => {
     let   message = 'The product ' + data[0].product.productName + ' has been added to cart.';
      let status = 'success';

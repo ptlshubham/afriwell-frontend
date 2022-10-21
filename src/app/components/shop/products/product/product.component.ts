@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit {
   // Add to cart
   public addToCart(product: Productlist, quantity: number = 1) {
     this.cartService.addToCart(product, quantity);
-    debugger
+     
     this.router.navigateByUrl('/widget-two', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/home/products/'+this.product.category+'/left-sidebar']);
     });

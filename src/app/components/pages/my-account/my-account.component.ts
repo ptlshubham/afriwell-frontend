@@ -37,7 +37,7 @@ export class MyAccountComponent implements OnInit {
     })
   }
   login() {
-    debugger
+     
     this.userRegisterService.login(this.userRegisterModel).subscribe(data => {
        
       let message, status;

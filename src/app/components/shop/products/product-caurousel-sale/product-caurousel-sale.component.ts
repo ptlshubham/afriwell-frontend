@@ -89,7 +89,7 @@ export class ProductCaurouselSaleComponent implements OnInit {
   getSaleProducts() {
     this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
       this.product = data
-      debugger
+       
        
     })
   }

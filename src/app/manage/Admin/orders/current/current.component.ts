@@ -42,7 +42,7 @@ export class CurrentComponent implements OnInit {
   viewOrderDetails(data:any, ind:any) {
 
     this.Orderview = data;
-    debugger
+     
     this.Orderview.userAdd = data.address + ',' + data.city + ',' + data.state + '-' + data.pincode;
     this.Orderview.index = ind + 1;
   }

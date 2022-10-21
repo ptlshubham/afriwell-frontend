@@ -189,7 +189,7 @@ export class CategoryComponent implements OnInit {
     });
   }
   selectTaxSlab(name: any) {
-    debugger
+     
     this.taxSlab.forEach((element: { name: any; }) => {
       if (element.name == name) {
         this.selctedTaxSlab = element.name;
@@ -408,9 +408,9 @@ export class CategoryComponent implements OnInit {
     this.ProductModel.category = id;
     this.ImagesModel.categoryId = id;
     this.selectedSubCatid = id;
-    debugger
+     
     this.subcategory.forEach(element => {
-      debugger
+       
       if (element.id == id) {
         this.selectedSubCat = element.name;
       }
@@ -635,7 +635,7 @@ export class CategoryComponent implements OnInit {
     }
   }
   submitAddProduct() {
-    debugger
+     
     if(this.isEdit){
       if(this.multi.length>0){
         this.multi.forEach(element=>{

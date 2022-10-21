@@ -40,14 +40,14 @@ export class WishlistService {
 
   // Add to wishlist
   public addToWishlist(product: Productlist): Observable<any> {
-    debugger
+     
     let message, status;
     var item: Productlist;
     let data = {
       userid: localStorage.getItem('userId')
     }
     products.push(data);
-    debugger
+     
     if (this.hasProduct(products)) {
       item = products.filter(item => item.id === product.id)[0];
       const index = products.indexOf(item);

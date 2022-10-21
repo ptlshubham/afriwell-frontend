@@ -114,7 +114,7 @@ export class CheckoutComponent implements OnInit {
     this.isAddNewAddClick = !this.isAddNewAddClick;
   }
   selectaddress(idn, id) {
-     debugger
+      
     if (this.userAddress[idn].selected == false) {
       this.userAddress[idn].selected = true;
       this.userAddress.forEach(element => {
@@ -293,12 +293,12 @@ export class CheckoutComponent implements OnInit {
           weight: 2.5
         };
         this.shipService.placingOrder(dataObj).subscribe((res: any) => {
-          debugger
+           
           if (res.order_id != undefined) {
             res.system_order_id = data.insertId;
-            debugger
+             
             this.checkoutService.saveShiperocketData(res).subscribe((resp: any) => {
-              debugger
+               
               this.router.navigate(['pages/order-success']);
             })
           }
@@ -318,7 +318,7 @@ export class CheckoutComponent implements OnInit {
   }
   cancelOrder() {
     this.shipService.cancelOrder(264317748).subscribe((res: any) => {
-      debugger
+       
     })
   }
 }
