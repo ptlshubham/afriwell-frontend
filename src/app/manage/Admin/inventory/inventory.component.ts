@@ -117,11 +117,11 @@ export class InventoryComponent implements OnInit {
         for (let i = 0; i < this.product.length; i++) {
           this.product[i].index = i + 1;
         }
-        this.product.forEach(element => {
-          this.inventoryService.getSize(element.id).subscribe((data: any) => {
-            element.sizeList = data;
-          })
-        });
+        // this.product.forEach(element => {
+        //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+        //     element.sizeList = data;
+        //   })
+        // });
 
       })
     }
@@ -134,11 +134,11 @@ export class InventoryComponent implements OnInit {
         for (let i = 0; i < this.product.length; i++) {
           this.product[i].index = i + 1;
         }
-        this.product.forEach(element => {
-          this.inventoryService.getSize(element.id).subscribe((data: any) => {
-            element.sizeList = data;
-          })
-        });
+        // this.product.forEach(element => {
+        //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+        //     element.sizeList = data;
+        //   })
+        // });
       })
     }
     else if (name == 'Sale Product') {
@@ -150,11 +150,11 @@ export class InventoryComponent implements OnInit {
         for (let i = 0; i < this.product.length; i++) {
           this.product[i].index = i + 1;
         }
-        this.product.forEach(element => {
-          this.inventoryService.getSize(element.id).subscribe((data: any) => {
-            element.sizeList = data;
-          })
-        });
+        // this.product.forEach(element => {
+        //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+        //     element.sizeList = data;
+        //   })
+        // });
       })
     }
     else {
@@ -166,11 +166,11 @@ export class InventoryComponent implements OnInit {
         for (let i = 0; i < this.product.length; i++) {
           this.product[i].index = i + 1;
         }
-        this.product.forEach(element => {
-          this.inventoryService.getSize(element.id).subscribe((data: any) => {
-            element.sizeList = data;
-          })
-        });
+        // this.product.forEach(element => {
+        //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+        //     element.sizeList = data;
+        //   })
+        // });
       })
     }
     // this.productCategory.forEach(element => {
@@ -251,11 +251,11 @@ export class InventoryComponent implements OnInit {
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
       }
-      this.product.forEach(element => {
-        this.inventoryService.getSize(element.id).subscribe((data: any) => {
-          element.sizeList = data;
-        })
-      });
+      // this.product.forEach(element => {
+      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+      //     element.sizeList = data;
+      //   })
+      // });
     });
     this.categoryService.getMainCat(id).subscribe(data => {
       this.subcategory = data;
@@ -273,11 +273,11 @@ export class InventoryComponent implements OnInit {
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
       }
-      this.product.forEach(element => {
-        this.inventoryService.getSize(element.id).subscribe((data: any) => {
-          element.sizeList = data;
-        })
-      });
+      // this.product.forEach(element => {
+      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+      //     element.sizeList = data;
+      //   })
+      // });
     });
     this.subcategory.forEach(element => {
       if (element.id == id) {
@@ -306,11 +306,11 @@ export class InventoryComponent implements OnInit {
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
       }
-      this.product.forEach(element => {
-        this.inventoryService.getSize(element.id).subscribe((data: any) => {
-          element.sizeList = data;
-        })
-      });
+      // this.product.forEach(element => {
+      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+      //     element.sizeList = data;
+      //   })
+      // });
     });
     this.ProductModel.subCategory = id;
     this.subprodcat.forEach(element => {
@@ -347,19 +347,20 @@ export class InventoryComponent implements OnInit {
   //   this.addSelectFields.splice(value, 1);
   // }
   getProductList() {
-    this.product=[];
+    this.product = [];
     this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
-       
+        
+
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
       }
-     
-      this.product.forEach(element => {
-        this.inventoryService.getSize(element.id).subscribe((data: any) => {
-          element.sizeList = data;
-        })
-      })
+
+      // this.product.forEach(element => {
+      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+      //     element.sizeList = data;
+      //   })
+      // })
       this.product.forEach(element => {
         element.selectedCheck = false;
       })
@@ -368,7 +369,8 @@ export class InventoryComponent implements OnInit {
   removeProduct() {
     this.product.forEach(element => {
       if (element.selectedCheck == true) {
-        this.inventoryService.removeProduct(element.id).subscribe((req) => {
+        debugger
+        this.inventoryService.removeProduct(element.productId).subscribe((req) => {
           this.apiservice.showNotification('top', 'right', 'Product Removed Successfully.', 'success');
           this.getProductList();
         })
@@ -376,13 +378,13 @@ export class InventoryComponent implements OnInit {
     })
 
   }
-  removeIndIvidualProduct(pro:any,ind:any){
-    
-        this.inventoryService.removeProduct(pro.id).subscribe((req) => {
-          this.apiservice.showNotification('top', 'right', 'Product Removed Successfully.', 'success');
-          this.getProductList();
-        })
-     
+  removeIndIvidualProduct(pro: any, ind: any) {
+
+    this.inventoryService.removeProduct(pro.productId).subscribe((req) => {
+      this.apiservice.showNotification('top', 'right', 'Product Removed Successfully.', 'success');
+      this.getProductList();
+    })
+
   }
   selectAll(event: any) {
 
@@ -393,12 +395,12 @@ export class InventoryComponent implements OnInit {
         for (let i = 0; i < this.product.length; i++) {
           this.product[i].index = i + 1;
         }
-        this.product.forEach(element => {
-          element.selectedCheck = false;
-          this.inventoryService.getSize(element.id).subscribe((data: any) => {
-            element.sizeList = data;
-          })
-        })
+        // this.product.forEach(element => {
+        //   element.selectedCheck = false;
+        //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+        //     element.sizeList = data;
+        //   })
+        // })
         this.Chagesproduct = [];
       });
     }
@@ -409,12 +411,12 @@ export class InventoryComponent implements OnInit {
         for (let i = 0; i < this.product.length; i++) {
           this.product[i].index = i + 1;
         }
-        this.product.forEach(element => {
-          element.selectedCheck = true;
-          this.inventoryService.getSize(element.id).subscribe((data: any) => {
-            element.sizeList = data;
-          })
-        })
+        // this.product.forEach(element => {
+        //   element.selectedCheck = true;
+        //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+        //     element.sizeList = data;
+        //   })
+        // })
         this.Chagesproduct = this.product;
       });
     }
@@ -487,12 +489,13 @@ export class InventoryComponent implements OnInit {
       this.addbestprdt = false;
       this.addsale = false;
       this.addhotprdt = false;
+        
       this.inventoryService.addToNewArrivals(this.Chagesproduct).subscribe(data => {
         this.apiservice.showNotification('top', 'right', 'Product Added Into New Arrival Successfully.', 'success');
       })
     }
     else {
-      this.addnewarrival = false;;
+      this.addnewarrival = false;
     }
 
 
@@ -504,6 +507,13 @@ export class InventoryComponent implements OnInit {
       this.addbestprdt = true;
       this.addsale = false;
       this.addhotprdt = false;
+  
+      // this.Chagesproduct.forEach(element => {
+      //   element.isBestProduct = true;
+      //   element.isNewArrival = false;
+      //   element.isOnSale = false;
+      //   element.isHot = false;
+      // });
       this.inventoryService.addToBestProduct(this.Chagesproduct).subscribe(data => {
         this.apiservice.showNotification('top', 'right', 'Product Added Into Best Successfully.', 'success');
       })
@@ -564,7 +574,7 @@ export class InventoryComponent implements OnInit {
 
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-       
+
       const max_size = 20971520;
       const allowed_types = ['image/png', 'image/jpeg'];
       max_height = 1280;
@@ -603,10 +613,10 @@ export class InventoryComponent implements OnInit {
             formdata.append('catid', this.ImagesModel.mainCategoryId);
             formdata.append('subcatid', this.ImagesModel.categoryId);
             formdata.append('grandchild', this.ImagesModel.subCategoryId);
-             
+
 
             this.categoryService.selectMultiUploadImage(formdata).subscribe((response) => {
-               
+
               this.multi.push(response);
             })
             // this.previewImagePath = imgBase64Path;

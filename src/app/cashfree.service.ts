@@ -17,7 +17,7 @@ export class cashfreeService {
         })
       }
     CreateNewOrderPayment(data){
-        debugger
+          
          return this.http.post(ApiService.createCashfreeOrderURL,data);
     }
 }

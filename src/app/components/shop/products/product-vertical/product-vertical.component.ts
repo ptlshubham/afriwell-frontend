@@ -15,30 +15,41 @@ export class ProductVerticalComponent implements OnInit {
 
   constructor(
     private userHomeService: UserHomeService
-  ) { }
-
-  ngOnInit() {
+  ) {
+    this.products;
     this.getbestProducts();
     this.getSaleProducts();
     this.getHotProducts();
+      
+  }
+
+  ngOnInit() {
+   
     setTimeout(() => {
       this.contentLoaded = true;
     }, 3000);
   }
   getbestProducts() {
     this.userHomeService.getNewArrival().subscribe((data: any) => {
+        
       this.products = data
+        
     })
   }
   getSaleProducts() {
     this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
+        
       this.onSale = data
+        
 
     })
   }
   getHotProducts() {
     this.userHomeService.getHotProduct().subscribe((data: any) => {
+        
       this.hotProduct = data
+
+        
 
     })
   }

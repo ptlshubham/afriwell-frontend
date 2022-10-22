@@ -30,7 +30,7 @@
             shopping</a>
         </div>
       </div>
-      <div class="new-product" fxLayout="column" *ngIf="!shoppingCartsItems?.length">
+      <div class="new-product" fxLayout="column" *ngIf="shoppingCartsItems?.length">
         <div class="item" fxLayout="row" fxLayoutAlign="start start"
           *ngFor="let item of shoppingCartsItems; let i =index">
           <div class="product" *ngIf="item.productMainImage.length">

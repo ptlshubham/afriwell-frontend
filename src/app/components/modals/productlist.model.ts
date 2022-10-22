@@ -11,6 +11,7 @@ export class Productlist {
     category?: number;
     subCategory?: number;
     productName?: string;
+    productPer?: number;
     brandName?: string;
     manufacturerName?: string;
     productCode?: number;
@@ -38,7 +39,7 @@ export class Productlist {
     isOnSale?: boolean;
     tags?: ProductTags[];
     colors?: ProductColor[];
-    productId?:any;
+    productId?: any;
     stock?: any;
     constructor(
         id?: number,
@@ -47,6 +48,7 @@ export class Productlist {
         subCategory?: number,
         productName?: string,
         brandName?: string,
+        productPer?: number,
         manufacturerName?: string,
         productCode?: number,
         startRating?: boolean,
@@ -109,11 +111,11 @@ export class Productlist {
         this.isOnSale = isOnSale;
         this.tags = tags;
         this.colors = colors;
-
+        this.productPer = productPer;
         this.stock = stock;
     }
 }
- // Color Filter
- export interface ColorFilter {
+// Color Filter
+export interface ColorFilter {
     color?: ProductColor;
-  }
+}

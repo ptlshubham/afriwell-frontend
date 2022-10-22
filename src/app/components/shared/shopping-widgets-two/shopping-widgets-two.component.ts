@@ -35,42 +35,39 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
 
 
   getCart() {
-     
+
     this.carttotal = 0;
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
-        if(data != 'empty'){
+        if (data != 'empty') {
           this.shoppingCartsItems = data;
-          debugger
 
-           
           this.getTotal();
         }
       });
-    }else{
-      let data =JSON.parse(localStorage.getItem('cartItem')) ;
+    } else {
+      let data = JSON.parse(localStorage.getItem('cartItem'));
       this.shoppingCartsItems = data;
-      debugger
-      if(this.shoppingCartsItems != null){
+      if (this.shoppingCartsItems != null) {
         this.getTotal();
       }
-       
+
     }
   }
   // Remove cart items
-  public removeItem(id , ind) {
-    if(localStorage.getItem('userId')==undefined){
-      this.shoppingCartsItems.splice(ind,1);
+  public removeItem(id, ind) {
+    if (localStorage.getItem('userId') == undefined) {
+      this.shoppingCartsItems.splice(ind, 1);
       localStorage.removeItem('cartItem');
       this.getCart();
       this.getTotal();
-    }else{
+    } else {
       this.cartService.removeCart(id).subscribe((data: any) => {
         this.getCart();
         this.getTotal();
       });
     }
-   
+
   }
 
   // Increase Product Quantity
@@ -107,13 +104,13 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
   public getTotal() {
     this.qantWith = 0;
     this.carttotal = 0;
-    if(this.shoppingCartsItems.length >0){
+    if (this.shoppingCartsItems.length > 0) {
       this.shoppingCartsItems.forEach(element => {
         this.qantWith = element.productPrice * element.quantity;
         this.carttotal = this.carttotal + this.qantWith;
       })
     }
-   
+
   }
 
 

@@ -131,7 +131,7 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       this.userAddress[idn].selected = false;
-      debugger
+        
     }
   }
 
@@ -190,7 +190,7 @@ export class CheckoutComponent implements OnInit {
   }
   paymentSelect(val){
     this.isPaymentDone = true
-    debugger;
+      ;
     if(val =='cashfree'){
       let data={
         order_amount:this.carttotal,
@@ -202,12 +202,12 @@ export class CheckoutComponent implements OnInit {
       },
      
       };
-      debugger
+        
       this.cashfreeservice.CreateNewOrderPayment(data).subscribe((res:any)=>{
         this.paymentResp = JSON.parse(res);
         // window.location.href = this.paymentResp.payment_link;
        let data = window.open(this.paymentResp.payment_link, "_blank", "resizable=no, toolbar=no, scrollbars=no, menubar=no, status=no, directories=no, location=no, width=1000, height=600, left= 20; top=100 " );
-        debugger
+          
       })
     }
   }

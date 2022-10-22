@@ -4,7 +4,7 @@
       <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
         <div class="widget-column">
           <div class="title">
-            <h4 class="widget-title">Arrivals Products</h4>
+            <h4 class="widget-title" *ngIf="products.length">Arrivals Products</h4>
           </div>
           <ul class="product-list">
             <li *ngFor="let product of products | slice:3:6 " fxLayout="row">

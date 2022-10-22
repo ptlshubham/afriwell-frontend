@@ -42,6 +42,7 @@ export class Product {
         public selectedSize?: any[],
         public multi?: any[],
         public selectedCheck?: Boolean,
+        public productId?:number,
         public index?: number,
     ) {
     }
