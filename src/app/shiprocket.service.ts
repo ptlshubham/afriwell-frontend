@@ -85,20 +85,23 @@ export class ShiprocketService {
 
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
      
-    return this.http.post(" https://apiv2.shiprocket.in/v1/external/orders/export", this.httpOption);
+    return this.http.post("https://apiv2.shiprocket.in/v1/external/orders/export", this.httpOption);
   }
   //to get details about courier service
-  getCourierServiceability(order_id) {
+  getCourierServiceability(order) {
      
     let data={
-      "order_id":order_id
-  }
+      "order_id":order.id,
+      "pickup_postcode":order.pickup_address_detail.pin_code,
+      "delivery_postcode":order.customer_pincode,
+      "cod":1
+    }
     //Use this API to check the availability of couriers between the pickup and delivery postal codes. Further details like the estimated time of delivery, the rates along with the ids are also shown.
     //One of either the 'order_id' or 'cod' and 'weight' is required. If you specify the order id, the cod and weight fields are not required and vice versa.
     //You can add further fields to add the shipment details and filter the search.
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
      
-    return this.http.get("https://apiv2.shiprocket.in/v1/external/courier/serviceability/"+order_id,this.httpOption);
+    return this.http.get("https://apiv2.shiprocket.in/v1/external/courier/serviceability?pickup_postcode="+data.pickup_postcode+"&delivety_postcode="+data.delivery_postcode+"&order_id="+data.order_id,this.httpOption);
   }
 
 
