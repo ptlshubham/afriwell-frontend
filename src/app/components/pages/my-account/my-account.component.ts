@@ -45,17 +45,18 @@ export class MyAccountComponent implements OnInit {
         message = 'Welcome back ' + data[0].firstname + ' ' + data[0].lastname + '!';
         status = 'success';
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+        localStorage.setItem('Email', data[0].email);
+        localStorage.setItem('userId', data[0].id);
+        localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
+        localStorage.setItem('contactNo',data[0].contactnumber);
+        this.reloadCurrentRoute();
       }
       else {
         message = 'Enter Valid User Email and password';
         status = 'danger';
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
       }
-      localStorage.setItem('Email', data[0].email);
-      localStorage.setItem('userId', data[0].id);
-      localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
-      localStorage.setItem('contactNo',data[0].contactnumber);
-      this.reloadCurrentRoute();
+     
     });
   }
   reloadCurrentRoute() {

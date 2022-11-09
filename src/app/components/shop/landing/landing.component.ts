@@ -40,12 +40,12 @@ export class LandingComponent implements OnInit {
     private cartService: CartService,
     private userHomeService: UserHomeService,
   ) {
-    this.getBanners();
+    
   }
 
   ngOnInit() {
     this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
-    this.productService.getProducts()
+    // this.productService.getProducts()
     // .subscribe(
     //   (product: Productlist[]) => {
     //     this.products = product.filter(item => item.type == 'furniture');
@@ -53,6 +53,8 @@ export class LandingComponent implements OnInit {
     // )
     setTimeout(() => {
       this.contentLoaded = true;
+      this.getBanners();
+      debugger
     }, 3000);
   }
   getBanners() {
@@ -61,6 +63,7 @@ export class LandingComponent implements OnInit {
     this.dealbanners = [];
     this.userHomeService.getWebSlider().subscribe((data: any) => {
       this.Banners = data;
+       
       this.Banners.forEach(element => {
         if (element.name == 'Top') {
           let data = {

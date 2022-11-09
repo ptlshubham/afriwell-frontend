@@ -1,6 +1,6 @@
 <div class="product-item-1 swiper-container" [swiper]="config">
   <div class="swiper-wrapper h-100">
-    <div *ngFor="let product of product" class="swiper-slide" style="width: 150px !important;">
+    <div *ngFor="let products of product" class="swiper-slide" style="width: 150px !important;">
       <mat-card fxLayout="column" style="max-width: 148px;">
         <div fxLayout="column">
           <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
@@ -11,13 +11,13 @@
 
         <div class="product-img" *ngIf="contentLoaded">
           <a class="product-link" [routerLink]="['/home/product', product.id]">
-            <img src="http://localhost:8090{{product.bannersimage}}" alt="" style=" max-width: 120px;">
+            <img src="http://localhost:8090{{products.productMainImage[0].productListImage}}" alt="" style=" max-width: 120px;">
           </a>
         </div>
         <div class="product-info-wrapper">
           <!-- <span class="category" *ngIf="contentLoaded">{{product.name}}</span> -->
           <div *ngIf="contentLoaded">
-            <p style="margin-bottom: 0px !important;text-transform: uppercase;text-align: center;">{{product.name}}
+            <p style="margin-bottom: 0px !important;text-transform: uppercase;text-align: center;">{{product.productName}}
             </p>
           </div>
 
@@ -48,7 +48,7 @@
               <mat-icon>cached</mat-icon>
             </a>
           </div> -->
-        </div>
+        </div>EWSQAWQASAffVRVFAdcXSASEFQS <Q>A1`<Q> `23RVGvrfecdxszxe1zw  aSXDAW EFvcZSQW23R4</Q></Q>
       </mat-card>
     </div>
 

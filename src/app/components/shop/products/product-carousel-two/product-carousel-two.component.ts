@@ -32,10 +32,13 @@ export class ProductCarouselTwoComponent implements OnInit {
   //  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
   ngOnInit() {
+      
     console.log(this.product);
     this.getNewArrivalsProducts();
     setTimeout(() => {
       this.contentLoaded = true;
+     
+        
     }, 3000);
   }
   ngAfterViewInit() {
@@ -95,9 +98,13 @@ export class ProductCarouselTwoComponent implements OnInit {
   }
 
   getNewArrivalsProducts() {
+      
     this.userHomeService.getBestProduct().subscribe((data: any) => {
-      this.product = data
-       
+      if(data != 'empty' || data.length >0){
+        this.product = data
+      }else{
+        this.product=[];
+      }
     })
   }
   public openProductDialog(product) {

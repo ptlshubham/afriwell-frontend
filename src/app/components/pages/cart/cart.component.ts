@@ -24,11 +24,22 @@ export class CartComponent implements OnInit {
 
   getCart() {
     this.carttotal = 0;
+    this.shoppingCartItems=[];
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
-        this.shoppingCartItems = data;
-        this.getTotal();
+        if (data != 'empty') {
+          this.shoppingCartItems = data;
+          this.getTotal();
+        }
       });
+    } else {
+      let data = JSON.parse(localStorage.getItem('cartItem'));
+      debugger
+      this.shoppingCartItems = data;
+      if (this.shoppingCartItems != null) {
+        this.getTotal();
+      }
+
     }
   }
   // Remove cart items

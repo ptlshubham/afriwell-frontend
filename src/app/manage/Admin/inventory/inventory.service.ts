@@ -14,7 +14,6 @@ export class InventoryService {
     private httpClient: HttpClient
   ) { }
   getProduct(): Observable<Product[]> {
-
     return this.httpClient.get<any>(ApiService.getAdminProductListURL);
   }
   getSize(id: any) {
@@ -28,7 +27,7 @@ export class InventoryService {
     return this.httpClient.post<any>(ApiService.GetFilterProductsURL, data)
   }
   removeProduct(id: any) {
-    debugger
+      
     return this.httpClient.get<any>(ApiService.removeProductListItemURL + id);
   }
   addToNewArrivals(data: any) {

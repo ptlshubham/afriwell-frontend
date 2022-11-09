@@ -23,8 +23,8 @@
                <div class="mat-header-cell">Action</div>
             </div>
             <div *ngFor="let item of shoppingCartItems" class="mat-row">
-               <div class="mat-cell"><img src="http://localhost:8090{{item.productMainImage[0].productListImage}}"></div>
-               <div class="mat-cell"><a class="product-name">{{item.productName}}</a></div>
+               <div class="mat-cell"><img src="http://localhost:8090{{item.product.productMainImage[0].productListImage}}"></div>
+               <div class="mat-cell"><a class="product-name">{{item.product.productName}}</a></div>
                <div class="mat-cell price">{{item.productPrice | number : '1.2-2'}}</div>
                <div class="mat-cell text-muted">
                   <div fxLayout="row" fxLayout.xs="column" class="text-muted">

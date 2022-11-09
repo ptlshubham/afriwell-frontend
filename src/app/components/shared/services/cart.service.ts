@@ -40,17 +40,15 @@ export class CartService {
 
   // Add to cart
   public addToCart(product: Productlist, quantity: number) {
-     
+    debugger
     let message, status;
     var item: CartItem | boolean = false;
     // If Products exist
     let hasItem = products.find((items, index) => {
-       
       if (items.product.productId == product.productId) {
         let qty = products[index].quantity + quantity;
         let stock = this.calculateStockCounts(products[index], quantity);
         if (qty != 0 && stock) {
-           
           products[index]['quantity'] = qty;
           message = 'The product ' + product.productName + ' has been added to cart.';
           status = 'success';
@@ -59,7 +57,6 @@ export class CartService {
         return true;
       }
     });
-
     // If Products does not exist (Add New Products)
     if (!hasItem) {
       products = [];
@@ -67,20 +64,14 @@ export class CartService {
       products.push(item);
       if(localStorage.getItem('userId') == undefined){
         localStorage.setItem("cartItem", JSON.stringify(products));
-        let   message = 'The product ' + products[0].productName + ' has been added to cart.';
+        let   message = 'The product ' + products.product.productName + ' has been added to cart.';
         let status = 'success';
-         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
-      
+        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
       }else{
         this.saveAddTocart(products);
-       
       }
-     
     }
-
-    
     return item;
-
   }
   saveAddTocart(data) {
      
@@ -94,11 +85,9 @@ export class CartService {
     return this.httpClient.post<any>(ApiService.updateCartDetailsURL, data);
   }
   getCartList(id) {
-
     return this.httpClient.get<any>(ApiService.getCartListURL + id);
   }
   removeCart(id) {
-
     return this.httpClient.get<any>(ApiService.removeCartListItemURL + id);
   }
   // getCategory(id): Observable<Category[]> {
@@ -110,7 +99,6 @@ export class CartService {
   // }
   removeWish(id) {
     return this.httpClient.get<any>(ApiService.removeWishListItemURL + id);
-
   }
   // Calculate Product stock Counts
   public calculateStockCounts(product: CartItem, quantity): CartItem | Boolean {

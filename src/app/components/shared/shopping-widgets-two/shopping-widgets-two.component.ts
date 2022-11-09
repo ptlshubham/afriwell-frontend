@@ -35,18 +35,18 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
 
 
   getCart() {
-
     this.carttotal = 0;
+    this.shoppingCartsItems=[];
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
         if (data != 'empty') {
           this.shoppingCartsItems = data;
-
           this.getTotal();
         }
       });
     } else {
       let data = JSON.parse(localStorage.getItem('cartItem'));
+      debugger
       this.shoppingCartsItems = data;
       if (this.shoppingCartsItems != null) {
         this.getTotal();
@@ -72,13 +72,11 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
 
   // Increase Product Quantity
   public increment(data) {
-
     this.totalItem = data.quantity + 1;
     data.quantity = this.totalItem;
     this.cartService.updateCartDetails(data).subscribe((res: any) => {
       this.getCart();
       this.getTotal();
-
     });
 
   }

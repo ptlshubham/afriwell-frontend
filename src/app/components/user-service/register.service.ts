@@ -18,6 +18,7 @@ export class UserRegisterService {
     return this.httpClient.post<any>(ApiService.saveUserRegisterURL, admin);
   }
   login(data: UserRegister): Observable<any> {
+      
     return this.httpClient.post<any>(ApiService.loginURl, data);
   }
 }

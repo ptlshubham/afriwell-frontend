@@ -4,7 +4,7 @@
     <div class="mat-button-wrapper">
       <div class="">
         <mat-icon class="mat-icon-lg mat-icon material-icons">local_grocery_store</mat-icon>
-        <span class="cart-count-wrapper">{{shoppingCartsItems?.length}}</span>
+        <span class="cart-count-wrapper">{{shoppingCartsItems.length}}</span>
       </div>
       <div class="top-cart">
         <span>{{carttotal}}</span>
@@ -21,8 +21,8 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="!shoppingCartsItems?.length">
-        <p class="woo-message" *ngIf="!shoppingCartsItems?.length">Please add product
+      <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="shoppingCartsItems.length==0">
+        <p class="woo-message" *ngIf="shoppingCartsItems.length==0">Please add product
         <p>
         <div>
           <a mat-raised-button color="primary" class="btn-project mt-20"
@@ -30,11 +30,11 @@
             shopping</a>
         </div>
       </div>
-      <div class="new-product" fxLayout="column" *ngIf="shoppingCartsItems?.length">
+      <div class="new-product" fxLayout="column" *ngIf="shoppingCartsItems.length >0">
         <div class="item" fxLayout="row" fxLayoutAlign="start start"
           *ngFor="let item of shoppingCartsItems; let i =index">
-          <div class="product" *ngIf="item.productMainImage.length">
-            <img src="http://localhost:8090{{item.productMainImage[0].productListImage}}" alt="">
+          <div class="product" *ngIf="item.product.productMainImage.length">
+            <img src="http://localhost:8090{{item.product.productMainImage[0].productListImage}}" alt="">
           </div>
           <div class="desc">
             <p>{{item.productName}}</p>

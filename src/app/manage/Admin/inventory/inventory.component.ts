@@ -369,7 +369,7 @@ export class InventoryComponent implements OnInit {
   removeProduct() {
     this.product.forEach(element => {
       if (element.selectedCheck == true) {
-        debugger
+          
         this.inventoryService.removeProduct(element.productId).subscribe((req) => {
           this.apiservice.showNotification('top', 'right', 'Product Removed Successfully.', 'success');
           this.getProductList();

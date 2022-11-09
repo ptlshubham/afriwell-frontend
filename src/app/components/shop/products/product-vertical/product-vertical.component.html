@@ -4,9 +4,9 @@
       <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
         <div class="widget-column">
           <div class="title">
-            <h4 class="widget-title" *ngIf="products.length">Arrivals Products</h4>
+            <h4 class="widget-title" *ngIf="products.length != undefined">Arrivals Products</h4>
           </div>
-          <ul class="product-list">
+          <ul class="product-list" *ngIf="products.length >0">
             <li *ngFor="let product of products | slice:3:6 " fxLayout="row">
               <div class="media-image">
                 <ngx-skeleton-loader [theme]="{ width: '80px', height: '80px' }" animation="progress"
@@ -32,13 +32,13 @@
           </ul>
         </div>
       </div>
-      <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
+      <!-- <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel" *ngIf="onSale.length != undefined && onSale.length >0">
         <div class="widget-column">
           <div class="title">
             <h4 class="widget-title">On Sale Products</h4>
           </div>
           <ul class="product-list">
-            <li *ngFor="let product of onSale | slice:5:8 " fxLayout="row">
+            <li *ngFor="let product of onSale | slice:3:6" fxLayout="row">
               <div class="media-image">
                 <ngx-skeleton-loader [theme]="{ width: '80px', height: '80px' }" animation="progress"
                   *ngIf="!contentLoaded"></ngx-skeleton-loader>
@@ -61,7 +61,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
         <div class="widget-column">
           <div class="title">

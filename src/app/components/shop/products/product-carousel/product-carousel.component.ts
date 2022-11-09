@@ -9,6 +9,7 @@ import { WishlistService } from 'src/app/components/shared/services/wishlist.ser
 import { CoreService } from 'src/app/components/user-service/core.service';
 import { Category } from 'src/app/manage/Admin/category/category.model';
 import { Productlist } from 'src/app/components/modals/productlist.model';
+import { InventoryService } from 'src/app/manage/Admin/inventory/inventory.service';
 
 @Component({
   selector: 'app-product-carousel',
@@ -27,7 +28,7 @@ export class ProductCarouselComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private wishlistService: WishlistService,
-    private coreService:CoreService
+    private inventoryService:InventoryService
   ) { }
 
   ngOnInit() {
@@ -87,7 +88,7 @@ export class ProductCarouselComponent implements OnInit {
     });
   }
   getCategoryList() {
-    this.coreService.getAllUserCate(0).subscribe((data: any) => {
+    this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
      });
   }

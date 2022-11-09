@@ -11,6 +11,8 @@ import { ShiprocketService } from 'src/app/shiprocket.service';
 import { DatePipe } from '@angular/common';
 import { UserRegister } from '../../user-models/userRegister.model';
 import { cashfreeService } from 'src/app/cashfree.service';
+import { UserRegisterService } from '../../user-service/register.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout',
@@ -44,7 +46,7 @@ export class CheckoutComponent implements OnInit {
   selectedAdd: any;
 
   isShow: boolean = false;
-  isLogin: boolean = true;
+  isLogin: boolean = false;
   showGift: boolean = false;
   isAddressOpen: boolean = false;
   isproductList: boolean = false;
@@ -52,7 +54,7 @@ export class CheckoutComponent implements OnInit {
   isProductsum: boolean = false;
   isShowLogout: boolean = false;
   isSignup: boolean = false;
-  loginModel: any = [];
+  loginModel: any = {};
   isAddNewAddClick:boolean = false;
   // selectedAdd: any;
 
@@ -65,25 +67,57 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private shipService: ShiprocketService,
     private datePipe: DatePipe,
-    private cashfreeservice:cashfreeService
+    private cashfreeservice:cashfreeService,
+    private userRegisterService:UserRegisterService,
+    private snackBar: MatSnackBar
   ) {
     this.getStateWithCity();
-
-    if (localStorage.getItem('UserId') != null || localStorage.getItem('UserId') != undefined) {
+    this.getCart();
+    debugger
+    if ( localStorage.getItem('userId') != undefined) {
+      debugger
       this.isLogin = true;
       this.getUserAddress();
     }
     else {
       this.isLogin = false;
     }
-    this.isLogin = true;
     // this.isSignup = false;
     this.isAddress = false;
     this.isShow=true;
     this.ispayment=true;
 
   }
-
+  continueLoginUser(){
+    this.loginModel
+    debugger
+    this.userRegisterService.login(this.loginModel).subscribe(data => {
+      let message, status;
+      if (data.length > 0) {
+        this.isLogin=true;
+        this.isSignup=false;
+        this.isAddress = true;
+        this.isShowLogout = true;
+        localStorage.setItem('Email', data[0].email);
+        localStorage.setItem('userId', data[0].id);
+        localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
+        localStorage.setItem('contactNo',data[0].contactnumber);
+        this.localUserName = localStorage.getItem('userName');
+        this.localUserId = localStorage.getItem('userId');
+        this.localUserEmail = localStorage.getItem('Email');
+        let data1 = JSON.parse(localStorage.getItem('cartItem'));
+        debugger
+        this.cartService.addToCart(data1,1);
+        this.getUserAddress();
+        this.getCart();
+      }
+      else {
+        message = 'Enter Valid User Email and password';
+        status = 'danger';
+        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+      }
+    });
+  }
   ngOnInit() {
     // this.cartItems = this.cartService.getItems();
     // this.cartItems.subscribe(products => this.buyProducts = products);
@@ -173,11 +207,22 @@ export class CheckoutComponent implements OnInit {
   }
   getCart() {
     this.carttotal = 0;
+    this.buyProducts=[];
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
-        this.buyProducts = data;
-        this.getTotal();
+        if (data != 'empty') {
+          this.buyProducts = data;
+          this.getTotal();
+        }
       });
+    } else {
+      let data = JSON.parse(localStorage.getItem('cartItem'));
+      if(data != null){
+        this.buyProducts = data;
+        if (this.buyProducts != null) {
+          this.getTotal();
+        }
+      }
     }
   }
   selectedaddress(data) {
