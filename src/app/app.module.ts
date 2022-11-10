@@ -14,7 +14,6 @@ import { SharedModule } from './components/shared/shared.module';
 import { ColorOptionsComponent } from './components/color-options/color-options.component';
 import { ManageModule } from './manage/manage.module';
 import { RouterModule } from '@angular/router';
-import { MainRoutes } from './components/main/main.routing';
 
 
 @NgModule({
@@ -36,8 +35,8 @@ import { MainRoutes } from './components/main/main.routing';
     AppRoutingModule,
     ManageModule,
     RouterModule,
+    AppRoutingModule,
     NgxImgZoomModule,
-    RouterModule.forChild(MainRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]

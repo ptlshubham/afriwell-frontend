@@ -2,14 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 
-const appRoutes: Routes = [
-  {
-
-    path: '',
-    redirectTo: 'home/landing',
-    pathMatch: 'full'
-  },
-
+export const appRoutes: Routes = [
+  { path: '',   redirectTo: 'home/landing', pathMatch: 'full' },
   {
     path: '',
     component: MainComponent,

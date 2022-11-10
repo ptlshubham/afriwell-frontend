@@ -40,7 +40,7 @@ export class LandingComponent implements OnInit {
     private cartService: CartService,
     private userHomeService: UserHomeService,
   ) {
-    
+    debugger
   }
 
   ngOnInit() {

@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   public subtosub: any = [];
   submenu:any=[];
   openSub: boolean = false;
-
+  Product:any;
   constructor(
     private coreService: CoreService,
     private router:Router
@@ -36,6 +36,7 @@ export class MenuComponent implements OnInit {
     });
   }
   getCategoryList() {
+    this.categoryList=[];
     this.coreService.getAllUserCate(0).subscribe((data: any) => {
       this.categoryList = data;
        
