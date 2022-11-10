@@ -48,4 +48,8 @@ export class InventoryService {
   restokProductQuantity(data: any) {
     return this.httpClient.post(ApiService.addRestockQuantityURL, data);
   }
+  getLowStockProduct(){
+    return this.httpClient.get(ApiService.getLowStockProductURL);
+  }
+ 
 }

@@ -21,17 +21,23 @@ export class DashboardComponent implements OnInit {
     customerlist: any = [];
     maincategory: any = [];
     currentOrders: any = [];
+    totalOrder:any=[];
+    LowStockProduct:any=[];
+    totalEarning:any;
     constructor(
         private inventoryService: InventoryService,
         private customerListService: CustomerListService,
         private categoryService: CategoryService,
         private ordersService: OrdersService,
-        private shipService:ShiprocketService
+        private shipService:ShiprocketService,
     ) {
         this.getProductList();
         this.getCustomerList();
         this.getMainCategory();
         this.getRecentOrder();
+        this.getTotalOrder();
+        this.getLowStockProduct();
+        this.getTotalAmount();
         
     }
     public gradientChartOptionsConfiguration: any;
@@ -742,6 +748,25 @@ export class DashboardComponent implements OnInit {
     getMainCategory() {
         this.categoryService.getMainCat(0).subscribe(data => {
             this.maincategory = data;
+        });
+    }
+    getTotalOrder(){
+        this.ordersService.getAllOrders().subscribe((data:any)=>{
+            if(data != 'empty'){
+                this.totalOrder = data;
+            }
+        })
+    }
+    getLowStockProduct(){
+        this.inventoryService.getLowStockProduct().subscribe((data:any)=>{
+            this.LowStockProduct = data;
+            debugger
+        });
+    }
+    getTotalAmount(){
+        this.ordersService.getTotalAmount().subscribe((data:any)=>{
+            this.totalEarning = data;
+            debugger
         });
     }
 }

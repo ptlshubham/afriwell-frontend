@@ -22,10 +22,16 @@ export class OrdersService {
 
     return this.httpClient.post<any>(ApiService.getOrdersListURL, data);
   }
+  getAllOrders(){
+    return this.httpClient.get(ApiService.getTotalOrdersListURL);
+  }
   acceptOrder(id:any) {
     let data = {
       id: id
     }
     return this.httpClient.post<any>(ApiService.acceptUserOrderURL, data);
+  }
+  getTotalAmount(){
+    return this.httpClient.get(ApiService.getTotalEarningURL)
   }
 }

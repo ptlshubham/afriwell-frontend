@@ -56,6 +56,8 @@ export class ApiService {
   public static getROIListURL: string = ApiService.HOST_URL + '/admin/GetROIList';
   public static removeROIListURL: string = ApiService.HOST_URL + '/admin/RemoveROIList';
   public static getOrdersListURL: string = ApiService.HOST_URL + '/admin/GetOrdersList';
+  public static getTotalOrdersListURL: string = ApiService.HOST_URL + '/admin/getTotalOrdersListURL';
+  
   public static acceptUserOrderURL: string = ApiService.HOST_URL + '/admin/AcceptUserOrders';
   public static addToNewArrivalsURL: string = ApiService.HOST_URL + '/admin/addToNewArrivals';
   public static addToBestProductURL: string = ApiService.HOST_URL + '/admin/addToBestProduct';
@@ -69,6 +71,8 @@ export class ApiService {
   public static updateOrdersStatusURL: string = ApiService.HOST_URL + '/admin/UpdateOrdersStatus';
   public static addRestockQuantityURL: string = ApiService.HOST_URL + '/admin/AddRestockQuantity';
   public static saveShiprocketDataURL: string = ApiService.HOST_URL + '/admin/saveShiprocketData';
+  public static getLowStockProductURL: string = ApiService.HOST_URL + '/admin/getLowStockProduct';
+  public static getTotalEarningURL: string = ApiService.HOST_URL + '/admin/getTotalEarning';
 
 
   //USer APIs

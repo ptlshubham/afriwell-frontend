@@ -100,7 +100,6 @@ export class ShiprocketService {
     //One of either the 'order_id' or 'cod' and 'weight' is required. If you specify the order id, the cod and weight fields are not required and vice versa.
     //You can add further fields to add the shipment details and filter the search.
     this.httpOption.headers = new HttpHeaders({ "Authorization": 'Bearer ' + localStorage.getItem('shipToken') });
-     
     return this.http.get("https://apiv2.shiprocket.in/v1/external/courier/serviceability?pickup_postcode="+data.pickup_postcode+"&delivety_postcode="+data.delivery_postcode+"&order_id="+data.order_id,this.httpOption);
   }
 
