@@ -28,7 +28,7 @@ export class BulkUploadComponent implements OnInit {
   selectedSubProCat: any;
   subToSubCat: any;
   selectedMain: any;
-  subCate: any;
+  subCate: any=null;
 
   public category: Category[] = [];
   public subcategory: Category[] = [];
@@ -204,7 +204,7 @@ export class BulkUploadComponent implements OnInit {
         maintag: this.maintag,
         mainCategory: this.selectedMain,
         category: this.selectedSubCatid,
-        subCategory: this.subCate,
+        subCategory: this.subCate ? this.subCate : 'null',
         productName: this.uploadedData[i][1],
         brandName: this.uploadedData[i][2],
         manufacturerName: this.uploadedData[i][3],
