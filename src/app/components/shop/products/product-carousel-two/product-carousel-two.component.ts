@@ -100,7 +100,7 @@ export class ProductCarouselTwoComponent implements OnInit {
   getNewArrivalsProducts() {
       
     this.userHomeService.getBestProduct().subscribe((data: any) => {
-      if(data != 'empty' || data.length >0){
+      if(data.length >0){
         this.product = data
       }else{
         this.product=[];

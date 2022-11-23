@@ -47,6 +47,7 @@ export class MenuComponent implements OnInit {
       })
     });
     this.categoryList;
+    
 
   }
   openSubToSub(mainid, subid, i, j) {
@@ -77,6 +78,7 @@ export class MenuComponent implements OnInit {
   }
   OpenCategory(id,ind){
     this.submenu = this.categoryList[ind].SubCategory;
+    
      
   }
   openSubcat(id){

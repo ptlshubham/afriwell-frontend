@@ -26,8 +26,8 @@ export class Productlist {
     productSize?: string;
     itemWeight?: string;
     isActive?: number;
-    productMainImage?: any;
     selectedSize?: any[];
+    productMainImage?:any[];
     userid?: any;
     productid?: number;
     quantity?: number;
@@ -62,7 +62,6 @@ export class Productlist {
         productSize?: string,
         itemWeight?: string,
         isActive?: number,
-        productMainImage?: string,
         selectedSize?: any[],
         userid?: any,
         productid?: number,
@@ -75,6 +74,7 @@ export class Productlist {
         isOnSale?: boolean,
         tags?: ProductTags[],
         colors?: ProductColor[],
+        productMainImage?:any[],
 
         stock?: any,
 

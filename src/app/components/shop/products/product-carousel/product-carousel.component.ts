@@ -90,6 +90,7 @@ export class ProductCarouselComponent implements OnInit {
   getCategoryList() {
     this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
+      debugger
      });
   }
   // Add to cart

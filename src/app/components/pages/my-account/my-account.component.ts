@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserRegister } from '../../user-models/userRegister.model';
 import { UserRegisterService } from '../../user-service/register.service';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-my-account',
@@ -18,7 +19,8 @@ export class MyAccountComponent implements OnInit {
   constructor(
     private userRegisterService: UserRegisterService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cartService:CartService
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,13 @@ export class MyAccountComponent implements OnInit {
         localStorage.setItem('userId', data[0].id);
         localStorage.setItem('userName', data[0].firstname + ' ' + data[0].lastname);
         localStorage.setItem('contactNo',data[0].contactnumber);
+        localStorage.setItem('token',data[0].token);
+        let data1 = JSON.parse(localStorage.getItem('cartItem'));
+        if(data1 != null){
+          this.cartService.addToCart(data1,1);
+        }
+        debugger
+      
         this.reloadCurrentRoute();
       }
       else {
@@ -61,7 +70,7 @@ export class MyAccountComponent implements OnInit {
   }
   reloadCurrentRoute() {
     let currentUrl = 'home/landing';
-    this.router.navigateByUrl('/main', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
   }

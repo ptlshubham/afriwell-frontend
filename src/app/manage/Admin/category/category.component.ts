@@ -227,6 +227,15 @@ export class CategoryComponent implements OnInit {
     this.getProductMasterTag();
     this.isProduct = true;
     this.ProductModel = {};
+    this.ProductModel.isBestProduct = false;
+    this.ProductModel.isHot = false;
+    this.ProductModel.isNewArrival = false;
+    this.ProductModel.isOnSale = false;
+    this.ProductModel.emiOptions = false;
+    this.ProductModel.avibilityStatus = false;
+    this.ProductModel.relatedProduct=false;
+    this.ProductModel.productDimension='';
+    this.ProductModel.startRating=false;
     this.isEdit = false;
     this.isShow = false;
     this.isshowsub = false;

@@ -13,6 +13,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OrderlistComponent } from './orderlist/orderlist.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
@@ -33,7 +34,7 @@ const routes: Routes = [
       { path: 'testimonials', component: ReviewsComponent },
       { path: 'order-success', component: OrderSuccessComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'order-list', component: OrderlistComponent }
+      { path: 'order-list', component: OrderlistComponent}
 
 
     ]

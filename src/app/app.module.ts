@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { ColorOptionsComponent } from './components/color-options/color-options.component';
 import { ManageModule } from './manage/manage.module';
 import { RouterModule } from '@angular/router';
+import { AuthInterceptor } from './components/guards/auth-http-interceptor';
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     NgxImgZoomModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

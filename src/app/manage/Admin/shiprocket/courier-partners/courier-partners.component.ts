@@ -21,10 +21,10 @@ export class CourierPartnersComponent implements OnInit {
   }
   getCourierListShipRocket() {
     this.order
-    debugger
+    
     this.shiprocketService.getCourierServiceability(this.order).subscribe((data: any) => {
       this.courierList = data;
-      debugger
+      
        
     });
   }

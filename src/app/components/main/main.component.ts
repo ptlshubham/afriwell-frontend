@@ -269,7 +269,8 @@ export class MainComponent implements OnInit {
     })
     // var values = JSON.parse(localStorage.getItem("userName"));
     // this.userName.localStorage.getItem('userName');
-    this.userName = localStorage.getItem('userName');
+   
+  
 
   }
 
@@ -279,6 +280,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.currency = this.currencies[0];
     this.flag = this.flags[0];
+    setTimeout(() => {
+      this.setUserName();
+     }, 500);
   }
 
   public changeCurrency(currency) {
@@ -290,9 +294,12 @@ export class MainComponent implements OnInit {
   logout() {
     localStorage.clear();
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/main', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+  setUserName(){
+    this.userName = localStorage.getItem('userName');
   }
 
 }

@@ -73,9 +73,9 @@ export class CheckoutComponent implements OnInit {
   ) {
     this.getStateWithCity();
     this.getCart();
-    debugger
+     
     if ( localStorage.getItem('userId') != undefined) {
-      debugger
+       
       this.isLogin = true;
       this.getUserAddress();
     }
@@ -90,7 +90,7 @@ export class CheckoutComponent implements OnInit {
   }
   continueLoginUser(){
     this.loginModel
-    debugger
+     
     this.userRegisterService.login(this.loginModel).subscribe(data => {
       let message, status;
       if (data.length > 0) {
@@ -106,7 +106,7 @@ export class CheckoutComponent implements OnInit {
         this.localUserId = localStorage.getItem('userId');
         this.localUserEmail = localStorage.getItem('Email');
         let data1 = JSON.parse(localStorage.getItem('cartItem'));
-        debugger
+         
         this.cartService.addToCart(data1,1);
         this.getUserAddress();
         this.getCart();
@@ -183,6 +183,7 @@ export class CheckoutComponent implements OnInit {
     })
   }
   getUserAddress() {
+    debugger
     this.checkoutService.getAddress(localStorage.getItem('userId')).subscribe((data: any) => {
       this.userAddress = data;
     });

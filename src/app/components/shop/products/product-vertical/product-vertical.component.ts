@@ -33,7 +33,7 @@ export class ProductVerticalComponent implements OnInit {
   }
   getbestProducts() {
     this.userHomeService.getNewArrival().subscribe((data: any) => {
-      if(data != 'empty' || data.length >0){
+      if( data.length >0){
         this.products = data
       }else{
         this.products=[];
@@ -43,7 +43,7 @@ export class ProductVerticalComponent implements OnInit {
   getSaleProducts() {
     this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
         
-      if(data != 'empty' || data.length >0){
+      if( data.length >0){
         this.onSale = data
       }else{
         this.onSale=[];
@@ -53,7 +53,7 @@ export class ProductVerticalComponent implements OnInit {
   }
   getHotProducts() {
     this.userHomeService.getHotProduct().subscribe((data: any) => {
-      if(data != 'empty' || data.length >0){
+      if(data.length >0){
         this.hotProduct = data
       }else{
         this.hotProduct=[];

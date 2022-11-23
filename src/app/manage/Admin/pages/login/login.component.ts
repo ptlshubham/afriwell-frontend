@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('authenticationAdminToken', data[0].token);
                 localStorage.setItem('AdminId', data[0].id);
                 localStorage.setItem('AdminName', data[0].firstname + ' ' + data[0].lastname);
+                localStorage.setItem('role','Admin');
                 this.router.navigate(['dashboard']);
             }
 

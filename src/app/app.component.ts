@@ -17,12 +17,11 @@ export class AppComponent {
 
   constructor(private spinner: NgxSpinnerService, public appSettings: AppSettings, public router: Router) {
     this.settings = this.appSettings.settings;
-    this.router.navigateByUrl('/home/landing');
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.url = event.url;
-    //   }
-    // })
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.url = event.url;
+      }
+    })
   }
 
 

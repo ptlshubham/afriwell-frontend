@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   carttotal: number = 0;
   totalItem: number = 0;
   qantWith: number = 0;
+  isLogin:boolean=false;
   constructor(private cartService: CartService) {
     this.getCart();
   }
@@ -26,8 +27,10 @@ export class CartComponent implements OnInit {
     this.carttotal = 0;
     this.shoppingCartItems=[];
     if (localStorage.getItem('userId') != undefined) {
+      debugger
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
         if (data != 'empty') {
+          this.isLogin=true;
           this.shoppingCartItems = data;
           this.getTotal();
         }
@@ -36,6 +39,7 @@ export class CartComponent implements OnInit {
       let data = JSON.parse(localStorage.getItem('cartItem'));
       debugger
       this.shoppingCartItems = data;
+      this.isLogin=false;
       if (this.shoppingCartItems != null) {
         this.getTotal();
       }

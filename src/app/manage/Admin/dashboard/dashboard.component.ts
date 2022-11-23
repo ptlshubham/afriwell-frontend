@@ -760,13 +760,13 @@ export class DashboardComponent implements OnInit {
     getLowStockProduct(){
         this.inventoryService.getLowStockProduct().subscribe((data:any)=>{
             this.LowStockProduct = data;
-            debugger
+            
         });
     }
     getTotalAmount(){
         this.ordersService.getTotalAmount().subscribe((data:any)=>{
             this.totalEarning = data;
-            debugger
+            
         });
     }
 }

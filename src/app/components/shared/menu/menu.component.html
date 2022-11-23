@@ -85,11 +85,6 @@
   </mat-toolbar-row> -->
 
 
-
-
-
-
-
  <mat-toolbar-row fxHide fxShow.gt-sm class="container" fxLayout="row" fxLayout.xs="row"
     fxLayoutAlign="space-between center">
     <div class="main-menu" fxLayout="row" fxHide fxShow.gt-sm>
@@ -98,14 +93,17 @@
 
         <a mat-button [matMenuTriggerFor]="Product" class="mat-button">Products<mat-icon class="caret">arrow_drop_down
             </mat-icon></a>
-        <mat-menu #Product="matMenu" *ngIf="categoryList.length >0">
-            <button mat-menu-item [matMenuTriggerFor]="category" (mouseover)="OpenCategory(c.id , i)"
+        <mat-menu #Product="matMenu">
+            <div  *ngIf="categoryList.length >0">
+                <button mat-menu-item [matMenuTriggerFor]="category" (mouseover)="OpenCategory(c.id , i)"
                 *ngFor="let c of categoryList; let i=index">{{c.name}}
             </button>
+            </div>
+          
         
                
         </mat-menu>
-        <mat-menu #category="matMenu">
+        <mat-menu #category="matMenu" >
             <button mat-menu-item (click)="openSubcat(sm.id)"
                 *ngFor="let sm of submenu; let j=index">{{sm.name}}
             </button>

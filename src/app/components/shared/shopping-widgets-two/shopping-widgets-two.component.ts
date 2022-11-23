@@ -16,14 +16,23 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
   carttotal: number = 0;
   totalItem: number = 0;
   qantWith: number = 0;
+  isLogin:boolean=false;
   public sidenavMenuItems: Array<any>;
   @Input() shoppingCartsItems: CartItem[] = [];
+
+
 
   constructor(
     private cartService: CartService,
     public productService: ProductService
   ) {
-    this.getCart();
+    this.shoppingCartsItems
+    if(this.shoppingCartsItems.length >0){
+
+    }else{
+      this.getCart();
+    }
+   
   }
 
   ngOnInit() {
@@ -41,6 +50,8 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
         if (data != 'empty') {
           this.shoppingCartsItems = data;
+          this.isLogin=true;
+          debugger
           this.getTotal();
         }
       });
@@ -48,6 +59,7 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
       let data = JSON.parse(localStorage.getItem('cartItem'));
       debugger
       this.shoppingCartsItems = data;
+      this.isLogin=false;
       if (this.shoppingCartsItems != null) {
         this.getTotal();
       }

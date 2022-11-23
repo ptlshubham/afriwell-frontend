@@ -40,11 +40,14 @@ export class LandingComponent implements OnInit {
     private cartService: CartService,
     private userHomeService: UserHomeService,
   ) {
-    debugger
+     
   }
 
   ngOnInit() {
-    this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
+    this.cartService.getItems().subscribe((shoppingCartItems:any) => {
+      this.shoppingCartItems = shoppingCartItems;
+      debugger
+    });
     // this.productService.getProducts()
     // .subscribe(
     //   (product: Productlist[]) => {
@@ -54,7 +57,7 @@ export class LandingComponent implements OnInit {
     setTimeout(() => {
       this.contentLoaded = true;
       this.getBanners();
-      debugger
+       
     }, 3000);
   }
   getBanners() {

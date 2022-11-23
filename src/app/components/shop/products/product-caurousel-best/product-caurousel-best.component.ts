@@ -31,8 +31,12 @@ export class ProductCaurouselBestComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.product);
+   this.product
+   if(this.product == null){
     this.getbestProducts();
+   }
+   debugger
+    
     setTimeout(() => {
       this.contentLoaded = true;
      
@@ -89,12 +93,13 @@ export class ProductCaurouselBestComponent implements OnInit {
 
   getbestProducts() {
     this.userHomeService.getBestProduct().subscribe((data: any) => {
-      if(data != 'empty' || data.length >0){
+      debugger
+      if( data.length >0){
         this.product = data
       }else{
         this.product=[];
       }
-      debugger
+      
        
     })
   }
