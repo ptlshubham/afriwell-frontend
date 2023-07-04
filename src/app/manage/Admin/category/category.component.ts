@@ -127,6 +127,7 @@ export class CategoryComponent implements OnInit {
         this.isSubCatData = false;
         this.addSelectFields = this.ProductModel.sizeList;
         this.selectTaxSlab(this.ProductModel.taxslab);
+        this.addImageUploader();
         // this.getdetailImages(this.ProductModel.id);
        
         // this.cateCategory(this.ProductModel.category);
@@ -475,8 +476,20 @@ export class CategoryComponent implements OnInit {
   }
 
   addImageUploader() {
-    this.val++;
-    this.addingprdtimg.push({ name: this.val });
+    let data={
+      productListImage:'../../../../assets/manage/assets/img/image_placeholder.jpg',
+      isThumb:true
+    }
+    
+    this.multi.push(data);
+    
+    // if(this.isEdit){
+    //   this.ProductModel.productMainImage.push(data);
+    // }else{
+    //   this.val++;
+    //   this.addingprdtimg.push({ name: this.val });
+    // }
+   
   }
   removeImageUploader(val: any) {
     if(this.isEdit){
@@ -538,7 +551,8 @@ export class CategoryComponent implements OnInit {
 
   // Multiple Image Uploader
 
-  onSelect(event: any) {
+  onSelect(event: any,ind:any) {
+     
     let max_height;
     let max_width;
 
@@ -582,12 +596,12 @@ export class CategoryComponent implements OnInit {
             formdata.append('catid', this.ImagesModel.mainCategoryId);
             formdata.append('subcatid', this.ImagesModel.categoryId);
             formdata.append('grandchild', this.ImagesModel.subCategoryId);
-
-
             this.categoryService.selectMultiUploadImage(formdata).subscribe((response) => {
-              this.multi.push(response);
-              console.log(response);
-
+               
+              // this.ProductModel.productMainImage[ind].productListImage = response;
+              this.multi[ind].productListImage=response;
+              this.multi[ind].isThumb = false;
+               
             })
             // this.previewImagePath = imgBase64Path;
           }
@@ -644,13 +658,20 @@ export class CategoryComponent implements OnInit {
     }
   }
   submitAddProduct() {
-     
+      
     if(this.isEdit){
       if(this.multi.length>0){
         this.multi.forEach(element=>{
-          this.ProductModel.productMainImage.push({productid:this.ProductModel.id,mainCategoryId:this.ProductModel.mainCategory,categoryId:this.ProductModel.category,subCategoryId:this.ProductModel.subCategory,productListImage:element})
-        })
+          element.productid=this.ProductModel.maintag;
+          element.mainCategoryId=this.ProductModel.mainCategory;
+          element.categoryId=this.ProductModel.category;
+          element.subCategoryId=this.ProductModel.subCategory
+          element.productListImage=element.productListImage;
+        });
+
       }
+      this.ProductModel.multi = this.multi;
+     
       this.categoryService.saveAddProduct(this.ProductModel).subscribe((response) => {
         this.apiservice.showNotification('top', 'right', 'Product Updated successfully.', 'success');
          this.router.navigate(['/inventory']);

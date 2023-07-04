@@ -9,7 +9,7 @@
     <div fxLayout="row wrap">
       <div fxFlex="100" fxFlex.gt-sm="50">
         <div class="swiper-container h-100">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper" *ngIf="product.productMainImage.length >0">
             <img src="http://localhost:8090{{product.productMainImage[0].productListImage}}" alt="" class="img-fluid">
           </div>
 
@@ -19,9 +19,9 @@
         <div class="product-right">
           <div class="product-details">
             <h2 class="mb-10">{{product.productName}}</h2>
-            <h4 class="mb-10"><del>{{product.productPrice |
-                currency:productsService?.currency:'symbol'}}</del><span>{{product.productPer}}% off</span></h4>
-            <h3 class="price mb-10">{{product.discountPrice | currency:productsService?.currency:'symbol' }}</h3>
+            <h4 class="mb-10" *ngIf="product.productPer<=0">{{product.productPrice |currency:productsService?.currency:'symbol'}}</h4>
+            <h4 class="mb-10" *ngIf="product.productPer>0"><del>{{product.productPrice |currency:productsService?.currency:'symbol'}}</del><span>{{product.productPer}}% off</span></h4>
+            <h3 class="price mb-10" *ngIf="product.productPer>0">{{product.discountPrice | currency:productsService?.currency:'symbol' }}</h3>
             <div class="discription">
               <p class="bold">Product details</p>
               <p class="text-muted productDescription">{{product.descripition}}</p>

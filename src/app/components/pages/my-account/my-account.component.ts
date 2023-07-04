@@ -24,6 +24,8 @@ export class MyAccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
   }
   joinus() {
     this.isLogin = true;
@@ -56,7 +58,7 @@ export class MyAccountComponent implements OnInit {
         if(data1 != null){
           this.cartService.addToCart(data1,1);
         }
-        debugger
+         
       
         this.reloadCurrentRoute();
       }

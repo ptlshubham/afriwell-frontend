@@ -34,7 +34,6 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
         this.listTitles = ROUTES.filter(listTitle => listTitle);
-
         const navbar: HTMLElement = this.element.nativeElement;
         const body = document.getElementsByTagName('body')[0];
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -51,15 +50,12 @@ export class NavbarComponent implements OnInit {
 
     minimizeSidebar() {
         const body = document.getElementsByTagName('body')[0];
-
         if (misc.sidebar_mini_active === true) {
             body.classList.remove('sidebar-mini');
             misc.sidebar_mini_active = false;
-
         } else {
             setTimeout(function () {
                 body.classList.add('sidebar-mini');
-
                 misc.sidebar_mini_active = true;
             }, 300);
         }
@@ -140,7 +136,7 @@ export class NavbarComponent implements OnInit {
     }
     logout() {
         localStorage.removeItem('authenticationAdminToken');
-        this.router.navigate(['manage/pages/login'])
+        this.router.navigate(['pages/login'])
     }
 
     getPath() {

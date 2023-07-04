@@ -262,6 +262,7 @@ export class InventoryComponent implements OnInit {
     });
   }
   cateCategory(id: any) {
+    this.product=[];
     this.subcatid = id;
     let data = {
       maincatid: this.maincatid,
@@ -269,6 +270,7 @@ export class InventoryComponent implements OnInit {
       subid: null
     }
     this.categoryService.GetFilterProduct(data).subscribe(data => {
+    
       this.product = data;
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
@@ -351,7 +353,6 @@ export class InventoryComponent implements OnInit {
     this.inventoryService.getProduct().subscribe((data: any) => {
       this.product = data;
         
-
       for (let i = 0; i < this.product.length; i++) {
         this.product[i].index = i + 1;
       }
@@ -431,7 +432,7 @@ export class InventoryComponent implements OnInit {
     else {
       this.product[idx].selectedCheck = false;
       for (let i = 0; i < this.Chagesproduct.length; i++) {
-        if (this.Chagesproduct[i].id == data.id) {
+        if (this.Chagesproduct[i].productId == data.productId) {
           this.Chagesproduct.splice(i, 1);
         }
       }
@@ -613,10 +614,7 @@ export class InventoryComponent implements OnInit {
             formdata.append('catid', this.ImagesModel.mainCategoryId);
             formdata.append('subcatid', this.ImagesModel.categoryId);
             formdata.append('grandchild', this.ImagesModel.subCategoryId);
-
-
             this.categoryService.selectMultiUploadImage(formdata).subscribe((response) => {
-
               this.multi.push(response);
             })
             // this.previewImagePath = imgBase64Path;
@@ -633,6 +631,7 @@ export class InventoryComponent implements OnInit {
   }
   saveBulkImages() {
     this.imageProduct.multi = this.multi;
+    debugger
     this.categoryService.saveBulkImages(this.imageProduct).subscribe(data => {
       this.apiservice.showNotification('top', 'right', 'Product Images Added Successfully.', 'success');
       this.isFileUploader = false;

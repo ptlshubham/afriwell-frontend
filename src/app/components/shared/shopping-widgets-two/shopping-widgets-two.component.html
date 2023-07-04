@@ -33,7 +33,7 @@
       <div class="new-product" fxLayout="column" *ngIf="shoppingCartsItems.length >0 && !isLogin">
         <div class="item" fxLayout="row" fxLayoutAlign="start start"
           *ngFor="let item of shoppingCartsItems; let i =index">
-          <div class="product" *ngIf="item.product != undefiend">
+          <div class="product" *ngIf="item.product.productMainImage.length>0">
             <img src="http://localhost:8090{{item.product.productMainImage[0].productListImage}}" alt="">
           </div>
           <div class="desc">
@@ -56,7 +56,7 @@
       <div class="new-product" fxLayout="column" *ngIf="shoppingCartsItems.length >0 && isLogin">
         <div class="item" fxLayout="row" fxLayoutAlign="start start"
           *ngFor="let item of shoppingCartsItems; let i =index">
-          <div class="product">
+          <div class="product" *ngIf="item.productMainImage.length>0">
             <img src="http://localhost:8090{{item.productMainImage[0].productListImage}}" alt="">
           </div>
           <div class="desc">

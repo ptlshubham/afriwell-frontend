@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     focus1: any;
     focus2: any;
     public loginModel: AdminRegister = new AdminRegister;
-
     // public loginModel: AdminRegister[] = [];
     loginForm: any;
     account_validation_messages = {
@@ -34,7 +33,6 @@ export class LoginComponent implements OnInit {
     private toggleButton:any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
-
     constructor(private element: ElementRef,
         public loginservice: LoginService,
         private router: Router,
@@ -43,13 +41,10 @@ export class LoginComponent implements OnInit {
         localStorage.removeItem('authenticationAdminToken');
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-
-
     }
     checkFullPageBackgroundImage() {
         var $page = $('.full-page');
         var image_src = $page.data('image');
-
         if (image_src !== undefined) {
             var image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>'
             $page.append(image_container);
@@ -62,7 +57,6 @@ export class LoginComponent implements OnInit {
         body.classList.add('login-page');
         var navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
-
         setTimeout(function () {
             // after 1000 ms we add the class animated to the login/register card
             $('.card').removeClass('card-hidden');
@@ -89,18 +83,15 @@ export class LoginComponent implements OnInit {
         }
     }
     login(credentials:any) {
-
+        debugger
         console.log("......data...." + credentials.email);
         this.loginservice.login(this.loginModel).subscribe(data => {
-             
+            debugger
             if (data == 1) {
-
                  this.apiservice.showNotification('top', 'right', 'Wrong Email!', 'danger');
             }
             else if (data == 2) {
-
                  this.apiservice.showNotification('top', 'right', 'Wrong Password!', 'danger');
-
             }
             else {
                  this.apiservice.showNotification('top', 'right', 'Admin successfully Login.', 'success');

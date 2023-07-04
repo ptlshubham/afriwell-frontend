@@ -222,6 +222,13 @@
             </div>
             <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
               <mat-form-field class="w-100">
+                <input matInput placeholder="Email" #address="ngModel" ngModel [(ngModel)]="addressModel.email"
+                  [ngModelOptions]="{standalone: true}" name="email">
+                <mat-error *ngIf="email.invalid">Please enter a valid email</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+              <mat-form-field class="w-100">
                 <input matInput placeholder="Town/city" #city="ngModel" ngModel [(ngModel)]="addressModel.city"
                   [ngModelOptions]="{standalone: true}" name="city">
                 <mat-error *ngIf="city.invalid">Please enter a valid City</mat-error>

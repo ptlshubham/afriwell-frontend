@@ -31,7 +31,6 @@ export class ProductCaurouselSaleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.product);
     this.getSaleProducts();
     setTimeout(() => {
       this.contentLoaded = true;
@@ -88,9 +87,7 @@ export class ProductCaurouselSaleComponent implements OnInit {
 
   getSaleProducts() {
     this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
-      this.product = data
-       
-       
+      this.product = data  
     })
   }
   public openProductDialog(product) {

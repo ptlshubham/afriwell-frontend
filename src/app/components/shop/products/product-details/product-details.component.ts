@@ -26,7 +26,6 @@ export class ProductDetailsComponent implements OnInit {
   getIamges: any[];
   public image: any;
   public zoomImage: any;
-
   public counter: number = 1;
   pId: number;
   index: number;
@@ -43,6 +42,7 @@ export class ProductDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = +params['id'];
       this.pId = id
+      debugger
       this.getProductDetails();
       // this.productsService.getProduct(id).subscribe(product => this.product = product)
       this.getProductimages();
@@ -59,8 +59,6 @@ export class ProductDetailsComponent implements OnInit {
       this.product = data[0];
       this.similarPId = data[0].category
       this.getSimilarProducts();
-
-
     });
   }
   getProductimages() {

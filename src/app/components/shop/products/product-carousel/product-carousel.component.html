@@ -1,7 +1,7 @@
 <div class="product-item-1 swiper-container" [swiper]="config">
   <div class="swiper-wrapper h-100">
     <div *ngFor="let products of product" class="swiper-slide" style="width: 150px !important;">
-      <mat-card fxLayout="column" style="max-width: 148px;">
+      <mat-card fxLayout="column" >
         <div fxLayout="column">
           <ngx-skeleton-loader *ngIf="!contentLoaded" count="1"
             [theme]="{ width: '180px', 'border-radius': '0', height: '180px' }"></ngx-skeleton-loader>
@@ -9,9 +9,9 @@
             [theme]="{ 'border-radius': '0', height: '20px', width: '180px'  }"></ngx-skeleton-loader>
         </div>
 
-        <div class="product-img" *ngIf="contentLoaded">
-          <a class="product-link" [routerLink]="['/home/product', product.id]">
-            <img src="http://localhost:8090{{products.productMainImage[0].productListImage}}" alt="" style=" max-width: 120px;">
+        <div class="product-img" *ngIf="contentLoaded && products.productMainImage.length>0">
+          <a class="product-link" [routerLink]="['/home/product', product.id]" >
+            <img src="http://localhost:8090{{products.productMainImage[0].productListImage}}" alt="" style=" max-width: 150px;max-height: 150px;;">
           </a>
         </div>
         <div class="product-info-wrapper">
@@ -21,41 +21,10 @@
             </p>
           </div>
 
-          <!-- <div *ngIf="contentLoaded" class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="stars">
-              <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-              <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-              <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-              <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-              <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-            </div>
-            <p>${{product.price | number : '1.2-2'}}</p>
-          </div> -->
-          <!-- <div *ngIf="contentLoaded" class="btn-wrap" fxLayout="row" fxLayoutAlign="space-between center">
-            <a (click)="addToCart(product)" mat-raised-button color="primary">ADD TO CART <mat-icon
-                class="mat-icon-lg mat-icon material-icons">shopping_cart</mat-icon></a>
-
-          </div> -->
-
-          <!-- <div class="icons" fxLayout="column">
-            <a (click)="addToWishlist(product)">
-              <mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon>
-            </a>
-            <a (click)="openProductDialog(product)">
-              <mat-icon>remove_red_eye</mat-icon>
-            </a>
-            <a (click)="addToCompare(product)">
-              <mat-icon>cached</mat-icon>
-            </a>
-          </div> -->
-        </div>     </mat-card>
+      
+        </div>     
+      </mat-card>
     </div>
 
   </div>
-  <!-- <button mat-mini-fab class="swiper-button-prev swipe-arrow">
-    <mat-icon>keyboard_arrow_left</mat-icon>
-  </button>
-  <button mat-mini-fab class="swiper-button-next swipe-arrow">
-    <mat-icon>keyboard_arrow_right</mat-icon>
-  </button> -->
 </div>

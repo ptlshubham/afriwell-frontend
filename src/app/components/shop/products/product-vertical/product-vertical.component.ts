@@ -16,25 +16,24 @@ export class ProductVerticalComponent implements OnInit {
   constructor(
     private userHomeService: UserHomeService
   ) {
-    this.products;
-    this.getbestProducts();
-    this.getSaleProducts();
-    this.getHotProducts();
+    // this.products;
    
-      
   }
 
   ngOnInit() {
+    this.getbestProducts();
+    this.getSaleProducts();
+    this.getHotProducts(); 
     setTimeout(() => {
       this.contentLoaded = true;
-   
     }, 3000);
-  
   }
   getbestProducts() {
     this.userHomeService.getNewArrival().subscribe((data: any) => {
+      debugger
       if( data.length >0){
-        this.products = data
+        this.products = data;
+        debugger
       }else{
         this.products=[];
       }
@@ -42,19 +41,19 @@ export class ProductVerticalComponent implements OnInit {
   }
   getSaleProducts() {
     this.userHomeService.getOnSaleProduct().subscribe((data: any) => {
-        
       if( data.length >0){
-        this.onSale = data
+        this.onSale = data;
+        debugger
       }else{
         this.onSale=[];
       }
-      
     })
   }
   getHotProducts() {
     this.userHomeService.getHotProduct().subscribe((data: any) => {
       if(data.length >0){
-        this.hotProduct = data
+        this.hotProduct = data;
+        debugger
       }else{
         this.hotProduct=[];
       }

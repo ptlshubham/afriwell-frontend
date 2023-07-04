@@ -7,6 +7,7 @@ declare var $: any;
 })
 export class ApiService {
   public static HOST_URL: string = "http://localhost:8090";
+  //  public static HOST_URL: string = "http://191.101.80.162:8090";
 
   constructor(
     private http: HttpClient,
@@ -41,7 +42,7 @@ export class ApiService {
   public static getBankListURL: string = ApiService.HOST_URL + '/admin/GetBankList';
   public static removeProductListItemURL: string = ApiService.HOST_URL + '/admin/RemoveProduct/';
   public static GetFilterProductsURL: string = ApiService.HOST_URL + '/admin/GetAllFilterProduct/';
-  public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
+  public static saveAdminLoginURL: string = ApiService.HOST_URL + '/authenticate/AdminLogin';
   public static uploadBannersImageURL: string = ApiService.HOST_URL + '/admin/UploadBannersImage';
   public static saveWebBannersURL: string = ApiService.HOST_URL + '/admin/SaveWebBanners';
   public static getWebBannersURL: string = ApiService.HOST_URL + '/admin/GetWebBanners/';
@@ -89,6 +90,7 @@ export class ApiService {
   public static getProductDetailsURL: string = ApiService.HOST_URL + '/user/GetProductDetails/';
   public static getProductImagesURL: string = ApiService.HOST_URL + '/user/GetProductImages/';
   public static getCategoryListURL: string = ApiService.HOST_URL + '/user/GetCategoryList/';
+  public static getCatForCategoriesComponentURL: string = ApiService.HOST_URL+'/user/getCatForCategoriesComponent/'
   public static getStateListURL: string = ApiService.HOST_URL + '/user/GetStateList/';
   public static saveUserAddressURL: string = ApiService.HOST_URL + '/user/SaveAddress';
   public static getUserAddressURL: string = ApiService.HOST_URL + '/user/GetUserAddress/';
@@ -108,17 +110,10 @@ export class ApiService {
   public static getSimilarProductURL: string = ApiService.HOST_URL + '/user/GetSimilarProductList';
   public static GetCustomerByIdURL: string = ApiService.HOST_URL + '/user/GetCustomerById';
   public static updateCustomerDetailsURL: string = ApiService.HOST_URL + '/user/updateCustomerDetails';
-
-
   //Cashfree APIS
   public static createCashfreeOrderURL: string = ApiService.HOST_URL + '/cashfree/createCashfreeOrder';
-
-
   showNotification(from: any, align: any, msg: any, color: any) {
-
-
     var color = color;
-
     $.notify({
       icon: "",
       message: msg

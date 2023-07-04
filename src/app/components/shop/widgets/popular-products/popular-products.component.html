@@ -4,13 +4,13 @@
   </div>
   <mat-list class="reviews">
     <mat-list-item class="content" *ngFor="let product of products | slice:0:3">
-      <div class="media"> <a [routerLink]="['/home/left-sidebar/product', product.id]">
-          <img class="img-fluid" [src]="product.pictures[0].big" alt="">
+      <div class="media" *ngIf="product.productMainImage.length>0"> <a [routerLink]="['/home/left-sidebar/product', product.productId]">
+          <img class="img-fluid" src="http://localhost:8090{{product.productMainImage[0].productListImage}}" alt="">
         </a>
       </div>
       <div class="info align-self-center">
-        <a [routerLink]="['/home/left-sidebar/product', product.id]">
-          <h5>{{product.name}}</h5>
+        <a [routerLink]="['/home/left-sidebar/product', product.productId]">
+          <h5>{{product.productName}}</h5>
         </a>
         <div class="stars">
           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
@@ -19,7 +19,7 @@
           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
         </div>
-        <p class="price">{{product.price}}</p>
+        <p class="price">{{product.productPrice  | currency:productsService?.currency:'symbol'}}</p>
       </div>
     </mat-list-item>
   </mat-list>

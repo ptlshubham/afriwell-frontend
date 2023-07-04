@@ -28,18 +28,14 @@ export class ProductCaurouselBestComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private userHomeService: UserHomeService
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit(): void {
-   this.product
-   if(this.product == null){
     this.getbestProducts();
-   }
-   debugger
-    
     setTimeout(() => {
       this.contentLoaded = true;
-     
     }, 3000);
   }
   ngAfterViewInit() {
@@ -99,8 +95,6 @@ export class ProductCaurouselBestComponent implements OnInit {
       }else{
         this.product=[];
       }
-      
-       
     })
   }
   public openProductDialog(product) {

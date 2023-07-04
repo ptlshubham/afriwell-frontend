@@ -140,6 +140,7 @@ export class SidebarComponent {
     }
     adminLogout() {
         localStorage.removeItem('authenticationAdminToken');
+        
         this.router.navigate(['pages/login'])
     }
 }

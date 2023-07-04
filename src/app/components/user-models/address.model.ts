@@ -29,7 +29,8 @@ export class Address {
         public addSelectFields?:any[],
         public soldquantity?:any,
         public stockdate?:Date,
-        public addressId?:number
+        public addressId?:number,
+        public email?:any
 
     ) {
     }

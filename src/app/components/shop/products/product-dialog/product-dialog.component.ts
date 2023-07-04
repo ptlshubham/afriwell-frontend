@@ -31,6 +31,8 @@ export class ProductDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.product
+    debugger
     // this.productsService.getProducts().subscribe(product => this.products = product);
   }
 

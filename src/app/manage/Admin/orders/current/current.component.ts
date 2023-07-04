@@ -18,6 +18,7 @@ import { OrdersService } from '../orders.service';
 export class CurrentComponent implements OnInit {
   currentOrders: any = [];
   Orderview: any = {};
+  isDetail:boolean=false;
   // invoice = new Invoice();
 
   constructor(
@@ -35,20 +36,19 @@ export class CurrentComponent implements OnInit {
 
     this.ordersService.getOrders(data).subscribe((data: any) => {
       this.currentOrders = data;
-
+      debugger
     });
   }
 
   viewOrderDetails(data:any, ind:any) {
-
+    this.isDetail=true;
     this.Orderview = data;
-     
     this.Orderview.userAdd = data.address + ',' + data.city + ',' + data.state + '-' + data.pincode;
     this.Orderview.index = ind + 1;
   }
   acceptOrders(id:any) {
-
     this.ordersService.acceptOrder(id).subscribe((data: any) => {
+      debugger
       this.getRecentOrders();
     })
   }

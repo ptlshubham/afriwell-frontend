@@ -104,7 +104,7 @@
                
         </mat-menu>
         <mat-menu #category="matMenu" >
-            <button mat-menu-item (click)="openSubcat(sm.id)"
+            <button mat-menu-item (click)="openSubcat(sm.id,sm.parent)"
                 *ngFor="let sm of submenu; let j=index">{{sm.name}}
             </button>
         </mat-menu>

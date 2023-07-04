@@ -27,7 +27,6 @@ export class CartComponent implements OnInit {
     this.carttotal = 0;
     this.shoppingCartItems=[];
     if (localStorage.getItem('userId') != undefined) {
-      debugger
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
         if (data != 'empty') {
           this.isLogin=true;
@@ -37,13 +36,11 @@ export class CartComponent implements OnInit {
       });
     } else {
       let data = JSON.parse(localStorage.getItem('cartItem'));
-      debugger
       this.shoppingCartItems = data;
       this.isLogin=false;
       if (this.shoppingCartItems != null) {
         this.getTotal();
       }
-
     }
   }
   // Remove cart items
@@ -56,7 +53,6 @@ export class CartComponent implements OnInit {
 
   // Increase Product Quantity
   public increment(data) {
-
     this.totalItem = data.quantity + 1;
     data.quantity = this.totalItem;
     this.cartService.updateCartDetails(data).subscribe((res: any) => {

@@ -16,6 +16,7 @@ export class ProductComponent implements OnInit {
 
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Input() product: any;
+  isLogin:boolean=false;
 
   constructor(
     private cartService: CartService,
@@ -27,16 +28,21 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+    this.isLogin = (localStorage.getItem('userId') != undefined) ? true : false;
+    this.product;
   }
 
   // Add to cart
   public addToCart(product: Productlist, quantity: number = 1) {
-    this.cartService.addToCart(product, quantity);
-     
-    this.router.navigateByUrl('/widget-two', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/home/products/'+this.product.category+'/left-sidebar']);
-    });
+    if(this.isLogin){
+      this.cartService.addToCart(product, quantity);
+      this.router.navigateByUrl('/widget-two', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/home/products/'+this.product.category+'/left-sidebar']);
+      });
+    }
+    else{
+      this.router.navigate(['/pages/my-account']);
+    }
   }
 
   // Add to wishlist  

@@ -32,13 +32,9 @@ export class ProductCarouselTwoComponent implements OnInit {
   //  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
   ngOnInit() {
-      
-    console.log(this.product);
     this.getNewArrivalsProducts();
     setTimeout(() => {
       this.contentLoaded = true;
-     
-        
     }, 3000);
   }
   ngAfterViewInit() {
@@ -66,8 +62,6 @@ export class ProductCarouselTwoComponent implements OnInit {
         1280: {
           slidesPerView: 4,
         },
-
-
       }
     }
   }
@@ -86,7 +80,6 @@ export class ProductCarouselTwoComponent implements OnInit {
   }
   // Add to wishlist
   public addToWishlist(product: Productlist) {
-    
     this.wishlistService.addToWishlist(product).subscribe((response) => {
       console.log(response);
     })
@@ -98,10 +91,10 @@ export class ProductCarouselTwoComponent implements OnInit {
   }
 
   getNewArrivalsProducts() {
-      
-    this.userHomeService.getBestProduct().subscribe((data: any) => {
+    this.userHomeService.getNewArrival().subscribe((data: any) => {
       if(data.length >0){
         this.product = data
+        
       }else{
         this.product=[];
       }

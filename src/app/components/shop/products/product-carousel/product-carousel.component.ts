@@ -19,9 +19,7 @@ import { InventoryService } from 'src/app/manage/Admin/inventory/inventory.servi
 export class ProductCarouselComponent implements OnInit {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Input('product') product: Array<Category> = [];
-  
   public config: SwiperConfigInterface = {};
-
   contentLoaded = false;
   constructor(
     private dialog: MatDialog,
@@ -69,8 +67,6 @@ export class ProductCarouselComponent implements OnInit {
        3280: {
           slidesPerView: 8,
         },
-
-
       }
     }
   }

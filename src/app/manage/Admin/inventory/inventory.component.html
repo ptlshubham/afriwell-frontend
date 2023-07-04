@@ -185,7 +185,7 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let p of product | paginate: { id:'listing',itemsPerPage: 10, currentPage: mpage,totalItems:totalRec };let i=index">
+                            *ngFor="let p of product | paginate: { id:'listing',itemsPerPage: 4, currentPage: mpage,totalItems:totalRec };let i=index">
                             <td class="text-left">
                                 <div class="form-check">
                                     <label class="form-check-label">
@@ -195,7 +195,7 @@
                                     </label>
                                 </div>
                             </td>
-                            <td class="text-center">{{i+1}}</td>
+                            <td class="text-center">{{p.index}}</td>
                             <td class="text-center">{{p.productName}}</td>
 
                             <td class="text-center">
@@ -209,7 +209,7 @@
 
                             </td>
                             <td class="text-center">
-                                {{p.name}}
+                                {{p.cat_name}}
                             </td>
 
                             <td class="text-center">
@@ -221,11 +221,11 @@
 
                             <td class="text-center">{{p.productPrice}} <i class="fa fa-inr" aria-hidden="true"></i></td>
                             <td class="text-center">
-                                <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"
+                                <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-md"
                                     data-toggle="modal" data-target="#noticeModal">
                                     <i class="fa fa-edit" (click)="restokProduct(p,i)"></i>
-                                </button>
-                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                </button>&nbsp;
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-md"
                                     (click)="  removeIndIvidualProduct(p,i)">
                                     <i class="fa fa-times"></i>
                                 </button>
@@ -240,7 +240,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage= $event"
+                    <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage=  $event"
                         autoHide="true" responsive="true">
                     </pagination-controls>
                 </div>
@@ -346,7 +346,7 @@
                                     <div class="form-group">
                                         <input type="number" class="form-control" [(ngModel)]="restock.productPer"
                                             id="productPer" name="productPer"
-                                            (input)="onDiscountChange($event.target.value)">
+                                            (input)="onDiscountChange( $event.target.value)">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -393,7 +393,7 @@
                                     <span class="fileinput-new">Select Detail Image</span>
                                     <span class="fileinput-exists">Change</span>
                                     <input type="file" id="productListImage" name="productListImage"
-                                        [(ngModel)]="ImagesModel.productListImage" (change)="onSelect($event)" />
+                                        [(ngModel)]="ImagesModel.productListImage" (change)="onSelect( $event)" />
                                 </span>
                                 <a href="javascript:void(0)" (click)="removeOrChangedImage()"
                                     class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
@@ -420,7 +420,7 @@
                                     <span class="fileinput-exists">Change</span>
                                     <input type="file" id="productListImage" name="productListImage"
                                         [(ngModel)]="ImagesModel.productListImage" value={}
-                                        (change)="onSelect($event)" />
+                                        (change)="onSelect( $event)" />
                                 </span>
                                 <a class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"
                                     (click)="removeOrChangedImage()"><i class="fa fa-times"></i> Remove</a>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/components/modals/product.model';
 import { ProductService } from 'src/app/components/shared/services/product.service';
+import { InventoryService } from 'src/app/manage/Admin/inventory/inventory.service';
 
 @Component({
   selector: 'app-popular-products',
@@ -10,11 +11,32 @@ import { ProductService } from 'src/app/components/shared/services/product.servi
 export class PopularProductsComponent implements OnInit {
 
   public products: Product[];
-  public product            :   Product = {};
+  public product :   Product = {};
  
-   constructor(private productService: ProductService) { }
+   constructor(
+    private productService: ProductService,
+    private inventoryService:InventoryService
+    ) { }
  
    ngOnInit() {
-     this.productService.getProducts().subscribe(product => this.products = product);
+    
+    let data = {
+      filter: 'best'
+    }
+    this.inventoryService.getFilterProduct(data).subscribe((data: any) => {
+      this.products = data;
+      debugger
+      // for (let i = 0; i < this.products.length; i++) {
+      //   this.products[i].index = i + 1;
+      // }
+      // this.product.forEach(element => {
+      //   this.inventoryService.getSize(element.id).subscribe((data: any) => {
+      //     element.sizeList = data;
+      //   })
+      // });
+    })
    }
 }
+
+
+

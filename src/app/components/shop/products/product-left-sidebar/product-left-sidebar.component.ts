@@ -32,7 +32,7 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.route.params.subscribe(
       (params: any) => {
         this.category = params['category'];
-         
+        this.allItems=[];
         if(this.category == 'all'){
           let data = {
             maincatid:null,
@@ -40,7 +40,6 @@ export class ProductLeftSidebarComponent implements OnInit {
             subid: null
           }
           this.productService.getProductList().subscribe(products => {
-            
             this.allItems = products;
             this.products = products.slice(0.8);
           })
@@ -51,12 +50,10 @@ export class ProductLeftSidebarComponent implements OnInit {
             subid: null
           }
           this.productService.getProductByCategory(data).subscribe(products => {
-            
             this.allItems = products;
             this.products = products.slice(0.8);
           })
         }
-      
       }
     )
     // this.getProducts();
@@ -100,9 +97,7 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.colors = itemColor
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   getProducts() {
     this.productService.getProductList().subscribe((data: any) => {
       this.allItems = data;
@@ -111,8 +106,6 @@ export class ProductLeftSidebarComponent implements OnInit {
       // this.getColors(data);
     });
   }
-
-
   public changeViewType(viewType, viewCol) {
     this.viewType = viewType;
     this.viewCol = viewCol;
@@ -132,12 +125,48 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.tagsFilters = tags;
     this.animation == 'fadeOut' ? this.fadeIn() : this.fadeOut(); // animation
   }
-
-
-
   // sorting type ASC / DESC / A-Z / Z-A etc.
   public onChangeSorting(val) {
+    let sortArray:any=[];
+    sortArray = this.allItems;
+    this.animation = 'fadeIn';
     this.sortByOrder = val;
+    if(val=='low'){
+      // this.animation == 'fadeOut' ? this.fadeIn() : this.fadeOut(); // animation
+      for(let i=0;i<this.allItems.length;i++){
+        for(let j=i+1;j<this.allItems.length;j++){
+          let temp:any={};
+          if(this.allItems[i].productPrice>this.allItems[j].productPrice){
+            let temp = this.allItems[i];
+            this.allItems[i] = this.allItems[j];
+            this.allItems[j] = temp;
+          }
+        }
+      }
+    }
+    else if(val=="high"){
+      this.animation == 'fadeOut' ? this.fadeIn() : this.fadeOut(); // animation
+      for(let i=0;i<this.allItems.length;i++){
+        for(let j=i+1;j<this.allItems.length;j++){
+          let temp:any={};
+          if(this.allItems[i].productPrice<this.allItems[j].productPrice){
+            let temp = this.allItems[i];
+            this.allItems[i] = this.allItems[j];
+            this.allItems[j] = temp;
+          }
+        }
+      }
+    }
+    else if(val =='a-z'){
+      this.allItems.sort(function (a, b) {
+        return  a.productName < b.productName ? -1 : 1 //using String.prototype.localCompare()
+      });
+    }
+    else{
+      this.allItems.sort(function (a, b) {
+        return  a.productName > b.productName ? -1 : 1 //using String.prototype.localCompare()
+      });
+    }
     this.animation == 'fadeOut' ? this.fadeIn() : this.fadeOut(); // animation
   }
 
@@ -168,31 +197,13 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.allItems;
     window.scrollTo(0, 0);
   }
-
-
-  // Update price filter
-  //   public updatePriceFilters(price: any) {
-  //     let items: any[] = [];
-  //     this.products.filter((item: Product) => {
-  //         if (item.price >= price[0] && item.price <= price[1] )  {
-  //            items.push(item); // push in array
-  //         }
-  //     });
-  //     this.items = items;
-  // }
-
-
   // Update price filter
   public updatePriceFilters(price: any) {
     console.log(price);
     console.log(this.products);
-
-
     this.allItems = this.products.filter((item: Productlist) => {
       return item.productPrice >= price.priceFrom && item.productPrice <= price.priceTo
     });
-    console.log(this.products);
-
   }
 
   onBrendsChanged(newBrend) {

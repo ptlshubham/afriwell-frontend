@@ -15,16 +15,12 @@
                   <a (click)="openProductDialog(product)" class="hvr-icon-pulse-shrink">
                      <mat-icon class="hvr-icon">remove_red_eye</mat-icon>
                   </a>
-                  <!-- <a (click)="addToCompare(product)" class="hvr-icon-pulse-shrink">
-                     <mat-icon class="hvr-icon">cached</mat-icon>
-                  </a> -->
                </div>
-
             </div>
             <div class="product-info-wrapper">
                <ngx-skeleton-loader *ngIf="!contentLoaded" count="2" [theme]="{ 'border-radius': '0', height: '20px' }">
                </ngx-skeleton-loader>
-               <span class="category" *ngIf="contentLoaded">{{product.mainCategory}}</span>
+               <span class="category" *ngIf="contentLoaded">{{product.cat_name}}</span>
                <div class="title-wrap" *ngIf="contentLoaded">
                   <h4>{{product.productName}}</h4>
                </div>
@@ -36,17 +32,15 @@
                   <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
                </div>
                <div *ngIf="contentLoaded" class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
-                  <p>${{product.productPrice | number : '1.2-2'}}</p>
+                  <p> {{product.productPrice | number : '1.2-2'}}</p>
                   <a (click)="addToCart(product)">
                      <mat-icon mat-stroked-button color="primary" class="mat-icon-lg mat-icon material-icons">
                         shopping_cart</mat-icon>
                   </a>
                </div>
-
             </div>
          </mat-card>
       </div>
-
    </div>
    <button mat-mini-fab class="swiper-button-prev swipe-arrow">
       <mat-icon>keyboard_arrow_left</mat-icon>

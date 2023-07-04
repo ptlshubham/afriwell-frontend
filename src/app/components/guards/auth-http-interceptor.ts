@@ -19,22 +19,22 @@ export class AuthInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        debugger
+         
 
 
         // this.router.navigate(['home']);
         let token: any = localStorage.getItem('token');
         let adminToken: any = localStorage.getItem('authenticationAdminToken');
-         debugger
         // request.clone({
         //     headers: request.headers.set('rejectUnauthorized', 'false').set('requestCert', 'false')
         //         .set('insecure', 'true')
         // })
-        if (localStorage.getItem('role') == 'Admin') {
+        if (localStorage.getItem('authenticationAdminToken')!= null) {
             if (request.url != ApiService.saveAdminLoginURL) {
 
                 if (adminToken == null || adminToken == undefined) {
                     console.log("token is null");
+                    debugger
                     this.router.navigate(['/pages/my-account']);
                 }
                  request = request.clone({ headers: request.headers.set('x-access-token', adminToken) });
@@ -57,7 +57,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (request.url != ApiService.loginURl) {
                      request = request.clone({ headers: request.headers.set('x-access-token', token) });
                      return next.handle(request).pipe(catchError(err => {
-                         
                         if (err.status == 401 || err.status ==111) {
                             // auto logout if 401 response returned from api
                            this.router.navigate(['/account/login']);
@@ -67,7 +66,6 @@ export class AuthInterceptor implements HttpInterceptor {
                     }))
                 }
                 else {
-                     
                     return next.handle(request);
                 }
             }

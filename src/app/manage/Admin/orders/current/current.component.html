@@ -64,7 +64,7 @@
                                 {{ro.id}}
                             </td>
                             <td>
-                                <div class="img-container">
+                                <div class="img-container" *ngIf="ro.productMainImage.length>0">
                                     <img src="http://localhost:8090{{ro.productMainImage[0].productListImage}}" alt="...">
                                 </div>
                             </td>
@@ -101,7 +101,7 @@
         </div>
     </div>
     <div class="modal fade" id="ordersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" *ngIf="isDetail">
         <div class="modal-dialog modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
@@ -146,7 +146,7 @@
                                 </div>
                                 <label class="col-sm-1 col-form-label">Product Image</label>
                                 <div class="col-sm-3">
-                                    <div class="img-container" style="max-width: 30% !important;">
+                                    <div class="img-container" style="max-width: 30% !important;" *ngIf="Orderview.productMainImage.length>0">
                                         <img src="http://localhost:8090{{Orderview.productMainImage[0].productListImage}}">
                                     </div>
                                 </div>

@@ -40,7 +40,7 @@ export class CartService {
 
   // Add to cart
   public addToCart(product: Productlist, quantity: number) {
-    debugger
+     debugger
     let message, status;
     var item: CartItem | boolean = false;
     // If Products exist
@@ -59,22 +59,16 @@ export class CartService {
     });
     // If Products does not exist (Add New Products)
     if (!hasItem) {
+       
       products = [];
       item = { product: product, quantity: quantity, userid: localStorage.getItem('userId'), productPrice: product.productPrice };
       products.push(item);
-      if(localStorage.getItem('userId') == undefined){
-        localStorage.setItem("cartItem", JSON.stringify(products));
-        let   message = 'The product ' + products.product.productName + ' has been added to cart.';
-        let status = 'success';
-        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
-      }else{
-        this.saveAddTocart(products);
-      }
+      this.saveAddTocart(products);
     }
     return item;
   }
   saveAddTocart(data) {
-     
+     debugger
     this.httpClient.post<any>(ApiService.saveAddToCartURL, data).subscribe((res: any) => {
     let   message = 'The product ' + data[0].product.productName + ' has been added to cart.';
      let status = 'success';
@@ -88,6 +82,7 @@ export class CartService {
     return this.httpClient.get<any>(ApiService.getCartListURL + id);
   }
   removeCart(id) {
+    debugger
     return this.httpClient.get<any>(ApiService.removeCartListItemURL + id);
   }
   // getCategory(id): Observable<Category[]> {

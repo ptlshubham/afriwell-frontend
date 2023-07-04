@@ -17,13 +17,15 @@ export class CourierPartnersComponent implements OnInit {
 
   ngOnInit(): void {
     this.order;
+    debugger
     this.getCourierListShipRocket();
   }
   getCourierListShipRocket() {
     this.order
     
     this.shiprocketService.getCourierServiceability(this.order).subscribe((data: any) => {
-      this.courierList = data;
+      debugger
+      this.courierList = data.data.available_courier_companies;
       
        
     });

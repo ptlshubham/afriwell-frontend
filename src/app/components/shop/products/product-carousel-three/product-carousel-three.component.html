@@ -35,7 +35,7 @@
             <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
           </div>
           <div *ngIf="contentLoaded" class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
-            <p>${{product.productPrice | number : '1.2-2'}}</p>
+            <p> {{product.productPrice | number : '1.2-2'}}</p>
             <a (click)="addToCart(product)">
               <mat-icon mat-stroked-button color="primary" class="mat-icon-lg mat-icon material-icons">shopping_cart
               </mat-icon>

@@ -16,7 +16,11 @@ export class CoreService {
     ) { }
 
     getAllUserCate(id): Observable<Category[]> {
-
         return this.httpClient.get<any>(ApiService.getCategoryListURL + id);
+    }
+
+    getCatForCategoriesComponent(id){
+         
+        return this.httpClient.get<any>(ApiService.getCatForCategoriesComponentURL + id);
     }
 }

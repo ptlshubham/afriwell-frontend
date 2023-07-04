@@ -14,7 +14,7 @@ export class InventoryService {
     private httpClient: HttpClient
   ) { }
   getProduct(): Observable<Product[]> {
-    return this.httpClient.get<any>(ApiService.getAdminProductListURL);
+    return this.httpClient.get<any>(ApiService.getProductListURL);
   }
   getSize(id: any) {
     let data = {

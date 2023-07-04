@@ -31,12 +31,9 @@ export class HeaderComponent implements OnInit {
   public settings: Settings;
 
   constructor(private cartService: CartService, public appSettings: AppSettings) {
-    debugger
+    
     this.settings = this.appSettings.settings;
-    this.cartService.getItems().subscribe((shoppingCartItems:any) => {
-      this.shoppingCartItems = shoppingCartItems;
-      debugger
-    });
+   
   }
 
   ngOnInit() {

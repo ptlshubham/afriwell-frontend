@@ -48,6 +48,7 @@ export class ShoppingWidgetsTwoComponent implements OnInit {
     this.shoppingCartsItems=[];
     if (localStorage.getItem('userId') != undefined) {
       this.cartService.getCartList(localStorage.getItem('userId')).subscribe((data: any) => {
+        debugger
         if (data != 'empty') {
           this.shoppingCartsItems = data;
           this.isLogin=true;

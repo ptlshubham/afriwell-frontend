@@ -81,7 +81,7 @@ export class MenuComponent implements OnInit {
     
      
   }
-  openSubcat(id){
+  openSubcat(id,parent){
     this.router.navigate(['/home/products/'+id+'/left-sidebar']);
   }
 

@@ -71,7 +71,7 @@
                                             <span class="fileinput-new">Select Image</span>
                                             <span class="fileinput-exists">Change</span>
                                             <input type="file" id="BannersImage" name="BannersImage"
-                                                (change)="selectBanners($event)" />
+                                                (change)="selectBanners( $event)" />
                                         </span>
                                         <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists"
                                             data-dismiss="fileinput"><i class="fa fa-times"></i>Remove</a>
@@ -149,7 +149,7 @@
                                             <span class="fileinput-new">Select Image</span>
                                             <span class="fileinput-exists">Change</span>
                                             <input type="file" id="BannersImage" name="BannersImage"
-                                                (change)="selectBanners($event)" />
+                                                (change)="selectBanners( $event)" />
                                         </span>
                                         <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists"
                                             data-dismiss="fileinput"><i class="fa fa-times"></i>Remove</a>
@@ -364,7 +364,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="productPrice" name="productPrice"
                                         [(ngModel)]="ProductModel.productPrice" placeholder="Enter Product Price"
-                                        required value="" pattern="^[0-9]*$" (focus)="focus=true"
+                                        required value="" pattern="^[0-9]* " (focus)="focus=true"
                                         #productPrice="ngModel">
                                 </div>
                                 <div *ngIf="productPrice.errors && (productPrice.dirty || productPrice.touched)"
@@ -378,7 +378,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="discountPrice" name="discountPrice"
                                         [(ngModel)]="ProductModel.discountPrice" #discountPrice="ngModel" required
-                                        value="" pattern="^[0-9]*$" (focus)="focus=true"
+                                        value="" pattern="^[0-9]* " (focus)="focus=true"
                                         placeholder="Enter Discount Price">
                                 </div>
                                 <div *ngIf="discountPrice.errors && (discountPrice.dirty || discountPrice.touched)"
@@ -407,7 +407,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="productCode" name="productCode"
                                         [(ngModel)]="ProductModel.productCode" placeholder="Enter Product Code" required
-                                        value="" pattern="^[a-zA-Z0-9]+$" (focus)="focus=true" #productCode="ngModel">
+                                        value="" pattern="^[a-zA-Z0-9]+ " (focus)="focus=true" #productCode="ngModel">
                                 </div>
                                 <div *ngIf="productCode.errors && (productCode.dirty || productCode.touched)"
                                     class="alert alert-danger">
@@ -423,7 +423,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="productSRNumber" name="productSRNumber"
                                         [(ngModel)]="ProductModel.productSRNumber" placeholder=" Enter Model Number"
-                                        required value="" pattern="^[a-zA-Z0-9]+$" (focus)="focus=true"
+                                        required value="" pattern="^[a-zA-Z0-9]+ " (focus)="focus=true"
                                         #productSRNumber="ngModel">
                                 </div>
                                 <div *ngIf="productSRNumber.errors && (productSRNumber.dirty || productSRNumber.touched)"
@@ -537,7 +537,7 @@
                                     <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
                                         <input type="number" name="mainPrice{{ind}}" [(ngModel)]="i.mainPrice"
                                             placeholder=" Enter Product Price" class="form-control" required value=""
-                                            pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
+                                            pattern="^[0-9]+ " (focus)="focus=true" (blur)="focus=false"
                                             #mainPrice="ngModel" style="text-transform: capitalize;">
                                     </div>
 
@@ -547,7 +547,7 @@
                                     <div class="form-group">
                                         <input type="number" name="discountPerc{{ind}}" [(ngModel)]="i.discountPerc"
                                             placeholder=" Discount Percentage" class="form-control"
-                                            (input)="onDiscountChange($event.target.value,i,ind)">
+                                            (input)="onDiscountChange( $event.target.value,i,ind)">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -559,16 +559,13 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="col-form-label">Quantity</label>
-
                                     <div class="form-group" [ngClass]="{'form-group-focus':focus===true}">
                                         <input type="number" name="quantity{{ind}}" [(ngModel)]="i.quantity"
                                             placeholder=" Enter Quantity" class="form-control" required value=""
-                                            pattern="^[0-9]+$" (focus)="focus=true" (blur)="focus=false"
+                                            pattern="^[0-9]+ " (focus)="focus=true" (blur)="focus=false"
                                             #quantity="ngModel">
                                     </div>
-
                                 </div>
-
                                 <div class="col-md-1">
                                     <label class="col-form-label">&nbsp;</label>
                                     <tr class="form-group">
@@ -583,16 +580,12 @@
                                     </tr>
                                 </div>
                             </div>
-
                         </div>
-
                         <br>
-                        <div class="row">
+                        <div class="row" *ngIf="!isEdit">
                             <div class="col-md-1"></div>
-
                             <div class="col-md-3" *ngIf="!isEdit">
                                 <div class="form-group">
-
                                     <p class="card-title">Select Product Detail Image</p>
                                     <span style="color: red;">*Image size must be 800X600</span>
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
@@ -606,7 +599,7 @@
                                                 <span class="fileinput-exists">Change</span>
                                                 <input type="file" id="productListImage" name="productListImage"
                                                     [(ngModel)]="ImagesModel.productListImage"
-                                                    (change)="onSelect($event)" />
+                                                    (change)="onSelect( $event)" />
                                             </span>
                                             <a href="javascript:void(0)" (click)="removeOrChangedImage()"
                                                 class="btn btn-danger btn-round fileinput-exists"
@@ -615,47 +608,57 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <br>
+                        <div class="row" *ngIf="isEdit && ProductModel.productMainImage.length>0">
+                            <div class="col-md-1"></div>
                             <div class="col-md-3 " *ngFor="let i of ProductModel.productMainImage;let ind=index">
                                 <div class="form-group">
                                     <p class="card-title">Select Product Detail Image</p>
                                     <span style="color: red;">*Image size must be 800X600</span>
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-
                                         <div class="fileinput-new thumbnail">
-
-                                            <img src="./assets/manage/assets/img/image_placeholder.jpg" alt="..."
-                                                *ngIf="!isEdit">
-                                            <img src="http://localhost:8090{{i.productListImage}}" alt="..."
-                                                *ngIf="isEdit">
+                                            <img src="http://localhost:8090{{i.productListImage}}" alt="..." *ngIf="isEdit">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" *ngIf="isEdit && multi.length>0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3 " *ngFor="let i of multi;let ind=index">
+                                <div class="form-group">
+                                    <p class="card-title">Select Product Detail Image</p>
+                                    <span style="color: red;">*Image size must be 800X600</span>
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img src="{{i.productListImage}}" alt="..." *ngIf="isEdit && i.isThumb">
+                                            <img src="http://localhost:8090{{i.productListImage}}" alt="..." *ngIf="isEdit && !i.isThumb">
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <div>
                                             <span class="btn btn-rose btn-round btn-file">
                                                 <span class="fileinput-new">Select Image</span>
                                                 <span class="fileinput-exists">Change</span>
-                                                <input type="file" id="productListImage" name="productListImage"
-                                                    [(ngModel)]="ImagesModel.productListImage" value={}
-                                                    (change)="onSelect($event)" />
+                                                <input type="file" id="productListImage" name="productListImage" [(ngModel)]="ImagesModel.productListImage" value={} (change)="onSelect( $event,ind)" />
                                             </span>
-                                            <a class="btn btn-danger btn-round fileinput-exists"
-                                                data-dismiss="fileinput" (click)="removeOrChangedImage()"><i
-                                                    class="fa fa-times"></i> Remove</a>
-                                            <a class="btn btn-danger btn-round btn-link"
-                                                (click)="removeImageUploader(ind)">
-                                                <i class="fa fa-times-circle-o" aria-hidden="true"
-                                                    style="font-size: 25px;"></i>
+                                            <a class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput" (click)="removeOrChangedImage()">
+                                                <i class="fa fa-times"></i> Remove</a>
+                                                <a class="btn btn-danger btn-round btn-link" (click)="removeImageUploader(ind)">
+                                                <i class="fa fa-times-circle-o" aria-hidden="true" style="font-size: 25px;"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="col-md-1">
-                                <i class="fa fa-plus-circle" aria-hidden="true"
-                                    style="font-size: 50px !important;margin-top:130%!important;"
-                                    (click)="addImageUploader()"></i>
-
+                                <i class="fa fa-plus-circle" aria-hidden="true" style="font-size: 50px !important;margin-top:130%!important;" (click)="addImageUploader()"></i>
                             </div>
-                        </div>
+                        </div> 
+                   
                         <br>
                     </form>
                 </div>
@@ -747,7 +750,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage= $event"
+                    <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage=  $event"
                         autoHide="true" responsive="true">
                     </pagination-controls>
                 </div>
@@ -792,7 +795,7 @@
                                                 <span class="fileinput-new">Select Image</span>
                                                 <span class="fileinput-exists">Change</span>
                                                 <input type="file" id="BannersImage" name="BannersImage"
-                                                    (change)="updateCategoryBanners($event)" />
+                                                    (change)="updateCategoryBanners( $event)" />
                                             </span>
                                             <a href="javascript:void(0)"
                                                 class="btn btn-danger btn-round fileinput-exists"
@@ -878,7 +881,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <pagination-controls id="sub" maxSize="10" directionLinks="true" (pageChange)="subpage= $event"
+                    <pagination-controls id="sub" maxSize="10" directionLinks="true" (pageChange)="subpage=  $event"
                         autoHide="true" responsive="true">
                     </pagination-controls>
                 </div>
@@ -945,7 +948,7 @@
                                             <span class="fileinput-new">Select Image</span>
                                             <span class="fileinput-exists">Change</span>
                                             <input type="file" id="BannersImage" name="BannersImage"
-                                                (change)="selectBanners($event)" />
+                                                (change)="selectBanners( $event)" />
                                         </span>
                                         <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists"
                                             data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
@@ -1022,7 +1025,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <pagination-controls id="subT" maxSize="10" directionLinks="true" (pageChange)="subMpage= $event"
+                    <pagination-controls id="subT" maxSize="10" directionLinks="true" (pageChange)="subMpage=  $event"
                         autoHide="true" responsive="true">
                     </pagination-controls>
                 </div>

@@ -26,6 +26,7 @@ export class ShiprocketService {
      
     this.http.post("https://apiv2.shiprocket.in/v1/external/auth/login", data).toPromise().then((res: any) => {
       localStorage.setItem("shipToken", res.token);
+      debugger
     });
   }
   //create/Update order

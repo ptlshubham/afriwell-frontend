@@ -12,9 +12,9 @@
                     <th class="text-left">
                         Rating
                     </th>
-                    <th class="text-left">
+                    <!-- <th class="text-left">
                         Expected Pickup
-                    </th>
+                    </th> -->
                     <th class="text-left">
                         Estimated Delivery
                     </th>
@@ -39,12 +39,12 @@
                             <!-- {{o.customer_email}}<br>
                             {{o.customer_phone}} -->
                         </td>
-                        <td class="text-left">
-                            Dead Wt : {{o.shipments.total_dead_weight}}<br>
+                        <!-- <td class="text-left">
+                             Dead Wt : {{o.shipments.total_dead_weight}}<br>
                             {{o.dimensions}}<br>
-                            volumetric Wt: {{o.total_volumetric_weight}}
-                        </td>
-                        <td class="text-left">{{o.etd}} <br>
+                            volumetric Wt: {{o.total_volumetric_weight}} 
+                        </td> -->
+                        <td class="text-left">{{o.estimated_delivery_days}} <br>
                             <!-- <span class="badge badge-success">{{o.payment_method}}</span> -->
 
                         </td>
@@ -59,10 +59,8 @@
                         <!-- <td class="text-right">{{o.id}}</td> -->
 
                         <td class="text-right">
-
                             <button class="btn btn-primary btn-md" style="margin-right: 5px;">
                                 Ship Now</button>
-
                         </td>
                     </tr>
                 </tbody>
@@ -72,7 +70,7 @@
     <div class="card-footer">
         <div class="row">
             <div class="ml-md-auto">
-                <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage= $event"
+                <pagination-controls id="listing" maxSize="10" directionLinks="true" (pageChange)="mpage=$event"
                     autoHide="true" responsive="true">
                 </pagination-controls>
             </div>

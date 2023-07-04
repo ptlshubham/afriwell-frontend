@@ -15,7 +15,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <div>
-                        <select (change)="onChangeSorting($event.target.value)">
+                        <select (change)="onChangeSorting( $event.target.value)">
                             <option value="asc">Sorting items</option>
                             <option value="asc">Ascending Order</option>
                             <option value="desc">Descending Order</option>
@@ -52,7 +52,7 @@
                     <div fxFlex="100">
                         <mat-card class="p-0 text-center no-shadow">
                             <pagination-controls class="product-pagination" autoHide="true" maxSize="5"
-                                (pageChange)="onPageChanged($event)"></pagination-controls>
+                                (pageChange)="onPageChanged( $event)"></pagination-controls>
                         </mat-card>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                                 </mat-expansion-panel-header>
 
                                 <div class="brands">
-                                    <app-brands (brandChanged)="onBrendsChanged($event)"></app-brands>
+                                    <app-brands (brandChanged)="onBrendsChanged( $event)"></app-brands>
                                 </div>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
@@ -87,7 +87,7 @@
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
 
-                                <app-price (priceFilters)="updatePriceFilters($event)"></app-price>
+                                <app-price (priceFilters)="updatePriceFilters( $event)"></app-price>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>

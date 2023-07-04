@@ -44,7 +44,6 @@ export class CheckoutComponent implements OnInit {
   public localUserEmail = localStorage.getItem('Email');
   isAddress: boolean = false;
   selectedAdd: any;
-
   isShow: boolean = false;
   isLogin: boolean = false;
   showGift: boolean = false;
@@ -56,6 +55,7 @@ export class CheckoutComponent implements OnInit {
   isSignup: boolean = false;
   loginModel: any = {};
   isAddNewAddClick:boolean = false;
+  selAddId:any;
   // selectedAdd: any;
 
   paymentResp:any;
@@ -183,7 +183,7 @@ export class CheckoutComponent implements OnInit {
     })
   }
   getUserAddress() {
-    debugger
+     
     this.checkoutService.getAddress(localStorage.getItem('userId')).subscribe((data: any) => {
       this.userAddress = data;
     });
@@ -227,12 +227,13 @@ export class CheckoutComponent implements OnInit {
     }
   }
   selectedaddress(data) {
+    debugger
     this.selectedAdd = data.name +' '+ data.address + ',' + data.landmark + ',' + data.city + ',' + data.state + ',' + data.pincode;
+    this.selAddId = data.id;
     this.isAddress = true;
     this.isProductsum = true;
     this.ispayment = true;
-
-
+    this.selectedFullAddress = data;
   }
   paymentSelect(val){
     this.isPaymentDone = true
@@ -279,7 +280,7 @@ export class CheckoutComponent implements OnInit {
     this.addressModel.username = localStorage.getItem('userName');
     this.addressModel.productid = this.buyProducts;
     this.addressModel.total = this.carttotal;
-    this.addressModel.addressId = this.selectedAdd;
+    this.addressModel.addressId = this.selAddId;
     this.addressModel.status = 'Pending';
     let orderedItems: any = []
     if (this.buyProducts.length > 0) {
@@ -298,11 +299,8 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.cartService.saveOrders(this.addressModel).subscribe((data: any) => {
-
-
       if (data.insertId != null || data.insertId != undefined) {
         this.removeItem();
-        alert("order succesfully");
         this.selectedFullAddress.country = 'India';
         let dataObj = {
           order_id: data.insertId,
@@ -318,7 +316,7 @@ export class CheckoutComponent implements OnInit {
           billing_pincode: this.selectedFullAddress.pincode,
           billing_state: this.selectedFullAddress.state,
           billing_country: this.selectedFullAddress.country,
-          billing_email: 'pranavgoswami38@gmail.com',
+          billing_email: this.selectedFullAddress.email,
           billing_phone: this.selectedFullAddress.contactnumber,
           shipping_is_billing: true,
           shipping_customer_name: "",
@@ -344,12 +342,10 @@ export class CheckoutComponent implements OnInit {
           weight: 2.5
         };
         this.shipService.placingOrder(dataObj).subscribe((res: any) => {
-           
+          debugger
           if (res.order_id != undefined) {
             res.system_order_id = data.insertId;
-             
             this.checkoutService.saveShiperocketData(res).subscribe((resp: any) => {
-               
               this.router.navigate(['pages/order-success']);
             })
           }
