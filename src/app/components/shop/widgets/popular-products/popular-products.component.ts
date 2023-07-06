@@ -14,7 +14,7 @@ export class PopularProductsComponent implements OnInit {
   public product :   Product = {};
  
    constructor(
-    private productService: ProductService,
+    private productsService: ProductService,
     private inventoryService:InventoryService
     ) { }
  

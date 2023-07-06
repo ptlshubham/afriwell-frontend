@@ -42,11 +42,11 @@
                <div class="product-right">
                   <div class="product-details">
                      <h2>{{product.productName}}</h2>
-                     <h4 *ngIf="!productsService?.catalogMode"><del>{{product.discountPrice |
+                     <h4 *ngIf="!productsService?.catalogMode"><del>{{product.productPrice |
                            currency:productsService?.currency:'symbol'}}</del>
-                           <span>{{product.discountPrice}} %off</span>
+                           <span>{{product.productPer}}%off</span>
                      </h4>
-                     <h3 class="price" *ngIf="!productsService?.catalogMode">{{product.productPrice |
+                     <h3 class="price" *ngIf="!productsService?.catalogMode">{{product.discountPrice |
                         currency:productsService?.currency:'symbol'}}</h3>
                      <p class="text-muted description">{{product.descripition}}</p>
                   </div>
@@ -87,22 +87,10 @@
                <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
                   <mat-tab label="Description">
                      <div class="full-desc lh">
-                        <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                           Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown
-                           printer took a galley of type and scrambled it to make a type specimen book. It has survived
-                           not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                           unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                           Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                           including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-                           typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the
-                           1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-                           book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                           remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                           sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                           like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p class="text-muted">{{product.descripition}}</p>
                      </div>
                   </mat-tab>
-                  <mat-tab label="Details">
+                  <!-- <mat-tab label="Details">
                      <div class="full-desc lh text-muted">
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
@@ -227,7 +215,7 @@
                            </form>
                         </div>
                      </div>
-                  </mat-tab>
+                  </mat-tab> -->
                </mat-tab-group>
             </mat-card>
          </div>
@@ -239,7 +227,7 @@
             <app-product-carousel-three [product]="products | slice:0:6"></app-product-carousel-three>
          </div>
       </div>
-      <div fxLayout="row wrap" fxHide fxShow.gt-sm fxFlex="100" fxFlex.gt-sm="22">
+      <div fxLayout="row wrap" fxHide fxShow.gt-sm fxFlex="100" fxFlex.gt-sm="24">
          <div fxFlex="100">
             <div fxLayout="row wrap" class="info-bar" ngClass.gt-md="m-0">
                <div fxFlex="100">

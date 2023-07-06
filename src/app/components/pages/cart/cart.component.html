@@ -23,9 +23,11 @@
                <div class="mat-header-cell">Action</div>
             </div>
             <div *ngFor="let item of shoppingCartItems" class="mat-row">
-               <div class="mat-cell"><img src="http://localhost:8090{{item.product.productMainImage[0].productListImage}}"></div>
+               <div class="mat-cell"><img
+                     src="http://localhost:8090{{item.product.productMainImage[0].productListImage}}"></div>
                <div class="mat-cell"><a class="product-name">{{item.product.productName}}</a></div>
-               <div class="mat-cell price">{{item.productPrice | number : '1.2-2'}}</div>
+               <div class="mat-cell price">{{item.productPrice | number : '1.2-2'|
+                  currency:productService?.currency:'symbol'}}</div>
                <div class="mat-cell text-muted">
                   <div fxLayout="row" fxLayout.xs="column" class="text-muted">
                      <div fxLayout="row" fxLayoutAlign="center start">
@@ -46,7 +48,8 @@
                        </div> -->
                   </div>
                </div>
-               <div class="mat-cell total">{{item.productPrice * item.quantity | number : '1.2-2' }}</div>
+               <div class="mat-cell total">{{item.productPrice * item.quantity | number :
+                  '1.2-2'|currency:productService?.currency:'symbol' }}</div>
                <div class="mat-cell text-center">
                   <div class="p-1">
                      <mat-icon (click)="removeItem(item.id)">close</mat-icon>
@@ -82,9 +85,11 @@
                <div class="mat-header-cell">Action</div>
             </div>
             <div *ngFor="let item of shoppingCartItems" class="mat-row">
-               <div class="mat-cell"><img src="http://localhost:8090{{item.productMainImage[0].productListImage}}"></div>
+               <div class="mat-cell"><img src="http://localhost:8090{{item.productMainImage[0].productListImage}}">
+               </div>
                <div class="mat-cell"><a class="product-name">{{item.productName}}</a></div>
-               <div class="mat-cell price">{{item.productPrice | number : '1.2-2'}}</div>
+               <div class="mat-cell price">{{item.productPrice | number : '1.2-2' |
+                  currency:productService?.currency:'symbol'}}</div>
                <div class="mat-cell text-muted">
                   <div fxLayout="row" fxLayout.xs="column" class="text-muted">
                      <div fxLayout="row" fxLayoutAlign="center start">
@@ -105,7 +110,8 @@
                        </div> -->
                   </div>
                </div>
-               <div class="mat-cell total">{{item.productPrice * item.quantity | number : '1.2-2' }}</div>
+               <div class="mat-cell total">{{item.productPrice * item.quantity | number : '1.2-2'
+                  |currency:productService?.currency:'symbol' }}</div>
                <div class="mat-cell text-center">
                   <div class="p-1">
                      <mat-icon (click)="removeItem(item.id)">close</mat-icon>
@@ -120,7 +126,8 @@
                <div class="mat-cell"></div>
                <div class="mat-cell text-right">
                   <div fxLayout="column" fxLayoutAlign="center end" class="grand-total px-2">
-                     <span class="new-price">Grand total: {{carttotal}}</span>
+                     <span class="new-price">Grand total:
+                        {{carttotal | currency:productService?.currency:'symbol'}}</span>
                   </div>
                </div>
                <div class="mat-cell text-center"><a mat-raised-button color="primary" class="btn-project"

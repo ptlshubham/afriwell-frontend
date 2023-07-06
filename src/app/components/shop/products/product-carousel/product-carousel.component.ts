@@ -19,6 +19,7 @@ import { InventoryService } from 'src/app/manage/Admin/inventory/inventory.servi
 export class ProductCarouselComponent implements OnInit {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Input('product') product: Array<Category> = [];
+
   public config: SwiperConfigInterface = {};
   contentLoaded = false;
   constructor(

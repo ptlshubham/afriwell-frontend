@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { CartItem } from 'src/app/components/modals/cart-item';
 import { CartService } from '../../shared/services/cart.service';
+import { ProductService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,10 @@ export class CartComponent implements OnInit {
   totalItem: number = 0;
   qantWith: number = 0;
   isLogin:boolean=false;
-  constructor(private cartService: CartService) {
+  constructor(
+    private cartService: CartService,
+    public productService: ProductService
+    ) {
     this.getCart();
   }
 

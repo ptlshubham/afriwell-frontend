@@ -8,8 +8,6 @@ import { Productlist } from 'src/app/components/modals/productlist.model';
 import { ApiService } from 'src/app/api.service';
 import { Images } from 'src/app/components/modals/images.model';
 
-
-
 // Get product from Localstorage
 let products = JSON.parse(localStorage.getItem("compareItem")) || [];
 
@@ -17,7 +15,7 @@ let products = JSON.parse(localStorage.getItem("compareItem")) || [];
   providedIn: 'root'
 })
 export class ProductService {
-  public currency: string = '₹';
+  public currency: string = 'KSh ';
   public catalogMode: boolean = false;
 
   private _url: string = "assets/data/";

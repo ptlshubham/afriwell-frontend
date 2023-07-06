@@ -81,11 +81,11 @@
                   </div>
                   <div class="col-md-2">
                     <button class="btn-project" mat-raised-button color="primary" type="submit"
-                    (click)="signupOpen()">SIGNUP</button>
+                      (click)="signupOpen()">SIGNUP</button>
                   </div>
                   <div class="col-md-2">
                     <button class="btn-project" mat-raised-button color="primary" type="submit"
-                    (click)="continueLoginUser()">Continue</button>
+                      (click)="continueLoginUser()">Continue</button>
                   </div>
                 </div>
 
@@ -329,18 +329,18 @@
             </ul>
             <ul class="total-amount">
               <li>
-                Subtotal <span class="amount">₹ {{ carttotal}}</span>
+                Subtotal <span class="amount">{{ carttotal | currency:productService?.currency:'symbol'}}</span>
               </li>
             </ul>
             <ul class="total">
-              <li>Total <span class="count">₹ {{carttotal}}</span></li>
+              <li>Total <span class="count">{{carttotal | currency:productService?.currency:'symbol'}}</span></li>
             </ul>
             <div class="order">
               <button *ngIf="isPaymentDone" class="btn-project" mat-raised-button color="primary" type="submit"
                 (click)="placeOrder()">PLACE
                 ORDER</button>&nbsp;&nbsp;
-              <button class="btn-project" mat-raised-button color="primary" type="submit"
-                (click)="cancelOrder()">CANCEL ORDER</button>
+              <button class="btn-project" mat-raised-button color="primary" type="submit" (click)="cancelOrder()">CANCEL
+                ORDER</button>
             </div>
           </div>
         </div>

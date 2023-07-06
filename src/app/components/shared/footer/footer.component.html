@@ -1,9 +1,9 @@
 <footer class="footer sec-padding">
   <div class="container">
     <div class="footer-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between start">
-      <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="50" class="footer-widget about-widget"><a class="logo"
-          href="index.html"><img src="assets//images/main.png" style="width: 85% !important;height: 50% !important;"
-            alt="Awesome Image"></a>
+      <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="50" class="footer-widget about-widget"><a class="logo" href=""
+          [routerLink]="['/home/landing']" routerLinkActive="router-link-active"><img src="assets//images/main.png"
+            style="width: 85% !important;height: 50% !important;" alt="Awesome Image"></a>
         <p>Get all the latest information on Events, Sales and Offers.</p>
         <!-- <div class="link"><a href="#">MORE ABOUT US</a> </div> -->
       </div>
@@ -11,14 +11,14 @@
       <div fxFlex="100" fxFlex.gt-sm="23" fxFlex.sm="50" ngClass.xs="mt-2"
         class="footer-widget links-widget links-widget-pac">
         <div class="title">
-          <h5>Services</h5>
+          <h5>Useful Links</h5>
         </div>
         <div class="row">
           <ul>
-            <li><a href="#">Rain Water Harvesting</a></li>
-            <li><a href="#">Water Treatment & Purification</a></li>
+            <li><a href="#" [routerLink]="['/home/landing']" routerLinkActive="router-link-active">Home</a></li>
+            <!-- <li><a href="#">Water Treatment & Purification</a></li>
             <li><a href="#">Water Storage (Tanks)</a></li>
-            <li><a href="#">Dam liners and Pond liners</a></li>
+            <li><a href="#">Dam liners and Pond liners</a></li> -->
             <!-- <li><a href="#">Irrigation</a></li>
             <li><a href="#">Plumbing Solutions</a></li>
             <li><a href="#">Swimming Pool Solutions</a></li>

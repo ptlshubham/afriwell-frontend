@@ -10,7 +10,7 @@
         </div>
 
         <div class="product-img" *ngIf="contentLoaded && products.productMainImage.length>0">
-          <a class="product-link" [routerLink]="['/home/product', product.id]" >
+          <a class="product-link" [routerLink]="['/home/product', products.productId]" >
             <img src="http://localhost:8090{{products.productMainImage[0].productListImage}}" alt="" style=" max-width: 150px;max-height: 150px;;">
           </a>
         </div>

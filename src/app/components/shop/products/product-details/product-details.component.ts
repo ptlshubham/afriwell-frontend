@@ -57,6 +57,7 @@ export class ProductDetailsComponent implements OnInit {
   getProductDetails() {
     this.productsService.getProductDetails(this.pId).subscribe((data: any) => {
       this.product = data[0];
+      debugger
       this.similarPId = data[0].category
       this.getSimilarProducts();
     });

@@ -4,12 +4,12 @@
   </div>
   <mat-list class="reviews">
     <mat-list-item class="content" *ngFor="let product of products | slice:0:3">
-      <div class="media" *ngIf="product.productMainImage.length>0"> <a [routerLink]="['/home/left-sidebar/product', product.productId]">
+      <div class="media" *ngIf="product.productMainImage.length>0"> <a [routerLink]="['/home/product/', product.productId]">
           <img class="img-fluid" src="http://localhost:8090{{product.productMainImage[0].productListImage}}" alt="">
         </a>
       </div>
       <div class="info align-self-center">
-        <a [routerLink]="['/home/left-sidebar/product', product.productId]">
+        <a [routerLink]="['/home/product/', product.productId]">
           <h5>{{product.productName}}</h5>
         </a>
         <div class="stars">
