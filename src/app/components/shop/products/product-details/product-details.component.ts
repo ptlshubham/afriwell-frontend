@@ -17,7 +17,6 @@ export class ProductDetailsComponent implements OnInit {
 
   public config: SwiperConfigInterface = {};
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
-
   @ViewChild('zoomViewer', { static: true }) zoomViewer;
   @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
 
@@ -42,7 +41,6 @@ export class ProductDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = +params['id'];
       this.pId = id
-      debugger
       this.getProductDetails();
       // this.productsService.getProduct(id).subscribe(product => this.product = product)
       this.getProductimages();
@@ -51,13 +49,11 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     // this.productsService.getProducts().subscribe(product => this.products = product);
-
   }
 
   getProductDetails() {
     this.productsService.getProductDetails(this.pId).subscribe((data: any) => {
       this.product = data[0];
-      debugger
       this.similarPId = data[0].category
       this.getSimilarProducts();
     });
@@ -66,7 +62,6 @@ export class ProductDetailsComponent implements OnInit {
     this.productsService.getImages(this.pId).subscribe((data: any) => {
       this.getIamges = data;
     });
-
   }
   ngAfterViewInit() {
     this.config = {
@@ -93,14 +88,12 @@ export class ProductDetailsComponent implements OnInit {
         1280: {
           slidesPerView: 3,
         },
-
-
       }
     }
   }
 
-
   public openProductDialog(product, bigProductImageIndex) {
+    debugger
     let dialogRef = this.dialog.open(ProductZoomComponent, {
       data: { product, index: bigProductImageIndex },
       panelClass: 'product-dialog',
@@ -111,17 +104,11 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
   }
-
-
   public selectImage(index) {
     console.log(this.product)
     console.log(index)
     this.bigProductImageIndex = index;
   }
-
-
-
-
   public increment() {
     this.counter += 1;
   }
@@ -142,8 +129,6 @@ export class ProductDetailsComponent implements OnInit {
   getSimilarProducts() {
     this.productsService.getSimilar(this.similarPId).subscribe((data: any) => {
       this.products = data;
-
-
     });
   }
   // Add to cart
@@ -162,8 +147,6 @@ export class ProductDetailsComponent implements OnInit {
       this.cartService.addToCart(product, parseInt(quantity));
     this.router.navigate(['/pages/checkout']);
   }
-
-
 
   public onMouseMove(e) {
     if (window.innerWidth >= 1280) {
@@ -193,8 +176,6 @@ export class ProductDetailsComponent implements OnInit {
       panelClass: 'zoom-dialog'
     });
   }
-
-
 
 }
 

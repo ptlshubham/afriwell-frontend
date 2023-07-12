@@ -22,7 +22,6 @@ export class CustomerListService {
   //     return this.httpClient.post<any>(ApiService.updatereviewsURL, admin);
   //   }
   removeRating(id:any) {
-
     return this.httpClient.get<any>(ApiService.removeReviewsURL + id);
 
   }
